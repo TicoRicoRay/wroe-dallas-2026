@@ -8,1040 +8,206 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-
+  <script src="config.js"></script>
   <style>
-    /* ── TOKENS ─────────────────────────────────────────── */
     :root {
-      --navy:    #1B2A4A;
-      --navy-dk: #111d33;
-      --navy-lt: #263d6a;
-      --orange:  #F26522;
+      --navy:      #1B2A4A;
+      --navy-dk:   #111d33;
+      --navy-lt:   #263d6a;
+      --orange:    #F26522;
       --orange-lt: #ff8040;
-      --white:   #FFFFFF;
+      --white:     #FFFFFF;
       --off-white: #F8F6F2;
-      --gray:    #6b7280;
-      --gray-lt: #e5e7eb;
-      --text:    #1a1a2e;
-
+      --gray:      #6b7280;
+      --gray-lt:   #e5e7eb;
+      --text:      #1a1a2e;
       --font-display: 'Bebas Neue', sans-serif;
       --font-serif:   'DM Serif Display', serif;
       --font-body:    'DM Sans', sans-serif;
-
       --max: 1160px;
       --radius: 4px;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      color: var(--text);
-      background: var(--white);
-      overflow-x: hidden;
-    }
-
+    body { font-family: var(--font-body); color: var(--text); background: var(--white); overflow-x: hidden; }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
+    sup { font-size: 0.55em; vertical-align: super; line-height: 0; }
 
-    /* ── NAV ─────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(27, 42, 74, 0.97);
-      backdrop-filter: blur(8px);
-      border-bottom: 2px solid var(--orange);
-    }
-
-    .nav-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 2rem;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .nav-logo-text {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      letter-spacing: 0.05em;
-      color: var(--white);
-      line-height: 1;
-    }
-
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(27,42,74,0.97); backdrop-filter: blur(8px); border-bottom: 2px solid var(--orange); }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo-text { font-family: var(--font-display); font-size: 1.35rem; letter-spacing: 0.05em; color: var(--white); line-height: 1; }
     .nav-logo-text span { color: var(--orange); }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      transition: color 0.2s;
-    }
-
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); transition: color 0.2s; }
     .nav-links a:hover { color: var(--orange); }
+    .nav-cta { background: var(--orange); color: var(--white) !important; padding: 0.45rem 1.25rem; border-radius: var(--radius); font-weight: 700 !important; }
+    .nav-cta:hover { background: var(--orange-lt) !important; }
 
-    .nav-cta {
-      background: var(--orange);
-      color: var(--white) !important;
-      padding: 0.45rem 1.25rem;
-      border-radius: var(--radius);
-      font-weight: 700 !important;
-      transition: background 0.2s !important;
-    }
-
-    .nav-cta:hover { background: var(--orange-lt) !important; color: var(--white) !important; }
-
-    /* ── HERO ────────────────────────────────────────────── */
-    #home {
-      min-height: 100vh;
-      background: var(--navy-dk);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 60px;
-      overflow: hidden;
-    }
-
-    /* diagonal orange accent */
-    #home::before {
-      content: '';
-      position: absolute;
-      top: 0; right: -10%;
-      width: 55%;
-      height: 100%;
-      background: linear-gradient(135deg, transparent 40%, rgba(242,101,34,0.07) 100%);
-      pointer-events: none;
-    }
-
-    /* subtle grid texture */
-    #home::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 5rem 2rem 4rem;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 2px;
-      background: var(--orange);
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(3.5rem, 7vw, 6.5rem);
-      line-height: 0.92;
-      letter-spacing: 0.02em;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
-
+    /* HERO */
+    #home { min-height: 100vh; background: var(--navy-dk); position: relative; display: flex; flex-direction: column; justify-content: center; padding-top: 60px; overflow: hidden; }
+    #home::before { content: ''; position: absolute; top: 0; right: -10%; width: 55%; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(242,101,34,0.07) 100%); pointer-events: none; }
+    #home::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .hero-inner { position: relative; z-index: 2; max-width: var(--max); margin: 0 auto; padding: 5rem 2rem 4rem; display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: center; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.5rem; }
+    .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--orange); }
+    .hero-title { font-family: var(--font-display); font-size: clamp(3.5rem, 7vw, 6.5rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--white); margin-bottom: 0.5rem; }
     .hero-title .eos { color: var(--orange); }
-    .hero-title .annual {
-      font-family: var(--font-body);
-      font-size: clamp(0.85rem, 1.5vw, 1rem);
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-tagline {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      color: rgba(255,255,255,0.65);
-      margin: 1.5rem 0 2.5rem;
-      line-height: 1.4;
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1rem;
-      color: rgba(255,255,255,0.85);
-      font-weight: 400;
-    }
-
-    .hero-meta-item .icon {
-      width: 36px;
-      height: 36px;
-      background: rgba(242,101,34,0.15);
-      border: 1px solid rgba(242,101,34,0.3);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 0.9rem;
-    }
-
+    .hero-title .annual { font-family: var(--font-body); font-size: clamp(0.85rem, 1.5vw, 1rem); font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: block; margin-bottom: 0.5rem; }
+    .hero-tagline { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.1rem, 2vw, 1.5rem); color: rgba(255,255,255,0.65); margin: 1.5rem 0 2.5rem; line-height: 1.4; }
+    .hero-meta { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2.5rem; }
+    .hero-meta-item { display: flex; align-items: center; gap: 0.75rem; font-size: 1rem; color: rgba(255,255,255,0.85); }
+    .hero-meta-item .icon { width: 36px; height: 36px; background: rgba(242,101,34,0.15); border: 1px solid rgba(242,101,34,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem; }
     .hero-meta-item strong { color: var(--white); }
-
-    .hero-cta-group {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--orange);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      padding: 1rem 2.25rem;
-      border-radius: var(--radius);
-      transition: background 0.2s, transform 0.15s;
-      border: 2px solid var(--orange);
-    }
-
-    .btn-primary:hover {
-      background: var(--orange-lt);
-      border-color: var(--orange-lt);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: transparent;
-      color: rgba(255,255,255,0.8);
-      font-size: 0.9rem;
-      font-weight: 500;
-      padding: 1rem 1.75rem;
-      border-radius: var(--radius);
-      border: 2px solid rgba(255,255,255,0.2);
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .btn-secondary:hover {
-      border-color: rgba(255,255,255,0.5);
-      color: var(--white);
-    }
-
-    /* ── COUNTDOWN CARD ──────────────────────────────────── */
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .countdown-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 2rem;
-      backdrop-filter: blur(4px);
-    }
-
-    .countdown-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 1.25rem;
-    }
-
-    .countdown-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .countdown-unit {
-      text-align: center;
-      background: rgba(27,42,74,0.8);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 4px;
-      padding: 0.75rem 0.25rem;
-    }
-
-    .countdown-num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      line-height: 1;
-      color: var(--white);
-      letter-spacing: 0.02em;
-    }
-
-    .countdown-unit-label {
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-top: 0.25rem;
-    }
-
-    /* tickets remaining */
-    .tickets-bar {
-      margin-top: 0.25rem;
-    }
-
-    .tickets-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 0.5rem;
-    }
-
-    .tickets-label {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.5);
-    }
-
-    .tickets-count {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--orange);
-      letter-spacing: 0.05em;
-    }
-
-    .tickets-count span {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.4);
-      font-weight: 400;
-    }
-
-    .progress-track {
-      height: 6px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--orange), var(--orange-lt));
-      border-radius: 3px;
-      width: 28%; /* placeholder: adjust when ticket cap is known */
-      transition: width 1s ease;
-    }
-
-    .tickets-note {
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.35);
-      margin-top: 0.4rem;
-    }
-
-    /* tier pill */
-    .tier-pills {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .tier-pill {
-      flex: 1;
-      text-align: center;
-      padding: 0.6rem;
-      border-radius: 4px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .tier-pill.free { border-color: rgba(255,255,255,0.15); }
-    .tier-pill.paid { border-color: rgba(242,101,34,0.4); background: rgba(242,101,34,0.08); }
-
-    .tier-name {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .tier-pill.paid .tier-name { color: var(--orange); }
-
-    .tier-price {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--white);
-      letter-spacing: 0.03em;
-    }
-
-    .tier-desc {
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.35);
-      margin-top: 0.1rem;
-    }
-
-    /* ── SECTION SHARED ──────────────────────────────────── */
-    section { padding: 6rem 2rem; }
-
-    .container {
-      max-width: var(--max);
-      margin: 0 auto;
-    }
-
-    .section-eyebrow {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .section-eyebrow::before {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--orange);
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      letter-spacing: 0.03em;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 1.25rem;
-    }
-
-    .section-title.light { color: var(--white); }
-
-    .section-body {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--gray);
-      max-width: 580px;
-    }
-
-    .section-body.light { color: rgba(255,255,255,0.65); }
-
-    /* ── ABOUT ───────────────────────────────────────────── */
-    #about {
-      background: var(--off-white);
-      border-top: 1px solid var(--gray-lt);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .about-video {
-      position: relative;
-      aspect-ratio: 16/9;
-      background: var(--navy);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(27,42,74,0.2);
-    }
-
-    .about-video iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .video-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      color: rgba(255,255,255,0.4);
-      font-size: 0.85rem;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .play-btn {
-      width: 64px;
-      height: 64px;
-      background: rgba(242,101,34,0.2);
-      border: 2px solid var(--orange);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-    }
-
-    .three-uniques {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .unique-item {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-
-    .unique-num {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      line-height: 1;
-      color: var(--orange);
-      opacity: 0.4;
-      min-width: 2rem;
-    }
-
-    .unique-text h3 {
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--navy);
-      margin-bottom: 0.2rem;
-    }
-
-    .unique-text p {
-      font-size: 0.9rem;
-      color: var(--gray);
-      line-height: 1.55;
-    }
-
-    /* ── AGENDA ──────────────────────────────────────────── */
-    #agenda {
-      background: var(--navy);
-      color: var(--white);
-    }
-
-    .agenda-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .agenda-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.35rem 0.85rem;
-      border-radius: 20px;
-    }
-
-    .badge-free {
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.6);
-    }
-
-    .badge-paid {
-      background: rgba(242,101,34,0.2);
-      color: var(--orange);
-      border: 1px solid rgba(242,101,34,0.3);
-    }
-
-    .agenda-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-left: 2px solid rgba(255,255,255,0.1);
-      padding-left: 2rem;
-      margin-left: 1rem;
-    }
-
-    .agenda-item {
-      position: relative;
-      padding: 1.25rem 0 1.25rem 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .agenda-item:last-child { border-bottom: none; }
-
-    .agenda-item::before {
-      content: '';
-      position: absolute;
-      left: -2.6rem;
-      top: 1.75rem;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--navy);
-      border: 2px solid rgba(255,255,255,0.2);
-    }
-
-    .agenda-item.highlight::before {
-      background: var(--orange);
-      border-color: var(--orange);
-      box-shadow: 0 0 12px rgba(242,101,34,0.5);
-    }
-
-    .agenda-item.sponsor-slot::before {
-      background: rgba(242,101,34,0.3);
-      border-color: var(--orange);
-    }
-
-    .agenda-time {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 0.2rem;
-    }
-
-    .agenda-session {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: var(--white);
-    }
-
-    .agenda-speaker {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.45);
-      margin-top: 0.15rem;
-    }
-
-    .agenda-divider {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 0.5rem 0;
-      padding: 0.5rem 0;
-    }
-
-    .divider-label {
-      white-space: nowrap;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.3rem 1rem;
-      border-radius: 20px;
-    }
-
-    /* ── SPEAKERS ────────────────────────────────────────── */
-    #speakers { background: var(--white); }
-
-    .speakers-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .speaker-card {
-      background: var(--off-white);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .speaker-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(27,42,74,0.12);
-    }
-
-    .speaker-photo {
-      aspect-ratio: 1;
-      background: var(--navy-lt);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* orange circle crop effect */
-    .speaker-photo-inner {
-      width: 80%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: var(--orange);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .speaker-photo-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .speaker-info {
-      padding: 1.25rem;
-    }
-
-    .speaker-name {
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--navy);
-      margin-bottom: 0.15rem;
-    }
-
-    .speaker-title {
-      font-size: 0.78rem;
-      color: var(--orange);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-
-    .speaker-session {
-      font-size: 0.85rem;
-      color: var(--gray);
-      line-height: 1.5;
-      font-style: italic;
-    }
-
-    .speaker-time {
-      display: inline-block;
-      margin-top: 0.75rem;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(27,42,74,0.4);
-      border-top: 1px solid var(--gray-lt);
-      padding-top: 0.6rem;
-      width: 100%;
-    }
-
-    /* ── SPONSORS ────────────────────────────────────────── */
-    #sponsors {
-      background: var(--off-white);
-      border-top: 1px solid var(--gray-lt);
-    }
-
-    .sponsor-tiers {
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
-
-    .sponsor-tier-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .sponsor-tier-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray-lt);
-    }
-
-    .sponsor-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .sponsor-slot {
-      background: var(--white);
-      border: 2px dashed var(--gray-lt);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gray);
-      font-size: 0.8rem;
-      font-weight: 500;
-      text-align: center;
-      transition: border-color 0.2s;
-    }
-
-    .sponsor-slot:hover { border-color: var(--orange); color: var(--orange); }
-
-    .sponsor-slot.title {
-      width: 280px;
-      height: 100px;
-      font-size: 0.85rem;
-    }
-
-    .sponsor-slot.book {
-      width: 220px;
-      height: 80px;
-    }
-
-    .sponsor-slot.happy {
-      width: 220px;
-      height: 80px;
-    }
-
-    .sponsor-slot.swag {
-      width: 160px;
-      height: 65px;
-      font-size: 0.75rem;
-    }
-
-    .sponsor-slot.booth {
-      width: 130px;
-      height: 55px;
-      font-size: 0.72rem;
-    }
-
-    .sponsor-slot.connector {
-      width: 110px;
-      height: 45px;
-      font-size: 0.68rem;
-    }
-
-    .sponsor-cta {
-      text-align: center;
-      margin-top: 2.5rem;
-      padding: 2rem;
-      background: var(--white);
-      border-radius: 8px;
-      border: 1px solid var(--gray-lt);
-    }
-
-    .sponsor-cta p {
-      font-size: 1.05rem;
-      color: var(--navy);
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
-
-    /* ── VENUE ───────────────────────────────────────────── */
-    #venue {
-      background: var(--navy);
-      color: var(--white);
-    }
-
-    .venue-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .venue-map {
-      aspect-ratio: 4/3;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .venue-map iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      filter: invert(0.9) hue-rotate(180deg);
-      opacity: 0.85;
-    }
-
-    .venue-details { display: flex; flex-direction: column; gap: 1.25rem; }
-
-    .venue-detail-item {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-
-    .venue-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(242,101,34,0.15);
-      border: 1px solid rgba(242,101,34,0.25);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .venue-detail-text strong {
-      display: block;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 0.2rem;
-    }
-
-    .venue-detail-text span {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.5);
-    }
-
-    /* ── FINAL CTA ───────────────────────────────────────── */
-    #register {
-      background: var(--orange);
-      padding: 5rem 2rem;
-      text-align: center;
-    }
-
-    #register .section-title {
-      color: var(--white);
-      margin-bottom: 1rem;
-    }
-
-    #register .section-body {
-      color: rgba(255,255,255,0.8);
-      max-width: 520px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .register-btns {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--white);
-      color: var(--orange);
-      font-size: 0.95rem;
-      font-weight: 700;
-      padding: 1rem 2.25rem;
-      border-radius: var(--radius);
-      border: 2px solid var(--white);
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .btn-white:hover {
-      background: var(--off-white);
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: transparent;
-      color: var(--white);
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 1rem 1.75rem;
-      border-radius: var(--radius);
-      border: 2px solid rgba(255,255,255,0.4);
-      transition: border-color 0.2s;
-    }
-
+    .hero-cta-group { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* BUTTONS */
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--orange); color: var(--white); font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; padding: 1rem 2.25rem; border-radius: var(--radius); transition: background 0.2s, transform 0.15s; border: 2px solid var(--orange); }
+    .btn-primary:hover { background: var(--orange-lt); border-color: var(--orange-lt); transform: translateY(-1px); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: rgba(255,255,255,0.8); font-size: 0.9rem; font-weight: 500; padding: 1rem 1.75rem; border-radius: var(--radius); border: 2px solid rgba(255,255,255,0.2); transition: border-color 0.2s, color 0.2s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+    .btn-white { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--white); color: var(--orange); font-size: 0.95rem; font-weight: 700; padding: 1rem 2.25rem; border-radius: var(--radius); border: 2px solid var(--white); transition: background 0.2s, transform 0.15s; }
+    .btn-white:hover { background: var(--off-white); transform: translateY(-1px); }
+    .btn-ghost-white { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--white); font-size: 0.9rem; font-weight: 600; padding: 1rem 1.75rem; border-radius: var(--radius); border: 2px solid rgba(255,255,255,0.4); transition: border-color 0.2s; }
     .btn-ghost-white:hover { border-color: var(--white); }
 
-    /* ── FOOTER ──────────────────────────────────────────── */
-    footer {
-      background: var(--navy-dk);
-      color: rgba(255,255,255,0.4);
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.8rem;
-      border-top: 2px solid var(--orange);
-    }
+    /* COUNTDOWN */
+    .hero-right { display: flex; flex-direction: column; gap: 1rem; }
+    .countdown-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2rem; backdrop-filter: blur(4px); }
+    .countdown-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.25rem; }
+    .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1.5rem; }
+    .countdown-unit { text-align: center; background: rgba(27,42,74,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 0.75rem 0.25rem; }
+    .countdown-num { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--white); letter-spacing: 0.02em; }
+    .countdown-unit-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
+    .tickets-bar { margin-top: 0.25rem; }
+    .tickets-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+    .tickets-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+    .tickets-count { font-family: var(--font-display); font-size: 1.4rem; color: var(--orange); letter-spacing: 0.05em; }
+    .tickets-count span { font-family: var(--font-body); font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 400; }
+    .progress-track { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--orange-lt)); border-radius: 3px; transition: width 1s ease; }
+    .tickets-note { font-size: 0.68rem; color: rgba(255,255,255,0.35); margin-top: 0.4rem; }
+    #tickets-remaining-section { display: none; }
+    .tier-pills { display: flex; gap: 0.5rem; }
+    .tier-pill { flex: 1; text-align: center; padding: 0.6rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+    .tier-pill.paid { border-color: rgba(242,101,34,0.4); background: rgba(242,101,34,0.08); }
+    .tier-name { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .tier-pill.paid .tier-name { color: var(--orange); }
+    .tier-price { font-family: var(--font-display); font-size: 1.4rem; color: var(--white); letter-spacing: 0.03em; }
+    .tier-desc { font-size: 0.65rem; color: rgba(255,255,255,0.35); margin-top: 0.1rem; }
 
+    /* SECTIONS */
+    section { padding: 6rem 2rem; }
+    .container { max-width: var(--max); margin: 0 auto; }
+    .section-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: var(--orange); }
+    .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.25rem); letter-spacing: 0.03em; color: var(--navy); line-height: 1; margin-bottom: 1.25rem; }
+    .section-title.light { color: var(--white); }
+    .section-body { font-size: 1.05rem; line-height: 1.7; color: var(--gray); max-width: 580px; }
+    .section-body.light { color: rgba(255,255,255,0.65); }
+
+    /* ABOUT */
+    #about { background: var(--off-white); border-top: 1px solid var(--gray-lt); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-video { position: relative; aspect-ratio: 16/9; background: var(--navy); border-radius: 8px; overflow: hidden; box-shadow: 0 20px 60px rgba(27,42,74,0.2); }
+    .about-video iframe { width: 100%; height: 100%; border: none; }
+    .video-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: rgba(255,255,255,0.4); font-size: 0.85rem; text-align: center; padding: 2rem; }
+    .play-btn { width: 64px; height: 64px; background: rgba(242,101,34,0.2); border: 2px solid var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .three-uniques { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+    .unique-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .unique-num { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--orange); opacity: 0.4; min-width: 2rem; }
+    .unique-text h3 { font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 0.2rem; }
+    .unique-text p { font-size: 0.9rem; color: var(--gray); line-height: 1.55; }
+
+    /* AGENDA */
+    #agenda { background: var(--navy); color: var(--white); }
+    .agenda-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .agenda-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 20px; }
+    .badge-free { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+    .badge-paid { background: rgba(242,101,34,0.2); color: var(--orange); border: 1px solid rgba(242,101,34,0.3); }
+    .agenda-list { display: flex; flex-direction: column; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 2rem; margin-left: 1rem; }
+    .agenda-item { position: relative; padding: 1.25rem 0 1.25rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .agenda-item:last-child { border-bottom: none; }
+    .agenda-item::before { content: ''; position: absolute; left: -2.6rem; top: 1.75rem; width: 12px; height: 12px; border-radius: 50%; background: var(--navy); border: 2px solid rgba(255,255,255,0.2); }
+    .agenda-item.highlight::before { background: var(--orange); border-color: var(--orange); box-shadow: 0 0 12px rgba(242,101,34,0.5); }
+    .agenda-item.sponsor-slot::before { background: rgba(242,101,34,0.3); border-color: var(--orange); }
+    .agenda-time { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.2rem; }
+    .agenda-session { font-weight: 600; font-size: 1.05rem; color: var(--white); }
+    .agenda-speaker { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 0.15rem; }
+    .agenda-divider { display: flex; align-items: center; gap: 1rem; margin: 0.5rem 0; padding: 0.5rem 0; }
+    .divider-label { white-space: nowrap; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 20px; }
+
+    /* SPEAKERS */
+    #speakers { background: var(--white); }
+    .speakers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .speaker-card { background: var(--off-white); border-radius: 8px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .speaker-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(27,42,74,0.12); }
+    .speaker-photo { aspect-ratio: 1; background: var(--navy-lt); display: flex; align-items: center; justify-content: center; }
+    .speaker-photo-inner { width: 80%; aspect-ratio: 1; border-radius: 50%; background: var(--orange); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .speaker-photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .speaker-info { padding: 1.25rem; }
+    .speaker-name { font-weight: 700; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.15rem; }
+    .speaker-title { font-size: 0.78rem; color: var(--orange); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .speaker-session { font-size: 0.85rem; color: var(--gray); line-height: 1.5; font-style: italic; }
+    .speaker-time { display: inline-block; margin-top: 0.75rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(27,42,74,0.4); border-top: 1px solid var(--gray-lt); padding-top: 0.6rem; width: 100%; }
+
+    /* SPONSORS */
+    #sponsors { background: var(--off-white); border-top: 1px solid var(--gray-lt); }
+    .sponsor-tiers { margin-top: 3rem; display: flex; flex-direction: column; gap: 2.5rem; }
+    .sponsor-tier-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+    .sponsor-tier-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-lt); }
+    .sponsor-row { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .sponsor-slot { background: var(--white); border: 2px dashed var(--gray-lt); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 0.8rem; font-weight: 500; text-align: center; transition: border-color 0.2s; }
+    .sponsor-slot:hover { border-color: var(--orange); color: var(--orange); }
+    .sponsor-slot.title { width: 280px; height: 100px; font-size: 0.85rem; }
+    .sponsor-slot.book, .sponsor-slot.happy { width: 220px; height: 80px; }
+    .sponsor-slot.swag { width: 160px; height: 65px; font-size: 0.75rem; }
+    .sponsor-slot.booth { width: 130px; height: 55px; font-size: 0.72rem; }
+    .sponsor-slot.connector { width: 110px; height: 45px; font-size: 0.68rem; }
+    .sponsor-cta { text-align: center; margin-top: 2.5rem; padding: 2rem; background: var(--white); border-radius: 8px; border: 1px solid var(--gray-lt); }
+    .sponsor-cta p { font-size: 1.05rem; color: var(--navy); font-weight: 500; margin-bottom: 1rem; }
+
+    /* VENUE */
+    #venue { background: var(--navy); color: var(--white); }
+    .venue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .venue-map { aspect-ratio: 4/3; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; overflow: hidden; }
+    .venue-map iframe { width: 100%; height: 100%; border: none; filter: invert(0.9) hue-rotate(180deg); opacity: 0.85; }
+    .venue-details { display: flex; flex-direction: column; gap: 1.25rem; }
+    .venue-detail-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .venue-icon { width: 40px; height: 40px; background: rgba(242,101,34,0.15); border: 1px solid rgba(242,101,34,0.25); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .venue-detail-text strong { display: block; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+    .venue-detail-text span { font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+
+    /* FINAL CTA */
+    #register { background: var(--orange); padding: 5rem 2rem; text-align: center; }
+    #register .section-title { color: var(--white); margin-bottom: 1rem; }
+    #register .section-body { color: rgba(255,255,255,0.8); max-width: 520px; margin: 0 auto 2.5rem; }
+    .register-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { background: var(--navy-dk); color: rgba(255,255,255,0.4); padding: 2rem; text-align: center; font-size: 0.8rem; border-top: 2px solid var(--orange); }
     footer a { color: rgba(255,255,255,0.5); }
     footer a:hover { color: var(--orange); }
 
-    /* ── ANIMATIONS ──────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
-    .hero-title   { animation: fadeUp 0.6s 0.1s ease both; }
-    .hero-tagline { animation: fadeUp 0.6s 0.2s ease both; }
-    .hero-meta    { animation: fadeUp 0.6s 0.3s ease both; }
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-eyebrow   { animation: fadeUp 0.6s ease both; }
+    .hero-title     { animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-tagline   { animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-meta      { animation: fadeUp 0.6s 0.3s ease both; }
     .hero-cta-group { animation: fadeUp 0.6s 0.4s ease both; }
-    .hero-right   { animation: fadeUp 0.6s 0.25s ease both; }
+    .hero-right     { animation: fadeUp 0.6s 0.25s ease both; }
 
-    /* ── RESPONSIVE ──────────────────────────────────────── */
+    /* RESPONSIVE */
     @media (max-width: 900px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-      .hero-right { order: -1; max-width: 480px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-left  { order: 1; }
+      .hero-right { order: 2; max-width: 480px; }
       .about-grid, .venue-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .speakers-grid { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
     }
-
     @media (max-width: 560px) {
       .speakers-grid { grid-template-columns: 1fr; }
       .countdown-grid { gap: 0.3rem; }
@@ -1049,15 +215,12 @@
     }
   </style>
 </head>
-
 <body>
 
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <div class="nav-badge">
-        <div class="nav-logo-text">WE RUN ON <span>EOS</span>®</div>
-      </div>
+      <div class="nav-logo-text">WE RUN ON <span>EOS</span><sup>®</sup></div>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#agenda">Agenda</a></li>
@@ -1073,30 +236,20 @@
   <section id="home">
     <div class="hero-inner">
       <div class="hero-left">
-        <div class="hero-eyebrow">Fifth Annual · Dallas / Fort Worth</div>
+        <div class="hero-eyebrow" id="hero-eyebrow"></div>
         <h1 class="hero-title">
           <span class="annual">We Run on</span>
-          <span class="eos">EOS</span>®
-          <br>Dallas
-          <br>2026
+          <span class="eos">EOS</span><sup>®</sup>
+          <br>Dallas<br>2026
         </h1>
         <p class="hero-tagline">One day. World-class speakers.<br>The DFW EOS community, together.</p>
         <div class="hero-meta">
-          <div class="hero-meta-item">
-            <div class="icon">📅</div>
-            <div><strong>Monday, September 14, 2026</strong></div>
-          </div>
-          <div class="hero-meta-item">
-            <div class="icon">🕘</div>
-            <div><strong>9:00 AM – 9:00 PM</strong> &nbsp;·&nbsp; Full day</div>
-          </div>
-          <div class="hero-meta-item">
-            <div class="icon">📍</div>
-            <div><strong>The Statler Dallas</strong> &nbsp;·&nbsp; 1914 Commerce St</div>
-          </div>
+          <div class="hero-meta-item"><div class="icon">📅</div><div><strong id="hero-date"></strong></div></div>
+          <div class="hero-meta-item"><div class="icon">🕘</div><div><strong id="hero-time"></strong></div></div>
+          <div class="hero-meta-item"><div class="icon">📍</div><div><strong id="hero-venue"></strong> &nbsp;·&nbsp; <span id="hero-address"></span></div></div>
         </div>
         <div class="hero-cta-group">
-          <a href="#register" class="btn-primary">Register Now &rarr;</a>
+          <a id="cta-register" href="#" class="btn-primary">Register Now &rarr;</a>
           <a href="#agenda" class="btn-secondary">View Full Agenda</a>
         </div>
       </div>
@@ -1105,36 +258,20 @@
         <div class="countdown-card">
           <div class="countdown-label">Event Countdown</div>
           <div class="countdown-grid">
-            <div class="countdown-unit">
-              <div class="countdown-num" id="cd-days">153</div>
-              <div class="countdown-unit-label">Days</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-num" id="cd-hours">00</div>
-              <div class="countdown-unit-label">Hours</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-num" id="cd-mins">00</div>
-              <div class="countdown-unit-label">Mins</div>
-            </div>
-            <div class="countdown-unit">
-              <div class="countdown-num" id="cd-secs">00</div>
-              <div class="countdown-unit-label">Secs</div>
-            </div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-days">--</div><div class="countdown-unit-label">Days</div></div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-unit-label">Hours</div></div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-unit-label">Mins</div></div>
+            <div class="countdown-unit"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-unit-label">Secs</div></div>
           </div>
-
-          <div class="tickets-bar">
+          <div id="tickets-remaining-section" class="tickets-bar">
             <div class="tickets-top">
               <span class="tickets-label">Paid Tier Tickets Remaining</span>
-              <div class="tickets-count"><!-- PLACEHOLDER --> TBD <span>of TBD</span></div>
+              <div class="tickets-count"><span id="tickets-left">--</span> <span>of <span id="tickets-cap">--</span></span></div>
             </div>
-            <div class="progress-track">
-              <div class="progress-fill" id="ticket-progress"></div>
-            </div>
-            <div class="tickets-note">* Ticket cap to be confirmed. Early bird pricing ends [DATE].</div>
+            <div class="progress-track"><div class="progress-fill" id="ticket-progress" style="width:0%"></div></div>
+            <div class="tickets-note" id="tickets-note"></div>
           </div>
         </div>
-
         <div class="tier-pills">
           <div class="tier-pill free">
             <div class="tier-name">Morning Session</div>
@@ -1143,8 +280,8 @@
           </div>
           <div class="tier-pill paid">
             <div class="tier-name">Full Day · Early Bird</div>
-            <div class="tier-price">$95</div>
-            <div class="tier-desc">Then $145 · Includes PM + Awards</div>
+            <div class="tier-price" id="hero-early-price"></div>
+            <div class="tier-desc" id="hero-standard-desc"></div>
           </div>
         </div>
       </div>
@@ -1155,44 +292,15 @@
   <section id="about">
     <div class="container">
       <div class="about-grid">
-        <div class="about-video">
-          <!-- PLACEHOLDER: Replace src with actual prior year YouTube embed URL from Shane -->
-          <div class="video-placeholder">
-            <div class="play-btn">▶</div>
-            <div>
-              <strong style="color:rgba(255,255,255,0.7)">Watch: We Run on EOS® Dallas 2025</strong><br>
-              <span style="font-size:0.75rem">Video to be provided by Shane Spillers</span>
-            </div>
-          </div>
-        </div>
-
+        <div class="about-video" id="about-video-container"></div>
         <div>
           <div class="section-eyebrow">About the Event</div>
-          <h2 class="section-title">The Biggest EOS<br>Event in DFW</h2>
-          <p class="section-body">Now in its fifth year, We Run on EOS® Dallas brings together DFW's entrepreneurial leaders for a full day of world-class speakers, hands-on workshops, and the community that makes it all possible.</p>
-
+          <h2 class="section-title">The Biggest EOS<sup>®</sup><br>Event in DFW</h2>
+          <p class="section-body">Now in its fifth year, We Run on EOS<sup>®</sup> Dallas brings together DFW's entrepreneurial leaders for a full day of world-class speakers, hands-on workshops, and the community that makes it all possible.</p>
           <div class="three-uniques">
-            <div class="unique-item">
-              <div class="unique-num">01</div>
-              <div class="unique-text">
-                <h3>Mastery</h3>
-                <p>Educational opportunities and workshops led by EOS experts at the top of their craft.</p>
-              </div>
-            </div>
-            <div class="unique-item">
-              <div class="unique-num">02</div>
-              <div class="unique-text">
-                <h3>Community</h3>
-                <p>Connect with DFW business leaders who run on EOS and the implementers who guide them.</p>
-              </div>
-            </div>
-            <div class="unique-item">
-              <div class="unique-num">03</div>
-              <div class="unique-text">
-                <h3>Celebration</h3>
-                <p>Celebrate wins and success collectively at the EOS Awards and Happy Hour.</p>
-              </div>
-            </div>
+            <div class="unique-item"><div class="unique-num">01</div><div class="unique-text"><h3>Mastery</h3><p>Educational opportunities and workshops led by EOS experts at the top of their craft.</p></div></div>
+            <div class="unique-item"><div class="unique-num">02</div><div class="unique-text"><h3>Community</h3><p>Connect with DFW business leaders who run on EOS and the implementers who guide them.</p></div></div>
+            <div class="unique-item"><div class="unique-num">03</div><div class="unique-text"><h3>Celebration</h3><p>Celebrate wins and success collectively at the EOS Awards and Happy Hour.</p></div></div>
           </div>
         </div>
       </div>
@@ -1204,7 +312,7 @@
     <div class="container">
       <div class="agenda-header">
         <div>
-          <div class="section-eyebrow" style="color:var(--orange)">September 14, 2026</div>
+          <div class="section-eyebrow" style="color:var(--orange)" id="agenda-date-label"></div>
           <h2 class="section-title light">Full Day Agenda</h2>
         </div>
         <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
@@ -1212,60 +320,7 @@
           <span class="agenda-badge badge-paid">Paid · Afternoon + Evening</span>
         </div>
       </div>
-
-      <div class="agenda-list">
-        <div class="agenda-item">
-          <div class="agenda-time">9:00 – 10:00 AM</div>
-          <div class="agenda-session">Coffee &amp; Registration</div>
-          <div class="agenda-speaker">The Statler Dallas · Lobby</div>
-        </div>
-
-        <div class="agenda-item highlight">
-          <div class="agenda-time">10:00 – 11:30 AM</div>
-          <div class="agenda-session">The Talk</div>
-          <div class="agenda-speaker">Shane Spillers · Expert EOS Implementer®</div>
-        </div>
-
-        <div class="agenda-item">
-          <div class="agenda-time">11:45 AM – 12:45 PM</div>
-          <div class="agenda-session">Lunch + Title Sponsor Workshop</div>
-          <div class="agenda-speaker badge-free" style="display:inline-block;background:rgba(255,255,255,0.06);padding:0.2rem 0.6rem;border-radius:3px;font-size:0.75rem;margin-top:0.3rem">Included with free registration</div>
-        </div>
-
-        <div class="agenda-divider">
-          <span class="divider-label badge-paid">Paid Tier Begins</span>
-        </div>
-
-        <div class="agenda-item highlight">
-          <div class="agenda-time">1:00 – 2:30 PM</div>
-          <div class="agenda-session">Data Workshop</div>
-          <div class="agenda-speaker">Mark Stanley · EOS Implementer</div>
-        </div>
-
-        <div class="agenda-item sponsor-slot">
-          <div class="agenda-time">2:45 – 4:15 PM</div>
-          <div class="agenda-session">Title Sponsor Workshop</div>
-          <div class="agenda-speaker">Sponsor TBD</div>
-        </div>
-
-        <div class="agenda-item highlight">
-          <div class="agenda-time">4:30 – 5:30 PM</div>
-          <div class="agenda-session">Rollout Workshop</div>
-          <div class="agenda-speaker">Beth Fahey · EOS Implementer</div>
-        </div>
-
-        <div class="agenda-item highlight">
-          <div class="agenda-time">5:45 – 7:15 PM</div>
-          <div class="agenda-session">Visionary Keynote</div>
-          <div class="agenda-speaker">Mark C. Winters · Co-author, Rocket Fuel</div>
-        </div>
-
-        <div class="agenda-item">
-          <div class="agenda-time">7:30 – 9:00 PM</div>
-          <div class="agenda-session">EOS Awards + Happy Hour + Networking</div>
-          <div class="agenda-speaker">Celebrate wins. Connect. Go home fired up.</div>
-        </div>
-      </div>
+      <div class="agenda-list" id="agenda-list"></div>
     </div>
   </section>
 
@@ -1275,56 +330,7 @@
       <div class="section-eyebrow">World-Class Lineup</div>
       <h2 class="section-title">2026 Speakers</h2>
       <p class="section-body">Four nationally recognized EOS experts, one extraordinary day.</p>
-
-      <div class="speakers-grid">
-        <div class="speaker-card">
-          <div class="speaker-photo">
-            <div class="speaker-photo-inner"><img src="https://implementer.eosworldwide.com/wp-content/uploads/2025/11/20170423-Spillers-Shane-Headshot-1-Large-2.png" alt="Shane Spillers"></div>
-          </div>
-          <div class="speaker-info">
-            <div class="speaker-title">Expert EOS Implementer®</div>
-            <div class="speaker-name">Shane Spillers</div>
-            <div class="speaker-session">"The Talk" — Opening the day with the foundation of running on EOS</div>
-            <div class="speaker-time">10:00 – 11:30 AM · Free Session</div>
-          </div>
-        </div>
-
-        <div class="speaker-card">
-          <div class="speaker-photo">
-            <div class="speaker-photo-inner"><img src="https://implementer.eosworldwide.com/wp-content/uploads/2025/12/MarkS-4578-Edit-SM.jpg" alt="Mark Stanley"></div>
-          </div>
-          <div class="speaker-info">
-            <div class="speaker-title">EOS Implementer</div>
-            <div class="speaker-name">Mark Stanley</div>
-            <div class="speaker-session">Data Workshop — Using data to drive decisions and accountability</div>
-            <div class="speaker-time">1:00 – 2:30 PM</div>
-          </div>
-        </div>
-
-        <div class="speaker-card">
-          <div class="speaker-photo">
-            <div class="speaker-photo-inner"><img src="https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/Fahey-Headshot-2023-WEB-2.jpeg.webp" alt="Beth Fahey"></div>
-          </div>
-          <div class="speaker-info">
-            <div class="speaker-title">EOS Implementer</div>
-            <div class="speaker-name">Beth Fahey</div>
-            <div class="speaker-session">Rollout Workshop — Getting EOS running deeper in your organization</div>
-            <div class="speaker-time">4:30 – 5:30 PM</div>
-          </div>
-        </div>
-
-        <div class="speaker-card">
-          <div class="speaker-photo">
-            <div class="speaker-photo-inner"><img src="https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/MCW-Headshot-Small-1-1-1024x767.jpeg.webp" alt="Mark C. Winters"></div>
-          </div>
-          <div class="speaker-info">
-            <div class="speaker-title">Co-author, Rocket Fuel</div>
-            <div class="speaker-name">Mark C. Winters</div>
-            <div class="speaker-session">Visionary Keynote — The Visionary/Integrator dynamic that powers great companies</div>
-            <div class="speaker-time">5:45 – 7:15 PM</div>
-          </div>
-        </div>
-      </div>
+      <div class="speakers-grid" id="speakers-grid"></div>
     </div>
   </section>
 
@@ -1334,41 +340,10 @@
       <div class="section-eyebrow">Partnership Opportunities</div>
       <h2 class="section-title">Our Sponsors</h2>
       <p class="section-body">Reach 250 DFW C-Suite leaders and EOS Implementers. Multiple tiers available.</p>
-
-      <div class="sponsor-tiers">
-        <div>
-          <div class="sponsor-tier-label">Title Sponsors · $10,000</div>
-          <div class="sponsor-row">
-            <div class="sponsor-slot title">Your Logo Here<br><span style="font-size:0.72rem;color:#aaa">2 Available</span></div>
-            <div class="sponsor-slot title">Your Logo Here<br><span style="font-size:0.72rem;color:#aaa">2 Available</span></div>
-          </div>
-        </div>
-        <div>
-          <div class="sponsor-tier-label">Book Sponsor · $9,000 &nbsp;|&nbsp; Happy Hour Sponsor · $6,500</div>
-          <div class="sponsor-row">
-            <div class="sponsor-slot book">Book Sponsor<br><span style="font-size:0.72rem;color:#aaa">1 Available</span></div>
-            <div class="sponsor-slot happy">Happy Hour Sponsor<br><span style="font-size:0.72rem;color:#aaa">1 Available</span></div>
-          </div>
-        </div>
-        <div>
-          <div class="sponsor-tier-label">Swag Bag · $3,500 &nbsp;|&nbsp; Booth · $1,500 &nbsp;|&nbsp; Connector · $750</div>
-          <div class="sponsor-row">
-            <div class="sponsor-slot swag">Swag Bag</div>
-            <div class="sponsor-slot swag">Swag Bag</div>
-            <div class="sponsor-slot booth">Booth</div>
-            <div class="sponsor-slot booth">Booth</div>
-            <div class="sponsor-slot booth">Booth</div>
-            <div class="sponsor-slot connector">Connector</div>
-            <div class="sponsor-slot connector">Connector</div>
-            <div class="sponsor-slot connector">Connector</div>
-          </div>
-        </div>
-      </div>
-
+      <div class="sponsor-tiers" id="sponsor-tiers"></div>
       <div class="sponsor-cta">
         <p>Interested in sponsoring? Let's talk about the right fit for your organization.</p>
-        <!-- PLACEHOLDER: Link to Kevin Taylor's contact or sponsorship deck -->
-        <a href="/cdn-cgi/l/email-protection#b5ded0c3dcdb9bc1d4ccd9dac7f5d0dac6c2dac7d9d1c2dcd1d09bd6dad8" class="btn-primary">Sponsorship Inquiry &rarr;</a>
+        <a id="sponsor-contact-btn" href="#" class="btn-primary">Sponsorship Inquiry &rarr;</a>
       </div>
     </div>
   </section>
@@ -1379,49 +354,17 @@
       <div class="venue-grid">
         <div>
           <div class="section-eyebrow">Where We Gather</div>
-          <h2 class="section-title light">The Statler<br>Dallas</h2>
+          <h2 class="section-title light" id="venue-name"></h2>
           <div class="venue-details">
-            <div class="venue-detail-item">
-              <div class="venue-icon">📍</div>
-              <div class="venue-detail-text">
-                <strong>Address</strong>
-                <span>1914 Commerce St, Dallas, TX 75201</span>
-              </div>
-            </div>
-            <div class="venue-detail-item">
-              <div class="venue-icon">🅿️</div>
-              <div class="venue-detail-text">
-                <strong>Parking</strong>
-                <span>Complimentary parking available on-site</span>
-              </div>
-            </div>
-            <div class="venue-detail-item">
-              <div class="venue-icon">📅</div>
-              <div class="venue-detail-text">
-                <strong>Date &amp; Time</strong>
-                <span>Monday, September 14, 2026 · 9:00 AM – 9:00 PM</span>
-              </div>
-            </div>
-            <div class="venue-detail-item">
-              <div class="venue-icon">🏨</div>
-              <div class="venue-detail-text">
-                <strong>Hotel Rooms</strong>
-                <span>Room block details coming soon for out-of-town guests</span>
-              </div>
-            </div>
+            <div class="venue-detail-item"><div class="venue-icon">📍</div><div class="venue-detail-text"><strong>Address</strong><span id="venue-address"></span></div></div>
+            <div class="venue-detail-item"><div class="venue-icon">🅿️</div><div class="venue-detail-text"><strong>Parking</strong><span id="venue-parking"></span></div></div>
+            <div class="venue-detail-item"><div class="venue-icon">📅</div><div class="venue-detail-text"><strong>Date &amp; Time</strong><span id="venue-datetime"></span></div></div>
+            <div class="venue-detail-item"><div class="venue-icon">🏨</div><div class="venue-detail-text"><strong>Hotel Rooms</strong><span>Room block details coming soon for out-of-town guests</span></div></div>
           </div>
-          <div style="margin-top:2rem">
-            <a href="https://maps.google.com/?q=1914+Commerce+St+Dallas+TX+75201" target="_blank" class="btn-secondary">Get Directions &rarr;</a>
-          </div>
+          <div style="margin-top:2rem"><a id="venue-directions" href="#" target="_blank" class="btn-secondary">Get Directions &rarr;</a></div>
         </div>
-
         <div class="venue-map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.3!2d-96.8019!3d32.7810!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e991a3d77b2d7%3A0x1914CommerceStDallas!2sThe+Statler+Dallas!5e0!3m2!1sen!2sus!4v1"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.1!2d-96.8019!3d32.7810!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e991a3d77b2d7%3A0x5b1ea8b9e5b8a1d3!2sThe%20Statler%20Dallas!5e0!3m2!1sen!2sus!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
@@ -1430,49 +373,159 @@
   <!-- FINAL CTA -->
   <section id="register">
     <div class="container">
-      <div class="section-eyebrow" style="justify-content:center;color:rgba(255,255,255,0.7)">September 14, 2026 · The Statler Dallas</div>
-      <h2 class="section-title">Ready to Run on EOS®?</h2>
+      <div class="section-eyebrow" style="justify-content:center;color:rgba(255,255,255,0.7)" id="cta-eyebrow"></div>
+      <h2 class="section-title">Ready to Run on EOS<sup>®</sup>?</h2>
       <p class="section-body">Join 250 DFW entrepreneurs and EOS Implementers for the biggest EOS event of the year. Morning sessions are free. Afternoon and evening require a ticket.</p>
       <div class="register-btns">
-        <!-- PLACEHOLDER: Replace # with Eventbrite link when Kevin sets it up -->
-        <a href="#" class="btn-white">Register Free (AM) &rarr;</a>
-        <a href="#" class="btn-ghost-white">Get Full Day Ticket · $95 Early Bird</a>
+        <a id="cta-free-btn" href="#" class="btn-white">Register Free (AM) &rarr;</a>
+        <a id="cta-paid-btn" href="#" class="btn-ghost-white"></a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>
-      We Run on EOS® is brought to you by the DFW EOS Implementer Community &nbsp;·&nbsp;
-      <a href="https://www.eosworldwide.com">EOS Worldwide</a> &nbsp;·&nbsp;
-      Questions? <a href="/cdn-cgi/l/email-protection#3c57594a555212485d4550534e7c59534f4b534e50584b555859125f5351">Contact us</a>
-    </p>
-    <p style="margin-top:0.5rem;font-size:0.72rem;opacity:0.6">
-      EOS®, EOS Implementer®, and We Run on EOS® are registered trademarks of EOS Worldwide, LLC. Used with permission.
-    </p>
+    <p>We Run on EOS<sup>®</sup> is brought to you by the DFW EOS Implementer Community &nbsp;·&nbsp; <a id="footer-eos-link" href="#">EOS Worldwide</a> &nbsp;·&nbsp; Questions? <a id="footer-contact" href="#">Contact us</a></p>
+    <p style="margin-top:0.5rem;font-size:0.72rem;opacity:0.6">EOS<sup>®</sup>, EOS Implementer<sup>®</sup>, and We Run on EOS<sup>®</sup> are registered trademarks of EOS Worldwide, LLC. Used with permission.</p>
   </footer>
 
-  <!-- COUNTDOWN SCRIPT -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    function updateCountdown() {
-      const target = new Date('2026-09-14T09:00:00-05:00');
-      const now = new Date();
-      const diff = target - now;
+  <script>
+  (function() {
+    const C = SITE_CONFIG;
+    const ev = C.event;
+    const tk = C.tickets;
+    const fmt$ = n => '$' + n.toLocaleString();
+    const el = id => document.getElementById(id);
 
-      if (diff <= 0) {
-        document.getElementById('cd-days').textContent = '00';
-        document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent = '00';
-        document.getElementById('cd-secs').textContent = '00';
-        return;
+    // Hero
+    el('hero-eyebrow').textContent    = ev.edition + ' · Dallas / Fort Worth';
+    el('hero-date').textContent        = ev.date;
+    el('hero-time').textContent        = ev.timeRange;
+    el('hero-venue').textContent       = ev.venue;
+    el('hero-address').textContent     = ev.address;
+    el('cta-register').href            = tk.earlyBirdUrl;
+    el('hero-early-price').textContent = fmt$(tk.earlyBirdPrice);
+    el('hero-standard-desc').textContent = 'Then ' + fmt$(tk.standardPrice) + ' · Includes PM + Awards';
+
+    // Tickets remaining (only shown when cap is set)
+    if (tk.cap) {
+      const remaining = tk.cap - tk.sold;
+      const pct = Math.round((tk.sold / tk.cap) * 100);
+      el('tickets-remaining-section').style.display = 'block';
+      el('tickets-left').textContent = remaining;
+      el('tickets-cap').textContent  = tk.cap;
+      el('ticket-progress').style.width = pct + '%';
+      el('tickets-note').textContent = tk.earlyBirdEndDate !== 'TBD'
+        ? '* Early bird pricing ends ' + tk.earlyBirdEndDate
+        : '* Early bird pricing available now';
+    }
+
+    // Agenda
+    el('agenda-date-label').textContent = ev.date;
+    const agendaList = el('agenda-list');
+    let shownDivider = false;
+    C.agenda.forEach(item => {
+      if (!shownDivider && item.tier === 'paid') {
+        shownDivider = true;
+        const div = document.createElement('div');
+        div.className = 'agenda-divider';
+        div.innerHTML = '<span class="divider-label badge-paid">Paid Tier Begins</span>';
+        agendaList.appendChild(div);
       }
+      const cls = ['agenda-item', item.highlight ? 'highlight' : '', item.isSponsor ? 'sponsor-slot' : ''].filter(Boolean).join(' ');
+      const row = document.createElement('div');
+      row.className = cls;
+      row.innerHTML = `<div class="agenda-time">${item.time}</div><div class="agenda-session">${item.session}</div><div class="agenda-speaker">${item.speaker}</div>`;
+      agendaList.appendChild(row);
+    });
 
-      const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+    // Speakers
+    const grid = el('speakers-grid');
+    C.speakers.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'speaker-card';
+      card.innerHTML = `
+        <div class="speaker-photo">
+          <div class="speaker-photo-inner">
+            <img src="${s.photo}" alt="${s.name}" onerror="this.parentElement.innerHTML='<span style=\\"font-family:var(--font-display);font-size:2rem;color:white;\\">${s.initials}</span>'">
+          </div>
+        </div>
+        <div class="speaker-info">
+          <div class="speaker-title">${s.title}</div>
+          <div class="speaker-name">${s.name}</div>
+          <div class="speaker-session">"${s.session}" — ${s.bio}</div>
+          <div class="speaker-time">${s.time}${s.tier === 'free' ? ' · Free Session' : ''}</div>
+        </div>`;
+      grid.appendChild(card);
+    });
 
-      document.getElementById('cd-days').textContent  = String(days).padStart(3, '0');
-      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('cd-mins').textContent  = Strin
+    // Sponsors
+    const clsMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happy','Swag Bag Sponsor':'swag','Booth Sponsor':'booth','Connector Sponsor':'connector'};
+    const tierGroups = [
+      { keys: ['Title Sponsor'] },
+      { keys: ['Book Sponsor', 'Happy Hour Sponsor'] },
+      { keys: ['Swag Bag Sponsor', 'Booth Sponsor', 'Connector Sponsor'] },
+    ];
+    const tierContainer = el('sponsor-tiers');
+    tierGroups.forEach(group => {
+      const tiers = C.sponsors.tiers.filter(t => group.keys.includes(t.name));
+      const section = document.createElement('div');
+      const labelText = tiers.map(t => `${t.name} &nbsp;·&nbsp; ${fmt$(t.price)}`).join(' &nbsp;|&nbsp; ');
+      section.innerHTML = `<div class="sponsor-tier-label">${labelText}</div><div class="sponsor-row"></div>`;
+      tierContainer.appendChild(section);
+      const row = section.querySelector('.sponsor-row');
+      tiers.forEach(tier => {
+        for (let i = 0; i < tier.available; i++) {
+          const slot = document.createElement('div');
+          slot.className = 'sponsor-slot ' + (clsMap[tier.name] || '');
+          slot.innerHTML = `Your Logo Here<br><span style="font-size:0.72rem;color:#aaa">${tier.available} Available</span>`;
+          row.appendChild(slot);
+        }
+      });
+    });
+    el('sponsor-contact-btn').href = 'mailto:' + C.sponsors.contact;
+
+    // Venue
+    el('venue-name').textContent     = ev.venue;
+    el('venue-address').textContent  = ev.address;
+    el('venue-parking').textContent  = ev.parking;
+    el('venue-datetime').textContent = ev.date + ' · ' + ev.timeRange;
+    el('venue-directions').href      = ev.mapsLink;
+
+    // Promo video
+    const videoContainer = el('about-video-container');
+    if (C.media.promoVideoUrl) {
+      videoContainer.innerHTML = `<iframe src="${C.media.promoVideoUrl}" allowfullscreen></iframe>`;
+    } else {
+      videoContainer.innerHTML = `<div class="video-placeholder"><div class="play-btn">▶</div><div><strong style="color:rgba(255,255,255,0.7)">Watch: We Run on EOS® Dallas 2025</strong><br><span style="font-size:0.75rem">Video coming soon</span></div></div>`;
+    }
+
+    // CTA section
+    el('cta-eyebrow').textContent  = ev.date + ' · ' + ev.venue;
+    el('cta-free-btn').href        = tk.freeUrl;
+    el('cta-paid-btn').href        = tk.earlyBirdUrl;
+    el('cta-paid-btn').textContent = 'Get Full Day Ticket · ' + fmt$(tk.earlyBirdPrice) + ' Early Bird';
+
+    // Footer
+    el('footer-eos-link').href  = C.contact.eosUrl;
+    el('footer-contact').href   = 'mailto:' + C.contact.general;
+  })();
+
+  // Live countdown — updates every second
+  function updateCountdown() {
+    const target = new Date(SITE_CONFIG.event.dateISO);
+    const diff   = target - new Date();
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+    document.getElementById('cd-days').textContent  = String(Math.floor(diff / 864e5)).padStart(3,'0');
+    document.getElementById('cd-hours').textContent = String(Math.floor((diff % 864e5) / 36e5)).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(Math.floor((diff % 36e5) / 6e4)).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(Math.floor((diff % 6e4) / 1e3)).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
