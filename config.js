@@ -100,7 +100,7 @@ const SITE_CONFIG = {
 
   // ── MEDIA ──────────────────────────────────────────────────
   media: {
-    promoVideoUrl: null,   // PLACEHOLDER: YouTube embed URL from Shane (e.g. "https://www.youtube.com/embed/XXXX")
+    promoVideoUrl: "https://www.youtube.com/embed/WtagBi514bA",
   },
 
   // ── CONTACT ────────────────────────────────────────────────
