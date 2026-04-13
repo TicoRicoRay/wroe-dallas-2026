@@ -7,7 +7,7 @@
   <meta name="description" content="The Fifth Annual We Run on EOS® Dallas event. September 14, 2026 at The Statler. A full day of EOS mastery, connection, and celebration for DFW entrepreneurs and leaders.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -24,9 +24,9 @@
       --gray:      #6b7280;
       --gray-lt:   #e5e7eb;
       --text:      #1a1a2e;
-      --font-display: 'Bebas Neue', sans-serif;
-      --font-serif:   'DM Serif Display', serif;
-      --font-body:    'DM Sans', sans-serif;
+      --font-display: 'Montserrat', sans-serif;
+      --font-serif:   'Montserrat', sans-serif;
+      --font-body:    'Roboto', sans-serif;
       --max: 1160px;
       --radius: 4px;
     }
@@ -55,10 +55,10 @@
     .hero-inner { position: relative; z-index: 2; max-width: var(--max); margin: 0 auto; padding: 5rem 2rem 4rem; display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: center; }
     .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.5rem; }
     .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--orange); }
-    .hero-title { font-family: var(--font-display); font-size: clamp(3.5rem, 7vw, 6.5rem); line-height: 0.92; letter-spacing: 0.02em; color: var(--white); margin-bottom: 0.5rem; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(2.8rem, 6vw, 5.5rem); text-transform: uppercase; line-height: 0.92; letter-spacing: 0.02em; color: var(--white); margin-bottom: 0.5rem; }
     .hero-title .eos { color: var(--orange); }
     .hero-title .annual { font-family: var(--font-body); font-size: clamp(0.85rem, 1.5vw, 1rem); font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: block; margin-bottom: 0.5rem; }
-    .hero-tagline { font-family: var(--font-serif); font-style: italic; font-size: clamp(1.1rem, 2vw, 1.5rem); color: rgba(255,255,255,0.65); margin: 1.5rem 0 2.5rem; line-height: 1.4; }
+    .hero-tagline { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(1.1rem, 2vw, 1.5rem); color: rgba(255,255,255,0.65); margin: 1.5rem 0 2.5rem; line-height: 1.4; }
     .hero-meta { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2.5rem; }
     .hero-meta-item { display: flex; align-items: center; gap: 0.75rem; font-size: 1rem; color: rgba(255,255,255,0.85); }
     .hero-meta-item .icon { width: 36px; height: 36px; background: rgba(242,101,34,0.15); border: 1px solid rgba(242,101,34,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.9rem; }
