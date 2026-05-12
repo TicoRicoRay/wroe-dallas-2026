@@ -52,7 +52,7 @@ const SITE_CONFIG = {
       time:     "10:00 \u2013 11:30 AM",
       tier:     "free",
       photo:    "https://implementer.eosworldwide.com/wp-content/uploads/2025/11/20170423-Spillers-Shane-Headshot-1-Large-2.png",
-      initials: "SS",
+      initials: "",
     },
     {
       name:     "Mark Stanley",
@@ -62,7 +62,7 @@ const SITE_CONFIG = {
       time:     "1:00 \u2013 2:30 PM",
       tier:     "paid",
       photo:    "https://implementer.eosworldwide.com/wp-content/uploads/2025/12/MarkS-4578-Edit-SM.jpg",
-      initials: "MS",
+      initials: "",
     },
     {
       name:     "Beth Fahey",
@@ -72,7 +72,7 @@ const SITE_CONFIG = {
       time:     "4:30 \u2013 5:30 PM",
       tier:     "paid",
       photo:    "https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/Fahey-Headshot-2023-WEB-2.jpeg.webp",
-      initials: "BF",
+      initials: "",
     },
     {
       name:     "Mark C. Winters",
@@ -82,7 +82,7 @@ const SITE_CONFIG = {
       time:     "5:45 \u2013 7:15 PM",
       tier:     "paid",
       photo:    "https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/MCW-Headshot-Small-1-1-1024x767.jpeg.webp",
-      initials: "MCW",
+      initials: "",
     },
   ],
 
