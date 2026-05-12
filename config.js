@@ -76,7 +76,7 @@ const SITE_CONFIG = {
     },
     {
       name:     "Mark C. Winters",
-      title:    "Co-author, Rocket Fuel",
+      title:    "Expert EOS Implementer\u00AE",
       session:  "Visionary Keynote",
       bio:      "The Visionary/Integrator dynamic that powers great companies",
       time:     "5:45 \u2013 7:15 PM",
@@ -91,10 +91,10 @@ const SITE_CONFIG = {
     { time: "9:00 \u2013 10:00 AM",    session: "Coffee & Registration",          speaker: "The Statler Dallas \u00B7 Lobby",                                   tier: "free",   highlight: false },
     { time: "10:00 \u2013 11:30 AM",   session: "The Talk",                       speaker: "Shane Spillers \u00B7 Expert EOS Implementer\u00AE",                 tier: "free",   highlight: true  },
     { time: "11:45 AM \u2013 12:45 PM",session: "Lunch + Title Sponsor Workshop", speaker: "Included with free registration",                                    tier: "free",   highlight: false },
-    { time: "1:00 \u2013 2:30 PM",     session: "Data Workshop",                  speaker: "Mark Stanley \u00B7 EOS Implementer\u00AE",                          tier: "paid",   highlight: true  },
+    { time: "1:00 \u2013 2:30 PM",     session: "Data Workshop",                  speaker: "Mark Stanley \u00B7 Expert EOS Implementer\u00AE",                          tier: "paid",   highlight: true  },
     { time: "2:45 \u2013 4:15 PM",     session: "Title Sponsor Workshop",         speaker: "Sponsor TBD",                                                        tier: "paid",   highlight: false, isSponsor: true },
-    { time: "4:30 \u2013 5:30 PM",     session: "Rollout Workshop",               speaker: "Beth Fahey \u00B7 EOS Implementer\u00AE",                            tier: "paid",   highlight: true  },
-    { time: "5:45 \u2013 7:15 PM",     session: "Visionary Keynote",              speaker: "Mark C. Winters \u00B7 Co-author, Rocket Fuel",                      tier: "paid",   highlight: true  },
+    { time: "4:30 \u2013 5:30 PM",     session: "Rollout Workshop",               speaker: "Beth Fahey \u00B7 Expert EOS Implementer\u00AE",                            tier: "paid",   highlight: true  },
+    { time: "5:45 \u2013 7:15 PM",     session: "Visionary Keynote",              speaker: "Mark C. Winters \u00B7 Expert EOS Implementer\u00AE",                      tier: "paid",   highlight: true  },
     { time: "7:30 \u2013 9:00 PM",     session: "EOS Awards + Happy Hour + Networking", speaker: "Celebrate wins. Connect. Go home fired up.",                  tier: "paid",   highlight: false },
   ],
 
