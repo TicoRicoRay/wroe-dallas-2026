@@ -271,7 +271,7 @@
         <li><a href="#speakers">Speakers</a></li>
         <li><a href="#sponsors">Sponsors</a></li>
         <li><a href="#venue">Venue</a></li>
-        <li><a href="#register" class="nav-cta">Register Now</a></li>
+        <li><a id="nav-cta-desktop" href="#register" class="nav-cta">Register Now</a></li>
       </ul>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -283,7 +283,7 @@
       <a href="#speakers" class="nav-mobile-link">Speakers</a>
       <a href="#sponsors" class="nav-mobile-link">Sponsors</a>
       <a href="#venue" class="nav-mobile-link">Venue</a>
-      <a href="#register" class="nav-cta">Register Now</a>
+      <a id="nav-cta-mobile" href="#register" class="nav-cta">Register Now</a>
     </div>
   </nav>
 
@@ -460,6 +460,8 @@
     // Master CTA URL: prefer tier-specific URL if set to something other than "#", otherwise fall back to ev.ctaUrl
     const ctaFor = (tierUrl) => (tierUrl && tierUrl !== '#') ? tierUrl : (ev.ctaUrl || '#');
     el('cta-register').href            = ctaFor(tk.earlyBirdUrl);
+    el('nav-cta-desktop').href         = ctaFor(tk.earlyBirdUrl);
+    el('nav-cta-mobile').href          = ctaFor(tk.earlyBirdUrl);
     el('hero-early-price').textContent = fmt$(tk.earlyBirdPrice);
     el('hero-standard-desc').textContent = 'Then ' + fmt$(tk.standardPrice) + ' · Includes PM + Awards';
 
