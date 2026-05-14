@@ -49,6 +49,13 @@ const SITE_CONFIG = {
         alt:  "The Sales Collective"
       },
       {
+        name: "Strety",
+        tier: "title",
+        url:  "https://strety.com/",
+        logo: "images/strety.jpg",
+        alt:  "Strety"
+      },
+      {
         name: "ProCFO",
         tier: "book",
         url:  "https://procfo.com/",
