@@ -76,12 +76,11 @@ const SITE_CONFIG = {
         logo: "images/titustalent.png",
         alt:  "Titus Talent"
       },
-      ,
       {
         name: "Ninety.io",
-        tier: "happyhour",
+        tier: "happyHour",
         url:  "https://ninety.io/",
-        logo: "images/ninetyio.png",
+        logo: "images/ninety.png",
         alt:  "Ninety.io"
       },
     ]
