@@ -404,7 +404,6 @@
             <div class="venue-detail-item"><div class="venue-icon">📍</div><div class="venue-detail-text"><strong>Address</strong><span id="venue-address"></span></div></div>
             <div class="venue-detail-item"><div class="venue-icon">🅿️</div><div class="venue-detail-text"><strong>Parking</strong><span id="venue-parking"></span></div></div>
             <div class="venue-detail-item"><div class="venue-icon">📅</div><div class="venue-detail-text"><strong>Date &amp; Time</strong><span id="venue-datetime"></span></div></div>
-            <div class="venue-detail-item"><div class="venue-icon">🏨</div><div class="venue-detail-text"><strong>Hotel Rooms</strong><span>Room block details coming soon for out-of-town guests</span></div></div>
           </div>
           <div style="margin-top:2rem"><a id="venue-directions" href="#" target="_blank" class="btn-secondary">Get Directions &rarr;</a></div>
         </div>
@@ -419,8 +418,8 @@
   <section id="register">
     <div class="container">
       <div class="section-eyebrow" style="justify-content:center;color:rgba(255,255,255,0.7)" id="cta-eyebrow"></div>
-      <h2 class="section-title">Ready to Run on EOS<sup>®</sup>?</h2>
-      <p class="section-body">Join 250 DFW entrepreneurs and EOS Implementers for the biggest EOS event of the year. Morning sessions are free. Afternoon and evening require a ticket.</p>
+      <h2 class="section-title">Join Us For An Exclusive EOS Experience</h2>
+      <p class="section-body">The biggest EOS event of the year for DFW entrepreneurs and EOS Implementers. Morning sessions are free. Afternoon and evening require a ticket.</p>
       <div class="register-btns">
         <a id="cta-free-btn" href="#" class="btn-white">Register Free (AM) &rarr;</a>
         <a id="cta-paid-btn" href="#" class="btn-ghost-white"></a>
@@ -521,13 +520,7 @@
     tierGroups.forEach(group => {
       const tiers = C.sponsors.tiers.filter(t => group.keys.includes(t.name));
       const section = document.createElement('div');
-      // Pluralize the tier label when there's more than one total slot (filled + available)
-      const labelText = tiers.map(t => {
-        const key = tierKeyMap[t.name];
-        const filled = sponsorList.filter(s => s.tier === key).length;
-        const total = filled + (t.available || 0);
-        return total > 1 ? t.name.replace(/Sponsor$/, 'Sponsors') : t.name;
-      }).join(' &nbsp;|&nbsp; ');
+      const labelText = tiers.map(t => t.name).join(' &nbsp;|&nbsp; ');
       section.innerHTML = `<div class="sponsor-tier-label">${labelText}</div><div class="sponsor-row"></div>`;
       tierContainer.appendChild(section);
       const row = section.querySelector('.sponsor-row');
