@@ -33,12 +33,28 @@ const SITE_CONFIG = {
   sponsors: {
     contact:    "kevin.taylor@eosworldwide.com",
     tiers: [
-      { name: "Title Sponsor",      price: 10000, available: 2 },
+      { name: "Title Sponsor",      price: 10000, available: 0 },
       { name: "Book Sponsor",       price: 9000,  available: 1 },
       { name: "Happy Hour Sponsor", price: 6500,  available: 1 },
       { name: "Swag Bag Sponsor",   price: 3500,  available: 2 },
       { name: "Booth Sponsor",      price: 1500,  available: 5 },
       { name: "Connector Sponsor",  price: 750,   available: 10 },
+    ],
+    sponsors: [
+      {
+        name: "The Sales Collective",
+        tier: "title",
+        url:  "https://thesalescollective.com/",
+        logo: "images/thesalescollective.jpg",
+        alt:  "The Sales Collective"
+      },
+      {
+        name: "Strety",
+        tier: "title",
+        url:  "https://strety.com/",
+        logo: "images/strety.jpg",
+        alt:  "Strety"
+      },
     ]
   },
 
