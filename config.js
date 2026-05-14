@@ -16,6 +16,7 @@ const SITE_CONFIG = {
     address:    "1914 Commerce St, Dallas, TX 75201",
     mapsLink:   "https://maps.google.com/?q=1914+Commerce+St+Dallas+TX+75201",
     parking:    "Complimentary parking available on-site",
+    ctaUrl:     "https://eventbrite.com",  // Master CTA link — used by every Register/Get Ticket button unless a tier-specific URL below overrides it
   },
 
   // ── TICKETS ────────────────────────────────────────────────
