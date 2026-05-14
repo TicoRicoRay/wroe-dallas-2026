@@ -35,7 +35,7 @@ const SITE_CONFIG = {
     tiers: [
       { name: "Title Sponsor",      price: 10000, available: 0 },
       { name: "Book Sponsor",       price: 9000,  available: 0 },
-      { name: "Happy Hour Sponsor", price: 6500,  available: 1 },
+      { name: "Happy Hour Sponsor", price: 6500,  available: 0 },
       { name: "Swag Bag Sponsor",   price: 3500,  available: 2 },
       { name: "Booth Sponsor",      price: 1500,  available: 5 },
       { name: "Connector Sponsor",  price: 750,   available: 10 },
@@ -52,7 +52,7 @@ const SITE_CONFIG = {
         name: "Strety",
         tier: "title",
         url:  "https://strety.com/",
-        logo: "images/strety.jpg",
+        logo: "images/strety.png",
         alt:  "Strety"
       },
       {
@@ -82,6 +82,13 @@ const SITE_CONFIG = {
         url:  "https://ninety.io/",
         logo: "images/ninety.png",
         alt:  "Ninety.io"
+      },
+      {
+        name: "Wolf's Edge Integrators",
+        tier: "booth",
+        url:  "https://wolfsedgeintegrators.com/",
+        logo: "images/wolfsedgeintegrators.png",
+        alt:  "Wolf's Edge Integrators"
       },
     ]
   },
