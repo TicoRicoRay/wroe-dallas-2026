@@ -34,7 +34,7 @@ const SITE_CONFIG = {
     contact:    "kevin.taylor@eosworldwide.com",
     tiers: [
       { name: "Title Sponsor",      price: 10000, available: 0 },
-      { name: "Book Sponsor",       price: 9000,  available: 1 },
+      { name: "Book Sponsor",       price: 9000,  available: 0 },
       { name: "Happy Hour Sponsor", price: 6500,  available: 1 },
       { name: "Swag Bag Sponsor",   price: 3500,  available: 2 },
       { name: "Booth Sponsor",      price: 1500,  available: 5 },
@@ -49,11 +49,33 @@ const SITE_CONFIG = {
         alt:  "The Sales Collective"
       },
       {
-        name: "Strety",
-        tier: "title",
-        url:  "https://strety.com/",
-        logo: "images/strety.jpg",
-        alt:  "Strety"
+        name: "ProCFO",
+        tier: "book",
+        url:  "https://procfo.com/",
+        logo: "images/procfo.png",
+        alt:  "ProCFO"
+      },
+      {
+        name: "Trainual",
+        tier: "book",
+        url:  "https://trainual.com/",
+        logo: "images/trainual.png",
+        alt:  "Trainual"
+      },
+      {
+        name: "Titus Talent",
+        tier: "book",
+        url:  "https://titus-talent.com/",
+        logo: "images/titustalent.png",
+        alt:  "Titus Talent"
+      },
+      ,
+      {
+        name: "Ninety.io",
+        tier: "happyhour",
+        url:  "https://ninety.io/",
+        logo: "images/ninetyio.png",
+        alt:  "Ninety.io"
       },
     ]
   },
