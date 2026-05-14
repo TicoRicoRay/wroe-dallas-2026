@@ -47,6 +47,16 @@
     .nav-links a:hover { color: var(--orange); }
     .nav-cta { background: var(--orange); color: var(--white) !important; padding: 0.45rem 1.25rem; border-radius: var(--radius); font-weight: 700 !important; }
     .nav-cta:hover { background: var(--orange-lt) !important; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.25s, opacity 0.25s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { display: none; flex-direction: column; background: rgba(17,29,51,0.98); border-top: 1px solid rgba(255,255,255,0.08); padding: 0.75rem 0 1rem; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); padding: 0.75rem 2rem; transition: color 0.2s, background 0.2s; }
+    .nav-mobile a:hover { color: var(--orange); background: rgba(255,255,255,0.04); }
+    .nav-mobile .nav-cta { margin: 0.5rem 2rem 0; text-align: center; padding: 0.65rem 1rem; border-radius: var(--radius); }
 
     /* HERO */
     #home { min-height: 100vh; background: var(--navy-dk); position: relative; display: flex; flex-direction: column; justify-content: center; padding-top: 60px; overflow: hidden; }
@@ -147,7 +157,7 @@
     .speaker-card { background: var(--off-white); border-radius: 8px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
     .speaker-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(27,42,74,0.12); }
     .speaker-photo { aspect-ratio: 1; background: var(--navy-lt); display: flex; align-items: center; justify-content: center; }
-    .speaker-photo-inner { width: 80%; aspect-ratio: 1; border-radius: 50%; background: var(--orange); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .speaker-photo-inner { width: 80%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
     .speaker-photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .speaker-info { padding: 1.25rem; }
     .speaker-name { font-weight: 700; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.15rem; }
@@ -168,8 +178,6 @@
     .sponsor-slot.swag { width: 160px; height: 65px; font-size: 0.75rem; }
     .sponsor-slot.booth { width: 130px; height: 55px; font-size: 0.72rem; }
     .sponsor-slot.connector { width: 110px; height: 45px; font-size: 0.68rem; }
-    .sponsor-cta { text-align: center; margin-top: 2.5rem; padding: 2rem; background: var(--white); border-radius: 8px; border: 1px solid var(--gray-lt); }
-    .sponsor-cta p { font-size: 1.05rem; color: var(--navy); font-weight: 500; margin-bottom: 1rem; }
 
     /* VENUE */
     #venue { background: var(--navy); color: var(--white); }
@@ -210,6 +218,7 @@
       .about-grid, .venue-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .speakers-grid { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
     }
     @media (max-width: 560px) {
       .speakers-grid { grid-template-columns: 1fr; }
@@ -232,6 +241,17 @@
         <li><a href="#venue">Venue</a></li>
         <li><a href="#register" class="nav-cta">Register Now</a></li>
       </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="#about" class="nav-mobile-link">About</a>
+      <a href="#agenda" class="nav-mobile-link">Agenda</a>
+      <a href="#speakers" class="nav-mobile-link">Speakers</a>
+      <a href="#sponsors" class="nav-mobile-link">Sponsors</a>
+      <a href="#venue" class="nav-mobile-link">Venue</a>
+      <a href="#register" class="nav-cta">Register Now</a>
     </div>
   </nav>
 
@@ -342,12 +362,7 @@
     <div class="container">
       <div class="section-eyebrow">Partnership Opportunities</div>
       <h2 class="section-title">Our Sponsors</h2>
-      <p class="section-body">Reach 250 DFW C-Suite leaders and EOS Implementers. Multiple tiers available.</p>
-      <div class="sponsor-tiers" id="sponsor-tiers"></div>
-      <div class="sponsor-cta">
-        <p>Interested in sponsoring? Let's talk about the right fit for your organization.</p>
-        <a id="sponsor-contact-btn" href="#" class="btn-primary">Sponsorship Inquiry &rarr;</a>
-      </div>
+       <div class="sponsor-tiers" id="sponsor-tiers"></div>
     </div>
   </section>
 
@@ -450,7 +465,7 @@
       card.innerHTML = `
         <div class="speaker-photo">
           <div class="speaker-photo-inner">
-            <img src="${s.photo}" alt="${s.name}" onerror="this.parentElement.innerHTML='<span style=\\"font-family:var(--font-display);font-size:2rem;color:white;\\">${s.initials}</span>'">
+            <img src="${s.photo}" alt="${s.name}">
           </div>
         </div>
         <div class="speaker-info">
@@ -473,7 +488,7 @@
     tierGroups.forEach(group => {
       const tiers = C.sponsors.tiers.filter(t => group.keys.includes(t.name));
       const section = document.createElement('div');
-      const labelText = tiers.map(t => `${t.name} &nbsp;·&nbsp; ${fmt$(t.price)}`).join(' &nbsp;|&nbsp; ');
+      const labelText = tiers.map(t => t.name).join(' &nbsp;|&nbsp; ');
       section.innerHTML = `<div class="sponsor-tier-label">${labelText}</div><div class="sponsor-row"></div>`;
       tierContainer.appendChild(section);
       const row = section.querySelector('.sponsor-row');
@@ -486,7 +501,6 @@
         }
       });
     });
-    el('sponsor-contact-btn').href = 'mailto:' + C.sponsors.contact;
 
     // Venue
     el('venue-name').textContent     = ev.venue;
@@ -512,6 +526,25 @@
     // Footer
     el('footer-eos-link').href  = C.contact.eosUrl;
     el('footer-contact').href   = 'mailto:' + C.contact.general;
+  })();
+
+  // Mobile nav toggle
+  (function() {
+    const btn = document.getElementById('nav-hamburger');
+    const menu = document.getElementById('nav-mobile');
+    btn.addEventListener('click', function() {
+      const isOpen = menu.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen);
+    });
+    // Close on link click
+    menu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
   })();
 
   // Live countdown — updates every second
