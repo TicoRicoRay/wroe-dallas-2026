@@ -45,7 +45,7 @@ const SITE_CONFIG = {
         name: "The Sales Collective",
         tier: "title",
         url:  "https://thesalescollective.com/",
-        logo: "images/thesalescollective.jpg",
+        logo: "images/thesalescollective.png",
         alt:  "The Sales Collective"
       },
       {
