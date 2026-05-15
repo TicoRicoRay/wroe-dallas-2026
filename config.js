@@ -37,8 +37,8 @@ const SITE_CONFIG = {
       { name: "Title Sponsor",      price: 10000, available: 0 },
       { name: "Book Sponsor",       price: 9000,  available: 0 },
       { name: "Happy Hour Sponsor", price: 6500,  available: 0 },
-      { name: "Swag Bag Sponsor",   price: 3500,  available: 2 },
-      { name: "Booth Sponsor",      price: 1500,  available: 5 },
+      { name: "Swag Bag Sponsor",   price: 3500,  available: 0 },
+      { name: "Booth Sponsor",      price: 1500,  available: 3 },
       { name: "Connector Sponsor",  price: 750,   available: 10 },
     ],
     sponsors: [
@@ -83,6 +83,14 @@ const SITE_CONFIG = {
         url:  "https://ninety.io/",
         logo: "images/ninety.png",
         alt:  "Ninety.io"
+      },
+      {
+        name: "Success.co",
+        tier: "swag",
+        url:  "https://www.success.co/",
+        logo: "images/successco.png",
+        alt:  "Success.co",
+        email: "chris@success.co"
       },
       {
         name: "Wolf's Edge Integrators",
