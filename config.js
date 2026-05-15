@@ -91,6 +91,14 @@ const SITE_CONFIG = {
         logo: "images/wolfsedgeintegrators.png",
         alt:  "Wolf's Edge Integrators"
       },
+      ,
+      {
+        name: "360 Consulting DFW",
+        tier: "booth",
+        url:  "https://360consultingdfw.com/",
+        logo: "images/360consultingdfw.png",
+        alt:  "360 Consulting DFW"
+      },
     ]
   },
 
