@@ -11,23 +11,23 @@ const SITE_CONFIG = {
     edition:    "Fifth Annual",
     date:       "Monday, September 14, 2026",
     dateISO:    "2026-09-14T09:00:00-05:00",   // CDT, 9am start
-    timeRange:  "9:00 AM \u2013 9:00 PM",
+    timeRange:  "9:00 AM",
     venue:      "The Statler Dallas",
     address:    "1914 Commerce St, Dallas, TX 75201",
     mapsLink:   "https://maps.google.com/?q=1914+Commerce+St+Dallas+TX+75201",
     parking:    "Complimentary parking available on-site",
-    ctaUrl:     "https://eventbrite.com",  // Master CTA link — used by every Register/Get Ticket button unless a tier-specific URL below overrides it
+    ctaUrl:     "https://wroedallas.regfox.com//we-run-on-eos-dfw",  // Master CTA link — used by every Register/Get Ticket button unless a tier-specific URL below overrides it
   },
 
   // ── TICKETS ────────────────────────────────────────────────
   tickets: {
-    earlyBirdPrice:     95,
-    standardPrice:      145,
+    earlyBirdPrice:     199,
+    standardPrice:      249,
     earlyBirdEndDate:   "TBD",          // PLACEHOLDER: update when confirmed
     cap:                null,           // PLACEHOLDER: hard ticket cap (null = hide counter)
     sold:               0,              // PLACEHOLDER: update to show tickets remaining
-    earlyBirdUrl:       "#",            // PLACEHOLDER: Eventbrite URL from Kevin
-    freeUrl:            "#",            // PLACEHOLDER: Eventbrite URL from Kevin (free tier)
+    earlyBirdUrl:       "https://wroedallas.regfox.com//we-run-on-eos-dfw#", 
+    freeUrl:            "https://wroedallas.regfox.com//we-run-on-eos-dfw",  
   },
 
   // ── SPONSORS ───────────────────────────────────────────────
@@ -175,7 +175,7 @@ const SITE_CONFIG = {
   contact: {
     general:    "kevin.taylor@eosworldwide.com",
     marketing:  "ray.myers@eosworldwide.com",
-    eosUrl:     "https://www.eosworldwide.com",
+    eosUrl:     "https://eosworldwide.com",
   },
 
 };
