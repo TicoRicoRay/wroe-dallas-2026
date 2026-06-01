@@ -175,7 +175,7 @@ const SITE_CONFIG = {
       },
        {
         time: "9:45 \u2013 10:05 AM",
-        session: "Break + Sponsor Booths Open",
+        session: "Break",
         location: "Foyer & Junior Ballroom",
         speaker: "",
         tier: "free",
@@ -192,7 +192,7 @@ const SITE_CONFIG = {
       },
       { 
         time: "10:55 \u2013 11:15 AM", 
-        session: "Break + Sponsor Booths Open", 
+        session: "Break", 
         location: "Foyer & Junior Ballroom",
         speaker: "", 
         tier: "free", 
@@ -208,7 +208,7 @@ const SITE_CONFIG = {
       },
        { 
         time: "12:15 PM \u2013 1:15 PM", 
-        session: "Lunch + Sponsor Booths Open; Walt Brown 30 Minute Update", 
+        session: "Lunch +  Walt Brown 30 Minute Update", 
         location: "Grand Ballroom",
         speaker: "Walt Brown", 
         tier: "paid", 
@@ -224,7 +224,7 @@ const SITE_CONFIG = {
       },
        { 
         time: "2:45 \u2013 3:05 PM", 
-        session: "Break + Sponsor Booths Open", 
+        session: "Break", 
         location: "Foyer & Junior Ballroom",
         speaker: "", 
         tier: "paid", 
@@ -240,7 +240,7 @@ const SITE_CONFIG = {
       },
       { 
         time: "4:35 \u2013 4:55 PM", 
-        session: "Break + Sponsor Booths Open", 
+        session: "Break", 
         location: "Foyer & Junior Ballroom",
         speaker: "", 
         tier: "paid", 
@@ -255,7 +255,7 @@ const SITE_CONFIG = {
       },
       { 
         time: "6:30 \u2013 8:00 PM", 
-        session: "EOS Awards + Happy Hour + Networking", 
+        session: "Happy Hour + Networking", 
         location: "Junior Ballroom",
         speaker: "Celebrate wins. Connect. Go home fired up.", 
         tier: "paid", 
