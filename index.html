@@ -136,22 +136,52 @@
 
     /* AGENDA */
     #agenda { background: var(--navy); color: var(--white); }
-    .agenda-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
-    .agenda-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 20px; }
-    .badge-free { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
-    .badge-paid { background: rgba(242,101,34,0.2); color: var(--orange); border: 1px solid rgba(242,101,34,0.3); }
-    .agenda-list { display: flex; flex-direction: column; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 2rem; margin-left: 1rem; }
+    .agenda-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+    .agenda-legend { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+    .agenda-legend-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .agenda-badge { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.78rem; font-weight: 700; padding: 0.4rem 0.9rem; border-radius: 4px; letter-spacing: 0.04em; }
+    .agenda-badge::before { content: ''; width: 9px; height: 9px; border-radius: 50%; }
+    .badge-free { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.18); }
+    .badge-free::before { background: rgba(255,255,255,0.45); }
+    .badge-paid { background: rgba(242,101,34,0.15); color: var(--orange); border: 1px solid rgba(242,101,34,0.45); }
+    .badge-paid::before { background: var(--orange); }
+
+    /* Section banners that split free vs paid */
+    .agenda-section-banner { display: flex; align-items: center; gap: 1.25rem; margin: 2.5rem 0 1.5rem; padding: 1.1rem 1.4rem; border-radius: 8px; position: relative; }
+    .agenda-section-banner:first-child { margin-top: 0; }
+    .agenda-section-banner.free { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-left: 4px solid rgba(255,255,255,0.6); }
+    .agenda-section-banner.paid { background: rgba(242,101,34,0.08); border: 1px solid rgba(242,101,34,0.35); border-left: 4px solid var(--orange); }
+    .agenda-section-tag { font-family: var(--font-display); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.18em; padding: 0.35rem 0.75rem; border-radius: 3px; flex-shrink: 0; }
+    .agenda-section-banner.free .agenda-section-tag { background: rgba(255,255,255,0.12); color: var(--white); }
+    .agenda-section-banner.paid .agenda-section-tag { background: var(--orange); color: var(--white); }
+    .agenda-section-title { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--white); line-height: 1.2; }
+    .agenda-section-sub { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.15rem; line-height: 1.4; }
+    .agenda-section-cta { margin-left: auto; flex-shrink: 0; }
+    .agenda-section-cta a { font-family: var(--font-display); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); text-decoration: none; padding: 0.6rem 1.1rem; border: 1.5px solid var(--orange); border-radius: 4px; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+    .agenda-section-cta a:hover { background: var(--orange); color: var(--white); }
+    .agenda-section-banner.free .agenda-section-cta a { color: var(--white); border-color: rgba(255,255,255,0.45); }
+    .agenda-section-banner.free .agenda-section-cta a:hover { background: var(--white); color: var(--navy); }
+
+    .agenda-group { display: flex; flex-direction: column; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 2rem; margin-left: 1rem; }
+    .agenda-group.paid { border-left-color: rgba(242,101,34,0.35); }
+    .agenda-list { display: flex; flex-direction: column; }
     .agenda-item { position: relative; padding: 1.25rem 0 1.25rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
     .agenda-item:last-child { border-bottom: none; }
-    .agenda-item::before { content: ''; position: absolute; left: -2.6rem; top: 1.75rem; width: 12px; height: 12px; border-radius: 50%; background: var(--navy); border: 2px solid rgba(255,255,255,0.2); }
-    .agenda-item.highlight::before { background: var(--orange); border-color: var(--orange); box-shadow: 0 0 12px rgba(242,101,34,0.5); }
+    .agenda-item::before { content: ''; position: absolute; left: -2.6rem; top: 1.75rem; width: 12px; height: 12px; border-radius: 50%; background: var(--navy); border: 2px solid rgba(255,255,255,0.25); }
+    .agenda-group.paid .agenda-item::before { border-color: rgba(242,101,34,0.45); }
+    /* Highlight dots: white in FREE group, orange in PAID group, so dot color matches tier */
+    .agenda-item.highlight::before { background: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.9); box-shadow: 0 0 10px rgba(255,255,255,0.35); }
+    .agenda-group.paid .agenda-item.highlight::before { background: var(--orange); border-color: var(--orange); box-shadow: 0 0 12px rgba(242,101,34,0.5); }
     .agenda-item.sponsor-slot::before { background: rgba(242,101,34,0.3); border-color: var(--orange); }
     .agenda-time { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.2rem; }
     .agenda-session { font-weight: 600; font-size: 1.05rem; color: var(--white); }
     .agenda-speaker { font-size: 0.85rem; color: rgba(255,255,255,1); margin-top: 0.15rem; }
     .agenda-location { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 0.15rem; }
-    .agenda-divider { display: flex; align-items: center; gap: 1rem; margin: 0.5rem 0; padding: 0.5rem 0; }
-    .divider-label { white-space: nowrap; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 20px; }
+    @media (max-width: 720px) {
+      .agenda-section-banner { flex-wrap: wrap; }
+      .agenda-section-cta { margin-left: 0; width: 100%; }
+      .agenda-section-cta a { display: inline-block; }
+    }
 
     /* SPEAKERS */
     #speakers { background: var(--white); }
@@ -374,12 +404,13 @@
           <div class="section-eyebrow" style="color:var(--orange)" id="agenda-date-label"></div>
           <h2 class="section-title light">Full Day Agenda</h2>
         </div>
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
-          <span class="agenda-badge badge-free">Free · Morning</span>
-          <span class="agenda-badge badge-paid">Paid · Afternoon + Evening</span>
+        <div class="agenda-legend">
+          <span class="agenda-legend-label">Two ways to attend</span>
+          <span class="agenda-badge badge-free">Free</span>
+          <span class="agenda-badge badge-paid">Full Day Ticket</span>
         </div>
       </div>
-      <div class="agenda-list" id="agenda-list"></div>
+      <div id="agenda-list"></div>
     </div>
   </section>
 
@@ -482,24 +513,61 @@
         : '* Early bird pricing available now';
     }
 
-    // Agenda
+    // Agenda — split into Free (AM) and Paid (PM + Evening) sections so attendance options are obvious
     el('agenda-date-label').textContent = ev.date;
     const agendaList = el('agenda-list');
-    let shownDivider = false;
-    C.agenda.forEach(item => {
-      if (!shownDivider && item.tier === 'paid') {
-        shownDivider = true;
-        const div = document.createElement('div');
-        div.className = 'agenda-divider';
-        div.innerHTML = '<span class="divider-label badge-paid">Paid Tier Begins</span>';
-        agendaList.appendChild(div);
-      }
+    const freeItems = C.agenda.filter(i => i.tier === 'free');
+    const paidItems = C.agenda.filter(i => i.tier === 'paid');
+    const renderItem = (item) => {
       const cls = ['agenda-item', item.highlight ? 'highlight' : '', item.isSponsor ? 'sponsor-slot' : ''].filter(Boolean).join(' ');
       const row = document.createElement('div');
       row.className = cls;
       row.innerHTML = `<div class="agenda-time">${item.time}</div><div class="agenda-session">${item.session}</div><div class="agenda-location">${item.location}</div><div class="agenda-speaker">${item.speaker}</div>`;
-      agendaList.appendChild(row);
-    });
+      return row;
+    };
+    const timeRange = (items) => {
+      if (!items.length) return '';
+      const first = items[0].time.split(/[–\-]/)[0].trim();
+      const lastFull = items[items.length - 1].time;
+      const last = lastFull.split(/[–\-]/).pop().trim();
+      return `${first} – ${last}`;
+    };
+    const ctaHref = ctaFor(tk.earlyBirdUrl);
+    const freeCtaHref = ctaFor(tk.freeUrl);
+
+    if (freeItems.length) {
+      const banner = document.createElement('div');
+      banner.className = 'agenda-section-banner free';
+      banner.innerHTML = `
+        <span class="agenda-section-tag">FREE</span>
+        <div>
+          <div class="agenda-section-title">Morning Program</div>
+          <div class="agenda-section-sub">${timeRange(freeItems)} · Open to all DFW EOS leaders — no ticket required.</div>
+        </div>
+        <div class="agenda-section-cta"><a href="${freeCtaHref}">Register Free →</a></div>`;
+      agendaList.appendChild(banner);
+      const group = document.createElement('div');
+      group.className = 'agenda-group free';
+      freeItems.forEach(item => group.appendChild(renderItem(item)));
+      agendaList.appendChild(group);
+    }
+
+    if (paidItems.length) {
+      const banner = document.createElement('div');
+      banner.className = 'agenda-section-banner paid';
+      banner.innerHTML = `
+        <span class="agenda-section-tag">FULL DAY TICKET</span>
+        <div>
+          <div class="agenda-section-title">Afternoon + Evening Program</div>
+          <div class="agenda-section-sub">${timeRange(paidItems)} · Workshops, EOS Awards &amp; Happy Hour — included with your Full Day ticket (${fmt$(tk.earlyBirdPrice)} early bird).</div>
+        </div>
+        <div class="agenda-section-cta"><a href="${ctaHref}">Get Full Day Ticket →</a></div>`;
+      agendaList.appendChild(banner);
+      const group = document.createElement('div');
+      group.className = 'agenda-group paid';
+      paidItems.forEach(item => group.appendChild(renderItem(item)));
+      agendaList.appendChild(group);
+    }
 
     // Speakers
     const grid = el('speakers-grid');
