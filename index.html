@@ -147,11 +147,11 @@
     .badge-paid { background: rgba(242,101,34,0.15); color: var(--orange); border: 1px solid rgba(242,101,34,0.45); }
     .badge-paid::before { background: var(--orange); }
 
-    /* Section banners that split free vs paid */
-    .agenda-section-banner { display: flex; align-items: center; gap: 1.25rem; margin: 2.5rem 0 1.5rem; padding: 1.1rem 1.4rem; border-radius: 8px; position: relative; }
+    /* Section banners that split free vs paid — banner sits on top of full-width colored panel */
+    .agenda-section-banner { display: flex; align-items: center; gap: 1.25rem; margin: 3rem 0 0; padding: 1.4rem 1.6rem; border-radius: 12px 12px 0 0; position: relative; border-bottom: 0; }
     .agenda-section-banner:first-child { margin-top: 0; }
-    .agenda-section-banner.free { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-left: 4px solid rgba(255,255,255,0.6); }
-    .agenda-section-banner.paid { background: rgba(242,101,34,0.08); border: 1px solid rgba(242,101,34,0.35); border-left: 4px solid var(--orange); }
+    .agenda-section-banner.free { background: rgba(56,189,248,0.18); border: 2px solid rgba(125,211,252,0.55); border-bottom: 0; border-left: 6px solid #7dd3fc; }
+    .agenda-section-banner.paid { background: rgba(242,101,34,0.22); border: 2px solid rgba(242,101,34,0.6); border-bottom: 0; border-left: 6px solid var(--orange); }
     .agenda-section-tag { font-family: var(--font-display); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.18em; padding: 0.35rem 0.75rem; border-radius: 3px; flex-shrink: 0; }
     .agenda-section-banner.free .agenda-section-tag { background: rgba(255,255,255,0.12); color: var(--white); }
     .agenda-section-banner.paid .agenda-section-tag { background: var(--orange); color: var(--white); }
@@ -163,8 +163,13 @@
     .agenda-section-banner.free .agenda-section-cta a { color: var(--white); border-color: rgba(255,255,255,0.45); }
     .agenda-section-banner.free .agenda-section-cta a:hover { background: var(--white); color: var(--navy); }
 
-    .agenda-group { display: flex; flex-direction: column; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 2rem; margin-left: 1rem; }
-    .agenda-group.paid { border-left-color: rgba(242,101,34,0.35); }
+    /* Group panel extends the banner's color block; timeline lives inside */
+    .agenda-group { display: flex; flex-direction: column; padding: 1.25rem 1.6rem 1.5rem; border-radius: 0 0 12px 12px; border: 2px solid; border-top: 0; }
+    .agenda-group.free { background: rgba(56,189,248,0.18); border-color: rgba(125,211,252,0.55); border-left-width: 6px; border-left-color: #7dd3fc; }
+    .agenda-group.paid { background: rgba(242,101,34,0.20); border-color: rgba(242,101,34,0.6); border-left-width: 6px; border-left-color: var(--orange); }
+    /* Inner timeline rail inside each group */
+    .agenda-group .agenda-items { display: flex; flex-direction: column; border-left: 2px solid rgba(255,255,255,0.15); padding-left: 2rem; margin-left: 1rem; margin-top: 0.25rem; }
+    .agenda-group.paid .agenda-items { border-left-color: rgba(242,101,34,0.45); }
     .agenda-list { display: flex; flex-direction: column; }
     .agenda-item { position: relative; padding: 1.25rem 0 1.25rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
     .agenda-item:last-child { border-bottom: none; }
@@ -179,9 +184,11 @@
     .agenda-speaker { font-size: 0.85rem; color: rgba(255,255,255,1); margin-top: 0.15rem; }
     .agenda-location { font-size: 0.85rem; color: rgba(255,255,255,0.45); margin-top: 0.15rem; }
     @media (max-width: 720px) {
-      .agenda-section-banner { flex-wrap: wrap; }
+      .agenda-section-banner { flex-wrap: wrap; padding: 1.1rem 1.1rem; }
       .agenda-section-cta { margin-left: 0; width: 100%; }
       .agenda-section-cta a { display: inline-block; }
+      .agenda-group { padding: 1rem 1.1rem 1.25rem; }
+      .agenda-group .agenda-items { padding-left: 1.6rem; margin-left: 0.6rem; }
     }
 
     /* SPEAKERS */
@@ -549,7 +556,10 @@
       agendaList.appendChild(banner);
       const group = document.createElement('div');
       group.className = 'agenda-group free';
-      freeItems.forEach(item => group.appendChild(renderItem(item)));
+      const freeItemsEl = document.createElement('div');
+      freeItemsEl.className = 'agenda-items';
+      freeItems.forEach(item => freeItemsEl.appendChild(renderItem(item)));
+      group.appendChild(freeItemsEl);
       agendaList.appendChild(group);
     }
 
@@ -566,7 +576,10 @@
       agendaList.appendChild(banner);
       const group = document.createElement('div');
       group.className = 'agenda-group paid';
-      paidItems.forEach(item => group.appendChild(renderItem(item)));
+      const paidItemsEl = document.createElement('div');
+      paidItemsEl.className = 'agenda-items';
+      paidItems.forEach(item => paidItemsEl.appendChild(renderItem(item)));
+      group.appendChild(paidItemsEl);
       agendaList.appendChild(group);
     }
 
