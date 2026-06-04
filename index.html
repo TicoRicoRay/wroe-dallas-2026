@@ -191,6 +191,43 @@
       .agenda-group .agenda-items { padding-left: 1.6rem; margin-left: 0.6rem; }
     }
 
+    /* TICKET COMPARE TABLE */
+    .ticket-compare { margin: 2rem 0 2.5rem; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); }
+    .ticket-compare-header { display: grid; grid-template-columns: 1fr 150px 150px; align-items: stretch; }
+    .ticket-compare-header > div { padding: 1.1rem 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.04em; }
+    .ticket-compare-header .tc-what { color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.78rem; }
+    .ticket-compare-header .tc-free { background: rgba(56,189,248,0.22); color: #fff; text-align: center; border-left: 6px solid #7dd3fc; }
+    .ticket-compare-header .tc-paid { background: rgba(242,101,34,0.28); color: #fff; text-align: center; border-left: 6px solid var(--orange); }
+    .ticket-compare-header .tc-price { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; opacity: 0.85; margin-top: 0.15rem; text-transform: none; }
+    .ticket-compare-row { display: grid; grid-template-columns: 1fr 150px 150px; align-items: stretch; border-top: 1px solid rgba(255,255,255,0.08); }
+    .ticket-compare-row .tc-label { padding: 0.85rem 1.25rem; color: rgba(255,255,255,0.92); font-size: 0.97rem; }
+    .ticket-compare-row .tc-free, .ticket-compare-row .tc-paid { display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; }
+    .ticket-compare-row .tc-free { background: rgba(56,189,248,0.10); color: #7dd3fc; border-left: 6px solid rgba(125,211,252,0.5); }
+    .ticket-compare-row .tc-paid { background: rgba(242,101,34,0.10); color: var(--orange); border-left: 6px solid rgba(242,101,34,0.55); }
+    .ticket-compare-row .tc-empty { color: rgba(255,255,255,0.18); font-weight: 400; font-size: 1.1rem; }
+    .ticket-compare-foot { display: grid; grid-template-columns: 1fr 150px 150px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .ticket-compare-foot > div { padding: 1rem 1.25rem; }
+    .ticket-compare-foot .tc-label { color: rgba(255,255,255,0.6); font-size: 0.85rem; font-style: italic; }
+    .ticket-compare-foot .tc-free, .ticket-compare-foot .tc-paid { text-align: center; }
+    .ticket-compare-foot .tc-free { background: rgba(56,189,248,0.12); border-left: 6px solid rgba(125,211,252,0.5); }
+    .ticket-compare-foot .tc-paid { background: rgba(242,101,34,0.14); border-left: 6px solid rgba(242,101,34,0.55); }
+    .ticket-compare-foot a { display: inline-block; font-family: var(--font-display); font-weight: 800; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.55rem 0.9rem; border-radius: 6px; text-decoration: none; transition: all 0.2s; }
+    .ticket-compare-foot .tc-free a { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.45); }
+    .ticket-compare-foot .tc-free a:hover { background: #fff; color: var(--navy); }
+    .ticket-compare-foot .tc-paid a { background: var(--orange); color: #fff; border: 1px solid var(--orange); }
+    .ticket-compare-foot .tc-paid a:hover { filter: brightness(1.1); }
+    @media (max-width: 720px) {
+      .ticket-compare-header, .ticket-compare-row, .ticket-compare-foot { grid-template-columns: 1fr 70px 70px; }
+      .ticket-compare-header > div { padding: 0.8rem 0.7rem; font-size: 0.82rem; }
+      .ticket-compare-row .tc-label { padding: 0.7rem 0.7rem; font-size: 0.88rem; }
+      .ticket-compare-row .tc-free, .ticket-compare-row .tc-paid { font-size: 1.15rem; }
+      .ticket-compare-foot { grid-template-columns: 1fr; }
+      .ticket-compare-foot > div { padding: 0.75rem 1rem; border-left: 0 !important; }
+      .ticket-compare-foot .tc-label { display: none; }
+      .ticket-compare-foot .tc-free, .ticket-compare-foot .tc-paid { background: transparent; }
+      .ticket-compare-foot a { display: block; width: 100%; font-size: 0.85rem; padding: 0.75rem 0.6rem; }
+    }
+
     /* SPEAKERS */
     #speakers { background: var(--white); }
     .speakers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
@@ -418,6 +455,27 @@
           <span class="agenda-badge badge-paid">Full Day Ticket</span>
         </div>
       </div>
+      <div class="ticket-compare" aria-label="What's included with each ticket">
+        <div class="ticket-compare-header">
+          <div class="tc-what">What's included</div>
+          <div class="tc-free">Free Ticket<span class="tc-price">Morning only</span></div>
+          <div class="tc-paid">Full Day Ticket<span class="tc-price">$199 early bird</span></div>
+        </div>
+        <div class="ticket-compare-row"><div class="tc-label">Light Breakfast</div><div class="tc-free">✓</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">90-Minute EOS Talk</div><div class="tc-free">✓</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Strety — Title Sponsor Workshop</div><div class="tc-free">✓</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Sales Collective — Title Sponsor Workshop</div><div class="tc-free">✓</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Lunch</div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Rollout Workshop</div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Data Workshop</div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Visionary Keynote</div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Happy Hour + Networking</div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-foot">
+          <div class="tc-label">Choose how you'll attend</div>
+          <div class="tc-free"><a id="compare-free-cta" href="#register">Register Free</a></div>
+          <div class="tc-paid"><a id="compare-paid-cta" href="#register">Get Full Day Ticket</a></div>
+        </div>
+      </div>
       <div id="agenda-list"></div>
     </div>
   </section>
@@ -503,6 +561,8 @@
     // Master CTA URL: prefer tier-specific URL if set to something other than "#", otherwise fall back to ev.ctaUrl
     const ctaFor = (tierUrl) => (tierUrl && tierUrl !== '#') ? tierUrl : (ev.ctaUrl || '#');
     el('cta-register').href            = ctaFor(tk.earlyBirdUrl);
+    if (document.getElementById('compare-free-cta')) document.getElementById('compare-free-cta').href = ctaFor(tk.freeUrl);
+    if (document.getElementById('compare-paid-cta')) document.getElementById('compare-paid-cta').href = ctaFor(tk.earlyBirdUrl);
     el('nav-cta-desktop').href         = ctaFor(tk.earlyBirdUrl);
     el('nav-cta-mobile').href          = ctaFor(tk.earlyBirdUrl);
     el('hero-early-price').textContent = fmt$(tk.earlyBirdPrice);
