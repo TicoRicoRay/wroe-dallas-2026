@@ -756,10 +756,11 @@
     const target = new Date(SITE_CONFIG.event.dateISO);
     const diff   = target - new Date();
     if (diff <= 0) {
-      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
+      document.getElementById('cd-days').textContent = '0';
+      ['cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
       return;
     }
-    document.getElementById('cd-days').textContent  = String(Math.floor(diff / 864e5)).padStart(3,'0');
+    document.getElementById('cd-days').textContent  = String(Math.floor(diff / 864e5));
     document.getElementById('cd-hours').textContent = String(Math.floor((diff % 864e5) / 36e5)).padStart(2,'0');
     document.getElementById('cd-mins').textContent  = String(Math.floor((diff % 36e5) / 6e4)).padStart(2,'0');
     document.getElementById('cd-secs').textContent  = String(Math.floor((diff % 6e4) / 1e3)).padStart(2,'0');
