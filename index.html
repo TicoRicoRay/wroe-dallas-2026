@@ -242,10 +242,8 @@
     .bonus-books { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .bonus-book { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem; transition: transform 0.2s, border-color 0.2s, background 0.2s; position: relative; overflow: hidden; text-decoration: none; color: inherit; display: block; }
     .bonus-book:hover { transform: translateY(-4px); border-color: rgba(242,101,34,0.5); background: rgba(255,255,255,0.06); }
-    .bonus-book-cover { width: 100%; aspect-ratio: 4 / 5; border-radius: 6px; background: linear-gradient(135deg, var(--orange), #b8430f); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; text-align: center; margin-bottom: 0.9rem; position: relative; box-shadow: 0 8px 22px rgba(0,0,0,0.45); }
-    .bonus-book-cover::after { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 4px; background: rgba(0,0,0,0.25); border-radius: 2px; }
-    .bonus-book-title { font-family: var(--font-display); font-weight: 800; color: #fff; font-size: 1.6rem; letter-spacing: 0.02em; }
-    .bonus-book-series { font-size: 0.6rem; letter-spacing: 0.22em; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; margin-top: 0.6rem; }
+    .bonus-book-cover { width: 100%; aspect-ratio: 4 / 5; border-radius: 6px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 0.9rem; position: relative; box-shadow: 0 8px 22px rgba(0,0,0,0.45); }
+    .bonus-book-cover img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .bonus-book h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--white); margin: 0 0 0.3rem; line-height: 1.2; }
     .bonus-book-subtitle { font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.35; margin-bottom: 0.55rem; }
     .bonus-book-meta { display: flex; align-items: center; justify-content: space-between; padding-top: 0.6rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.74rem; }
@@ -279,8 +277,6 @@
       .bonus-books { grid-template-columns: 1fr; }
       .bonus-book { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; }
       .bonus-book-cover { width: 90px; aspect-ratio: 4 / 5; flex-shrink: 0; margin-bottom: 0; }
-      .bonus-book-cover .bonus-book-title { font-size: 1.1rem; }
-      .bonus-book-cover .bonus-book-series { font-size: 0.5rem; }
       .bonus-book-body { flex: 1; min-width: 0; }
     }
 
@@ -692,8 +688,7 @@
       booksEl.innerHTML = fb.books.map(b => `
         <a class="bonus-book" href="${b.bookUrl}" target="_blank" rel="noopener">
           <div class="bonus-book-cover">
-            <div class="bonus-book-title">${b.title}</div>
-            <div class="bonus-book-series">EOS Mastery Series</div>
+            ${b.coverImage ? `<img src="${b.coverImage}" alt="${b.title} book cover" loading="lazy">` : `<div class="bonus-book-title">${b.title}</div>`}
           </div>
           <div class="bonus-book-body">
             <h3>${b.title}</h3>

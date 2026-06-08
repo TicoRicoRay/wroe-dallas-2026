@@ -43,7 +43,8 @@ const SITE_CONFIG = {
         authors:  "Mark O'Donnell, Angela Kalemis, Mark Stanley, et al.",
         speaker:  "Mark Stanley",
         retail:   20.66,
-        bookUrl:  "https://www.eosworldwide.com/data-book"
+        bookUrl:  "https://www.eosworldwide.com/data-book",
+        coverImage: "img/books/data_cover.jpg"
       },
       {
         title:    "Rollout",
@@ -51,7 +52,8 @@ const SITE_CONFIG = {
         authors:  "Marisa Smith & Beth Fahey",
         speaker:  "Beth Fahey",
         retail:   29.99,
-        bookUrl:  "https://www.rolloutbook.com"
+        bookUrl:  "https://www.rolloutbook.com",
+        coverImage: "img/books/rollout_cover.jpg"
       },
       {
         title:    "Visionary",
@@ -59,7 +61,8 @@ const SITE_CONFIG = {
         authors:  "Mark C. Winters",
         speaker:  "Mark C. Winters",
         retail:   29.99,
-        bookUrl:  "https://www.markcwinters.com/visionary-book-dot-com/"
+        bookUrl:  "https://www.markcwinters.com/visionary-book-dot-com/",
+        coverImage: "img/books/visionary_cover.jpg"
       }
     ],
     mealsValue:  45,    // Conservative DFW conference catered lunch value
