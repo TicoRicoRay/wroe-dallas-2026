@@ -201,6 +201,8 @@
     .ticket-compare-header .tc-price { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; opacity: 0.85; margin-top: 0.15rem; text-transform: none; }
     .ticket-compare-row { display: grid; grid-template-columns: 1fr 150px 150px; align-items: stretch; border-top: 1px solid rgba(255,255,255,0.08); }
     .ticket-compare-row .tc-label { padding: 0.85rem 1.25rem; color: rgba(255,255,255,0.92); font-size: 0.97rem; }
+    .ticket-compare-row .tc-label em { font-style: italic; font-weight: 600; color: #fff; }
+    .ticket-compare-row .tc-label small { color: rgba(255,255,255,0.5); font-weight: 400; font-size: 0.8em; }
     .ticket-compare-row .tc-free, .ticket-compare-row .tc-paid { display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; }
     .ticket-compare-row .tc-free { background: rgba(56,189,248,0.10); color: #7dd3fc; border-left: 6px solid rgba(125,211,252,0.5); }
     .ticket-compare-row .tc-paid { background: rgba(242,101,34,0.10); color: var(--orange); border-left: 6px solid rgba(242,101,34,0.55); }
@@ -226,6 +228,60 @@
       .ticket-compare-foot .tc-label { display: none; }
       .ticket-compare-foot .tc-free, .ticket-compare-foot .tc-paid { background: transparent; }
       .ticket-compare-foot a { display: block; width: 100%; font-size: 0.85rem; padding: 0.75rem 0.6rem; }
+    }
+
+    /* FULL-DAY BONUS / VALUE STACK */
+    #full-day-bonus { background: linear-gradient(180deg, #0d1f3a 0%, var(--navy) 100%); padding: 4.5rem 0 5rem; position: relative; overflow: hidden; }
+    #full-day-bonus::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(242,101,34,0.18) 0%, transparent 60%); pointer-events: none; }
+    .bonus-eyebrow { color: var(--orange); font-family: var(--font-display); font-weight: 800; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.6rem; }
+    .bonus-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 2px; background: var(--orange); }
+    .bonus-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin: 0.6rem 0 0.5rem; line-height: 1.1; letter-spacing: -0.01em; }
+    .bonus-title em { font-style: normal; color: var(--orange); }
+    .bonus-sub { color: rgba(255,255,255,0.75); font-size: 1.1rem; max-width: 640px; line-height: 1.5; }
+    .bonus-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; margin-top: 2.5rem; align-items: start; }
+    .bonus-books { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .bonus-book { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem; transition: transform 0.2s, border-color 0.2s, background 0.2s; position: relative; overflow: hidden; text-decoration: none; color: inherit; display: block; }
+    .bonus-book:hover { transform: translateY(-4px); border-color: rgba(242,101,34,0.5); background: rgba(255,255,255,0.06); }
+    .bonus-book-cover { width: 100%; aspect-ratio: 4 / 5; border-radius: 6px; background: linear-gradient(135deg, var(--orange), #b8430f); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; text-align: center; margin-bottom: 0.9rem; position: relative; box-shadow: 0 8px 22px rgba(0,0,0,0.45); }
+    .bonus-book-cover::after { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 4px; background: rgba(0,0,0,0.25); border-radius: 2px; }
+    .bonus-book-title { font-family: var(--font-display); font-weight: 800; color: #fff; font-size: 1.6rem; letter-spacing: 0.02em; }
+    .bonus-book-series { font-size: 0.6rem; letter-spacing: 0.22em; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; margin-top: 0.6rem; }
+    .bonus-book h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--white); margin: 0 0 0.3rem; line-height: 1.2; }
+    .bonus-book-subtitle { font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.35; margin-bottom: 0.55rem; }
+    .bonus-book-meta { display: flex; align-items: center; justify-content: space-between; padding-top: 0.6rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.74rem; }
+    .bonus-book-author { color: rgba(255,255,255,0.6); }
+    .bonus-book-retail { color: var(--orange); font-weight: 700; }
+    .bonus-book-speaking { font-size: 0.68rem; letter-spacing: 0.12em; font-weight: 700; color: var(--orange); text-transform: uppercase; margin-top: 0.5rem; display: inline-flex; align-items: center; gap: 0.35rem; }
+    .bonus-book-speaking::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 8px var(--orange); animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+    .bonus-stack { background: rgba(242,101,34,0.10); border: 2px solid rgba(242,101,34,0.55); border-radius: 14px; padding: 1.75rem; position: relative; }
+    .bonus-stack-label { font-family: var(--font-display); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.16em; color: var(--orange); text-transform: uppercase; margin-bottom: 1rem; }
+    .stack-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.6rem 0; border-bottom: 1px dashed rgba(255,255,255,0.12); }
+    .stack-row:last-of-type { border-bottom: 0; }
+    .stack-row .stack-label { color: rgba(255,255,255,0.92); font-size: 0.92rem; }
+    .stack-row .stack-label small { display: block; color: rgba(255,255,255,0.5); font-size: 0.72rem; font-weight: 400; margin-top: 0.1rem; }
+    .stack-row .stack-value { font-family: var(--font-display); font-weight: 700; color: var(--white); font-size: 1rem; white-space: nowrap; margin-left: 1rem; }
+    .stack-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 1.1rem; padding-top: 1rem; border-top: 2px solid rgba(242,101,34,0.45); }
+    .stack-total .stack-label { color: var(--white); font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .stack-total .stack-value { font-family: var(--font-display); font-weight: 800; color: var(--white); font-size: 1.8rem; }
+    .stack-price { display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.6rem; padding: 0.7rem 0.9rem; background: rgba(0,0,0,0.25); border-radius: 8px; }
+    .stack-price .stack-label { color: var(--white); font-weight: 600; font-size: 0.92rem; }
+    .stack-price .stack-value { color: var(--orange); font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; }
+    .stack-payoff { margin-top: 1rem; padding: 0.9rem; background: var(--orange); color: var(--white); border-radius: 8px; text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.02em; line-height: 1.35; }
+    .stack-payoff span { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; opacity: 0.85; margin-top: 0.25rem; }
+    .bonus-cta { display: inline-block; margin-top: 1.25rem; padding: 0.95rem 1.6rem; background: var(--white); color: var(--navy); font-family: var(--font-display); font-weight: 800; text-decoration: none; border-radius: 8px; letter-spacing: 0.04em; font-size: 0.95rem; transition: transform 0.15s, box-shadow 0.15s; width: 100%; text-align: center; box-sizing: border-box; }
+    .bonus-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,0.3); }
+    .bonus-disclaimer { font-size: 0.7rem; color: rgba(255,255,255,0.45); margin-top: 0.85rem; line-height: 1.4; }
+    @media (max-width: 900px) {
+      .bonus-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+    }
+    @media (max-width: 640px) {
+      .bonus-books { grid-template-columns: 1fr; }
+      .bonus-book { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; }
+      .bonus-book-cover { width: 90px; aspect-ratio: 4 / 5; flex-shrink: 0; margin-bottom: 0; }
+      .bonus-book-cover .bonus-book-title { font-size: 1.1rem; }
+      .bonus-book-cover .bonus-book-series { font-size: 0.5rem; }
+      .bonus-book-body { flex: 1; min-width: 0; }
     }
 
     /* SPEAKERS */
@@ -421,6 +477,33 @@
     </div>
   </section>
 
+  <!-- FULL-DAY BONUS / VALUE STACK -->
+  <section id="full-day-bonus">
+    <div class="container">
+      <div class="bonus-eyebrow">Full Day Ticket Bonus</div>
+      <h2 class="bonus-title">Get <em>$160+ in books &amp; hospitality</em> — free with every Full Day ticket.</h2>
+      <p class="bonus-sub">Walk out with three hardcover books from the EOS Mastery Series &mdash; written by the implementers teaching the room. Plus catered lunch and a hosted happy hour with the DFW EOS community.</p>
+
+      <div class="bonus-grid">
+        <div>
+          <div class="bonus-books" id="bonus-books"></div>
+        </div>
+
+        <aside class="bonus-stack">
+          <div class="bonus-stack-label">What you walk away with</div>
+          <div class="stack-row"><div class="stack-label">3 hardcover books <small>signed by speaking authors</small></div><div class="stack-value" id="stack-books-value">$80.64</div></div>
+          <div class="stack-row"><div class="stack-label">Catered lunch <small>Grand Ballroom</small></div><div class="stack-value" id="stack-lunch-value">$45</div></div>
+          <div class="stack-row"><div class="stack-label">Hosted happy hour <small>drinks + appetizers</small></div><div class="stack-value" id="stack-happy-value">$35</div></div>
+          <div class="stack-total"><div class="stack-label">Tangible value</div><div class="stack-value" id="stack-total">$160.64</div></div>
+          <div class="stack-price"><div class="stack-label">Full Day ticket price</div><div class="stack-value" id="stack-ticket-price">$199</div></div>
+          <div class="stack-payoff" id="stack-payoff">You're paying ~$38 for a full day of EOS workshops, the Visionary Keynote, and EOS Awards.<span>Workshops, keynote, awards, networking — all included.</span></div>
+          <a class="bonus-cta" id="bonus-cta" href="#register">Grab a Full Day Ticket →</a>
+          <p class="bonus-disclaimer">Books and meals reserved for Full Day ticket holders only. Free morning attendees do not receive books, lunch, or happy hour access.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
@@ -470,6 +553,9 @@
         <div class="ticket-compare-row"><div class="tc-label">Data Workshop</div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
         <div class="ticket-compare-row"><div class="tc-label">Visionary Keynote</div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
         <div class="ticket-compare-row"><div class="tc-label">Happy Hour + Networking</div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Hardcover: <em>Data</em> by Mark Stanley <small>(retail $20.66)</small></div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Hardcover: <em>Rollout</em> by Beth Fahey <small>(retail $29.99)</small></div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
+        <div class="ticket-compare-row"><div class="tc-label">Hardcover: <em>Visionary</em> by Mark C. Winters <small>(retail $29.99)</small></div><div class="tc-free tc-empty">—</div><div class="tc-paid">✓</div></div>
         <div class="ticket-compare-foot">
           <div class="tc-label">Choose how you'll attend</div>
           <div class="tc-free"><a id="compare-free-cta" href="#register">Register Free</a></div>
@@ -573,10 +659,10 @@
     el('hero-early-price').textContent = fmt$(currentPrice);
     if (earlyBirdActive) {
       el('hero-paid-name').textContent = 'Full Day · Early Bird';
-      el('hero-standard-desc').textContent = 'Then ' + fmt$(tk.standardPrice) + ' once early bird sells out · Includes lunch + afternoon';
+      el('hero-standard-desc').innerHTML = 'Includes 3 hardcover books, lunch &amp; happy hour <br><small style="opacity:0.7;font-size:0.85em">— then ' + fmt$(tk.standardPrice) + ' once 40 early birds sell out</small>';
     } else {
       el('hero-paid-name').textContent = 'Full Day Ticket';
-      el('hero-standard-desc').textContent = 'Includes lunch and afternoon sessions';
+      el('hero-standard-desc').innerHTML = 'Includes 3 hardcover books, lunch &amp; happy hour';
     }
 
     // Early bird counter (only when cap is set and tickets still remain)
@@ -597,6 +683,49 @@
     // Compare table price label reflects current pricing
     const cmp = document.getElementById('compare-paid-price');
     if (cmp) cmp.textContent = earlyBirdActive ? (fmt$(tk.earlyBirdPrice) + ' early bird') : fmt$(tk.standardPrice);
+
+    // ── FULL-DAY BONUS SECTION ─────────────────────────────────
+    if (C.fullDayBonuses && document.getElementById('bonus-books')) {
+      const fb = C.fullDayBonuses;
+      const booksEl = document.getElementById('bonus-books');
+      const booksTotal = fb.books.reduce((s, b) => s + (b.retail || 0), 0);
+      booksEl.innerHTML = fb.books.map(b => `
+        <a class="bonus-book" href="${b.bookUrl}" target="_blank" rel="noopener">
+          <div class="bonus-book-cover">
+            <div class="bonus-book-title">${b.title}</div>
+            <div class="bonus-book-series">EOS Mastery Series</div>
+          </div>
+          <div class="bonus-book-body">
+            <h3>${b.title}</h3>
+            <div class="bonus-book-subtitle">${b.subtitle}</div>
+            <div class="bonus-book-meta">
+              <span class="bonus-book-author">${b.authors}</span>
+              <span class="bonus-book-retail">$${b.retail.toFixed(2)}</span>
+            </div>
+            <div class="bonus-book-speaking">${b.speaker} · On Stage</div>
+          </div>
+        </a>
+      `).join('');
+
+      const tangibleTotal = booksTotal + (fb.mealsValue || 0) + (fb.happyHourValue || 0);
+      const netCost = currentPrice - tangibleTotal;
+      document.getElementById('stack-books-value').textContent  = '$' + booksTotal.toFixed(2);
+      document.getElementById('stack-lunch-value').textContent  = fmt$(fb.mealsValue);
+      document.getElementById('stack-happy-value').textContent  = fmt$(fb.happyHourValue);
+      document.getElementById('stack-total').textContent        = '$' + tangibleTotal.toFixed(2);
+      document.getElementById('stack-ticket-price').textContent = fmt$(currentPrice);
+
+      const payoffEl = document.getElementById('stack-payoff');
+      if (netCost <= 0) {
+        payoffEl.innerHTML = 'The bonuses alone are worth more than the ticket.<span>Workshops, keynote, awards, networking — all included.</span>';
+      } else {
+        payoffEl.innerHTML = `You're paying ~$${Math.round(netCost)} for a full day of EOS workshops, the Visionary Keynote, and EOS Awards.<span>Workshops, keynote, awards, networking — all included.</span>`;
+      }
+      document.getElementById('bonus-cta').href = ctaFor(tk.earlyBirdUrl);
+      document.getElementById('bonus-cta').textContent = earlyBirdActive
+        ? `Get Full Day Ticket · ${fmt$(tk.earlyBirdPrice)} Early Bird →`
+        : `Get Full Day Ticket · ${fmt$(tk.standardPrice)} →`;
+    }
 
     // Agenda — split into Free (AM) and Paid (PM + Evening) sections so attendance options are obvious
     el('agenda-date-label').textContent = ev.date;

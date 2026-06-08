@@ -33,6 +33,39 @@ const SITE_CONFIG = {
     freeUrl:            "https://wroedallas.regfox.com//we-run-on-eos-dfw",  
   },
 
+  // ── FULL-DAY VALUE STACK ────────────────────────────────
+  // Exclusive bonuses for Full Day ticket holders. Drives the value-prop pitch.
+  fullDayBonuses: {
+    books: [
+      {
+        title:    "Data",
+        subtitle: "Harness Your Numbers to Go from Uncertain to Unstoppable",
+        authors:  "Mark O'Donnell, Angela Kalemis, Mark Stanley, et al.",
+        speaker:  "Mark Stanley",
+        retail:   20.66,
+        bookUrl:  "https://www.eosworldwide.com/data-book"
+      },
+      {
+        title:    "Rollout",
+        subtitle: "Get Your Entire Team Running on EOS® to Achieve Your Vision",
+        authors:  "Marisa Smith & Beth Fahey",
+        speaker:  "Beth Fahey",
+        retail:   29.99,
+        bookUrl:  "https://www.rolloutbook.com"
+      },
+      {
+        title:    "Visionary",
+        subtitle: "How Driven Entrepreneurs Get What They Want Without Doing It All Themselves",
+        authors:  "Mark C. Winters",
+        speaker:  "Mark C. Winters",
+        retail:   29.99,
+        bookUrl:  "https://www.markcwinters.com/visionary-book-dot-com/"
+      }
+    ],
+    mealsValue:  45,    // Conservative DFW conference catered lunch value
+    happyHourValue: 35  // Hosted happy hour w/ drinks + appetizers
+  },
+
   // ── SPONSORS ───────────────────────────────────────────────
   sponsors: {
     contact:    "kevin.taylor@eosworldwide.com",
