@@ -23,9 +23,12 @@ const SITE_CONFIG = {
   tickets: {
     earlyBirdPrice:     199,
     standardPrice:      249,
-    earlyBirdEndDate:   "TBD",          // PLACEHOLDER: update when confirmed
-    cap:                null,           // PLACEHOLDER: hard ticket cap (null = hide counter)
-    sold:               0,              // PLACEHOLDER: update to show tickets remaining
+    // Early bird is now COUNT-based, not date-based. Update earlyBirdSold manually as sales happen.
+    // When earlyBirdSold >= earlyBirdCap, the site automatically switches to standard pricing copy.
+    earlyBirdCap:       40,             // Total early bird tickets available
+    earlyBirdSold:      0,              // MANUAL: update this number as early bird tickets sell
+    cap:                null,           // (optional) overall venue cap — null hides the counter
+    sold:               0,              // (optional) overall tickets sold
     earlyBirdUrl:       "https://wroedallas.regfox.com//we-run-on-eos-dfw#", 
     freeUrl:            "https://wroedallas.regfox.com//we-run-on-eos-dfw",  
   },
