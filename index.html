@@ -126,6 +126,9 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .about-video { position: relative; aspect-ratio: 16/9; background: var(--navy); border-radius: 8px; overflow: hidden; box-shadow: 0 20px 60px rgba(27,42,74,0.2); }
     .about-video iframe { width: 100%; height: 100%; border: none; }
+    /* Portrait (Reels/Shorts) variant — phone-frame */
+    .about-video.portrait { aspect-ratio: 9/16; max-width: 360px; margin: 0 auto; border-radius: 32px; background: #111; padding: 10px; box-shadow: 0 24px 60px rgba(27,42,74,0.28), 0 0 0 2px rgba(27,42,74,0.08); }
+    .about-video.portrait iframe { border-radius: 22px; }
     .video-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: rgba(255,255,255,0.4); font-size: 0.85rem; text-align: center; padding: 2rem; }
     .play-btn { width: 64px; height: 64px; background: rgba(242,101,34,0.2); border: 2px solid var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
     .three-uniques { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
@@ -860,6 +863,7 @@
 
     // Promo video
     const videoContainer = el('about-video-container');
+    if (C.media && C.media.promoVideoPortrait) videoContainer.classList.add('portrait');
     if (C.media.promoVideoUrl) {
       videoContainer.innerHTML = `<iframe src="${C.media.promoVideoUrl}" allowfullscreen></iframe>`;
     } else {

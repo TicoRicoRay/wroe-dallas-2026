@@ -307,7 +307,8 @@ const SITE_CONFIG = {
 
   // ── MEDIA ──────────────────────────────────────────────────
   media: {
-    promoVideoUrl: "https://www.youtube.com/embed/WtagBi514bA",
+    promoVideoUrl: "https://www.youtube.com/embed/lfiH_kmKHws",
+    promoVideoPortrait: true,  // true = 9:16 phone-frame; false = 16:9 landscape
   },
 
   // ── CONTACT ────────────────────────────────────────────────
