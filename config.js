@@ -78,7 +78,6 @@ const SITE_CONFIG = {
       { name: "Happy Hour Sponsor", price: 6500,  available: 0 },
       { name: "Swag Bag Sponsor",   price: 3500,  available: 0 },
       { name: "Booth Sponsor",      price: 1500,  available: 0 },
-      { name: "Connector Sponsor",  price: 750,   available: 0 },
     ],
     sponsors: [
       {
@@ -308,7 +307,8 @@ const SITE_CONFIG = {
 
   // ── MEDIA ──────────────────────────────────────────────────
   media: {
-    promoVideoUrl: "https://www.youtube.com/embed/WtagBi514bA",
+    promoVideoUrl: "https://www.youtube.com/embed/lfiH_kmKHws",
+    promoVideoPortrait: true,  // true = 9:16 phone-frame; false = 16:9 landscape
   },
 
   // ── CONTACT ────────────────────────────────────────────────
