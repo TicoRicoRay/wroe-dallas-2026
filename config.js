@@ -78,7 +78,6 @@ const SITE_CONFIG = {
       { name: "Happy Hour Sponsor", price: 6500,  available: 0 },
       { name: "Swag Bag Sponsor",   price: 3500,  available: 0 },
       { name: "Booth Sponsor",      price: 1500,  available: 0 },
-      { name: "Connector Sponsor",  price: 750,   available: 0 },
     ],
     sponsors: [
       {

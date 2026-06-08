@@ -314,13 +314,11 @@
     .sponsor-logo.happy { width: 260px; height: 90px; }
     .sponsor-logo.swag  { width: 180px; height: 70px; }
     .sponsor-logo.booth { width: 140px; height: 55px; }
-    .sponsor-logo.connector { width: 110px; height: 45px; }
     .sponsor-slot.title { width: 280px; height: 140px; font-size: 0.85rem; }
     .sponsor-slot.book  { width: 240px; height: 110px; font-size: 0.8rem; }
     .sponsor-slot.happy { width: 260px; height: 90px; }
     .sponsor-slot.swag  { width: 180px; height: 70px; font-size: 0.75rem; }
     .sponsor-slot.booth { width: 140px; height: 55px; font-size: 0.72rem; }
-    .sponsor-slot.connector { width: 110px; height: 45px; font-size: 0.68rem; }
 
     /* VENUE */
     #venue { background: var(--navy); color: var(--white); }
@@ -386,7 +384,6 @@
       .sponsor-logo.happy, .sponsor-slot.happy { width: 100%; max-width: 320px; height: 80px; }
       .sponsor-logo.swag,  .sponsor-slot.swag  { width: 46%; max-width: 180px; height: 60px; }
       .sponsor-logo.booth, .sponsor-slot.booth { width: 30%; max-width: 140px; height: 52px; }
-      .sponsor-logo.connector, .sponsor-slot.connector { width: 29%; max-width: 110px; height: 44px; }
     }
   </style>
 </head>
@@ -813,9 +810,9 @@
     });
 
     // Sponsors
-    const clsMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happy','Swag Bag Sponsor':'swag','Booth Sponsor':'booth','Connector Sponsor':'connector'};
+    const clsMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happy','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
     // Map tier-name -> internal key used on sponsor records (e.g. "Title Sponsor" -> "title")
-    const tierKeyMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happyHour','Swag Bag Sponsor':'swag','Booth Sponsor':'booth','Connector Sponsor':'connector'};
+    const tierKeyMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happyHour','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
     const sponsorList = (C.sponsors.sponsors || []);
     const tierGroups = [
       { keys: ['Title Sponsor'] },
@@ -823,7 +820,6 @@
       { keys: ['Happy Hour Sponsor'] },
       { keys: ['Swag Bag Sponsor'] },
       { keys: ['Booth Sponsor'] },
-      { keys: ['Connector Sponsor'] },
     ];
     const tierContainer = el('sponsor-tiers');
     tierGroups.forEach(group => {
