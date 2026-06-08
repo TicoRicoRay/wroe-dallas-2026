@@ -396,9 +396,9 @@
             <div class="countdown-unit"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-unit-label">Mins</div></div>
             <div class="countdown-unit"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-unit-label">Secs</div></div>
           </div>
-          <div id="tickets-remaining-section" class="tickets-bar">
+          <div id="tickets-remaining-section" class="tickets-bar" style="display:none">
             <div class="tickets-top">
-              <span class="tickets-label">Paid Tier Tickets Remaining</span>
+              <span class="tickets-label" id="tickets-label">Early Bird Tickets Remaining</span>
               <div class="tickets-count"><span id="tickets-left">--</span> <span>of <span id="tickets-cap">--</span></span></div>
             </div>
             <div class="progress-track"><div class="progress-fill" id="ticket-progress" style="width:0%"></div></div>
@@ -412,7 +412,7 @@
             <div class="tier-desc">9am – 12:45pm</div>
           </div>
           <div class="tier-pill paid">
-            <div class="tier-name">Full Day · Early Bird</div>
+            <div class="tier-name" id="hero-paid-name">Full Day Ticket</div>
             <div class="tier-price" id="hero-early-price"></div>
             <div class="tier-desc" id="hero-standard-desc"></div>
           </div>
@@ -459,7 +459,7 @@
         <div class="ticket-compare-header">
           <div class="tc-what">What's included</div>
           <div class="tc-free">Free Ticket<span class="tc-price">Morning only</span></div>
-          <div class="tc-paid">Full Day Ticket<span class="tc-price">$199 early bird</span></div>
+          <div class="tc-paid">Full Day Ticket<span class="tc-price" id="compare-paid-price">$199 early bird</span></div>
         </div>
         <div class="ticket-compare-row"><div class="tc-label">Light Breakfast</div><div class="tc-free">✓</div><div class="tc-paid">✓</div></div>
         <div class="ticket-compare-row"><div class="tc-label">90-Minute EOS Talk</div><div class="tc-free">✓</div><div class="tc-paid">✓</div></div>
@@ -565,21 +565,38 @@
     if (document.getElementById('compare-paid-cta')) document.getElementById('compare-paid-cta').href = ctaFor(tk.earlyBirdUrl);
     el('nav-cta-desktop').href         = ctaFor(tk.earlyBirdUrl);
     el('nav-cta-mobile').href          = ctaFor(tk.earlyBirdUrl);
-    el('hero-early-price').textContent = fmt$(tk.earlyBirdPrice);
-    el('hero-standard-desc').textContent = 'Then ' + fmt$(tk.standardPrice) + ' · Includes lunch and afternoon sessions';
+    // Early bird pricing is COUNT-based: available until earlyBirdSold reaches earlyBirdCap.
+    const ebRemaining = (typeof tk.earlyBirdCap === 'number') ? Math.max(0, tk.earlyBirdCap - (tk.earlyBirdSold || 0)) : null;
+    const earlyBirdActive = ebRemaining === null ? true : ebRemaining > 0;
+    const currentPrice = earlyBirdActive ? tk.earlyBirdPrice : tk.standardPrice;
 
-    // Tickets remaining (only shown when cap is set)
-    if (tk.cap) {
-      const remaining = tk.cap - tk.sold;
-      const pct = Math.round((tk.sold / tk.cap) * 100);
-      el('tickets-remaining-section').style.display = 'block';
-      el('tickets-left').textContent = remaining;
-      el('tickets-cap').textContent  = tk.cap;
-      el('ticket-progress').style.width = pct + '%';
-      el('tickets-note').textContent = tk.earlyBirdEndDate !== 'TBD'
-        ? '* Early bird pricing ends ' + tk.earlyBirdEndDate
-        : '* Early bird pricing available now';
+    el('hero-early-price').textContent = fmt$(currentPrice);
+    if (earlyBirdActive) {
+      el('hero-paid-name').textContent = 'Full Day · Early Bird';
+      el('hero-standard-desc').textContent = 'Then ' + fmt$(tk.standardPrice) + ' once early bird sells out · Includes lunch + afternoon';
+    } else {
+      el('hero-paid-name').textContent = 'Full Day Ticket';
+      el('hero-standard-desc').textContent = 'Includes lunch and afternoon sessions';
     }
+
+    // Early bird counter (only when cap is set and tickets still remain)
+    if (ebRemaining !== null && ebRemaining > 0) {
+      const sold = tk.earlyBirdSold || 0;
+      const pct = Math.round((sold / tk.earlyBirdCap) * 100);
+      el('tickets-remaining-section').style.display = 'block';
+      el('tickets-label').textContent = 'Early Bird Tickets Remaining';
+      el('tickets-left').textContent  = ebRemaining;
+      el('tickets-cap').textContent   = tk.earlyBirdCap;
+      el('ticket-progress').style.width = pct + '%';
+      el('tickets-note').textContent  = '* Early bird price (' + fmt$(tk.earlyBirdPrice) + ') available until all ' + tk.earlyBirdCap + ' early bird tickets are sold. Then ' + fmt$(tk.standardPrice) + '.';
+    } else if (ebRemaining === 0) {
+      // Sold out — hide counter, no need to show progress bar
+      el('tickets-remaining-section').style.display = 'none';
+    }
+
+    // Compare table price label reflects current pricing
+    const cmp = document.getElementById('compare-paid-price');
+    if (cmp) cmp.textContent = earlyBirdActive ? (fmt$(tk.earlyBirdPrice) + ' early bird') : fmt$(tk.standardPrice);
 
     // Agenda — split into Free (AM) and Paid (PM + Evening) sections so attendance options are obvious
     el('agenda-date-label').textContent = ev.date;
@@ -725,7 +742,9 @@
     el('cta-eyebrow').textContent  = ev.date + ' · ' + ev.venue;
     el('cta-free-btn').href        = ctaFor(tk.freeUrl);
     el('cta-paid-btn').href        = ctaFor(tk.earlyBirdUrl);
-    el('cta-paid-btn').textContent = 'Get Full Day Ticket · ' + fmt$(tk.earlyBirdPrice) + ' Early Bird';
+    el('cta-paid-btn').textContent = earlyBirdActive
+      ? 'Get Full Day Ticket · ' + fmt$(tk.earlyBirdPrice) + ' Early Bird'
+      : 'Get Full Day Ticket · ' + fmt$(tk.standardPrice);
 
     // Footer
     el('footer-eos-link').href  = C.contact.eosUrl;
