@@ -283,8 +283,11 @@
     /* SPEAKERS */
     #speakers { background: var(--white); }
     .speakers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
-    .speaker-card { background: var(--off-white); border-radius: 8px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .speaker-card { background: var(--off-white); border-radius: 8px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; display: block; text-decoration: none; color: inherit; }
     .speaker-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(27,42,74,0.12); }
+    a.speaker-card:hover .speaker-profile-link { color: var(--orange); }
+    .speaker-profile-link { display: inline-block; margin-top: 0.6rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); transition: color 0.2s; }
+    .speaker-profile-link::after { content: ' \2192'; }
     .speaker-photo { aspect-ratio: 1; background: var(--navy-lt); display: flex; align-items: center; justify-content: center; }
     .speaker-photo-inner { width: 80%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
     .speaker-photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
@@ -787,8 +790,13 @@
     // Speakers
     const grid = el('speakers-grid');
     C.speakers.forEach(s => {
-      const card = document.createElement('div');
+      const card = document.createElement(s.profileUrl ? 'a' : 'div');
       card.className = 'speaker-card';
+      if (s.profileUrl) {
+        card.href = s.profileUrl;
+        card.target = '_blank';
+        card.rel = 'noopener';
+      }
       card.innerHTML = `
         <div class="speaker-photo">
           <div class="speaker-photo-inner">
@@ -800,6 +808,7 @@
           <div class="speaker-name">${s.name}</div>
           <div class="speaker-session">"${s.session}" — ${s.bio}</div>
           <div class="speaker-time">${s.time}${s.tier === 'free' ? ' · Free Session' : ''}</div>
+          ${s.profileUrl ? '<span class="speaker-profile-link">View Profile</span>' : ''}
         </div>`;
       grid.appendChild(card);
     });

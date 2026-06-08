@@ -160,6 +160,7 @@ const SITE_CONFIG = {
       tier:     "free",
       photo:    "https://implementer.eosworldwide.com/wp-content/uploads/2025/11/20170423-Spillers-Shane-Headshot-1-Large-2.png",
       initials: "SS",
+      profileUrl: "https://implementer.eosworldwide.com/shane-spillers/",
     },
     {
       name:     "Mark Stanley",
@@ -170,6 +171,7 @@ const SITE_CONFIG = {
       tier:     "paid",
       photo:    "https://implementer.eosworldwide.com/wp-content/uploads/2025/12/MarkS-4578-Edit-SM.jpg",
       initials: "MS",
+      profileUrl: "https://implementer.eosworldwide.com/mark-stanley/",
     },
     {
       name:     "Beth Fahey",
@@ -180,6 +182,7 @@ const SITE_CONFIG = {
       tier:     "paid",
       photo:    "https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/Fahey-Headshot-2023-WEB-2.jpeg.webp",
       initials: "BF",
+      profileUrl: "https://implementer.eosworldwide.com/beth-fahey/",
     },
     {
       name:     "Mark C. Winters",
@@ -190,6 +193,7 @@ const SITE_CONFIG = {
       tier:     "paid",
       photo:    "https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/MCW-Headshot-Small-1-1-1024x767.jpeg.webp",
       initials: "MW",
+      profileUrl: "https://implementer.eosworldwide.com/mark-c-winters/",
     },
   ],
 
