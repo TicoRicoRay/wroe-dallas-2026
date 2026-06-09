@@ -471,7 +471,7 @@
   <section id="full-day-bonus">
     <div class="container">
       <div class="bonus-eyebrow">Full Day Ticket Bonus</div>
-      <h2 class="bonus-title">Get <em>$160+ in books &amp; hospitality</em> — free with every Full Day ticket.</h2>
+      <h2 class="bonus-title">Get <em id="bonus-headline-value">$160+ in books &amp; hospitality</em> — free with every Full Day ticket.</h2>
       <p class="bonus-sub">Walk out with three hardcover books from the EOS Mastery Series &mdash; written by the implementers teaching the room. Plus catered lunch and a hosted happy hour with the North Texas EOS community.</p>
 
       <div class="bonus-grid">
@@ -484,7 +484,7 @@
           <div class="stack-row"><div class="stack-label">3 hardcover books <small>written by speaking authors</small></div><div class="stack-value" id="stack-books-value">$80.64</div></div>
           <div class="stack-row"><div class="stack-label">Catered lunch <small>Grand Ballroom</small></div><div class="stack-value" id="stack-lunch-value">$45</div></div>
           <div class="stack-row"><div class="stack-label">Hosted happy hour <small>drinks + appetizers</small></div><div class="stack-value" id="stack-happy-value">$35</div></div>
-          <div class="stack-total"><div class="stack-label">Tangible value</div><div class="stack-value" id="stack-total">$160.64</div></div>
+          <div class="stack-total"><div class="stack-label">Tangible value</div><div class="stack-value" id="stack-total">$0</div></div>
           <div class="stack-price"><div class="stack-label">Full Day ticket price</div><div class="stack-value" id="stack-ticket-price">$199</div></div>
           <div class="stack-payoff" id="stack-payoff">You're paying ~$38 for a full day of EOS workshops, the Visionary Keynote, and EOS Awards.<span>Workshops, keynote, awards, networking — all included.</span></div>
           <a class="bonus-cta" id="bonus-cta" href="#register">Grab a Full Day Ticket →</a>
@@ -688,6 +688,11 @@
       document.getElementById('stack-happy-value').textContent  = fmt$(fb.happyHourValue);
       document.getElementById('stack-total').textContent        = '$' + tangibleTotal.toFixed(2);
       document.getElementById('stack-ticket-price').textContent = fmt$(currentPrice);
+
+      // Dynamic headline: round DOWN to nearest $10 for a clean "$190+" feel
+      const headlineFloor = Math.floor(tangibleTotal / 10) * 10;
+      const headlineEl = document.getElementById('bonus-headline-value');
+      if (headlineEl) headlineEl.innerHTML = `$${headlineFloor}+ in books &amp; hospitality`;
 
       const payoffEl = document.getElementById('stack-payoff');
       if (netCost <= 0) {

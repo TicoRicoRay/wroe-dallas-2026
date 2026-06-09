@@ -65,7 +65,7 @@ const SITE_CONFIG = {
         coverImage: "img/books/visionary_cover.jpg"
       }
     ],
-    mealsValue:  45,    // Conservative DFW conference catered lunch value
+    mealsValue:  75,    // Catered lunch value (Statler Dallas / DFW conference rate)
     happyHourValue: 35  // Hosted happy hour w/ drinks + appetizers
   },
 
