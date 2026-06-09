@@ -450,14 +450,6 @@
             <div class="countdown-unit"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-unit-label">Mins</div></div>
             <div class="countdown-unit"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-unit-label">Secs</div></div>
           </div>
-          <div id="tickets-remaining-section" class="tickets-bar" style="display:none">
-            <div class="tickets-top">
-              <span class="tickets-label" id="tickets-label">Early Bird Tickets Remaining</span>
-              <div class="tickets-count"><span id="tickets-left">--</span> <span>of <span id="tickets-cap">--</span></span></div>
-            </div>
-            <div class="progress-track"><div class="progress-fill" id="ticket-progress" style="width:0%"></div></div>
-            <div class="tickets-note" id="tickets-note"></div>
-          </div>
         </div>
         <div class="tier-pills">
           <div class="tier-pill free">
@@ -657,25 +649,10 @@
     el('hero-early-price').textContent = fmt$(currentPrice);
     if (earlyBirdActive) {
       el('hero-paid-name').textContent = 'Full Day · Early Bird';
-      el('hero-standard-desc').innerHTML = 'Includes 3 hardcover books, lunch &amp; happy hour <br><small style="opacity:0.7;font-size:0.85em">— then ' + fmt$(tk.standardPrice) + ' once 40 early birds sell out</small>';
+      el('hero-standard-desc').innerHTML = 'Includes 3 hardcover books, lunch &amp; happy hour <br><small style="opacity:0.7;font-size:0.85em">— then ' + fmt$(tk.standardPrice) + ' once early bird sells out</small>';
     } else {
       el('hero-paid-name').textContent = 'Full Day Ticket';
       el('hero-standard-desc').innerHTML = 'Includes 3 hardcover books, lunch &amp; happy hour';
-    }
-
-    // Early bird counter (only when cap is set and tickets still remain)
-    if (ebRemaining !== null && ebRemaining > 0) {
-      const sold = tk.earlyBirdSold || 0;
-      const pct = Math.round((sold / tk.earlyBirdCap) * 100);
-      el('tickets-remaining-section').style.display = 'block';
-      el('tickets-label').textContent = 'Early Bird Tickets Remaining';
-      el('tickets-left').textContent  = ebRemaining;
-      el('tickets-cap').textContent   = tk.earlyBirdCap;
-      el('ticket-progress').style.width = pct + '%';
-      el('tickets-note').textContent  = '* Early bird price (' + fmt$(tk.earlyBirdPrice) + ') available until all ' + tk.earlyBirdCap + ' early bird tickets are sold. Then ' + fmt$(tk.standardPrice) + '.';
-    } else if (ebRemaining === 0) {
-      // Sold out — hide counter, no need to show progress bar
-      el('tickets-remaining-section').style.display = 'none';
     }
 
     // Compare table price label reflects current pricing
