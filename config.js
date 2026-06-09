@@ -257,7 +257,7 @@ const SITE_CONFIG = {
       },
        { 
         time: "12:15 PM \u2013 1:15 PM", 
-        session: "Lunch +  Walt Brown 30 Minute Update", 
+        session: "Lunch + Walt Brown, EOS Worldwide Head Coach", 
         location: "Grand Ballroom",
         speaker: "Walt Brown", 
         tier: "paid", 
