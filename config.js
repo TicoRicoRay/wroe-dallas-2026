@@ -145,6 +145,13 @@ const SITE_CONFIG = {
         logo: "images/360consultingdfw.png",
         alt:  "360 Consulting DFW"
       },
+      {
+        name: "Profit Works",
+        tier: "booth",
+        url:  "https://www.profitworksllc.com/",
+        logo: "images/profitworks.jpg",
+        alt:  "Profit Works"
+      },
     ]
   },
 
