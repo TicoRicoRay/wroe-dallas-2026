@@ -81,11 +81,11 @@ const SITE_CONFIG = {
     ],
     sponsors: [
       {
-        name: "The Sales Collective",
+        name: "System of Selling",
         tier: "title",
-        url:  "https://thesalescollective.com/",
-        logo: "images/thesalescollective.png",
-        alt:  "The Sales Collective"
+        url:  "https://www.thesystemofselling.com/",
+        logo: "images/systemofselling.svg",
+        alt:  "System of Selling"
       },
       {
         name: "Strety",
@@ -242,9 +242,9 @@ const SITE_CONFIG = {
       },
       { 
         time: "11:15 AM \u2013 12:15 PM", 
-        session: "Sales Collective - Title Sponsor Workshop", 
+        session: "System of Selling - Title Sponsor Workshop", 
         location: "Grand Ballroom",
-        speaker: "Sales Collective \u00B7 Title Sponsor", 
+        speaker: "System of Selling \u00B7 Title Sponsor", 
         tier: "free", 
         highlight: true 
       },
