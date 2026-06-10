@@ -207,7 +207,7 @@ const SITE_CONFIG = {
   agenda: 
     [
       {
-        time: "7:30 \u2013 8:10 AM",
+        time: "7:30 \u2013 8:00 AM",
         session: "Coffee, Snacks & Registration",
         location: "Foyer & Junior Ballroom",
         speaker: "",
@@ -215,7 +215,7 @@ const SITE_CONFIG = {
         highlight: false
       },
       {
-        time: "8:10 \u2013 9:45 AM",
+        time: "8:00 \u2013 9:35 AM",
         session: "Opening / The Talk",
         location: "Grand Ballroom",
         speaker: "Shane Spillers \u00B7 Expert EOS Implementer\u00AE",
@@ -223,7 +223,7 @@ const SITE_CONFIG = {
         highlight: true
       },
        {
-        time: "9:45 \u2013 10:05 AM",
+        time: "9:35 \u2013 9:55 AM",
         session: "Break",
         location: "Foyer & Junior Ballroom",
         speaker: "",
@@ -232,7 +232,7 @@ const SITE_CONFIG = {
       },
       
       { 
-        time: "10:05 \u2013 10:55 AM", 
+        time: "9:55 \u2013 10:45 AM", 
         session: "Strety - Title Sponsor Workshop",
         location: "Grand Ballroom", 
         speaker: "Strety \u00B7 Title Sponsor", 
@@ -240,7 +240,7 @@ const SITE_CONFIG = {
         highlight: true
       },
       { 
-        time: "10:55 \u2013 11:15 AM", 
+        time: "10:45 \u2013 11:00 AM", 
         session: "Break", 
         location: "Foyer & Junior Ballroom",
         speaker: "", 
@@ -248,7 +248,7 @@ const SITE_CONFIG = {
         highlight: false
       },
       { 
-        time: "11:15 AM \u2013 12:15 PM", 
+        time: "11:00 AM \u2013 12:00 PM", 
         session: "System of Selling - Title Sponsor Workshop", 
         location: "Grand Ballroom",
         speaker: "System of Selling \u00B7 Title Sponsor", 
@@ -256,7 +256,7 @@ const SITE_CONFIG = {
         highlight: true 
       },
        { 
-        time: "12:15 PM \u2013 1:15 PM", 
+        time: "12:00 PM \u2013 1:00 PM", 
         session: "Lunch + Walt Brown, EOS Worldwide Head Coach", 
         location: "Grand Ballroom",
         speaker: "Walt Brown", 
@@ -264,31 +264,15 @@ const SITE_CONFIG = {
         highlight: true 
       },
       { 
-        time: "1:15 \u2013 2:45 PM", 
-        session: "Rollout Workshop", 
-        location: "Grand Ballroom",
-        speaker: "Beth Fahey \u00B7 Expert EOS Implementer\u00AE", 
-        tier: "paid", 
-        highlight: true 
-      },
-       { 
-        time: "2:45 \u2013 3:05 PM", 
-        session: "Break", 
-        location: "Foyer & Junior Ballroom",
-        speaker: "", 
-        tier: "paid", 
-        highlight: false
-      },
-      { 
-        time: "3:05 \u2013 4:35 PM", 
-        session: "Data Workshop", 
+        time: "1:00 \u2013 2:30 PM", 
+       session: "Data Workshop", 
         location: "Grand Ballroom",
         speaker: "Mark Stanley \u00B7 Expert EOS Implementer\u00AE", 
         tier: "paid", 
         highlight: true 
       },
-      { 
-        time: "4:35 \u2013 4:55 PM", 
+       { 
+        time: "2:30 \u2013 2:50 PM", 
         session: "Break", 
         location: "Foyer & Junior Ballroom",
         speaker: "", 
@@ -296,14 +280,31 @@ const SITE_CONFIG = {
         highlight: false
       },
       { 
-        time: "4:55 \u2013 6:30 PM", 
+        time: "2:50 \u2013 4:25 PM", 
+         session: "Rollout Workshop", 
+        location: "Grand Ballroom",
+        speaker: "Beth Fahey \u00B7 Expert EOS Implementer\u00AE", 
+        tier: "paid", 
+        highlight: true 
+        
+      },
+      { 
+        time: "4:25 \u2013 4:45 PM", 
+        session: "Break", 
+        location: "Foyer & Junior Ballroom",
+        speaker: "", 
+        tier: "paid", 
+        highlight: false
+      },
+      { 
+        time: "4:45 \u2013 6:15 PM", 
         session: "Visionary Keynote", location: "Grand Ballroom",
         speaker: "Mark C. Winters \u00B7 Expert EOS Implementer\u00AE", 
         tier: "paid", 
         highlight: true 
       },
       { 
-        time: "6:30 \u2013 8:00 PM", 
+        time: "6:15 \u2013 8:00 PM", 
         session: "Happy Hour + Networking", 
         location: "Junior Ballroom",
         speaker: "Celebrate wins. Connect. Go home fired up.", 
