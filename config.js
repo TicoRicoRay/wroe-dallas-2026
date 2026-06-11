@@ -16,7 +16,7 @@ const SITE_CONFIG = {
     address:    "1914 Commerce St, Dallas, TX 75201",
     mapsLink:   "https://maps.google.com/?q=1914+Commerce+St+Dallas+TX+75201",
     parking:    "Complimentary parking available on-site",
-    ctaUrl:     "https://wroedallas.regfox.com//we-run-on-eos-dfw",  // Master CTA link — used by every Register/Get Ticket button unless a tier-specific URL below overrides it
+    ctaUrl:     "https://wroedallas.regfox.com/we-run-on-eos-dfw",  // Master CTA link — used by every Register/Get Ticket button unless a tier-specific URL below overrides it
   },
 
   // ── TICKETS ────────────────────────────────────────────────
@@ -29,8 +29,8 @@ const SITE_CONFIG = {
     earlyBirdSold:      0,              // MANUAL: update this number as early bird tickets sell
     cap:                null,           // (optional) overall venue cap — null hides the counter
     sold:               0,              // (optional) overall tickets sold
-    earlyBirdUrl:       "https://wroedallas.regfox.com//we-run-on-eos-dfw#", 
-    freeUrl:            "https://wroedallas.regfox.com//we-run-on-eos-dfw",  
+    earlyBirdUrl:       "https://wroedallas.regfox.com/we-run-on-eos-dfw#", 
+    freeUrl:            "https://wroedallas.regfox.com/we-run-on-eos-dfw",  
   },
 
   // ── FULL-DAY VALUE STACK ────────────────────────────────
@@ -81,11 +81,11 @@ const SITE_CONFIG = {
     ],
     sponsors: [
       {
-        name: "System of Selling",
+        name: "The System of Selling",
         tier: "title",
         url:  "https://www.thesystemofselling.com/",
-        logo: "images/systemofselling.svg",
-        alt:  "System of Selling"
+        logo: "images/tsos.png",
+        alt:  "The System of Selling"
       },
       {
         name: "Strety",
@@ -160,7 +160,7 @@ const SITE_CONFIG = {
     {
       name:     "Shane Spillers",
       title:    "Expert EOS Implementer\u00AE",
-      session:  "The Talk",
+      session:  "Get a Grip on your Business with EOS",
       bio:      "Opening the day with the foundation of running on EOS",
       time:     "10:00 \u2013 11:30 AM",
       tier:     "free",
@@ -216,7 +216,7 @@ const SITE_CONFIG = {
       },
       {
         time: "8:00 \u2013 9:35 AM",
-        session: "Opening / The Talk",
+        session: "Get a Grip on your Business with EOS",
         location: "Grand Ballroom",
         speaker: "Shane Spillers \u00B7 Expert EOS Implementer\u00AE",
         tier: "free",
@@ -249,7 +249,7 @@ const SITE_CONFIG = {
       },
       { 
         time: "11:00 AM \u2013 12:00 PM", 
-        session: "System of Selling - Title Sponsor Workshop", 
+        session: "The System of Selling - Title Sponsor Workshop", 
         location: "Grand Ballroom",
         speaker: "System of Selling \u00B7 Title Sponsor", 
         tier: "free", 
