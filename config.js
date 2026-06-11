@@ -95,10 +95,10 @@ const SITE_CONFIG = {
         alt:  "Strety"
       },
       {
-        name: "ProCFO",
+        name: "ProCFO Partners",
         tier: "book",
-        url:  "https://procfo.com/",
-        logo: "images/procfo.png",
+        url:  "https://procfopartners.com/",
+        logo: "images/procfopartners.svg",
         alt:  "ProCFO"
       },
       {
@@ -251,7 +251,7 @@ const SITE_CONFIG = {
         time: "11:00 AM \u2013 12:00 PM", 
         session: "The System of Selling - Title Sponsor Workshop", 
         location: "Grand Ballroom",
-        speaker: "System of Selling \u00B7 Title Sponsor", 
+        speaker: "The System of Selling \u00B7 Title Sponsor", 
         tier: "free", 
         highlight: true 
       },
