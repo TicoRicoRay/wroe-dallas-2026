@@ -44,7 +44,7 @@ const SITE_CONFIG = {
         speaker:  "Mark Stanley",
         retail:   20.66,
         bookUrl:  "https://www.eosworldwide.com/data-book",
-        coverImage: "img/books/data_cover.jpg"
+        coverImage: "images/books/data_cover.jpg"
       },
       {
         title:    "Rollout",
@@ -53,7 +53,7 @@ const SITE_CONFIG = {
         speaker:  "Beth Fahey",
         retail:   29.99,
         bookUrl:  "https://www.rolloutbook.com",
-        coverImage: "img/books/rollout_cover.jpg"
+        coverImage: "images/books/rollout_cover.jpg"
       },
       {
         title:    "Visionary",
@@ -62,7 +62,7 @@ const SITE_CONFIG = {
         speaker:  "Mark C. Winters",
         retail:   29.99,
         bookUrl:  "https://www.markcwinters.com/visionary-book-dot-com/",
-        coverImage: "img/books/visionary_cover.jpg"
+        coverImage: "images/books/visionary_cover.jpg"
       }
     ],
     mealsValue:  75,    // Catered lunch value (Statler Dallas / DFW conference rate)

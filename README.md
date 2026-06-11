@@ -21,9 +21,8 @@ wroe-dallas-2026/
 ├── CNAME                # Custom domain for GitHub Pages: "eosnorthtexas.com"
 ├── config.js            # SITE_CONFIG object — edit this for content changes
 ├── index.html           # All markup, CSS, and rendering JS in one file
-├── images/              # Sponsor logos, branding marks (PNG/SVG/JPG/WEBP)
-└── img/
-    └── books/           # Book cover images for the bonus stack section
+└── images/              # All image assets
+    └── books/           # Book cover images for the full-day bonus section
 ```
 
 That's it. No `node_modules`, no `package.json`, no bundler.
@@ -164,4 +163,4 @@ The domain, hosting, cert, and CDN all continue with zero changes year-to-year.
 - Some sponsor logo files exist in `images/` but aren't currently referenced in `config.js` (e.g., legacy `thesalescollective.png`). Safe to ignore or delete. The brand was renamed to "System of Selling" — the active logo is `systemofselling.svg`.
 - `mealsValue` and `happyHourValue` in `fullDayBonuses` are leftover from a value-stack calculator that was removed from the page. They're harmless but currently unused.
 - `.xcf` files in `images/` are GIMP source files — keep them if you want to edit those logos, otherwise removable.
-- Book covers in `img/books/` are scraped product images, not licensed assets. If anyone gets twitchy about it, replace with publisher-provided art.
+- Book covers in `images/books/` are processed product images sourced from publisher/retailer pages, not licensed assets. If anyone gets twitchy about it, replace with publisher-provided art.
