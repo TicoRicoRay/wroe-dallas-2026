@@ -10,8 +10,8 @@ const SITE_CONFIG = {
     name:       "We Run on EOS\u00AE Dallas 2026",
     edition:    "Fifth Annual",
     date:       "Monday, September 14, 2026",
-    dateISO:    "2026-09-14T09:00:00-05:00",   // CDT, 9am start
-    timeRange:  "9:00 AM",
+    dateISO:    "2026-09-14T08:00:00-05:00",   // CDT, 9am start
+    timeRange:  "8:00 AM",
     venue:      "The Statler Dallas",
     address:    "1914 Commerce St, Dallas, TX 75201",
     mapsLink:   "https://maps.google.com/?q=1914+Commerce+St+Dallas+TX+75201",
