@@ -86,7 +86,7 @@ const SITE_CONFIG = {
         url:  "https://www.thesystemofselling.com/",
         logo: "images/tsos.png",
         alt:  "The System of Selling",
-        verified: true
+        verified: false
       },
       {
         name: "Strety",
