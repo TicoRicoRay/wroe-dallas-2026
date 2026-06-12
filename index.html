@@ -783,6 +783,11 @@
     const tierContainer = el('sponsor-tiers');
     tierGroups.forEach(group => {
       const tiers = C.sponsors.tiers.filter(t => group.keys.includes(t.name));
+      // Skip this tier entirely if it has zero verified sponsors AND zero available slots
+      const tierKeys = tiers.map(t => tierKeyMap[t.name]);
+      const hasVerified = sponsorList.some(s => tierKeys.includes(s.tier));
+      const hasAvailableSlots = tiers.some(t => (t.available || 0) > 0);
+      if (!hasVerified && !hasAvailableSlots) return;
       const section = document.createElement('div');
       const labelText = tiers.map(t => t.name).join(' &nbsp;|&nbsp; ');
       section.innerHTML = `<div class="sponsor-tier-label">${labelText}</div><div class="sponsor-row"></div>`;
