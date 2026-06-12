@@ -101,8 +101,8 @@
     .countdown-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2rem; backdrop-filter: blur(4px); }
     .countdown-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.25rem; }
     .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1.5rem; }
-    .countdown-unit { text-align: center; background: rgba(27,42,74,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 0.75rem 0.25rem; min-width: 0; overflow: hidden; }
-    .countdown-num { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--white); letter-spacing: 0.02em; font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+    .countdown-unit { text-align: center; background: rgba(27,42,74,0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 0.75rem 0.1rem; min-width: 0; overflow: hidden; }
+    .countdown-num { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; color: var(--white); letter-spacing: 0; font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
     .countdown-unit-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
     .tickets-bar { margin-top: 0.25rem; }
     .tickets-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
@@ -390,8 +390,9 @@
     }
     @media (max-width: 560px) {
       .speakers-grid { grid-template-columns: 1fr; }
-      .countdown-grid { gap: 0.3rem; }
-      .countdown-num { font-size: 2rem; }
+      .countdown-grid { gap: 0.5rem; }
+      .countdown-unit { padding: 0.65rem 0.05rem; }
+      .countdown-num { font-size: 1.7rem; }
       .sponsor-row { gap: 1rem; }
       .sponsor-logo.title { flex: 0 0 100%; width: 100%; max-width: 100%; height: 105px; }
       .sponsor-slot.title { width: 100%; max-width: 100%; height: 105px; }
