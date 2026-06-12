@@ -7,30 +7,30 @@ const SITE_CONFIG = {
 
   // ── EVENT DETAILS ──────────────────────────────────────────
   event: {
-    name:       "We Run on EOS\u00AE Dallas 2026",
-    edition:    "Fifth Annual",
-    date:       "Monday, September 14, 2026",
-    dateISO:    "2026-09-14T08:00:00-05:00",   // CDT, 9am start
-    timeRange:  "8:00 AM",
-    venue:      "The Statler Dallas",
-    address:    "1914 Commerce St, Dallas, TX 75201",
-    mapsLink:   "https://maps.google.com/?q=1914+Commerce+St+Dallas+TX+75201",
-    parking:    "Complimentary parking available on-site",
-    ctaUrl:     "https://wroedallas.regfox.com/we-run-on-eos-dfw",  // Master CTA link — used by every Register/Get Ticket button unless a tier-specific URL below overrides it
+    name: "We Run on EOS\u00AE Dallas 2026",
+    edition: "Fifth Annual",
+    date: "Monday, September 14, 2026",
+    dateISO: "2026-09-14T08:00:00-05:00",   // CDT, 9am start
+    timeRange: "8:00 AM",
+    venue: "The Statler Dallas",
+    address: "1914 Commerce St, Dallas, TX 75201",
+    mapsLink: "https://maps.google.com/?q=1914+Commerce+St+Dallas+TX+75201",
+    parking: "Complimentary parking available on-site",
+    ctaUrl: "https://wroedallas.regfox.com/we-run-on-eos-dfw",  // Master CTA link — used by every Register/Get Ticket button unless a tier-specific URL below overrides it
   },
 
   // ── TICKETS ────────────────────────────────────────────────
   tickets: {
-    earlyBirdPrice:     199,
-    standardPrice:      249,
+    earlyBirdPrice: 199,
+    standardPrice: 249,
     // Early bird is now COUNT-based, not date-based. Update earlyBirdSold manually as sales happen.
     // When earlyBirdSold >= earlyBirdCap, the site automatically switches to standard pricing copy.
-    earlyBirdCap:       40,             // Total early bird tickets available
-    earlyBirdSold:      0,              // MANUAL: update this number as early bird tickets sell
-    cap:                null,           // (optional) overall venue cap — null hides the counter
-    sold:               0,              // (optional) overall tickets sold
-    earlyBirdUrl:       "https://wroedallas.regfox.com/we-run-on-eos-dfw#", 
-    freeUrl:            "https://wroedallas.regfox.com/we-run-on-eos-dfw",  
+    earlyBirdCap: 40,             // Total early bird tickets available
+    earlyBirdSold: 0,              // MANUAL: update this number as early bird tickets sell
+    cap: null,           // (optional) overall venue cap — null hides the counter
+    sold: 0,              // (optional) overall tickets sold
+    earlyBirdUrl: "https://wroedallas.regfox.com/we-run-on-eos-dfw#",
+    freeUrl: "https://wroedallas.regfox.com/we-run-on-eos-dfw",
   },
 
   // ── FULL-DAY VALUE STACK ────────────────────────────────
@@ -38,127 +38,128 @@ const SITE_CONFIG = {
   fullDayBonuses: {
     books: [
       {
-        title:    "Data",
+        title: "Data",
         subtitle: "Harness Your Numbers to Go from Uncertain to Unstoppable",
-        authors:  "Mark O'Donnell, Angela Kalemis, Mark Stanley, et al.",
-        speaker:  "Mark Stanley",
-        retail:   20.66,
-        bookUrl:  "https://www.eosworldwide.com/data-book",
+        authors: "Mark O'Donnell, Angela Kalemis, Mark Stanley, et al.",
+        speaker: "Mark Stanley",
+        retail: 20.66,
+        bookUrl: "https://www.eosworldwide.com/data-book",
         coverImage: "images/books/data_cover.jpg"
       },
       {
-        title:    "Rollout",
+        title: "Rollout",
         subtitle: "Get Your Entire Team Running on EOS® to Achieve Your Vision",
-        authors:  "Marisa Smith & Beth Fahey",
-        speaker:  "Beth Fahey",
-        retail:   29.99,
-        bookUrl:  "https://www.rolloutbook.com",
+        authors: "Marisa Smith & Beth Fahey",
+        speaker: "Beth Fahey",
+        retail: 29.99,
+        bookUrl: "https://www.rolloutbook.com",
         coverImage: "images/books/rollout_cover.jpg"
       },
       {
-        title:    "Visionary",
+        title: "Visionary",
         subtitle: "How Driven Entrepreneurs Get What They Want Without Doing It All Themselves",
-        authors:  "Mark C. Winters",
-        speaker:  "Mark C. Winters",
-        retail:   29.99,
-        bookUrl:  "https://www.markcwinters.com/visionary-book-dot-com/",
+        authors: "Mark C. Winters",
+        speaker: "Mark C. Winters",
+        retail: 29.99,
+        bookUrl: "https://www.markcwinters.com/visionary-book-dot-com/",
         coverImage: "images/books/visionary_cover.jpg"
       }
     ],
-    mealsValue:  75,    // Catered lunch value (Statler Dallas / DFW conference rate)
+    mealsValue: 75,    // Catered lunch value (Statler Dallas / DFW conference rate)
     happyHourValue: 35  // Hosted happy hour w/ drinks + appetizers
   },
 
   // ── SPONSORS ───────────────────────────────────────────────
   sponsors: {
-    contact:    "kevin.taylor@eosworldwide.com",
+    contact: "kevin.taylor@eosworldwide.com",
     tiers: [
-      { name: "Title Sponsor",      price: 10000, available: 0 },
-      { name: "Book Sponsor",       price: 9000,  available: 0 },
-      { name: "Happy Hour Sponsor", price: 6500,  available: 0 },
-      { name: "Swag Bag Sponsor",   price: 3500,  available: 0 },
-      { name: "Booth Sponsor",      price: 1500,  available: 0 },
+      { name: "Title Sponsor", price: 10000, available: 0 },
+      { name: "Book Sponsor", price: 9000, available: 0 },
+      { name: "Happy Hour Sponsor", price: 6500, available: 0 },
+      { name: "Swag Bag Sponsor", price: 3500, available: 0 },
+      { name: "Booth Sponsor", price: 1500, available: 0 },
     ],
     sponsors: [
-      {
-        name: "The System of Selling",
-        tier: "title",
-        url:  "https://www.thesystemofselling.com/",
-        logo: "images/tsos.png",
-        alt:  "The System of Selling",
-        verified: false
-      },
+
       {
         name: "Strety",
         tier: "title",
-        url:  "https://strety.com/",
+        url: "https://strety.com/",
         logo: "images/strety.png",
-        alt:  "Strety",
+        alt: "Strety",
         verified: true
+      },
+      {
+        name: "The System of Selling",
+        tier: "title",
+        url: "https://www.thesystemofselling.com/",
+        logo: "images/tsos.png",
+        alt: "The System of Selling",
+        verified: false
       },
       {
         name: "ProCFO Partners",
         tier: "book",
-        url:  "https://procfopartners.com/",
+        url: "https://procfopartners.com/",
         logo: "images/procfopartners.svg",
-        alt:  "ProCFO",
+        alt: "ProCFO",
         verified: true
       },
       {
         name: "Trainual",
         tier: "book",
-        url:  "https://trainual.com/",
+        url: "https://trainual.com/",
         logo: "images/trainual.png",
-        alt:  "Trainual",
+        alt: "Trainual",
         verified: false
       },
       {
         name: "Titus Talent",
         tier: "book",
-        url:  "https://titus-talent.com/",
+        url: "https://titus-talent.com/",
         logo: "images/titustalent.png",
-        alt:  "Titus Talent",
+        alt: "Titus Talent",
         verified: true
       },
       {
         name: "Ninety.io",
         tier: "happyHour",
-        url:  "https://ninety.io/",
+        url: "https://ninety.io/",
         logo: "images/ninety.png",
-        alt:  "Ninety.io",
+        alt: "Ninety.io",
         verified: true
       },
       {
         name: "Success.co",
         tier: "swag",
-        url:  "https://www.success.co/",
+        url: "https://www.success.co/",
         logo: "images/successco.png",
-        alt:  "Success.co",
+        alt: "Success.co",
         email: "chris@success.co",
         verified: false
       },
       {
         name: "Wolf's Edge Integrators",
         tier: "booth",
-        url:  "https://wolfsedgeintegrators.com/",
+        url: "https://wolfsedgeintegrators.com/",
         logo: "images/wolfsedgeintegrators.png",
-        alt:  "Wolf's Edge Integrators",
+        alt: "Wolf's Edge Integrators",
         verified: true
       },
       {
         name: "360 Consulting DFW",
         tier: "booth",
-        url:  "https://360consultingdfw.com/",
+        url: "https://360consultingdfw.com/",
         logo: "images/360consultingdfw.png",
-        alt:  "360 Consulting DFW",
+        alt: "360 Consulting DFW",
         verified: true
       },
       {
         name: "Profit Works",
         tier: "booth",
-        url:  "https://www.profitworksllc.com/",
+        url: "https://www.profitworksllc.com/",
         logo: "images/profitworks.jpg",
-        alt:  "Profit Works",
+        alt: "Profit Works",
         verified: true
       },
     ]
@@ -167,53 +168,53 @@ const SITE_CONFIG = {
   // ── SPEAKERS ───────────────────────────────────────────────
   speakers: [
     {
-      name:     "Shane Spillers",
-      title:    "Expert EOS Implementer\u00AE",
-      session:  "Get a Grip on your Business with EOS",
-      bio:      "Opening the day with the foundation of running on EOS",
-      time:     "10:00 \u2013 11:30 AM",
-      tier:     "free",
-      photo:    "https://implementer.eosworldwide.com/wp-content/uploads/2025/11/20170423-Spillers-Shane-Headshot-1-Large-2.png",
+      name: "Shane Spillers",
+      title: "Expert EOS Implementer\u00AE",
+      session: "Get a Grip on your Business with EOS",
+      bio: "Opening the day with the foundation of running on EOS",
+      time: "10:00 \u2013 11:30 AM",
+      tier: "free",
+      photo: "https://implementer.eosworldwide.com/wp-content/uploads/2025/11/20170423-Spillers-Shane-Headshot-1-Large-2.png",
       initials: "SS",
       profileUrl: "https://implementer.eosworldwide.com/shane-spillers/",
     },
     {
-      name:     "Mark Stanley",
-      title:    "Expert EOS Implementer\u00AE",
-      session:  "Data Workshop",
-      bio:      "Using data to drive decisions and accountability",
-      time:     "1:00 \u2013 2:30 PM",
-      tier:     "paid",
-      photo:    "https://implementer.eosworldwide.com/wp-content/uploads/2025/12/MarkS-4578-Edit-SM.jpg",
+      name: "Mark Stanley",
+      title: "Expert EOS Implementer\u00AE",
+      session: "Data Workshop",
+      bio: "Using data to drive decisions and accountability",
+      time: "1:00 \u2013 2:30 PM",
+      tier: "paid",
+      photo: "https://implementer.eosworldwide.com/wp-content/uploads/2025/12/MarkS-4578-Edit-SM.jpg",
       initials: "MS",
       profileUrl: "https://implementer.eosworldwide.com/mark-stanley/",
     },
     {
-      name:     "Beth Fahey",
-      title:    "Expert EOS Implementer\u00AE",
-      session:  "Rollout Workshop",
-      bio:      "Getting EOS running deeper in your organization",
-      time:     "4:30 \u2013 5:30 PM",
-      tier:     "paid",
-      photo:    "https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/Fahey-Headshot-2023-WEB-2.jpeg.webp",
+      name: "Beth Fahey",
+      title: "Expert EOS Implementer\u00AE",
+      session: "Rollout Workshop",
+      bio: "Getting EOS running deeper in your organization",
+      time: "4:30 \u2013 5:30 PM",
+      tier: "paid",
+      photo: "https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/Fahey-Headshot-2023-WEB-2.jpeg.webp",
       initials: "BF",
       profileUrl: "https://implementer.eosworldwide.com/beth-fahey/",
     },
     {
-      name:     "Mark C. Winters",
-      title:    "Expert EOS Implementer\u00AE",
-      session:  "Visionary Keynote",
-      bio:      "The Visionary/Integrator dynamic that powers great companies",
-      time:     "5:45 \u2013 7:15 PM",
-      tier:     "paid",
-      photo:    "https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/MCW-Headshot-Small-1-1-1024x767.jpeg.webp",
+      name: "Mark C. Winters",
+      title: "Expert EOS Implementer\u00AE",
+      session: "Visionary Keynote",
+      bio: "The Visionary/Integrator dynamic that powers great companies",
+      time: "5:45 \u2013 7:15 PM",
+      tier: "paid",
+      photo: "https://implementer.eosworldwide.com/wp-content/smush-webp/2025/08/MCW-Headshot-Small-1-1-1024x767.jpeg.webp",
       initials: "MW",
       profileUrl: "https://implementer.eosworldwide.com/mark-c-winters/",
     },
   ],
 
   // ── AGENDA ─────────────────────────────────────────────────
-  agenda: 
+  agenda:
     [
       {
         time: "7:30 \u2013 8:00 AM",
@@ -231,7 +232,7 @@ const SITE_CONFIG = {
         tier: "free",
         highlight: true
       },
-       {
+      {
         time: "9:35 \u2013 9:55 AM",
         session: "Break",
         location: "Foyer & Junior Ballroom",
@@ -239,86 +240,86 @@ const SITE_CONFIG = {
         tier: "free",
         highlight: false
       },
-      
-      { 
-        time: "9:55 \u2013 10:45 AM", 
+
+      {
+        time: "9:55 \u2013 10:45 AM",
         session: "Strety - Title Sponsor Workshop",
-        location: "Grand Ballroom", 
-        speaker: "Strety \u00B7 Title Sponsor", 
-        tier: "free", 
+        location: "Grand Ballroom",
+        speaker: "Strety \u00B7 Title Sponsor",
+        tier: "free",
         highlight: true
       },
-      { 
-        time: "10:45 \u2013 11:00 AM", 
-        session: "Break", 
+      {
+        time: "10:45 \u2013 11:00 AM",
+        session: "Break",
         location: "Foyer & Junior Ballroom",
-        speaker: "", 
-        tier: "free", 
+        speaker: "",
+        tier: "free",
         highlight: false
       },
-      { 
-        time: "11:00 AM \u2013 12:00 PM", 
-        session: "The System of Selling - Title Sponsor Workshop", 
+      {
+        time: "11:00 AM \u2013 12:00 PM",
+        session: "The System of Selling - Title Sponsor Workshop",
         location: "Grand Ballroom",
-        speaker: "The System of Selling \u00B7 Title Sponsor", 
-        tier: "free", 
-        highlight: true 
+        speaker: "The System of Selling \u00B7 Title Sponsor",
+        tier: "free",
+        highlight: true
       },
-       { 
-        time: "12:00 PM \u2013 1:00 PM", 
-        session: "Lunch + Walt Brown, EOS Worldwide Head Coach", 
+      {
+        time: "12:00 PM \u2013 1:00 PM",
+        session: "Lunch + Walt Brown, EOS Worldwide Head Coach",
         location: "Grand Ballroom",
-        speaker: "Walt Brown", 
-        tier: "paid", 
-        highlight: true 
+        speaker: "Walt Brown",
+        tier: "paid",
+        highlight: true
       },
-      { 
-        time: "1:00 \u2013 2:30 PM", 
-       session: "Data Workshop", 
+      {
+        time: "1:00 \u2013 2:30 PM",
+        session: "Data Workshop",
         location: "Grand Ballroom",
-        speaker: "Mark Stanley \u00B7 Expert EOS Implementer\u00AE", 
-        tier: "paid", 
-        highlight: true 
+        speaker: "Mark Stanley \u00B7 Expert EOS Implementer\u00AE",
+        tier: "paid",
+        highlight: true
       },
-       { 
-        time: "2:30 \u2013 2:50 PM", 
-        session: "Break", 
+      {
+        time: "2:30 \u2013 2:50 PM",
+        session: "Break",
         location: "Foyer & Junior Ballroom",
-        speaker: "", 
-        tier: "paid", 
+        speaker: "",
+        tier: "paid",
         highlight: false
       },
-      { 
-        time: "2:50 \u2013 4:25 PM", 
-         session: "Rollout Workshop", 
+      {
+        time: "2:50 \u2013 4:25 PM",
+        session: "Rollout Workshop",
         location: "Grand Ballroom",
-        speaker: "Beth Fahey \u00B7 Expert EOS Implementer\u00AE", 
-        tier: "paid", 
-        highlight: true 
-        
+        speaker: "Beth Fahey \u00B7 Expert EOS Implementer\u00AE",
+        tier: "paid",
+        highlight: true
+
       },
-      { 
-        time: "4:25 \u2013 4:45 PM", 
-        session: "Break", 
+      {
+        time: "4:25 \u2013 4:45 PM",
+        session: "Break",
         location: "Foyer & Junior Ballroom",
-        speaker: "", 
-        tier: "paid", 
+        speaker: "",
+        tier: "paid",
         highlight: false
       },
-      { 
-        time: "4:45 \u2013 6:15 PM", 
+      {
+        time: "4:45 \u2013 6:15 PM",
         session: "Visionary Keynote", location: "Grand Ballroom",
-        speaker: "Mark C. Winters \u00B7 Expert EOS Implementer\u00AE", 
-        tier: "paid", 
-        highlight: true 
+        speaker: "Mark C. Winters \u00B7 Expert EOS Implementer\u00AE",
+        tier: "paid",
+        highlight: true
       },
-      { 
-        time: "6:15 \u2013 8:00 PM", 
-        session: "Happy Hour + Networking", 
+      {
+        time: "6:15 \u2013 8:00 PM",
+        session: "Happy Hour + Networking",
         location: "Junior Ballroom",
-        speaker: "Celebrate wins. Connect. Go home fired up.", 
-        tier: "paid", 
-        highlight: false 
+        speaker: "Celebrate wins. Connect. Go home fired up.",
+        tier: "paid",
+        highlight: false
       },
     ],
 
@@ -330,9 +331,9 @@ const SITE_CONFIG = {
 
   // ── CONTACT ────────────────────────────────────────────────
   contact: {
-    general:    "kevin.taylor@eosworldwide.com",
-    marketing:  "ray.myers@eosworldwide.com",
-    eosUrl:     "https://eosworldwide.com",
+    general: "kevin.taylor@eosworldwide.com",
+    marketing: "ray.myers@eosworldwide.com",
+    eosUrl: "https://eosworldwide.com",
   },
 
 };
