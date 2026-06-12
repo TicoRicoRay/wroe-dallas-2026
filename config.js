@@ -85,42 +85,48 @@ const SITE_CONFIG = {
         tier: "title",
         url:  "https://www.thesystemofselling.com/",
         logo: "images/tsos.png",
-        alt:  "The System of Selling"
+        alt:  "The System of Selling",
+        verified: true
       },
       {
         name: "Strety",
         tier: "title",
         url:  "https://strety.com/",
         logo: "images/strety.png",
-        alt:  "Strety"
+        alt:  "Strety",
+        verified: true
       },
       {
         name: "ProCFO Partners",
         tier: "book",
         url:  "https://procfopartners.com/",
         logo: "images/procfopartners.svg",
-        alt:  "ProCFO"
+        alt:  "ProCFO",
+        verified: true
       },
       {
         name: "Trainual",
         tier: "book",
         url:  "https://trainual.com/",
         logo: "images/trainual.png",
-        alt:  "Trainual"
+        alt:  "Trainual",
+        verified: false
       },
       {
         name: "Titus Talent",
         tier: "book",
         url:  "https://titus-talent.com/",
         logo: "images/titustalent.png",
-        alt:  "Titus Talent"
+        alt:  "Titus Talent",
+        verified: true
       },
       {
         name: "Ninety.io",
         tier: "happyHour",
         url:  "https://ninety.io/",
         logo: "images/ninety.png",
-        alt:  "Ninety.io"
+        alt:  "Ninety.io",
+        verified: true
       },
       {
         name: "Success.co",
@@ -128,29 +134,32 @@ const SITE_CONFIG = {
         url:  "https://www.success.co/",
         logo: "images/successco.png",
         alt:  "Success.co",
-        email: "chris@success.co"
+        email: "chris@success.co",
+        verified: false
       },
       {
         name: "Wolf's Edge Integrators",
         tier: "booth",
         url:  "https://wolfsedgeintegrators.com/",
         logo: "images/wolfsedgeintegrators.png",
-        alt:  "Wolf's Edge Integrators"
+        alt:  "Wolf's Edge Integrators",
+        verified: true
       },
-      ,
       {
         name: "360 Consulting DFW",
         tier: "booth",
         url:  "https://360consultingdfw.com/",
         logo: "images/360consultingdfw.png",
-        alt:  "360 Consulting DFW"
+        alt:  "360 Consulting DFW",
+        verified: true
       },
       {
         name: "Profit Works",
         tier: "booth",
         url:  "https://www.profitworksllc.com/",
         logo: "images/profitworks.jpg",
-        alt:  "Profit Works"
+        alt:  "Profit Works",
+        verified: true
       },
     ]
   },

@@ -51,8 +51,9 @@ Open `config.js` — the file is divided into clearly-labeled sections with comm
 ### Adding a sponsor
 
 1. Drop the logo in `images/` (PNG or SVG preferred, transparent background)
-2. Add a `{ name, url, logo }` entry in the correct tier's array in `config.js`
-3. Commit and push to `main`
+2. Add a `{ name, tier, url, logo, alt, verified }` entry in `config.js` → `sponsors.sponsors`
+3. **Set `verified: true`** to show the sponsor on the site. Anything else (false, missing, undefined) hides them. This is the gate to keep unconfirmed prospects out of the public lineup.
+4. Commit and push to `main`
 
 ### Adding/editing a speaker
 

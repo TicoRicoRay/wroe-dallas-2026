@@ -772,7 +772,7 @@
     const clsMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happy','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
     // Map tier-name -> internal key used on sponsor records (e.g. "Title Sponsor" -> "title")
     const tierKeyMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happyHour','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
-    const sponsorList = (C.sponsors.sponsors || []);
+    const sponsorList = (C.sponsors.sponsors || []).filter(s => s && s.verified === true);
     const tierGroups = [
       { keys: ['Title Sponsor'] },
       { keys: ['Book Sponsor'] },
