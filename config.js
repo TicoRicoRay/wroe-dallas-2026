@@ -130,21 +130,21 @@ const SITE_CONFIG = {
         verified: true
       },
       {
-        name: "Success.co",
-        tier: "swag",
-        url: "https://www.success.co/",
-        logo: "images/successco.png",
-        alt: "Success.co",
-        email: "chris@success.co",
-        verified: true
-      },
-      {
         name: "Strata Wealth Advisors",
         tier: "swag",
         url: "https://www.stratawealth.com/",
         logo: "images/strata.jpg",
         alt: "Strata Wealth Advisors",
         email: "dwallace@stratawealth.com",
+        verified: true
+      },
+      {
+        name: "Success.co",
+        tier: "swag",
+        url: "https://www.success.co/",
+        logo: "images/successco.png",
+        alt: "Success.co",
+        email: "chris@success.co",
         verified: true
       },
       {
