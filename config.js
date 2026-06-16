@@ -146,15 +146,7 @@ const SITE_CONFIG = {
         alt: "Success.co",
         email: "chris@success.co",
         verified: true
-      },
-      {
-        name: "Wolf's Edge Integrators",
-        tier: "booth",
-        url: "https://wolfsedgeintegrators.com/",
-        logo: "images/wolfsedgeintegrators.png",
-        alt: "Wolf's Edge Integrators",
-        verified: true
-      },
+      },      
       {
         name: "360 Consulting DFW",
         tier: "booth",
@@ -171,6 +163,14 @@ const SITE_CONFIG = {
         alt: "Profit Works",
         verified: true
       },
+      {
+        name: "Wolf's Edge Integrators",
+        tier: "booth",
+        url: "https://wolfsedgeintegrators.com/",
+        logo: "images/wolfsedgeintegrators.png",
+        alt: "Wolf's Edge Integrators",
+        verified: true
+      }
     ]
   },
 
