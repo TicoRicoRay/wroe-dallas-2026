@@ -139,6 +139,15 @@ const SITE_CONFIG = {
         verified: false
       },
       {
+        name: "Strata Wealth Advisors",
+        tier: "swag",
+        url: "https://www.stratawealth.com/",
+        logo: "images/strata.jpg",
+        alt: "Strata Wealth Advisors",
+        email: "dwallace@stratawealth.com",
+        verified: true
+      },
+      {
         name: "Wolf's Edge Integrators",
         tier: "booth",
         url: "https://wolfsedgeintegrators.com/",
@@ -158,7 +167,7 @@ const SITE_CONFIG = {
         name: "Profit Works",
         tier: "booth",
         url: "https://www.profitworksllc.com/",
-        logo: "images/profitworks.jpg",
+        logo: "images/profitworks.png",
         alt: "Profit Works",
         verified: true
       },
