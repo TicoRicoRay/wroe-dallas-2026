@@ -136,7 +136,7 @@ const SITE_CONFIG = {
         logo: "images/successco.png",
         alt: "Success.co",
         email: "chris@success.co",
-        verified: false
+        verified: true
       },
       {
         name: "Strata Wealth Advisors",
