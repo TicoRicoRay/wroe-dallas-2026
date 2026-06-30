@@ -159,7 +159,7 @@ const SITE_CONFIG = {
         name: "Chief AI Officer",
         tier: "booth",
         url: "https://chiefaiofficer.com/",
-        logo: "images/chiefaiofficer.png",
+        logo: "images/chiefaiofficer.webp",
         alt: "Chief AI Officer",
         verified: true
       },
