@@ -153,7 +153,7 @@ const SITE_CONFIG = {
         url: "https://360consultingdfw.com/",
         logo: "images/360consultingdfw.png",
         alt: "360 Consulting DFW",
-        verified: true
+        verified: false
       },
       {
         name: "Chief AI Officer",
