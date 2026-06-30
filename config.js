@@ -156,6 +156,14 @@ const SITE_CONFIG = {
         verified: true
       },
       {
+        name: "Chief AI Officer",
+        tier: "booth",
+        url: "https://chiefaiofficer.com/",
+        logo: "images/chiefaiofficer.webp",
+        alt: "Chief AI Officer",
+        verified: true
+      },
+      {
         name: "Profit Works",
         tier: "booth",
         url: "https://www.profitworksllc.com/",
