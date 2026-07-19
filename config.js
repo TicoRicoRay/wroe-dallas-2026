@@ -185,15 +185,15 @@ const SITE_CONFIG = {
   // ── SPEAKERS ───────────────────────────────────────────────
   speakers: [
     {
-      name: "Shane Spillers",
+      name: "Ann Sheu",
       title: "Expert EOS Implementer\u00AE",
       session: "Get a Grip on your Business with EOS",
       bio: "Opening the day with the foundation of running on EOS",
       time: "10:00 \u2013 11:30 AM",
       tier: "free",
-      photo: "https://implementer.eosworldwide.com/wp-content/uploads/2025/11/20170423-Spillers-Shane-Headshot-1-Large-2.png",
-      initials: "SS",
-      profileUrl: "https://implementer.eosworldwide.com/shane-spillers/",
+      photo: "https://implementer.eosworldwide.com/wp-content/uploads/2025/08/Sheu-Ann-300x300-1.jpg",
+      initials: "AS",
+      profileUrl: "https://implementer.eosworldwide.com/ann-sheu/",
     },
     {
       name: "Mark Stanley",
@@ -245,7 +245,7 @@ const SITE_CONFIG = {
         time: "8:00 \u2013 9:35 AM",
         session: "Get a Grip on your Business with EOS",
         location: "Grand Ballroom",
-        speaker: "Shane Spillers \u00B7 Expert EOS Implementer\u00AE",
+        speaker: "Ann Sheu \u00B7 Expert EOS Implementer\u00AE",
         tier: "free",
         highlight: true
       },
