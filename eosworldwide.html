@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Kit for EOS Worldwide · WROE Dallas 2026</title>
+  <meta name="description" content="Ready-to-post social package for the EOS Worldwide marketing team — WROE Dallas 2026.">
+  <meta name="robots" content="noindex,follow">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:      #1B2A4A;
+      --navy-dk:   #111d33;
+      --navy-lt:   #263d6a;
+      --orange:    #F26522;
+      --orange-lt: #ff8040;
+      --white:     #FFFFFF;
+      --off-white: #F7F4EF;
+      --gray:      #6B7280;
+      --gray-lt:   #E4E2DE;
+      --success:   #10B981;
+      --font-display: 'Montserrat', sans-serif;
+      --font-body:    'Roboto', sans-serif;
+      --radius:    6px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); color: #1F2937; background: var(--off-white); line-height: 1.55; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(27,42,74,0.97); backdrop-filter: blur(8px); border-bottom: 2px solid var(--orange); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0.9rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; letter-spacing: 0.04em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--orange); }
+    .nav-back { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; opacity: 0.85; }
+    .nav-back:hover { opacity: 1; color: var(--orange); }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-lt) 100%); color: var(--white); padding: 3.5rem 1.5rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; top: 0; right: 0; width: 300px; height: 120px; background: var(--orange); clip-path: polygon(100% 0, 100% 100%, 0 0); opacity: 0.9; }
+    .hero-eyebrow { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.2em; color: var(--orange); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.75rem, 5vw, 2.75rem); line-height: 1.1; margin-bottom: 0.75rem; }
+    .hero p { font-size: 1.05rem; max-width: 680px; margin: 0 auto; opacity: 0.9; }
+
+    /* CONTAINER */
+    .container { max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .section { margin-bottom: 3rem; }
+    .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+    .section-num { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: var(--orange); color: var(--white); font-family: var(--font-display); font-weight: 900; font-size: 1.15rem; border-radius: 50%; flex-shrink: 0; }
+    .section-title { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; color: var(--navy); }
+    .section-sub { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.25rem; margin-left: 3.75rem; }
+
+    /* INTRO CARD */
+    .intro-card { background: var(--white); border-radius: var(--radius); padding: 1.75rem 2rem; border-left: 4px solid var(--orange); margin-bottom: 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .intro-card h2 { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1.2rem; margin-bottom: 0.85rem; }
+    .intro-card p { margin-bottom: 0.75rem; font-size: 0.98rem; }
+    .intro-card p:last-child { margin-bottom: 0; }
+    .intro-card b { color: var(--navy); }
+
+    /* PRIMARY ACTION CARD */
+    .primary-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-lt) 100%); color: var(--white); border-radius: var(--radius); padding: 2rem 2.25rem 1.85rem; margin-bottom: 2.5rem; position: relative; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .primary-card::before { content: ""; position: absolute; top: 0; right: 0; width: 200px; height: 100px; background: var(--orange); clip-path: polygon(100% 0, 100% 100%, 0 0); opacity: 0.9; }
+    .primary-eyebrow { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.15em; color: var(--orange); font-size: 0.7rem; text-transform: uppercase; margin-bottom: 0.6rem; position: relative; z-index: 2; }
+    .primary-title { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; margin-bottom: 0.85rem; position: relative; z-index: 2; }
+    .primary-desc { font-size: 0.98rem; opacity: 0.92; margin-bottom: 1.35rem; max-width: 640px; }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: var(--orange); color: var(--white); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; padding: 0.7rem 1.4rem; border-radius: var(--radius); text-transform: uppercase; letter-spacing: 0.05em; transition: background 0.15s; border: none; cursor: pointer; }
+    .btn-primary:hover { background: var(--orange-lt); }
+    .btn-primary svg { width: 15px; height: 15px; }
+
+    /* TEMPLATES */
+    .template { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-left: 4px solid var(--orange); }
+    .template-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.85rem; gap: 1rem; flex-wrap: wrap; }
+    .template-title { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1.1rem; }
+    .template-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 3px; background: var(--orange); color: var(--white); }
+    .template-desc { color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem; }
+    .template-body { background: var(--off-white); border-radius: var(--radius); padding: 1.15rem 1.35rem; font-family: var(--font-body); font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 1rem; border: 1px solid var(--gray-lt); }
+    .btn-copy { background: var(--navy); color: var(--white); border: none; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.6rem 1.1rem; border-radius: var(--radius); cursor: pointer; transition: background 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-copy:hover { background: var(--navy-lt); }
+    .btn-copy.copied { background: var(--success); }
+    .btn-copy svg { width: 14px; height: 14px; }
+
+    /* GRAPHICS GRID */
+    .graphics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+    .graphic-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+    .graphic-preview { background: var(--gray-lt); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    .graphic-preview img { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+    .graphic-info { padding: 1rem 1.15rem 1.15rem; flex: 1; display: flex; flex-direction: column; }
+    .graphic-name { font-family: var(--font-display); font-weight: 700; color: var(--navy); font-size: 0.98rem; margin-bottom: 0.2rem; }
+    .graphic-meta { font-size: 0.78rem; color: var(--gray); margin-bottom: 0.85rem; flex: 1; }
+    .btn-download { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; background: var(--orange); color: var(--white); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; padding: 0.55rem 1rem; border-radius: var(--radius); text-transform: uppercase; letter-spacing: 0.05em; transition: background 0.15s; border: none; cursor: pointer; }
+    .btn-download:hover { background: var(--orange-lt); }
+    .btn-download svg { width: 13px; height: 13px; }
+
+    /* FACTS */
+    .facts { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .facts-title { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem 2rem; font-size: 0.92rem; }
+    .facts-grid dt { color: var(--gray); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+    .facts-grid dd { color: var(--navy); font-weight: 500; word-break: break-word; }
+    .facts-grid dd a { color: var(--orange); text-decoration: none; font-weight: 600; }
+    .facts-grid dd a:hover { text-decoration: underline; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--success); color: var(--white); padding: 0.85rem 1.5rem; border-radius: 6px; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; box-shadow: 0 8px 24px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.25s, transform 0.25s; z-index: 1000; pointer-events: none; white-space: nowrap; max-width: 90vw; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: var(--white); text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 640px) {
+      .section-header { align-items: flex-start; }
+      .section-title { font-size: 1.3rem; }
+      .section-sub { margin-left: 0; margin-top: 0.5rem; }
+      .hero { padding: 2.5rem 1.25rem 2rem; }
+      .container { padding: 2rem 1rem; }
+      .primary-card, .intro-card, .template { padding: 1.35rem; }
+      .template-body { padding: 1rem; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">WE RUN ON <span>EOS®</span> DALLAS 2026</a>
+    <a href="/" class="nav-back">← Back to Event Site</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Social Kit · For the EOS Worldwide Marketing Team</div>
+  <h1>Ready-to-post package.</h1>
+  <p>Everything the EOS Worldwide social team needs to promote WROE Dallas 2026 on @EOSWorldwide channels — pre-written copy, sized graphics, event facts. Zero prep required.</p>
+</section>
+
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <h2>What this is</h2>
+    <p>The 5th Annual <b>We Run on EOS® Dallas</b> is <b>Monday, September 14, 2026</b> at The Statler Dallas. It's organized by the North Texas Expert EOS Implementer® community. On stage: <b>Ann Sheu, Mark Stanley, Beth Fahey, and Mark C. Winters</b>.</p>
+    <p>We're asking for <b>one post from @EOSWorldwide</b> on Facebook and/or LinkedIn between now and Sept 14. Everything below is pre-built to make that a copy-paste job.</p>
+    <p style="color: var(--gray); font-size: 0.88rem; margin-top: 1rem;">Contact: Ray Myers · WROE Dallas 2026 Organizer · <a href="mailto:ray.myers@eosworldwide.com" style="color: var(--orange); font-weight: 600; text-decoration: none;">ray.myers@eosworldwide.com</a></p>
+  </div>
+
+  <!-- SECTION 1: PDF BRIEF -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">One-page PDF brief</h2>
+    </div>
+    <p class="section-sub">If it's easier to route internally, everything on this page is also in a single-page PDF.</p>
+
+    <div class="primary-card">
+      <div class="primary-eyebrow">Internal Routing</div>
+      <div class="primary-title">Download the one-page brief</div>
+      <div class="primary-desc">The ask, event facts, ready-to-post copy, and graphics list — formatted as a printable one-pager.</div>
+      <a href="share-kit/EOS-Worldwide-WROE-Dallas-Brief.pdf" download class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+        Download PDF Brief
+      </a>
+    </div>
+  </div>
+
+  <!-- SECTION 2: POST COPY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">Post copy</h2>
+    </div>
+    <p class="section-sub">Written in a neutral corporate tone that fits the @EOSWorldwide brand voice. Pairs with the Facebook Landscape or LinkedIn Landscape graphic below.</p>
+
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">For Facebook &amp; LinkedIn (@EOSWorldwide)</div>
+        <span class="template-badge">Corporate voice</span>
+      </div>
+      <div class="template-desc">Approx. 90 words. Works on both platforms as-is. For LinkedIn, we recommend moving the URL into the first comment (LinkedIn algorithm suppresses posts with external links in the body).</div>
+      <div class="template-body" id="tpl-eosw">Save the date, North Texas.
+
+The 5th Annual We Run on EOS® Dallas returns Monday, September 14, 2026 at The Statler Dallas — organized by the North Texas Expert EOS Implementer® community.
+
+On stage:
+• Ann Sheu, Expert EOS Implementer®
+• Mark Stanley, Expert EOS Implementer®
+• Beth Fahey, Expert EOS Implementer®
+• Mark C. Winters, Expert EOS Implementer® &amp; co-author of Rocket Fuel
+
+One day of Mastery, Community, and Celebration for leadership teams that run on EOS®.
+
+Details and registration: EOSNorthTexas.com
+
+#WeRunOnEOS #EOS #Traction #Leadership</div>
+      <button class="btn-copy" data-target="tpl-eosw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+        Copy Post
+      </button>
+    </div>
+  </div>
+
+  <!-- SECTION 3: GRAPHICS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2 class="section-title">Graphics</h2>
+    </div>
+    <p class="section-sub">All sized to native platform specs. Cleared for use on @EOSWorldwide channels.</p>
+
+    <div class="graphics-grid">
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_facebook.png" alt="Facebook landscape"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Facebook Landscape</div>
+          <div class="graphic-meta">1200 × 630 · Facebook feed</div>
+          <a href="share-kit/flyer_facebook.png" download="WROE-Dallas-2026-Facebook.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_linkedin.png" alt="LinkedIn landscape"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">LinkedIn Landscape</div>
+          <div class="graphic-meta">1200 × 627 · LinkedIn feed</div>
+          <a href="share-kit/flyer_linkedin.png" download="WROE-Dallas-2026-LinkedIn.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_square.png" alt="Universal square"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Universal Square</div>
+          <div class="graphic-meta">1080 × 1080 · Instagram, LinkedIn, FB</div>
+          <a href="share-kit/flyer_square.png" download="WROE-Dallas-2026-Square.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_story.png" alt="Vertical story"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Vertical Story</div>
+          <div class="graphic-meta">1080 × 1920 · IG/FB Stories, Reels cover</div>
+          <a href="share-kit/flyer_story.png" download="WROE-Dallas-2026-Story.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: EVENT FACTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2 class="section-title">Event facts</h2>
+    </div>
+    <p class="section-sub">For reference if you'd like to rewrite the copy in your own voice.</p>
+
+    <div class="facts">
+      <div class="facts-title">Event Details</div>
+      <dl class="facts-grid">
+        <div><dt>Event</dt><dd>5th Annual We Run on EOS® Dallas</dd></div>
+        <div><dt>Date</dt><dd>Monday, September 14, 2026</dd></div>
+        <div><dt>Time</dt><dd>Full day · 8:00 AM start</dd></div>
+        <div><dt>Venue</dt><dd>The Statler Dallas · 1914 Commerce St, Dallas TX</dd></div>
+        <div><dt>Website</dt><dd><a href="https://eosnorthtexas.com" target="_blank" rel="noopener">EOSNorthTexas.com</a></dd></div>
+        <div><dt>Theme</dt><dd>Mastery · Community · Celebration</dd></div>
+        <div><dt>Audience</dt><dd>Leadership teams in North Texas running on EOS®, and those exploring EOS®</dd></div>
+        <div><dt>Organized by</dt><dd>40 Expert EOS Implementers® in the North Texas region</dd></div>
+      </dl>
+    </div>
+
+    <div class="facts" style="margin-top: 1.25rem;">
+      <div class="facts-title">Featured Speakers</div>
+      <dl class="facts-grid">
+        <div><dt>Ann Sheu</dt><dd><a href="https://implementer.eosworldwide.com/ann-sheu/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd></div>
+        <div><dt>Mark Stanley</dt><dd><a href="https://implementer.eosworldwide.com/mark-stanley/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd></div>
+        <div><dt>Beth Fahey</dt><dd><a href="https://implementer.eosworldwide.com/beth-fahey/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd></div>
+        <div><dt>Mark C. Winters</dt><dd><a href="https://implementer.eosworldwide.com/mark-c-winters/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd></div>
+      </dl>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Prepared for the EOS Worldwide marketing team · Questions? <a href="mailto:ray.myers@eosworldwide.com">ray.myers@eosworldwide.com</a>
+</footer>
+
+<div class="toast" id="toast">Copied ✓</div>
+
+<script>
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  document.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const text = document.getElementById(targetId).innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalHTML = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg> Copied!';
+        showToast('Copied ✓  Paste into Facebook or LinkedIn');
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = originalHTML;
+        }, 2000);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Copied ✓  Paste into Facebook or LinkedIn');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
