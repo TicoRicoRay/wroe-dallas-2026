@@ -88,6 +88,17 @@
     .btn-copy.copied { background: var(--success); }
     .btn-copy svg { width: 14px; height: 14px; }
 
+    /* EOS WORLDWIDE CARD */
+    .eosw-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-lt) 100%); color: var(--white); border-radius: var(--radius); padding: 2rem 2rem 1.75rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+    .eosw-card::before { content: ""; position: absolute; top: 0; right: 0; width: 180px; height: 90px; background: var(--orange); clip-path: polygon(100% 0, 100% 100%, 0 0); opacity: 0.85; }
+    .eosw-eyebrow { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.15em; color: var(--orange); font-size: 0.7rem; text-transform: uppercase; margin-bottom: 0.5rem; position: relative; z-index: 2; }
+    .eosw-title { font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; margin-bottom: 0.75rem; position: relative; z-index: 2; }
+    .eosw-desc { font-size: 0.95rem; opacity: 0.9; margin-bottom: 1.25rem; max-width: 640px; }
+    .eosw-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .eosw-actions .btn-download { background: var(--orange); }
+    .eosw-actions .btn-copy { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); }
+    .eosw-actions .btn-copy:hover { background: rgba(255,255,255,0.25); }
+
     /* FACTS BAR */
     .facts { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .facts-title { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
@@ -332,10 +343,86 @@ Happy to answer questions in the comments.</div>
     </div>
   </div>
 
-  <!-- SECTION 3: QUICK FACTS -->
+  <!-- SECTION 3: EOS WORLDWIDE -->
   <div class="section">
     <div class="section-header">
       <div class="section-num">3</div>
+      <h2 class="section-title">Ask EOS Worldwide to share</h2>
+    </div>
+    <p class="section-sub">EOS Worldwide's Facebook Page has ~92K followers. One share from them &gt; 40 of ours. Below is a ready-to-post package their social team can use in 60 seconds.</p>
+
+    <div class="eosw-card">
+      <div class="eosw-eyebrow">For the EOS Worldwide Social Team</div>
+      <div class="eosw-title">One-Page Brief · Ready to Post</div>
+      <div class="eosw-desc">Everything Marketing needs to promote WROE Dallas 2026 on the corporate FB, LinkedIn, and Instagram accounts — copy, graphics, event details, tagging list. Send them this link or the PDF brief.</div>
+      <div class="eosw-actions">
+        <a href="share-kit/EOS-Worldwide-WROE-Dallas-Brief.pdf" download class="btn-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+          Download PDF Brief
+        </a>
+        <button class="btn-copy" data-target="eosw-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+          Copy Email Draft
+        </button>
+      </div>
+    </div>
+
+    <!-- Hidden email draft for copy button -->
+    <div class="template-body" id="eosw-email" style="display:none;">Subject: WROE Dallas 2026 — social share request from the North Texas implementer community
+
+Hi EOS Worldwide social team,
+
+The 5th Annual We Run on EOS® Dallas is Monday, September 14, 2026 at The Statler Dallas. 40 North Texas implementers are behind it, with Ann Sheu, Mark Stanley, Beth Fahey, and Mark C. Winters on stage.
+
+Would you consider one post from the @EOSWorldwide Facebook Page in the next 8 weeks? A single share from your 92K-follower page would dramatically outperform everything the 40 of us can do combined.
+
+I've built a ready-to-post kit so it takes zero work on your end:
+
+→ Copy, graphics (FB / LinkedIn / IG / Story sizes), event facts, and tagging list:
+   https://eosnorthtexas.com/share#eos-worldwide
+
+→ Or the PDF one-pager if easier to route internally:
+   https://eosnorthtexas.com/share-kit/EOS-Worldwide-WROE-Dallas-Brief.pdf
+
+Happy to answer any questions or reformat anything.
+
+Thanks,
+Ray Myers
+WROE Dallas 2026 organizer
+EOSNorthTexas.com</div>
+
+    <div class="template recommended" id="eos-worldwide">
+      <div class="template-head">
+        <div class="template-title">Post copy for @EOSWorldwide (Facebook &amp; LinkedIn)</div>
+        <span class="template-badge rec">Corporate voice</span>
+      </div>
+      <div class="template-desc">Written in a neutral corporate tone that fits the @EOSWorldwide brand voice. Pairs with the Facebook Landscape or LinkedIn Landscape graphic above.</div>
+      <div class="template-body" id="tpl-eosw">Save the date, North Texas.
+
+The 5th Annual We Run on EOS® Dallas returns Monday, September 14, 2026 at The Statler Dallas — organized by the North Texas Expert EOS Implementer® community.
+
+On stage:
+• Ann Sheu, Expert EOS Implementer®
+• Mark Stanley, Expert EOS Implementer®
+• Beth Fahey, Expert EOS Implementer®
+• Mark C. Winters, Expert EOS Implementer® &amp; co-author of Rocket Fuel
+
+One day of Mastery, Community, and Celebration for leadership teams that run on EOS®.
+
+Details and registration: EOSNorthTexas.com
+
+#WeRunOnEOS #EOS #Traction #Leadership</div>
+      <button class="btn-copy" data-target="tpl-eosw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+        Copy Corporate Post
+      </button>
+    </div>
+  </div>
+
+  <!-- SECTION 4: QUICK FACTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
       <h2 class="section-title">Quick facts &amp; tagging</h2>
     </div>
     <p class="section-sub">Copy any of these into your own words. Tag the people and pages below to boost reach.</p>
