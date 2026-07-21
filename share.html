@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementer Share Kit · WROE Dallas 2026</title>
+  <meta name="description" content="Everything you need to promote WROE Dallas 2026 on social media in under 60 seconds.">
+  <meta name="robots" content="noindex,follow">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:      #1B2A4A;
+      --navy-dk:   #111d33;
+      --navy-lt:   #263d6a;
+      --orange:    #F26522;
+      --orange-lt: #ff8040;
+      --white:     #FFFFFF;
+      --off-white: #F7F4EF;
+      --gray:      #6B7280;
+      --gray-lt:   #E4E2DE;
+      --success:   #10B981;
+      --font-display: 'Montserrat', sans-serif;
+      --font-body:    'Roboto', sans-serif;
+      --radius:    6px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); color: #1F2937; background: var(--off-white); line-height: 1.55; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(27,42,74,0.97); backdrop-filter: blur(8px); border-bottom: 2px solid var(--orange); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0.9rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; letter-spacing: 0.04em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--orange); }
+    .nav-back { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; opacity: 0.85; }
+    .nav-back:hover { opacity: 1; color: var(--orange); }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-lt) 100%); color: var(--white); padding: 3.5rem 1.5rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; top: 0; right: 0; width: 300px; height: 120px; background: var(--orange); clip-path: polygon(100% 0, 100% 100%, 0 0); opacity: 0.9; }
+    .hero-eyebrow { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.2em; color: var(--orange); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.75rem, 5vw, 2.75rem); line-height: 1.1; margin-bottom: 0.75rem; }
+    .hero p { font-size: 1.05rem; max-width: 640px; margin: 0 auto; opacity: 0.9; }
+    .hero-stats { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+    .hero-stat { text-align: center; }
+    .hero-stat-num { font-family: var(--font-display); font-weight: 900; font-size: 2rem; color: var(--orange); line-height: 1; }
+    .hero-stat-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.75; margin-top: 0.35rem; }
+
+    /* CONTAINER */
+    .container { max-width: 1080px; margin: 0 auto; padding: 3rem 1.5rem; }
+    .section { margin-bottom: 3.5rem; }
+    .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; }
+    .section-num { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: var(--orange); color: var(--white); font-family: var(--font-display); font-weight: 900; font-size: 1.15rem; border-radius: 50%; flex-shrink: 0; }
+    .section-title { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; color: var(--navy); }
+    .section-sub { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.5rem; margin-left: 3.75rem; }
+
+    /* STEPS INTRO */
+    .steps-card { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; border-left: 4px solid var(--orange); margin-bottom: 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .steps-card h2 { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1.15rem; margin-bottom: 0.75rem; }
+    .steps-list { list-style: none; padding: 0; }
+    .steps-list li { padding: 0.35rem 0; padding-left: 1.75rem; position: relative; font-size: 0.98rem; }
+    .steps-list li::before { content: ""; position: absolute; left: 0; top: 0.75rem; width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
+    .steps-list b { color: var(--navy); }
+
+    /* GRAPHICS GRID */
+    .graphics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .graphic-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: transform 0.15s, box-shadow 0.15s; display: flex; flex-direction: column; }
+    .graphic-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .graphic-preview { background: var(--gray-lt); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    .graphic-preview img { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+    .graphic-info { padding: 1rem 1.15rem 1.15rem; flex: 1; display: flex; flex-direction: column; }
+    .graphic-name { font-family: var(--font-display); font-weight: 700; color: var(--navy); font-size: 1rem; margin-bottom: 0.25rem; }
+    .graphic-meta { font-size: 0.8rem; color: var(--gray); margin-bottom: 0.85rem; flex: 1; }
+    .btn-download { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; background: var(--orange); color: var(--white); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; padding: 0.55rem 1rem; border-radius: var(--radius); text-transform: uppercase; letter-spacing: 0.05em; transition: background 0.15s; border: none; cursor: pointer; }
+    .btn-download:hover { background: var(--orange-lt); }
+    .btn-download svg { width: 14px; height: 14px; }
+
+    /* TEMPLATES */
+    .template { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-left: 4px solid var(--navy-lt); }
+    .template.recommended { border-left-color: var(--orange); }
+    .template-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap; }
+    .template-title { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1.15rem; }
+    .template-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 3px; background: var(--gray-lt); color: var(--gray); }
+    .template-badge.rec { background: var(--orange); color: var(--white); }
+    .template-desc { color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem; }
+    .template-body { background: var(--off-white); border-radius: var(--radius); padding: 1.15rem 1.35rem; font-family: var(--font-body); font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; margin-bottom: 1rem; border: 1px solid var(--gray-lt); }
+    .btn-copy { background: var(--navy); color: var(--white); border: none; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.6rem 1.1rem; border-radius: var(--radius); cursor: pointer; transition: background 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-copy:hover { background: var(--navy-lt); }
+    .btn-copy.copied { background: var(--success); }
+    .btn-copy svg { width: 14px; height: 14px; }
+
+    /* FACTS BAR */
+    .facts { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .facts-title { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem 2rem; font-size: 0.92rem; }
+    .facts-grid dt { color: var(--gray); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+    .facts-grid dd { color: var(--navy); font-weight: 500; word-break: break-word; }
+    .facts-grid dd a { color: var(--orange); text-decoration: none; font-weight: 600; }
+    .facts-grid dd a:hover { text-decoration: underline; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--success); color: var(--white); padding: 0.85rem 1.5rem; border-radius: 6px; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; box-shadow: 0 8px 24px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.25s, transform 0.25s; z-index: 1000; pointer-events: none; white-space: nowrap; max-width: 90vw; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: var(--white); text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; }
+    footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 640px) {
+      .section-header { align-items: flex-start; }
+      .section-title { font-size: 1.3rem; }
+      .section-sub { margin-left: 0; margin-top: 0.5rem; }
+      .hero { padding: 2.5rem 1.25rem 2rem; }
+      .container { padding: 2rem 1rem; }
+      .template { padding: 1.25rem; }
+      .template-body { padding: 1rem; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">WE RUN ON <span>EOS®</span> DALLAS 2026</a>
+    <a href="/" class="nav-back">← Back to Event Site</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Implementer Share Kit</div>
+  <h1>Help us fill the ballroom.</h1>
+  <p>Everything you need to promote WROE Dallas 2026 on Facebook, LinkedIn, and Instagram — in under 60 seconds.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">40</div><div class="hero-stat-label">Implementers</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">~28K</div><div class="hero-stat-label">Combined Reach</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">60s</div><div class="hero-stat-label">Your Time</div></div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- HOW TO USE THIS PAGE -->
+  <div class="steps-card">
+    <h2>How to use this page</h2>
+    <ol class="steps-list">
+      <li><b>Pick a graphic below</b> and click Download. Save to your phone or desktop.</li>
+      <li><b>Pick a post template</b> that sounds most like you. Click Copy.</li>
+      <li><b>Paste into Facebook or LinkedIn</b>, attach the graphic, tag 2–3 people, hit post.</li>
+      <li><b>Bonus:</b> Share to any relevant business group you belong to, or RSVP to the Facebook Event.</li>
+    </ol>
+  </div>
+
+  <!-- SECTION 1: GRAPHICS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2 class="section-title">Download a graphic</h2>
+    </div>
+    <p class="section-sub">All graphics are sized to their platform's native spec. Use the recommended one, or match your usual posting style.</p>
+
+    <div class="graphics-grid">
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_facebook.png" alt="Facebook graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Facebook Landscape</div>
+          <div class="graphic-meta">1200 × 630 · Facebook feed</div>
+          <a href="share-kit/flyer_facebook.png" download="WROE-Dallas-2026-Facebook.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_linkedin.png" alt="LinkedIn graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">LinkedIn Landscape</div>
+          <div class="graphic-meta">1200 × 627 · LinkedIn feed</div>
+          <a href="share-kit/flyer_linkedin.png" download="WROE-Dallas-2026-LinkedIn.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_square.png" alt="Square graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Square (Universal)</div>
+          <div class="graphic-meta">1080 × 1080 · Instagram, FB square, LinkedIn</div>
+          <a href="share-kit/flyer_square.png" download="WROE-Dallas-2026-Square.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_linkedin_square.png" alt="LinkedIn square"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">LinkedIn Square</div>
+          <div class="graphic-meta">1080 × 1080 · Best for mobile LinkedIn feed</div>
+          <a href="share-kit/flyer_linkedin_square.png" download="WROE-Dallas-2026-LinkedIn-Square.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="share-kit/flyer_story.png" alt="Vertical story graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Vertical Story</div>
+          <div class="graphic-meta">1080 × 1920 · IG/FB Stories, Reels cover</div>
+          <a href="share-kit/flyer_story.png" download="WROE-Dallas-2026-Story.png" class="btn-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 3v14m0 0l-5-5m5 5l5-5M3 21h18"/></svg>
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: POST TEMPLATES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2 class="section-title">Copy a post template</h2>
+    </div>
+    <p class="section-sub">Three tones — pick whichever sounds most like you. All three are safe to post as-is.</p>
+
+    <!-- Template 1 -->
+    <div class="template recommended">
+      <div class="template-head">
+        <div class="template-title">Template A · Personal &amp; warm</div>
+        <span class="template-badge rec">Recommended</span>
+      </div>
+      <div class="template-desc">First-person tone. Works great on your personal profile. Highest engagement.</div>
+      <div class="template-body" id="tpl-a">Excited about this one. 👇
+
+The 5th Annual We Run on EOS® Dallas is Monday, September 14, 2026 at The Statler Dallas — one day with four Expert EOS Implementers® guiding the North Texas EOS community.
+
+On stage: Ann Sheu, Mark Stanley, Beth Fahey, and Mark C. Winters (co-author of Rocket Fuel).
+
+Mastery. Community. Celebration. If your company runs on EOS®, this is the day.
+
+Registration: EOSNorthTexas.com
+
+#WeRunOnEOS #Traction #DallasBusiness</div>
+      <button class="btn-copy" data-target="tpl-a">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+        Copy Template A
+      </button>
+    </div>
+
+    <!-- Template 2 -->
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">Template B · Professional / client-facing</div>
+        <span class="template-badge">For business Pages</span>
+      </div>
+      <div class="template-desc">Aimed at your professional network and EOS clients. Best for LinkedIn or a business Facebook Page.</div>
+      <div class="template-body" id="tpl-b">To my clients and fellow EOS® leaders in North Texas:
+
+The 5th Annual We Run on EOS® Dallas returns on Monday, September 14, 2026 at The Statler Dallas.
+
+One day. Four Expert EOS Implementers®. Practical sessions on getting more traction out of your company — plus the North Texas EOS community, all in one room.
+
+Featured speakers:
+• Ann Sheu — Expert EOS Implementer®
+• Mark Stanley — Expert EOS Implementer®
+• Beth Fahey — Expert EOS Implementer®
+• Mark C. Winters — Expert EOS Implementer® &amp; co-author of Rocket Fuel
+
+Details and registration: EOSNorthTexas.com
+
+If you run on EOS® — or you're considering it — put this on your calendar.
+
+#EOS #WeRunOnEOS #Traction #Leadership #DallasBusiness</div>
+      <button class="btn-copy" data-target="tpl-b">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+        Copy Template B
+      </button>
+    </div>
+
+    <!-- Template 3 -->
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">Template C · Short &amp; shareable</div>
+        <span class="template-badge">Best for reshares</span>
+      </div>
+      <div class="template-desc">Bite-sized. Works well as a quick post or when sharing someone else's post.</div>
+      <div class="template-body" id="tpl-c">🚀 We Run on EOS® Dallas · 5th Annual
+
+📅 Monday, September 14, 2026
+📍 The Statler Dallas
+
+Ann Sheu · Mark Stanley · Beth Fahey · Mark C. Winters
+
+Mastery. Community. Celebration.
+
+🎟️ EOSNorthTexas.com
+
+#WeRunOnEOS #Traction</div>
+      <button class="btn-copy" data-target="tpl-c">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+        Copy Template C
+      </button>
+    </div>
+
+    <!-- Template 4: Groups -->
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">Template D · For Facebook groups</div>
+        <span class="template-badge">Group-friendly</span>
+      </div>
+      <div class="template-desc">Written to pass group moderator scrutiny — informational tone, no hard sell. Always check the group's posting rules first.</div>
+      <div class="template-body" id="tpl-d">Sharing a local event that might be relevant to business owners in this group.
+
+The 5th Annual We Run on EOS® Dallas is happening Monday, September 14, 2026 at The Statler Dallas. It's a full-day event built around the Entrepreneurial Operating System (EOS®) — the framework from the book Traction by Gino Wickman.
+
+If your company runs on EOS® or you're curious about it, four Expert EOS Implementers® will be teaching sessions: Ann Sheu, Mark Stanley, Beth Fahey, and Mark C. Winters (co-author of Rocket Fuel).
+
+The theme this year is Mastery, Community, and Celebration — practical learning, connection with other North Texas business owners, and recognition of the wins we usually don't take time to acknowledge.
+
+Details and registration: EOSNorthTexas.com
+
+Happy to answer questions in the comments.</div>
+      <button class="btn-copy" data-target="tpl-d">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+        Copy Template D
+      </button>
+    </div>
+  </div>
+
+  <!-- SECTION 3: QUICK FACTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2 class="section-title">Quick facts &amp; tagging</h2>
+    </div>
+    <p class="section-sub">Copy any of these into your own words. Tag the people and pages below to boost reach.</p>
+
+    <div class="facts">
+      <div class="facts-title">Event Details</div>
+      <dl class="facts-grid">
+        <div><dt>Event</dt><dd>5th Annual We Run on EOS® Dallas</dd></div>
+        <div><dt>Date</dt><dd>Monday, September 14, 2026</dd></div>
+        <div><dt>Time</dt><dd>Full day · 8:00 AM start</dd></div>
+        <div><dt>Venue</dt><dd>The Statler Dallas · 1914 Commerce St</dd></div>
+        <div><dt>Website</dt><dd><a href="https://eosnorthtexas.com" target="_blank" rel="noopener">EOSNorthTexas.com</a></dd></div>
+        <div><dt>Theme</dt><dd>Mastery · Community · Celebration</dd></div>
+      </dl>
+    </div>
+
+    <div class="facts" style="margin-top: 1.25rem;">
+      <div class="facts-title">Featured Speakers (tag on LinkedIn)</div>
+      <dl class="facts-grid">
+        <div><dt>Ann Sheu</dt><dd><a href="https://implementer.eosworldwide.com/ann-sheu/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd></div>
+        <div><dt>Mark Stanley</dt><dd><a href="https://implementer.eosworldwide.com/mark-stanley/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd></div>
+        <div><dt>Beth Fahey</dt><dd><a href="https://implementer.eosworldwide.com/beth-fahey/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd></div>
+        <div><dt>Mark C. Winters</dt><dd><a href="https://implementer.eosworldwide.com/mark-c-winters/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd></div>
+      </dl>
+    </div>
+
+    <div class="facts" style="margin-top: 1.25rem;">
+      <div class="facts-title">Best Practices</div>
+      <ul class="steps-list" style="margin-top: 0.5rem;">
+        <li><b>Tag people, don't just name them.</b> Tagged people get notified — their networks amplify the post 5–10×.</li>
+        <li><b>Post from your personal profile</b> for warmest engagement. Use your business Page for the professional variant.</li>
+        <li><b>Best time to post:</b> Weekday mornings (7:30–10 AM CT) or Sunday evenings (6–8 PM CT).</li>
+        <li><b>Reply to every comment</b> in the first 3 hours — the algorithm treats early engagement as quality.</li>
+        <li><b>For LinkedIn:</b> put the URL in the first comment, not the post body — LinkedIn suppresses posts with external links.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Built for the North Texas EOS® Implementer Community · Questions? <a href="mailto:ray.myers@eosworldwide.com">ray.myers@eosworldwide.com</a>
+</footer>
+
+<div class="toast" id="toast">Copied to clipboard ✓</div>
+
+<script>
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  document.querySelectorAll('.btn-copy').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const text = document.getElementById(targetId).innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalHTML = btn.innerHTML;
+        btn.classList.add('copied');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg> Copied!';
+        showToast('Copied ✓  Paste into Facebook or LinkedIn');
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = originalHTML;
+        }, 2000);
+      } catch (e) {
+        // Fallback for older browsers or non-secure contexts
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('Copied ✓  Paste into Facebook or LinkedIn');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
