@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>Privacy Policy · We Run on EOS® Dallas 2026</title>
+<meta name="description" content="Privacy Policy and California (CCPA/CPRA) disclosures for EOSNorthTexas.com.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:      #1B2A4A;
+    --navy-lt:   #263d6a;
+    --orange:    #F26522;
+    --orange-lt: #ff8040;
+    --white:     #FFFFFF;
+    --off-white: #F7F4EF;
+    --gray:      #6B7280;
+    --gray-lt:   #E4E2DE;
+    --text:      #1F2937;
+    --font-display: 'Montserrat', sans-serif;
+    --font-body:    'Roboto', sans-serif;
+    --radius:    6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); color: var(--text); background: var(--off-white); line-height: 1.65; }
+  a { color: var(--orange); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(27,42,74,0.97); backdrop-filter: blur(8px); border-bottom: 2px solid var(--orange); }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0.9rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; letter-spacing: 0.02em; color: var(--white); }
+  .nav-logo span { color: var(--orange); }
+  .nav-back { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500; }
+  .nav-back:hover { color: var(--white); text-decoration: none; }
+
+  .hero { background: var(--navy); color: var(--white); padding: 3rem 1.5rem 2rem; text-align: left; }
+  .hero-inner { max-width: 900px; margin: 0 auto; }
+  .hero-eyebrow { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.2em; color: var(--orange); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.75rem, 4.5vw, 2.4rem); line-height: 1.15; margin-bottom: 0.5rem; }
+  .hero .updated { opacity: 0.85; font-size: 0.9rem; }
+
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 3rem; }
+
+  .toc { background: var(--white); border-left: 4px solid var(--orange); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .toc h2 { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .toc ol { padding-left: 1.25rem; font-size: 0.95rem; }
+  .toc li { margin: 0.25rem 0; }
+
+  h2.section { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1.35rem; margin: 2rem 0 0.75rem; padding-bottom: 0.35rem; border-bottom: 2px solid var(--gray-lt); }
+  h3 { font-family: var(--font-display); font-weight: 700; color: var(--navy); font-size: 1.05rem; margin: 1.25rem 0 0.5rem; }
+  p, li { margin-bottom: 0.75rem; }
+  ul, ol { padding-left: 1.5rem; }
+  ul li, ol li { margin-bottom: 0.4rem; }
+
+  .callout { background: var(--white); border-left: 4px solid var(--navy-lt); border-radius: var(--radius); padding: 1.15rem 1.4rem; margin: 1.25rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .callout.ca { border-left-color: var(--orange); }
+  .callout h3 { margin-top: 0; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .contact-box { background: var(--navy); color: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; margin: 1.5rem 0; }
+  .contact-box h3 { color: var(--orange); font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .contact-box a { color: var(--orange-lt); font-weight: 600; }
+  .contact-box p:last-child { margin-bottom: 0; }
+
+  .optout-btn { display: inline-block; background: var(--orange); color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.7rem 1.2rem; border-radius: var(--radius); border: none; cursor: pointer; margin: 0.5rem 0; }
+  .optout-btn:hover { background: var(--orange-lt); text-decoration: none; }
+  .optout-btn.confirmed { background: #10B981; }
+  .optout-status { font-size: 0.9rem; margin-left: 0.75rem; color: var(--gray); font-style: italic; }
+
+  footer { background: var(--navy); color: var(--white); text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; }
+  footer a { color: var(--orange); }
+  footer .subline { opacity: 0.6; font-size: 0.72rem; margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">WE RUN ON <span>EOS®</span> DALLAS 2026</div>
+    <a class="nav-back" href="/">← Back to Event Site</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">LEGAL</div>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: July 29, 2026</p>
+  </div>
+</div>
+
+<main>
+
+  <div class="toc">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#who">Who runs this site</a></li>
+      <li><a href="#what">What we collect</a></li>
+      <li><a href="#why">Why we collect it</a></li>
+      <li><a href="#sharing">Who we share it with</a></li>
+      <li><a href="#cookies">Cookies &amp; analytics</a></li>
+      <li><a href="#retention">How long we keep it</a></li>
+      <li><a href="#california">California privacy rights (CCPA/CPRA)</a></li>
+      <li><a href="#children">Children's privacy</a></li>
+      <li><a href="#changes">Changes to this policy</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <h2 class="section" id="who">1. Who runs this site</h2>
+  <p>EOSNorthTexas.com is operated by Ray Myers on behalf of the North Texas EOS® Implementer Community and the annual <em>We Run on EOS® Dallas</em> event. This site is a static marketing page. It does not host user accounts, checkout, or ticket sales &mdash; those are handled by third parties (Eventbrite, EOS Worldwide) under their own privacy policies.</p>
+
+  <h2 class="section" id="what">2. What we collect</h2>
+  <p>Directly from you: <strong>nothing.</strong> This site has no forms, no sign-up fields, no account creation, and no payment processing.</p>
+  <p>Automatically, when you visit any page: standard web-server and analytics data, which may include:</p>
+  <ul>
+    <li>IP address (typically truncated by Google Analytics before storage)</li>
+    <li>Browser type, operating system, device type, screen size</li>
+    <li>Referring URL (the page or link that sent you here)</li>
+    <li>Pages viewed on this site and time spent on each</li>
+    <li>Approximate geographic location derived from IP (city/region level)</li>
+  </ul>
+  <p>We do not collect names, email addresses, phone numbers, government IDs, financial information, precise geolocation, or health information on this site.</p>
+
+  <h2 class="section" id="why">3. Why we collect it</h2>
+  <ul>
+    <li>To understand how many people visit and which pages are useful</li>
+    <li>To improve page performance and fix broken links</li>
+    <li>To measure the reach of promotional efforts by our sponsors and community</li>
+    <li>To keep the site secure (blocking abuse patterns)</li>
+  </ul>
+  <p>We do not use your information for advertising, retargeting, or building a profile about you.</p>
+
+  <h2 class="section" id="sharing">4. Who we share it with</h2>
+  <p>We share the automatically-collected data described above with the following service providers, who process it on our behalf:</p>
+  <ul>
+    <li><strong>Google LLC</strong> &mdash; Google Analytics 4, for anonymous audience measurement. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
+    <li><strong>Cloudflare, Inc.</strong> &mdash; DNS, CDN, and DDoS protection (processes IP addresses and request metadata as part of serving the site). <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Privacy Policy</a>.</li>
+    <li><strong>GitHub, Inc.</strong> &mdash; static-site hosting (serves the pages via GitHub Pages). <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.</li>
+  </ul>
+  <p>We do <strong>not</strong> sell your personal information for money. Under California law, however, the flow of analytics data to Google may be considered "sharing" for cross-context behavioral advertising purposes. See <a href="#california">Section 7</a> for how to opt out.</p>
+
+  <h2 class="section" id="cookies">5. Cookies &amp; analytics</h2>
+  <p>Google Analytics 4 sets a small number of first-party cookies (typically <code>_ga</code> and <code>_ga_&lt;property&gt;</code>) to distinguish unique visitors. These cookies do not contain personal identifiers, and expire automatically after up to 24 months.</p>
+  <p>You can opt out of Google Analytics on this site in three ways:</p>
+  <ol>
+    <li><strong>Click the button below.</strong> This sets a small cookie on your browser that tells this site to disable Google Analytics for all future visits from this device.</li>
+    <li>Install the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</li>
+    <li>Enable your browser's built-in tracking protection or the <a href="https://globalprivacycontrol.org/" target="_blank" rel="noopener">Global Privacy Control (GPC)</a> signal. This site respects the GPC signal automatically.</li>
+  </ol>
+  <p style="margin-top:1rem;">
+    <button id="ga-optout-btn" class="optout-btn" type="button">Opt out of analytics on this device</button>
+    <span id="ga-optout-status" class="optout-status"></span>
+  </p>
+
+  <h2 class="section" id="retention">6. How long we keep it</h2>
+  <p>Google Analytics is configured with the default 2-month or 14-month user-level data retention window. Aggregate (de-identified) reports are retained indefinitely. Server-level logs at Cloudflare and GitHub follow those providers' standard retention schedules (typically 30 days or less for raw request logs).</p>
+
+  <h2 class="section" id="california">7. California privacy rights (CCPA/CPRA)</h2>
+  <div class="callout ca">
+    <h3>If you are a California resident</h3>
+    <p>The California Consumer Privacy Act (CCPA), as amended by the California Privacy Rights Act (CPRA), gives you the following rights regarding personal information we may hold about you:</p>
+    <ul>
+      <li><strong>Right to know</strong> what personal information we have collected and how we use it.</li>
+      <li><strong>Right to delete</strong> personal information we hold about you, subject to certain exceptions.</li>
+      <li><strong>Right to correct</strong> inaccurate personal information.</li>
+      <li><strong>Right to opt out of the sale or sharing</strong> of your personal information. As stated above, we do not sell your data, but Google Analytics data flows may qualify as "sharing" under California law. You can opt out with the button in <a href="#cookies">Section 5</a>, or by enabling the Global Privacy Control (GPC) signal in your browser.</li>
+      <li><strong>Right to limit the use of sensitive personal information.</strong> We do not collect sensitive personal information on this site.</li>
+      <li><strong>Right to non-discrimination.</strong> We will not deny you service, charge different prices, or provide a lower quality of service because you exercised any of these rights.</li>
+    </ul>
+    <p>To exercise any of these rights, email us at <a href="mailto:ray.myers@eosworldwide.com?subject=California%20Privacy%20Request">ray.myers@eosworldwide.com</a> with the subject line "California Privacy Request." We will verify your request (typically by asking you to confirm from the email address associated with any interaction, or by asking two data points that match our records) and respond within 45 days as required by law. You may also designate an authorized agent to make a request on your behalf; the agent must provide signed written permission.</p>
+    <p>The full text of the California Consumer Privacy Act is available at <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener">oag.ca.gov/privacy/ccpa</a>.</p>
+  </div>
+
+  <h3>Do Not Sell or Share My Personal Information</h3>
+  <p>Use the opt-out button in <a href="#cookies">Section 5</a> above, or send an email to <a href="mailto:ray.myers@eosworldwide.com?subject=Do%20Not%20Sell%20or%20Share">ray.myers@eosworldwide.com</a> with the subject "Do Not Sell or Share."</p>
+
+  <h2 class="section" id="children">8. Children's privacy</h2>
+  <p>This site is intended for business owners and leadership teams. It is not directed to children under 13, and we do not knowingly collect personal information from anyone under 13. If you believe a child has provided information to us, contact us and we will delete it.</p>
+
+  <h2 class="section" id="changes">9. Changes to this policy</h2>
+  <p>We may update this policy from time to time. The "Last updated" date at the top of this page reflects the most recent revision. Material changes will be highlighted on the home page for at least 30 days.</p>
+
+  <h2 class="section" id="contact">10. Contact</h2>
+  <div class="contact-box">
+    <h3>Privacy questions &amp; requests</h3>
+    <p>Ray Myers, on behalf of the We Run on EOS® Dallas event</p>
+    <p>Email: <a href="mailto:ray.myers@eosworldwide.com">ray.myers@eosworldwide.com</a></p>
+    <p>Website: <a href="https://eosnorthtexas.com" style="color:var(--orange-lt);">eosnorthtexas.com</a></p>
+  </div>
+
+</main>
+
+<footer>
+  <p>We Run on EOS<sup>®</sup> is brought to you by the North Texas EOS Implementer Community &nbsp;·&nbsp; <a href="/">Home</a> &nbsp;·&nbsp; <a href="/privacy/">Privacy</a> &nbsp;·&nbsp; <a href="#" id="footer-dns-link">Do Not Sell or Share My Personal Information</a></p>
+  <p class="subline">EOS<sup>®</sup>, EOS Implementer<sup>®</sup>, and We Run on EOS<sup>®</sup> are registered trademarks of EOS Worldwide, LLC. Used with permission.</p>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById('ga-optout-btn');
+  var status = document.getElementById('ga-optout-status');
+  var footerDns = document.getElementById('footer-dns-link');
+
+  function hasOptOut() {
+    return document.cookie.split(';').some(function (c) {
+      return c.trim().indexOf('ga-optout=1') === 0;
+    });
+  }
+
+  function setOptOut() {
+    // 2-year cookie, root path, secure on https
+    var exp = new Date();
+    exp.setFullYear(exp.getFullYear() + 2);
+    var secure = (location.protocol === 'https:') ? '; Secure' : '';
+    document.cookie = 'ga-optout=1; expires=' + exp.toUTCString() + '; path=/; SameSite=Lax' + secure;
+    // Also set the Google-recognized disable flag on this page load
+    window['ga-disable-G-LC5GV9736F'] = true;
+  }
+
+  function render() {
+    if (hasOptOut()) {
+      btn.textContent = 'Analytics opt-out active ✓';
+      btn.classList.add('confirmed');
+      btn.disabled = true;
+      status.textContent = 'Google Analytics is disabled on this device.';
+    } else {
+      btn.textContent = 'Opt out of analytics on this device';
+      btn.classList.remove('confirmed');
+      btn.disabled = false;
+      status.textContent = '';
+    }
+  }
+
+  btn.addEventListener('click', function () {
+    setOptOut();
+    render();
+  });
+
+  if (footerDns) {
+    footerDns.addEventListener('click', function (e) {
+      e.preventDefault();
+      setOptOut();
+      render();
+      // Scroll the opt-out button into view so user sees confirmation
+      btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+
+  render();
+})();
+</script>
+
+</body>
+</html>
