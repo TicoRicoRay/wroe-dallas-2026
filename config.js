@@ -178,6 +178,30 @@ const SITE_CONFIG = {
         logo: "images/wolfsedgeintegrators.png",
         alt: "Wolf's Edge Integrators",
         verified: true
+      },
+      {
+        name: "All In One Accounting",
+        tier: "booth",
+        url: "https://allinoneaccounting.com/",
+        logo: "images/allinoneaccounting.svg",
+        alt: "All In One Accounting",
+        verified: true
+      },
+      {
+        name: "Talent Harbor",
+        tier: "booth",
+        url: "https://talentharbor.com/",
+        logo: "images/talentharbor.png",
+        alt: "Talent Harbor",
+        verified: true
+      },
+      {
+        name: "Next Level Revenue",
+        tier: "booth",
+        url: "https://readyforthenextlevel.com/",
+        logo: "images/readyforthenextlevel.svg",
+        alt: "Next Level Revenue",
+        verified: true
       }
     ]
   },
