@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sponsor Share Kit · WROE Dallas 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:      #1B2A4A;
+    --navy-dk:   #111d33;
+    --navy-lt:   #263d6a;
+    --orange:    #F26522;
+    --orange-lt: #ff8040;
+    --white:     #FFFFFF;
+    --off-white: #F7F4EF;
+    --gray:      #6B7280;
+    --gray-lt:   #E4E2DE;
+    --success:   #10B981;
+    --font-display: 'Montserrat', sans-serif;
+    --font-body:    'Roboto', sans-serif;
+    --radius:    6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); color: #1F2937; background: var(--off-white); line-height: 1.55; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(27,42,74,0.97); backdrop-filter: blur(8px); border-bottom: 2px solid var(--orange); }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0.9rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; letter-spacing: 0.02em; color: var(--white); }
+  .nav-logo span { color: var(--orange); }
+  .nav-back { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-back:hover { color: var(--white); }
+
+  /* HERO */
+  .hero { background: var(--navy); color: var(--white); padding: 3.5rem 1.5rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::after { content: ""; position: absolute; top: 0; right: 0; width: 300px; height: 120px; background: var(--orange); clip-path: polygon(100% 0, 100% 100%, 0 0); opacity: 0.9; }
+  .hero-eyebrow { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.2em; color: var(--orange); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .hero h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.75rem, 5vw, 2.75rem); line-height: 1.1; margin-bottom: 0.75rem; }
+  .hero p { font-size: 1.05rem; max-width: 640px; margin: 0 auto; opacity: 0.9; }
+  .hero-stats { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-family: var(--font-display); font-weight: 900; font-size: 2rem; color: var(--orange); line-height: 1; }
+  .hero-stat-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.75; margin-top: 0.25rem; }
+
+  /* STEPS INTRO */
+  .steps-card { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; border-left: 4px solid var(--orange); margin-bottom: 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .steps-card h2 { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1.15rem; margin-bottom: 0.75rem; }
+  .steps-list { list-style: none; padding: 0; }
+  .steps-list li { padding: 0.35rem 0; padding-left: 1.75rem; position: relative; font-size: 0.98rem; }
+  .steps-list li::before { content: "•"; position: absolute; left: 0.25rem; color: var(--orange); font-weight: 700; }
+  .steps-list li strong { color: var(--navy); }
+
+  /* SECTION HEADERS */
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.4rem; }
+  .step-num { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: var(--orange); color: var(--white); font-family: var(--font-display); font-weight: 900; font-size: 1.15rem; border-radius: 50%; flex-shrink: 0; }
+  .section-title { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; color: var(--navy); }
+  .section-sub { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.5rem; margin-left: 3.75rem; }
+  section.block { margin-bottom: 3rem; }
+
+  /* GRAPHICS */
+  .graphics-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1.25rem; }
+  .graphic-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: transform 0.15s, box-shadow 0.15s; display: flex; flex-direction: column; }
+  .graphic-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .graphic-preview { background: var(--gray-lt); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .graphic-preview img { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+  .graphic-info { padding: 1rem 1.15rem 1.15rem; flex: 1; display: flex; flex-direction: column; }
+  .graphic-name { font-family: var(--font-display); font-weight: 700; color: var(--navy); font-size: 1rem; margin-bottom: 0.25rem; }
+  .graphic-meta { font-size: 0.8rem; color: var(--gray); margin-bottom: 0.85rem; flex: 1; }
+  .btn-download { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; background: var(--orange); color: var(--white); text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.05em; padding: 0.6rem 1rem; border-radius: var(--radius); }
+  .btn-download:hover { background: var(--orange-lt); }
+
+  /* TEMPLATES */
+  .template { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-left: 4px solid var(--navy-lt); }
+  .template.recommended { border-left-color: var(--orange); }
+  .template-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap; }
+  .template-title { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1.15rem; }
+  .template-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 3px; background: var(--gray-lt); color: var(--gray); }
+  .template-badge.rec { background: var(--orange); color: var(--white); }
+  .template-desc { color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem; }
+  .template-body { background: var(--off-white); border-radius: var(--radius); padding: 1.15rem 1.35rem; font-family: var(--font-body); font-size: 0.95rem; white-space: pre-wrap; margin-bottom: 1rem; color: #1F2937; }
+  .btn-copy { border: none; cursor: pointer; background: var(--navy); color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.05em; padding: 0.55rem 1.1rem; border-radius: var(--radius); transition: background 0.15s; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .btn-copy:hover { background: var(--navy-lt); }
+  .btn-copy.copied { background: var(--success); }
+
+  /* FACTS BAR */
+  .facts { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
+  .facts-title { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .facts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem 2rem; font-size: 0.92rem; }
+  .facts-grid dt { color: var(--gray); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+  .facts-grid dd { color: var(--navy); font-weight: 500; word-break: break-word; }
+  .facts-grid dd a { color: var(--orange); text-decoration: none; font-weight: 600; }
+  .facts-grid dd a:hover { text-decoration: underline; }
+
+  .contest-box { background: var(--navy); color: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; }
+  .contest-box h3 { font-family: var(--font-display); font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--orange); margin-bottom: 0.6rem; }
+  .contest-box p { font-size: 0.95rem; opacity: 0.95; }
+
+  .best-practices { background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .best-practices h3 { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .best-practices ul { list-style: none; }
+  .best-practices li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; font-size: 0.92rem; color: #374151; }
+  .best-practices li::before { content: "•"; position: absolute; left: 0.25rem; color: var(--orange); font-weight: 700; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--navy); color: var(--white); padding: 0.75rem 1.5rem; border-radius: var(--radius); font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; opacity: 0; transition: opacity 0.25s, transform 0.25s; z-index: 1000; pointer-events: none; white-space: nowrap; max-width: 90vw; box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* FOOTER */
+  footer { background: var(--navy); color: var(--white); text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem; }
+  footer a { color: var(--orange); text-decoration: none; font-weight: 600; }
+
+  @media (max-width: 640px) {
+    .section-header { align-items: flex-start; }
+    .section-title { font-size: 1.3rem; }
+    .section-sub { margin-left: 0; margin-top: 0.5rem; }
+    .hero { padding: 2.5rem 1.25rem 2rem; }
+    .container { padding: 2rem 1rem; }
+    .template { padding: 1.25rem; }
+    .template-body { padding: 1rem; font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">WE RUN ON <span>EOS®</span> DALLAS 2026</div>
+    <a class="nav-back" href="https://eosnorthtexas.com" target="_blank" rel="noopener">← Back to Event Site</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">SPONSOR SHARE KIT</div>
+  <h1>Help us fill the room. Bring home the trophy.</h1>
+  <p>Everything you need to invite your clients and prospects to We Run on EOS® Dallas 2026 on Facebook and LinkedIn, in under 60 seconds. Plus, it's a contest.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">15</div>
+      <div class="hero-stat-label">Sponsors in the Running</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">1</div>
+      <div class="hero-stat-label">Trophy on the Line</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">60s</div>
+      <div class="hero-stat-label">Your Time</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="steps-card">
+    <h2>How to use this page</h2>
+    <ul class="steps-list">
+      <li><strong>Pick a graphic below</strong> and click Download. Save to your phone or desktop.</li>
+      <li><strong>Pick a post template</strong> that fits your audience. Click Copy.</li>
+      <li><strong>Paste into Facebook or LinkedIn</strong>, tag 2 to 3 people, hit post.</li>
+      <li><strong>Remind whoever registers</strong> to type your company name in the "who referred you" field. That's the only way you get credit in the sponsor contest below.</li>
+      <li><strong>Bonus:</strong> forward the email version straight to your own client list.</li>
+    </ul>
+  </div>
+
+  <section class="block">
+    <div class="section-header">
+      <div class="step-num">1</div>
+      <div class="section-title">Download a graphic</div>
+    </div>
+    <div class="section-sub">All graphics are sized to their platform's native spec. Use the recommended one, or match your usual posting style.</div>
+    <div class="graphics-grid">
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="https://eosnorthtexas.com/share-kit/flyer_facebook.png" alt="Facebook Landscape graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Facebook Landscape</div>
+          <div class="graphic-meta">1200 × 630 · Facebook feed</div>
+          <a class="btn-download" href="https://eosnorthtexas.com/share-kit/flyer_facebook.png" download target="_blank" rel="noopener">DOWNLOAD</a>
+        </div>
+      </div>
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="https://eosnorthtexas.com/share-kit/flyer_linkedin.png" alt="LinkedIn Landscape graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">LinkedIn Landscape</div>
+          <div class="graphic-meta">1200 × 627 · LinkedIn feed</div>
+          <a class="btn-download" href="https://eosnorthtexas.com/share-kit/flyer_linkedin.png" download target="_blank" rel="noopener">DOWNLOAD</a>
+        </div>
+      </div>
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="https://eosnorthtexas.com/share-kit/flyer_square.png" alt="Square Universal graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Square (Universal)</div>
+          <div class="graphic-meta">1080 × 1080 · Instagram, FB square, LinkedIn</div>
+          <a class="btn-download" href="https://eosnorthtexas.com/share-kit/flyer_square.png" download target="_blank" rel="noopener">DOWNLOAD</a>
+        </div>
+      </div>
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="https://eosnorthtexas.com/share-kit/flyer_linkedin_square.png" alt="LinkedIn Square graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">LinkedIn Square</div>
+          <div class="graphic-meta">1080 × 1080 · Best for mobile LinkedIn feed</div>
+          <a class="btn-download" href="https://eosnorthtexas.com/share-kit/flyer_linkedin_square.png" download target="_blank" rel="noopener">DOWNLOAD</a>
+        </div>
+      </div>
+      <div class="graphic-card">
+        <div class="graphic-preview"><img src="https://eosnorthtexas.com/share-kit/flyer_story.png" alt="Vertical Story graphic"></div>
+        <div class="graphic-info">
+          <div class="graphic-name">Vertical Story</div>
+          <div class="graphic-meta">1080 × 1920 · IG/FB Stories, Reels cover</div>
+          <a class="btn-download" href="https://eosnorthtexas.com/share-kit/flyer_story.png" download target="_blank" rel="noopener">DOWNLOAD</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-header">
+      <div class="step-num">2</div>
+      <div class="section-title">Copy a post template</div>
+    </div>
+    <div class="section-sub">Three versions, matched to different audiences. Swap in your company name and post as-is, or tweak the tone to match your voice.</div>
+
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">Template A · For Clients Already Running on EOS®</div>
+        <div class="template-badge">FOR EOS CLIENTS</div>
+      </div>
+      <div class="template-desc">Best for contacts who already know EOS® terminology and speak the language.</div>
+      <div class="template-body" id="tmpl-a">We're excited to be a proud sponsor of We Run on EOS® Dallas! 👇
+
+📅 Monday, September 14, 2026
+📍 The Statler, Dallas
+
+If your company runs on EOS®, this is the day to sharpen the saw: sessions from Certified EOS Implementer® Ann Sheu and expert EOS Implementers® Mark Stanley (co-author of Data), Beth Fahey (co-author of Rollout), and Mark C. Winters (co-author of Rocket Fuel).
+
+As one of the sponsors, we'd love to see you there. Register at EOSNorthTexas.com, and be sure to note "[Sponsor Company Name]" as your referral when you sign up. We're in a friendly contest with the other sponsors to see who brings the most people, and we'd love the bragging rights!
+
+#WeRunOnEOS #EOS #Traction #DallasBusiness</div>
+      <button class="btn-copy" data-target="tmpl-a">COPY TEMPLATE A</button>
+    </div>
+
+    <div class="template">
+      <div class="template-head">
+        <div class="template-title">Template B · For Prospects Curious About EOS®</div>
+        <div class="template-badge">FOR NEW PROSPECTS</div>
+      </div>
+      <div class="template-desc">Best for contacts who aren't on EOS® yet, or aren't sure what it is.</div>
+      <div class="template-body" id="tmpl-b">Ever heard of EOS®, the Entrepreneurial Operating System® from the book Traction? We're a proud sponsor of We Run on EOS® Dallas, a full day built to help business owners and leadership teams get real traction in their companies.
+
+📅 Monday, September 14, 2026   📍 The Statler, Dallas
+
+The morning session is FREE and open to anyone curious: coffee, the opening EOS talk, and workshops from our two Title Sponsors, no cost to attend. Stay for the full day ($249) and you'll also get lunch, plus workshops on Data, Rollout, and Vision from expert EOS Implementers®, three hardcover books, and the Happy Hour celebration.
+
+Come see what the buzz is about. Register at EOSNorthTexas.com, and when you sign up, just note "[Sponsor Company Name]" as who invited you. We're competing with the other sponsors for bragging rights on who brings the most people, so help us win!
+
+#WeRunOnEOS #EOS #Traction</div>
+      <button class="btn-copy" data-target="tmpl-b">COPY TEMPLATE B</button>
+    </div>
+
+    <div class="template recommended">
+      <div class="template-head">
+        <div class="template-title">Template C · "Pick Your Poison" (Works for Any Audience)</div>
+        <div class="template-badge rec">RECOMMENDED</div>
+      </div>
+      <div class="template-desc">Best for one post to your whole network, a mixed audience of clients and prospects.</div>
+      <div class="template-body" id="tmpl-c">We're a proud sponsor of We Run on EOS® Dallas, Monday, September 14, 2026 at The Statler, Dallas.
+
+Already running on EOS®? Come sharpen the saw with sessions from Certified EOS Implementer® Ann Sheu and expert EOS Implementers® Mark Stanley (co-author of Data), Beth Fahey (co-author of Rollout), and Mark C. Winters (co-author of Rocket Fuel).
+
+Never heard of EOS®? Come see what the buzz is about: the morning session is free, no strings attached.
+
+Either way, we'd love to see you there. Register at EOSNorthTexas.com, and be sure to note "[Sponsor Company Name]" as your referral. Sponsors are competing for bragging rights on who brings the most people to the event!
+
+#WeRunOnEOS #EOS #Traction #DallasBusiness</div>
+      <button class="btn-copy" data-target="tmpl-c">COPY TEMPLATE C</button>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="section-header">
+      <div class="step-num">3</div>
+      <div class="section-title">Quick facts, tagging & the contest</div>
+    </div>
+    <div class="section-sub">Copy any of these into your own words. Tag the speakers below on LinkedIn to boost reach.</div>
+
+    <div class="facts">
+      <div class="facts-title">Event Details</div>
+      <dl class="facts-grid">
+        <div>
+          <dt>Event</dt>
+          <dd>We Run on EOS® Dallas (5th Annual)</dd>
+        </div>
+        <div>
+          <dt>Date</dt>
+          <dd>Monday, September 14, 2026</dd>
+        </div>
+        <div>
+          <dt>Time</dt>
+          <dd>Free morning: 7:30 AM–12:00 PM · Full day: 7:30 AM–8:00 PM</dd>
+        </div>
+        <div>
+          <dt>Venue</dt>
+          <dd>The Statler Dallas · 1914 Commerce St, Dallas, TX 75201</dd>
+        </div>
+        <div>
+          <dt>Website</dt>
+          <dd><a href="https://eosnorthtexas.com" target="_blank" rel="noopener">EOSNorthTexas.com</a></dd>
+        </div>
+        <div>
+          <dt>Theme</dt>
+          <dd>Mastery · Community · Celebration</dd>
+        </div>
+        <div>
+          <dt>Free Ticket Includes</dt>
+          <dd>Light breakfast, opening EOS talk, and workshops from Title Sponsors Strety and The System of Selling</dd>
+        </div>
+        <div>
+          <dt>Full Day Ticket ($249)</dt>
+          <dd>Everything above, plus lunch, Data/Rollout/Visionary workshops, 3 hardcover books, and Happy Hour</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="facts">
+      <div class="facts-title">Featured Speakers (Tag on LinkedIn)</div>
+      <dl class="facts-grid">
+        <div>
+          <dt>Ann Sheu</dt>
+          <dd><a href="https://implementer.eosworldwide.com/ann-sheu/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd>
+        </div>
+        <div>
+          <dt>Mark Stanley</dt>
+          <dd><a href="https://implementer.eosworldwide.com/mark-stanley/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd>
+        </div>
+        <div>
+          <dt>Beth Fahey</dt>
+          <dd><a href="https://implementer.eosworldwide.com/beth-fahey/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd>
+        </div>
+        <div>
+          <dt>Mark C. Winters</dt>
+          <dd><a href="https://implementer.eosworldwide.com/mark-c-winters/" target="_blank" rel="noopener">EOS Worldwide profile ↗</a></dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="contest-box">
+      <h3>How the Sponsor Contest Works</h3>
+      <p>When your invitees register, they're asked who referred them. Make sure they type your company name, spelling counts, since it's not a dropdown. The sponsor who brings the most attendees gets bragging rights and a trophy during the Awards + Happy Hour celebration at the end of the day.</p>
+    </div>
+
+    <div class="best-practices">
+      <h3>Best Practices</h3>
+      <ul>
+        <li>Tag people, don't just name them. Tagged people get notified, and their networks amplify the post several times over.</li>
+        <li>Post from your personal profile for the warmest engagement. Use your business page for the professional variant.</li>
+        <li>Best time to post: weekday mornings (7:30 to 10 AM CT) or Sunday evenings (6 to 8 PM CT).</li>
+        <li>Reply to every comment in the first 3 hours, early engagement signals quality to the algorithm.</li>
+        <li>For LinkedIn: put the registration link in the first comment, not the post body, since LinkedIn suppresses posts with external links.</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Built for our 2026 We Run on EOS® Dallas Sponsors · Questions? <a href="mailto:Kevin.Taylor@eosworldwide.com">Kevin.Taylor@eosworldwide.com</a>
+  <div style="margin-top:0.65rem;font-size:0.85rem;"><a href="/privacy/">Privacy Policy</a> · <a href="/privacy/#california">Do Not Sell or Share My Personal Information</a></div>
+</footer>
+
+<div class="toast" id="toast">Copied to clipboard ✓</div>
+
+<script>
+  document.querySelectorAll('.btn-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var targetId = btn.getAttribute('data-target');
+      var text = document.getElementById(targetId).innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.classList.add('copied');
+        var original = btn.textContent;
+        btn.textContent = 'COPIED ✓';
+        showToast('Copied to clipboard ✓');
+        setTimeout(function () {
+          btn.classList.remove('copied');
+          btn.textContent = original;
+        }, 1800);
+      });
+    });
+  });
+
+  function showToast(msg) {
+    var toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(function () {
+      toast.classList.remove('show');
+    }, 2200);
+  }
+</script>
+
+</body>
+</html>

@@ -13,14 +13,30 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <script src="config.js"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-LC5GV9736F"></script>
+<!-- Google tag (gtag.js) — consent-aware loader -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-LC5GV9736F');
+  (function () {
+    var GA_ID = 'G-LC5GV9736F';
+    // 1) User previously opted out via /privacy/ page? Cookie is set.
+    var hasOptOutCookie = document.cookie.split(';').some(function (c) {
+      return c.trim().indexOf('ga-optout=1') === 0;
+    });
+    // 2) Browser sends Global Privacy Control signal (CPRA-recognized opt-out).
+    var gpc = (navigator.globalPrivacyControl === true);
+    if (hasOptOutCookie || gpc) {
+      window['ga-disable-' + GA_ID] = true;
+      return; // do not load gtag.js at all
+    }
+    // Otherwise, load Google Analytics normally.
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID, { anonymize_ip: true });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+  })();
 </script>
   <style>
     :root {
@@ -623,6 +639,7 @@
   <!-- FOOTER -->
   <footer>
     <p>We Run on EOS<sup>®</sup> is brought to you by the North Texas EOS Implementer Community &nbsp;·&nbsp; <a id="footer-eos-link" href="#">EOS Worldwide</a> &nbsp;·&nbsp; Questions? <a id="footer-contact" href="#">Contact us</a></p>
+    <p style="margin-top:0.5rem;font-size:0.85rem;"><a href="/privacy/">Privacy Policy</a> &nbsp;·&nbsp; <a href="/privacy/#california">Do Not Sell or Share My Personal Information</a></p>
     <p style="margin-top:0.5rem;font-size:0.72rem;opacity:0.6">EOS<sup>®</sup>, EOS Implementer<sup>®</sup>, and We Run on EOS<sup>®</sup> are registered trademarks of EOS Worldwide, LLC. Used with permission.</p>
   </footer>
 
