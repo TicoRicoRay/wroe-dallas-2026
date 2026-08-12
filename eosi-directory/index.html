@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>DFW EOS Implementer Directory</title>
+  <meta name="description" content="A directory of EOS Implementers serving the Dallas / Fort Worth / North Texas market.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Google tag (gtag.js) — consent-aware loader -->
+  <script>
+    (function () {
+      var GA_ID = 'G-LC5GV9736F';
+      var hasOptOutCookie = document.cookie.split(';').some(function (c) {
+        return c.trim().indexOf('ga-optout=1') === 0;
+      });
+      var gpc = (navigator.globalPrivacyControl === true);
+      if (hasOptOutCookie || gpc) {
+        window['ga-disable-' + GA_ID] = true;
+        return;
+      }
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', GA_ID, { anonymize_ip: true });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+    })();
+  </script>
+  <style>
+    :root {
+      --navy:      #1B2A4A;
+      --navy-dk:   #111d33;
+      --navy-lt:   #263d6a;
+      --orange:    #F26522;
+      --orange-lt: #ff8040;
+      --white:     #FFFFFF;
+      --off-white: #F8F6F2;
+      --gray:      #6b7280;
+      --gray-lt:   #e5e7eb;
+      --text:      #1a1a2e;
+      --font-display: 'Montserrat', sans-serif;
+      --font-body:    'Roboto', sans-serif;
+      --max: 1240px;
+      --radius: 6px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--text); background: var(--off-white); }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Header */
+    header.page-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 3rem 1.5rem 2.5rem;
+      border-bottom: 3px solid var(--orange);
+    }
+    .header-inner { max-width: var(--max); margin: 0 auto; }
+    .eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .subtitle {
+      margin-top: 0.75rem;
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      max-width: 60ch;
+    }
+
+    /* Controls */
+    .controls {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-lt);
+      padding: 1rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .controls-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .search-box {
+      flex: 1 1 220px;
+      min-width: 200px;
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--gray-lt);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      background: var(--white);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .search-box:focus { border-color: var(--orange); }
+    select.filter {
+      padding: 0.6rem 0.85rem;
+      border: 1px solid var(--gray-lt);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      background: var(--white);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .count {
+      color: var(--gray);
+      font-size: 0.85rem;
+      margin-left: auto;
+      font-weight: 500;
+    }
+
+    /* Grid */
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Card */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+    }
+    .card-photo-wrap {
+      position: relative;
+      background: var(--navy-lt);
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+    }
+    .card-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .card-photo-wrap .no-photo {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-lt) 100%);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .badge {
+      position: absolute;
+      top: 0.6rem;
+      left: 0.6rem;
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      border-radius: 3px;
+    }
+    .badge.professional { background: #6b7280; }
+    .badge.certified    { background: var(--orange); }
+    .badge.expert       { background: var(--navy); }
+
+    .card-body {
+      padding: 1rem 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .card-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    .card-meta {
+      color: var(--gray);
+      font-size: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.6rem;
+    }
+    .card-meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+    .card-meta .market {
+      background: var(--off-white);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      color: var(--navy);
+      font-weight: 500;
+    }
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 0.5rem;
+      padding-top: 0.5rem;
+    }
+    .card-actions a {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-profile {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-profile:hover { background: var(--navy-lt); }
+    .btn-profile.disabled {
+      background: var(--gray-lt);
+      color: var(--gray);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .btn-email {
+      background: var(--white);
+      color: var(--navy);
+      border: 1px solid var(--gray-lt);
+    }
+    .btn-email:hover {
+      background: var(--orange);
+      color: var(--white);
+      border-color: var(--orange);
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--gray);
+      font-size: 1rem;
+    }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+    footer p { margin: 0.25rem 0; }
+
+    @media (max-width: 640px) {
+      header.page-header { padding: 2rem 1rem 1.5rem; }
+      main { padding: 1.25rem 1rem 3rem; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.85rem; }
+      .card-name { font-size: 1rem; }
+      .count { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="header-inner">
+      <div class="eyebrow">Working directory</div>
+      <h1>DFW EOS Implementer Directory</h1>
+      <p class="subtitle">EOS Implementers serving the Dallas / Fort Worth / North Texas market. Data sourced from the DFW EOSI Master roster; profile links and headshots from the official EOS Worldwide Implementer Directory.</p>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="controls-inner">
+      <input type="search" id="search" class="search-box" placeholder="Search by name…" autocomplete="off">
+      <select id="filter-desig" class="filter" aria-label="Filter by designation">
+        <option value="">All designations</option>
+        <option value="Expert">Expert</option>
+        <option value="Certified">Certified</option>
+        <option value="Professional">Professional</option>
+      </select>
+      <select id="filter-market" class="filter" aria-label="Filter by other market">
+        <option value="">Any market</option>
+      </select>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <footer>
+    <p>Source: DFW EOSI Master Spreadsheet · Profile links via implementer.eosworldwide.com</p>
+    <p id="stamp"></p>
+  </footer>
+
+  <script>
+    const IMPLEMENTERS = [{"name":"Aaron Garcia","first_name":"Aaron","last_name":"Garcia","email":"aaron.garcia@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/aaron-garcia/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/09/2024_TekConsiergeDay2-0051-scaled.jpg"},{"name":"Amanda Matthews","first_name":"Amanda","last_name":"Matthews","email":"amanda.matthews@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"Austin","profile_url":"https://implementer.eosworldwide.com/amanda-matthews/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/10/9f160c9e-d797-4ee0-b829-52c78c62248a-scaled.jpg"},{"name":"Amy Johannesen","first_name":"Amy","last_name":"Johannesen","email":"amy.johannesen@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/amy-johannesen/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/10/Amy-w.-Traction-01-scaled.jpg"},{"name":"Andrea Holmes","first_name":"Andrea","last_name":"Holmes","email":"andrea.holmes@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"","photo_url":""},{"name":"Andrew Newsom","first_name":"Andrew","last_name":"Newsom","email":"andrew.newsom@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/andrew-newsom/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/andrew-newsom-1-1.jpg"},{"name":"Ann Sheu","first_name":"Ann","last_name":"Sheu","email":"ann.sheu@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/ann-sheu/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/Sheu-Ann-300x300-1-2.jpg"},{"name":"Blake Winters","first_name":"Blake","last_name":"Winters","email":"blake.winters@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/blake-winters/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/09/13-1-scaled.jpeg"},{"name":"Brian Prescott","first_name":"Brian","last_name":"Prescott","email":"brian.prescott@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"Mid-Atlantic","profile_url":"https://implementer.eosworldwide.com/brian-prescott/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/12/Headshot-8.jpg"},{"name":"Brooke Lively","first_name":"Brooke","last_name":"Lively","email":"brooke.lively@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/brooke-lively/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/IMG_6024-1.jpg"},{"name":"Curt Swindoll","first_name":"Curt","last_name":"Swindoll","email":"curt.swindoll@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/curt-swindoll/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/Curt-head-shot-square-300x300-1-1.jpg"},{"name":"Curtis Rippee","first_name":"Curtis","last_name":"Rippee","email":"curtis.rippee@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/curtis-rippee/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/ONLINE-CURTIS-RIPPEE-MAY2024-7-1-2.jpg"},{"name":"Daniel Ignatius Himel","first_name":"Daniel Ignatius","last_name":"Himel","email":"daniel.himel@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/daniel-himel/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/10/Untitled-design-4-3.png"},{"name":"Dawn Clarke","first_name":"Dawn","last_name":"Clarke","email":"dawn.clarke@eosworldwide.com","designation":"Expert","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/dawn-clarke/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/Clarke-EOS-Tall-low-res-1-1.jpeg"},{"name":"Duke Revard","first_name":"Duke","last_name":"Revard","email":"duke.revard@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"Bentonville, AR","profile_url":"https://implementer.eosworldwide.com/duke-revard/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/09/Best-Duke-Headshot-1.jpg"},{"name":"Erin Thiem","first_name":"Erin","last_name":"Thiem","email":"erin.thiem@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/erin-thiem/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/10/square.jpeg"},{"name":"Gary Leeman","first_name":"Gary","last_name":"Leeman","email":"gary.leeman@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/gary-leeman/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2026/06/GLeeman_SigHeadshots_240927_215920-Retouched-crop-scaled.jpg"},{"name":"Greg Benson","first_name":"Greg","last_name":"Benson","email":"greg.benson@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/greg-benson/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/20220830_GBHeadshot-EOS-MicroPg-SqSmlr-1.jpg"},{"name":"Harrison Jenkins","first_name":"Harrison","last_name":"Jenkins","email":"harrison.jenkins@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/harrison-jenkins/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/IMG_2219-copy-scaled.jpg"},{"name":"James Hill","first_name":"James","last_name":"Hill","email":"james.hill@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/james-hill/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2026/03/officeblackshirt.jpeg"},{"name":"Jarrod Upton","first_name":"Jarrod","last_name":"Upton","email":"jarrod.upton@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"West Texas / Midland","profile_url":"https://implementer.eosworldwide.com/jarrod-upton/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2026/03/Upton-Headshot-v2.jpg"},{"name":"Jeff Schafer","first_name":"Jeff","last_name":"Schafer","email":"jeff.schafer@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/jeff-schafer/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2026/03/Jeff-Schafer-300-KB.jpeg"},{"name":"Jill Young","first_name":"Jill","last_name":"Young","email":"jyoung@eosworldwide.com","designation":"Expert","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/jill-young/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/09/78J-scaled.jpg"},{"name":"Jim Brewer","first_name":"Jim","last_name":"Brewer","email":"jim.brewer@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/jim-brewer/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/EOS-Portrait-Shot-1.jpg"},{"name":"John Lewis","first_name":"John","last_name":"Lewis","email":"john.lewis@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/john-lewis/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/4-scaled.jpg"},{"name":"Justin Mink","first_name":"Justin","last_name":"Mink","email":"justin.mink@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/justin-mink/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/11/Screenshot-2025-11-11-at-9.46.30-AM.png"},{"name":"Kevin Taylor","first_name":"Kevin","last_name":"Taylor","email":"kevin.taylor@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/kevin-taylor/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/Headshot-1-3.jpg"},{"name":"Leonard Lynskey","first_name":"Leonard","last_name":"Lynskey","email":"leonard.lynskey@eosworldwide.com","designation":"Expert","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/leonard-lynskey/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/Lynskey-Leonard-1-1.jpg"},{"name":"Mark C Winters","first_name":"Mark C","last_name":"Winters","email":"mcw@markcwinters.com","designation":"Expert","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/mark-c-winters/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/MCW-Headshot-Small-1-1.jpeg"},{"name":"Michael Visentine","first_name":"Michael","last_name":"Visentine","email":"michael.visentine@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/michael-visentine/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/MV-headshot-1.jpeg"},{"name":"Natalie Mitro","first_name":"Natalie","last_name":"Mitro","email":"natalie.mitro@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/natalie-mitro/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/09/SMB04017_green-black-pref1-scaled.jpg"},{"name":"Ray Myers","first_name":"Ray","last_name":"Myers","email":"ray.myers@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/ray-myers/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/EOS-Full-smaller_Crop.png"},{"name":"Ray Salinas","first_name":"Ray","last_name":"Salinas","email":"ray.salinas@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/ray-salinas/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/EOS-Head-Shot-1.jpeg"},{"name":"Sally Michael","first_name":"Sally","last_name":"Michael","email":"sally.michael@eosworldwide.com","designation":"Professional","primary_market":"Central texas","other_market":"","profile_url":"https://implementer.eosworldwide.com/sally-michael/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2026/07/Sally-Michael-Headshot.jpg"},{"name":"Sandi Mitchell","first_name":"Sandi","last_name":"Mitchell","email":"sandi@apexcatalystgroup.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/sandi-mitchell/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/10/Untitled-design-21-2.png"},{"name":"Sean Rosensteel","first_name":"Sean","last_name":"Rosensteel","email":"sean.rosensteel@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/sean-rosensteel/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/sean_rosensteel-1.jpeg"},{"name":"Shane Spillers","first_name":"Shane","last_name":"Spillers","email":"shane.spillers@eosworldwide.com","designation":"Expert","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/shane-spillers/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/11/20170423-Spillers-Shane-Headshot-1-Large-2.png"},{"name":"Steven Ross","first_name":"Steven","last_name":"Ross","email":"steven.ross@eosworldwide.com","designation":"Certified","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/steven-ross/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/Steven-Ross-Portrait-Photo-Headshot-2.png"},{"name":"Stewart Hsu","first_name":"Stewart","last_name":"Hsu","email":"stewart.hsu@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/stewart-hsu/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/Stewart-Hsu-directory-profile-pic.png"},{"name":"Willard Martin","first_name":"Williard","last_name":"Martin","email":"willard.martin@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"Iowa","profile_url":"https://implementer.eosworldwide.com/willard-martin/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2025/08/1619806441587.jpg"},{"name":"Zachary Perry","first_name":"Zack","last_name":"Perry","email":"zack.perry@eosworldwide.com","designation":"Professional","primary_market":"DFW","other_market":"","profile_url":"https://implementer.eosworldwide.com/zack-perry/","photo_url":"https://implementer.eosworldwide.com/wp-content/uploads/2026/04/SP-20260327_1171_webres.jpg"}];
+
+    // Build the "other market" filter dropdown from actual data
+    const marketSet = new Set();
+    IMPLEMENTERS.forEach(i => { if (i.other_market) marketSet.add(i.other_market); });
+    const marketSelect = document.getElementById('filter-market');
+    [...marketSet].sort().forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m; opt.textContent = m;
+      marketSelect.appendChild(opt);
+    });
+
+    function initials(name) {
+      return name.split(/\s+/).filter(Boolean).map(p => p[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    function render() {
+      const q = document.getElementById('search').value.trim().toLowerCase();
+      const desig = document.getElementById('filter-desig').value;
+      const market = document.getElementById('filter-market').value;
+
+      const filtered = IMPLEMENTERS.filter(i => {
+        if (q && !i.name.toLowerCase().includes(q)) return false;
+        if (desig && i.designation !== desig) return false;
+        if (market && i.other_market !== market) return false;
+        return true;
+      });
+
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty">No implementers match those filters.</div>';
+      } else {
+        filtered.forEach(i => grid.appendChild(cardEl(i)));
+      }
+
+      const c = document.getElementById('count');
+      c.textContent = filtered.length + ' of ' + IMPLEMENTERS.length + ' shown';
+    }
+
+    function cardEl(i) {
+      const card = document.createElement('article');
+      card.className = 'card';
+
+      // Photo
+      const photoWrap = document.createElement('div');
+      photoWrap.className = 'card-photo-wrap';
+      if (i.photo_url) {
+        const img = document.createElement('img');
+        img.src = i.photo_url;
+        img.alt = i.name;
+        img.loading = 'lazy';
+        img.onerror = function() {
+          this.remove();
+          const fallback = document.createElement('div');
+          fallback.className = 'no-photo';
+          fallback.textContent = initials(i.name);
+          photoWrap.appendChild(fallback);
+        };
+        photoWrap.appendChild(img);
+      } else {
+        const fallback = document.createElement('div');
+        fallback.className = 'no-photo';
+        fallback.textContent = initials(i.name);
+        photoWrap.appendChild(fallback);
+      }
+      const badge = document.createElement('span');
+      badge.className = 'badge ' + (i.designation || '').toLowerCase();
+      badge.textContent = i.designation || '';
+      if (i.designation) photoWrap.appendChild(badge);
+      card.appendChild(photoWrap);
+
+      // Body
+      const body = document.createElement('div');
+      body.className = 'card-body';
+
+      const name = document.createElement('div');
+      name.className = 'card-name';
+      name.textContent = i.name;
+      body.appendChild(name);
+
+      const meta = document.createElement('div');
+      meta.className = 'card-meta';
+      const primary = document.createElement('span');
+      primary.className = 'market';
+      primary.textContent = i.primary_market || '—';
+      meta.appendChild(primary);
+      if (i.other_market) {
+        const other = document.createElement('span');
+        other.className = 'market';
+        other.textContent = '+ ' + i.other_market;
+        meta.appendChild(other);
+      }
+      body.appendChild(meta);
+
+      const actions = document.createElement('div');
+      actions.className = 'card-actions';
+      const profile = document.createElement('a');
+      profile.className = 'btn-profile' + (i.profile_url ? '' : ' disabled');
+      profile.textContent = 'Profile';
+      if (i.profile_url) {
+        profile.href = i.profile_url;
+        profile.target = '_blank';
+        profile.rel = 'noopener';
+      } else {
+        profile.href = '#';
+        profile.setAttribute('aria-disabled', 'true');
+        profile.title = 'No public EOS Worldwide profile found';
+      }
+      actions.appendChild(profile);
+
+      const email = document.createElement('a');
+      email.className = 'btn-email';
+      email.textContent = 'Email';
+      email.href = 'mailto:' + i.email;
+      actions.appendChild(email);
+
+      body.appendChild(actions);
+      card.appendChild(body);
+      return card;
+    }
+
+    // Wire up events
+    document.getElementById('search').addEventListener('input', render);
+    document.getElementById('filter-desig').addEventListener('change', render);
+    document.getElementById('filter-market').addEventListener('change', render);
+
+    render();
+
+    // Data freshness stamp
+    document.getElementById('stamp').textContent = 'Directory rendered ' + new Date().toLocaleString();
+  </script>
+</body>
+</html>
