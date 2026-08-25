@@ -172,6 +172,14 @@ const SITE_CONFIG = {
         verified: true
       },
       {
+        name: "Hoops HR",
+        tier: "booth",
+        url: "https://hoopshr.com/",
+        logo: "images/hoopshr.webp",
+        alt: "Hoops HR",
+        verified: true
+      },
+      {
         name: "Next Level Revenue",
         tier: "booth",
         url: "https://readyforthenextlevel.com/",
