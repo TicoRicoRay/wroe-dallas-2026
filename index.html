@@ -342,14 +342,16 @@
     /* Sizing scales with sponsorship price. Logos use flex to fill the row on desktop. */
     .sponsor-logo.title { flex: 1 1 0; min-width: 280px; max-width: 560px; height: 140px; }
     .sponsor-logo.book  { flex: 1 1 0; min-width: 240px; max-width: 360px; height: 110px; }
-    .sponsor-logo.happy { width: 260px; height: 90px; }
-    .sponsor-logo.swag  { width: 180px; height: 70px; }
-    .sponsor-logo.booth { width: 180px; height: 70px; }
-    .sponsor-slot.title { width: 280px; height: 140px; font-size: 0.85rem; }
-    .sponsor-slot.book  { width: 240px; height: 110px; font-size: 0.8rem; }
-    .sponsor-slot.happy { width: 260px; height: 90px; }
-    .sponsor-slot.swag  { width: 180px; height: 70px; font-size: 0.75rem; }
-    .sponsor-slot.booth { width: 180px; height: 70px; font-size: 0.75rem; }
+    .sponsor-logo.happy  { width: 260px; height: 90px; }
+    .sponsor-logo.lounge { width: 220px; height: 80px; }
+    .sponsor-logo.swag   { width: 180px; height: 70px; }
+    .sponsor-logo.booth  { width: 180px; height: 70px; }
+    .sponsor-slot.title  { width: 280px; height: 140px; font-size: 0.85rem; }
+    .sponsor-slot.book   { width: 240px; height: 110px; font-size: 0.8rem; }
+    .sponsor-slot.happy  { width: 260px; height: 90px; }
+    .sponsor-slot.lounge { width: 220px; height: 80px; font-size: 0.78rem; }
+    .sponsor-slot.swag   { width: 180px; height: 70px; font-size: 0.75rem; }
+    .sponsor-slot.booth  { width: 180px; height: 70px; font-size: 0.75rem; }
 
     /* VENUE */
     #venue { background: var(--navy); color: var(--white); }
@@ -413,8 +415,9 @@
       .sponsor-slot.title { width: 100%; max-width: 100%; height: 105px; }
       .sponsor-logo.book  { flex: 0 0 100%; width: 100%; max-width: 100%; height: 85px; }
       .sponsor-slot.book  { width: 100%; max-width: 100%; height: 85px; }
-      .sponsor-logo.happy, .sponsor-slot.happy { width: 100%; max-width: 320px; height: 80px; }
-      .sponsor-logo.swag,  .sponsor-slot.swag  { width: 46%; max-width: 180px; height: 60px; }
+      .sponsor-logo.happy,  .sponsor-slot.happy  { width: 100%; max-width: 320px; height: 80px; }
+      .sponsor-logo.lounge, .sponsor-slot.lounge { width: 100%; max-width: 280px; height: 72px; }
+      .sponsor-logo.swag,   .sponsor-slot.swag   { width: 46%; max-width: 180px; height: 60px; }
       .sponsor-logo.booth, .sponsor-slot.booth { width: 46%; max-width: 180px; height: 60px; }
     }
   </style>
@@ -794,14 +797,15 @@
     });
 
     // Sponsors
-    const clsMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happy','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
+    const clsMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happy','Lounge Sponsor':'lounge','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
     // Map tier-name -> internal key used on sponsor records (e.g. "Title Sponsor" -> "title")
-    const tierKeyMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happyHour','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
+    const tierKeyMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happyHour','Lounge Sponsor':'lounge','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
     const sponsorList = (C.sponsors.sponsors || []).filter(s => s && s.verified === true);
     const tierGroups = [
       { keys: ['Title Sponsor'] },
       { keys: ['Book Sponsor'] },
       { keys: ['Happy Hour Sponsor'] },
+      { keys: ['Lounge Sponsor'] },
       { keys: ['Swag Bag Sponsor'] },
       { keys: ['Booth Sponsor'] },
     ];

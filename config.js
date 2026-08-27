@@ -76,6 +76,7 @@ const SITE_CONFIG = {
       { name: "Title Sponsor", price: 10000, available: 0 },
       { name: "Book Sponsor", price: 9000, available: 0 },
       { name: "Happy Hour Sponsor", price: 6500, available: 0 },
+      { name: "Lounge Sponsor", price: 5000, available: 0 },
       { name: "Swag Bag Sponsor", price: 3500, available: 0 },
       { name: "Booth Sponsor", price: 1500, available: 0 },
     ],
@@ -127,6 +128,14 @@ const SITE_CONFIG = {
         url: "https://ninety.io/",
         logo: "images/ninety.png",
         alt: "Ninety.io",
+        verified: true
+      },
+      {
+        name: "Vsimple",
+        tier: "lounge",
+        url: "https://www.vsimple.com/",
+        logo: "images/vsimple.svg",
+        alt: "Vsimple",
         verified: true
       },
       {
