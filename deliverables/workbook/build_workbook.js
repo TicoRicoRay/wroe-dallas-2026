@@ -432,7 +432,7 @@ function speakerCoverPage(s) {
   items.push(pageBreak());
   items.push(new Paragraph({
     spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: s.speaker.toUpperCase() + ' · CONTENT', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange })],
+    children: [new TextRun({ text: s.session_title.toUpperCase() + ' · CONTENT', font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 200 }, alignment: AlignmentType.LEFT,
@@ -448,7 +448,7 @@ function speakerCoverPage(s) {
   items.push(pageBreak());
   items.push(new Paragraph({
     spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: s.speaker.toUpperCase() + ' · MY NOTES', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange })],
+    children: [new TextRun({ text: s.session_title.toUpperCase() + ' · MY NOTES', font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 300 }, alignment: AlignmentType.LEFT,
