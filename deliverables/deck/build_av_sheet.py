@@ -136,10 +136,8 @@ tbl_pre.setStyle(TableStyle([
 story.append(tbl_pre)
 
 story.append(Paragraph(
-    "<b>One-time setup (if the Custom Shows aren\u2019t already saved):</b> "
-    "Slide Show menu \u203a Custom Slide Show \u203a Custom Shows \u203a New. "
-    "Name it <b>Pre-Event Loop</b>, add slides <b>1\u20135</b>, click OK. "
-    "Then New again, name it <b>Event</b>, add slides <b>6\u201328</b>, click OK. Close.",
+    "The two Custom Shows (<b>Pre-Event Loop</b> and <b>Event</b>) are already saved inside "
+    "the deck. No setup needed \u2014 just pick them from the Custom show dropdown.",
     callout,
 ))
 
@@ -178,10 +176,10 @@ story.append(Paragraph(break_body, body))
 story.append(Paragraph("QUICK REFERENCE", h2))
 
 qref_data = [
-    ["Deck file", "Deck.pptx (28 slides, 16:9)"],
+    ["Deck file", "Deck.pptx (27 slides, 16:9)"],
     ["Playback app", "Microsoft PowerPoint (desktop) \u2014 required for timings"],
     ["Pre-event loop", "Slides 1\u20135, auto-advance 15s, loop until Esc"],
-    ["Event show", "Slides 6\u201328, manual click-to-advance"],
+    ["Event show", "Slides 6\u201327, manual click-to-advance"],
     ["Break timer URL", "eosnorthtexas.com/timer"],
     ["Backup handoff", "If timings misfire, click through slides 1\u20135 manually"],
 ]
