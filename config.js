@@ -239,7 +239,7 @@ const SITE_CONFIG = {
     {
       name: "Mark Stanley",
       title: "Expert EOS Implementer\u00AE",
-      session: "Data Workshop",
+      session: "Profit Power: Stronger \u2014 or Just Bigger?",
       bio: "Using data to drive decisions and accountability",
       time: "1:00 \u2013 2:30 PM",
       tier: "paid",
@@ -250,7 +250,7 @@ const SITE_CONFIG = {
     {
       name: "Beth Fahey",
       title: "Expert EOS Implementer\u00AE",
-      session: "Rollout Workshop",
+      session: "Rollout, Reworked: Your Plan for Running EOS\u00AE Company-Wide",
       bio: "Getting EOS running deeper in your organization",
       time: "4:30 \u2013 5:30 PM",
       tier: "paid",
@@ -261,7 +261,7 @@ const SITE_CONFIG = {
     {
       name: "Mark C. Winters",
       title: "Expert EOS Implementer\u00AE",
-      session: "Visionary Keynote",
+      session: "The 10 Pillars of Visionary Greatness",
       bio: "The Visionary/Integrator dynamic that powers great companies",
       time: "5:45 \u2013 7:15 PM",
       tier: "paid",
@@ -301,7 +301,7 @@ const SITE_CONFIG = {
 
       {
         time: "9:55 \u2013 10:45 AM",
-        session: "Strety - Title Sponsor Workshop",
+        session: "Journey with an EOS Implementer",
         location: "Grand Ballroom",
         speaker: "Strety \u00B7 Title Sponsor",
         tier: "free",
@@ -317,23 +317,23 @@ const SITE_CONFIG = {
       },
       {
         time: "11:00 AM \u2013 12:00 PM",
-        session: "The System of Selling - Title Sponsor Workshop",
+        session: "Your Sales Team Isn\u2019t the Problem. Your System Is.",
         location: "Grand Ballroom",
-        speaker: "The System of Selling \u00B7 Title Sponsor",
+        speaker: "The Sales Collective \u00B7 Title Sponsor",
         tier: "free",
         highlight: true
       },
       {
         time: "12:00 PM \u2013 1:00 PM",
-        session: "Lunch + Walt Brown, EOS Worldwide Head Coach",
+        session: "Lunch with Walt Brown: Healthy Matters",
         location: "Grand Ballroom",
-        speaker: "Walt Brown",
+        speaker: "Walt Brown \u00B7 Unlocking the power of Healthy. Introduction to the latest EOS Trust Builder \u2192 7 Critical Needs.",
         tier: "paid",
         highlight: true
       },
       {
         time: "1:00 \u2013 2:30 PM",
-        session: "Data Workshop",
+        session: "Profit Power: Stronger \u2014 or Just Bigger?",
         location: "Grand Ballroom",
         speaker: "Mark Stanley \u00B7 Expert EOS Implementer\u00AE",
         tier: "paid",
@@ -349,7 +349,7 @@ const SITE_CONFIG = {
       },
       {
         time: "2:50 \u2013 4:25 PM",
-        session: "Rollout Workshop",
+        session: "Rollout, Reworked: Your Plan for Running EOS\u00AE Company-Wide",
         location: "Grand Ballroom",
         speaker: "Beth Fahey \u00B7 Expert EOS Implementer\u00AE",
         tier: "paid",
@@ -366,7 +366,7 @@ const SITE_CONFIG = {
       },
       {
         time: "4:45 \u2013 6:15 PM",
-        session: "Visionary Keynote", location: "Grand Ballroom",
+        session: "The 10 Pillars of Visionary Greatness", location: "Grand Ballroom",
         speaker: "Mark C. Winters \u00B7 Expert EOS Implementer\u00AE",
         tier: "paid",
         highlight: true
