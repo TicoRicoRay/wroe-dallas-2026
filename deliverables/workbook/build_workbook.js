@@ -549,12 +549,12 @@ function sponsorsPage() {
   // per logo vs Happy Hour at 1-col, Book's height cap must be pushed up to compensate.
   // Prices: Title $10K, Book $9K, HH $6.5K, Lounge $5K, Swag $3.5K, Booth $1.5K.
   const TIER_LAYOUT = {
-    title:     { label: 'Title Sponsors',      cols: 1, maxH: 180 },  // $10K
-    book:      { label: 'Book Sponsors',       cols: 2, maxH: 170 },  // $9K — 2 col but taller to match value
-    happyHour: { label: 'Happy Hour Sponsor',  cols: 1, maxH: 110 },  // $6.5K
-    lounge:    { label: 'Lounge Sponsor',      cols: 1, maxH: 90  },  // $5K
-    swag:      { label: 'Swag Bag Sponsors',   cols: 2, maxH: 90  },  // $3.5K
-    booth:     { label: 'Booth Sponsors',      cols: 4, maxH: 60  },  // $1.5K
+    title:     { label: 'Title Sponsors',      cols: 2, maxH: 130 },  // $10K — 2 title sponsors, side by side
+    book:      { label: 'Book Sponsors',       cols: 2, maxH: 120 },  // $9K
+    happyHour: { label: 'Happy Hour Sponsor',  cols: 1, maxH: 100 },  // $6.5K
+    lounge:    { label: 'Lounge Sponsor',      cols: 1, maxH: 80  },  // $5K
+    swag:      { label: 'Swag Bag Sponsors',   cols: 2, maxH: 80  },  // $3.5K
+    booth:     { label: 'Booth Sponsors',      cols: 4, maxH: 55  },  // $1.5K
   };
   const tierOrder = ['title', 'book', 'happyHour', 'lounge', 'swag', 'booth'];
 
@@ -632,7 +632,7 @@ function sponsorsPage() {
           })],
         }));
 
-        const boxPadding = tk === 'title' ? 240 : tk === 'booth' ? 100 : 160;
+        const boxPadding = tk === 'title' ? 180 : tk === 'booth' ? 80 : 140;
         rowCells.push(cell({
           width: columnWidths[c], borders: lightBorders, shading: COLORS.white,
           align: VerticalAlign.CENTER,
