@@ -117,7 +117,7 @@ function addFooterBar(slide, opts = {}) {
     x: 0, y: 7.3, w: 13.333, h: 0.2,
     fill: { color: opts.barColor || ORANGE }, line: { color: opts.barColor || ORANGE },
   });
-  slide.addText('WE RUN ON EOS® NORTH TEXAS  ·  MAY 2026', {
+  slide.addText('WE RUN ON EOS® NORTH TEXAS  ·  SEPTEMBER 14, 2026', {
     x: 0.5, y: 7.05, w: 8, h: 0.25,
     fontSize: 9, fontFace: FONT_HEAD, color: fg, bold: true, charSpacing: 4,
   });
@@ -362,8 +362,35 @@ function makeSessionIntro(session, idx) {
   addFooterBar(s, { bg: NAVY, fg: 'D4DFEA' });
   s.addNotes(`EMCEE INTRO (30-45 seconds):\n\n${session.intro}`);
 
-  // NOTE: No placeholder content slide. Emcee inserts speaker's own deck
-  // after the intro slide during the live event.
+  // Speaker content placeholder — the presenter uses this slide as a working
+  // canvas or replaces it with their own deck material.
+  const p = pptx.addSlide();
+  p.background = { color: WHITE };
+  p.addText(session.title, {
+    x: 0.75, y: 0.55, w: 12, h: 0.55,
+    fontSize: 20, fontFace: FONT_HEAD, color: NAVY, bold: true,
+  });
+  p.addText(`${session.speaker}  ·  ${session.time}`, {
+    x: 0.75, y: 1.05, w: 12, h: 0.3,
+    fontSize: 11, fontFace: FONT_BODY, color: ORANGE, bold: true, charSpacing: 4,
+  });
+  // Thin orange rule under header
+  p.addShape('rect', { x: 0.75, y: 1.45, w: 1.2, h: 0.04, fill: { color: ORANGE }, line: { color: ORANGE } });
+  // Working canvas (subtle frame, not dashed)
+  p.addShape('roundRect', {
+    x: 0.75, y: 1.75, w: 11.8, h: 5.1,
+    fill: { color: BG_TINT }, line: { color: RULE, width: 0.75 }, rectRadius: 0.08,
+  });
+  p.addText('SPEAKER CONTENT', {
+    x: 0.75, y: 4.05, w: 11.8, h: 0.3,
+    fontSize: 11, fontFace: FONT_HEAD, color: 'A9B4C4', bold: true, charSpacing: 8, align: 'center',
+  });
+  p.addText('Replace this slide with your presentation, or use it as a working canvas.', {
+    x: 0.75, y: 4.4, w: 11.8, h: 0.4,
+    fontSize: 13, fontFace: FONT_BODY, color: 'A9B4C4', italic: true, align: 'center',
+  });
+  addFooterBar(p);
+  p.addNotes(`[Speaker canvas for ${session.speaker}. Replace with the presenter's deck, or annotate live.]`);
 }
 
 // ==============================================================
@@ -380,53 +407,39 @@ function makeBreakSlide(opts) {
     fontSize: 18, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 12, align: 'center',
   });
 
-  // Big countdown-style block (static — real countdown would need macros)
-  s.addText(duration, {
-    x: 0.5, y: 1.3, w: 12.333, h: 2.4,
-    fontSize: 200, fontFace: FONT_HEAD, color: WHITE, bold: true, align: 'center',
+  // Countdown number — objectName tagged so the VBA macro (in .pptm build) can find it
+  // and count down mm:ss in real time. In the plain .pptx build, it stays static at NN:00.
+  s.addText(`${duration}:00`, {
+    x: 0.5, y: 1.15, w: 12.333, h: 2.5,
+    fontSize: 180, fontFace: FONT_HEAD, color: WHITE, bold: true, align: 'center',
+    objectName: `CountdownTimer_${duration}`,
   });
-  s.addText('minute break', {
-    x: 0.5, y: 3.7, w: 12.333, h: 0.5,
-    fontSize: 22, fontFace: FONT_BODY, color: 'D4DFEA', italic: true, align: 'center',
+  s.addText('minutes remaining', {
+    x: 0.5, y: 3.75, w: 12.333, h: 0.4,
+    fontSize: 18, fontFace: FONT_BODY, color: 'D4DFEA', italic: true, align: 'center',
   });
   s.addText(`We resume at ${resumeAt}`, {
-    x: 0.5, y: 4.2, w: 12.333, h: 0.5,
-    fontSize: 22, fontFace: FONT_BODY, color: ORANGE, bold: true, align: 'center',
+    x: 0.5, y: 4.2, w: 12.333, h: 0.4,
+    fontSize: 18, fontFace: FONT_BODY, color: ORANGE, bold: true, align: 'center',
   });
 
-  // Sponsor strip — logos across the bottom
-  const stripY = 5.2, stripH = 1.6;
+  // Sponsor showcase — ALL sponsors, tier-organized in a compact 2-row strip
+  const stripY = 4.9, stripH = 2.4;
   s.addShape('rect', {
     x: 0.5, y: stripY, w: 12.333, h: stripH, fill: { color: WHITE }, line: { color: RULE, width: 0.5 },
   });
   s.addText('THANK YOU TO OUR SPONSORS', {
-    x: 0.5, y: stripY + 0.05, w: 12.333, h: 0.3,
+    x: 0.5, y: stripY + 0.08, w: 12.333, h: 0.28,
     fontSize: 10, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 6, align: 'center',
   });
-  // Place 6 top sponsors in a row (Title, Book, Happy Hour, Lounge)
-  const featured = getVerifiedSponsors()
-    .filter(sp => ['title', 'book', 'happyHour', 'lounge'].includes(sp.tier))
-    .slice(0, 6);
-  const logoCount = featured.length;
-  const stripPadX = 0.6;
-  const stripInnerW = 12.333 - stripPadX * 2;
-  const cellW = stripInnerW / logoCount;
-  const maxLogoH = 0.9;
-  const logoY = stripY + 0.4;
-  featured.forEach((sp, i) => {
-    const logo = resolveSponsorLogo(sp);
-    if (!logo) return;
-    const fit = fitBox(logo, cellW - 0.2, maxLogoH);
-    const cxCenter = 0.5 + stripPadX + cellW * i + cellW / 2;
-    s.addImage({
-      path: logo,
-      x: cxCenter - fit.w / 2,
-      y: logoY + (maxLogoH - fit.h) / 2,
-      w: fit.w, h: fit.h,
-    });
-  });
+  // Row 1: major sponsors (title + book + happyHour + lounge) = 6 logos, larger
+  const majors = getVerifiedSponsors().filter(sp => ['title', 'book', 'happyHour', 'lounge'].includes(sp.tier));
+  drawLogoRow(s, majors, { y: stripY + 0.45, maxH: 0.75, cols: majors.length, stripInnerW: 11.5, xLeft: 0.917 });
+  // Row 2: swag + booth = 10 logos, smaller
+  const community = getVerifiedSponsors().filter(sp => ['swag', 'booth'].includes(sp.tier));
+  drawLogoRow(s, community, { y: stripY + 1.4, maxH: 0.55, cols: community.length, stripInnerW: 11.9, xLeft: 0.717 });
   addFooterBar(s, { bg: NAVY, fg: 'D4DFEA' });
-  s.addNotes(notes || `[Break slide — auto-advances or manual. Displays sponsor logos while attendees are on break.]`);
+  s.addNotes(notes || `[Break slide. All sponsors displayed. Countdown timer available separately.]`);
 }
 
 // ==============================================================
@@ -569,24 +582,40 @@ function makeHappyHourClose() {
   const s = pptx.addSlide();
   s.background = { color: NAVY };
   s.addText('HAPPY HOUR', {
-    x: 0.5, y: 1.5, w: 12.333, h: 0.6,
+    x: 0.5, y: 0.9, w: 12.333, h: 0.5,
     fontSize: 22, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 12, align: 'center',
   });
   s.addText('6:15 PM', {
-    x: 0.5, y: 2.2, w: 12.333, h: 1.6,
-    fontSize: 140, fontFace: FONT_HEAD, color: WHITE, bold: true, align: 'center',
+    x: 0.5, y: 1.55, w: 12.333, h: 1.6,
+    fontSize: 130, fontFace: FONT_HEAD, color: WHITE, bold: true, align: 'center',
   });
-  s.addText('Sponsored by Ninety.io', {
-    x: 0.5, y: 4.1, w: 12.333, h: 0.5,
-    fontSize: 22, fontFace: FONT_BODY, color: ORANGE, italic: true, align: 'center',
-  });
+  // Ninety logo card — white background so brand renders correctly on navy
+  const ninetyLogo = path.join(SPONSOR_DIR, 'ninety.png');
+  if (fs.existsSync(ninetyLogo)) {
+    const cardW = 4.8, cardH = 1.5, cardX = (13.333 - cardW) / 2, cardY = 3.55;
+    s.addShape('roundRect', {
+      x: cardX, y: cardY, w: cardW, h: cardH,
+      fill: { color: WHITE }, line: { color: WHITE }, rectRadius: 0.1,
+    });
+    s.addText('SPONSORED BY', {
+      x: cardX, y: cardY + 0.12, w: cardW, h: 0.25,
+      fontSize: 10, fontFace: FONT_HEAD, color: TEXT_MUTED, bold: true, charSpacing: 6, align: 'center',
+    });
+    const fit = fitBox(ninetyLogo, cardW - 0.6, cardH - 0.55);
+    s.addImage({
+      path: ninetyLogo,
+      x: cardX + (cardW - fit.w) / 2,
+      y: cardY + 0.4 + ((cardH - 0.5) - fit.h) / 2,
+      w: fit.w, h: fit.h,
+    });
+  }
   s.addText('Stay. Meet someone new. Celebrate what you learned today.', {
-    x: 0.5, y: 5.1, w: 12.333, h: 0.6,
+    x: 0.5, y: 5.35, w: 12.333, h: 0.6,
     fontSize: 22, fontFace: FONT_BODY, color: WHITE, align: 'center', italic: true,
   });
   s.addText('See you next year.', {
-    x: 0.5, y: 5.9, w: 12.333, h: 0.5,
-    fontSize: 20, fontFace: FONT_BODY, color: 'D4DFEA', align: 'center',
+    x: 0.5, y: 6.05, w: 12.333, h: 0.5,
+    fontSize: 18, fontFace: FONT_BODY, color: 'D4DFEA', align: 'center',
   });
   addFooterBar(s, { bg: NAVY, fg: 'D4DFEA' });
   s.addNotes(

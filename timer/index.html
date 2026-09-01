@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break Timer — WRoEOS North Texas 2026</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy-light: #1A2E4A;
+    --orange: #E87722;
+    --white: #FFFFFF;
+    --muted: #D4DFEA;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Roboto', system-ui, sans-serif;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4vh 2vw;
+  }
+  .brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+    letter-spacing: 0.25em;
+    color: var(--orange);
+    margin-bottom: 1.5vh;
+  }
+  .label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
+    letter-spacing: 0.15em;
+    color: var(--orange);
+    margin-bottom: 3vh;
+    text-transform: uppercase;
+  }
+  #time {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(6rem, 28vw, 30rem);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s;
+    padding: 0 4vw;
+    max-width: 100vw;
+  }
+  #time.warning { color: #F5B369; }
+  #time.critical { color: #FF6B6B; }
+  #time.done { color: var(--orange); animation: pulse 1s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  .status {
+    margin-top: 3vh;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--muted);
+    font-style: italic;
+    min-height: 1.5em;
+  }
+  .controls {
+    position: fixed;
+    bottom: 3vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 1rem;
+    opacity: 0.35;
+    transition: opacity 0.2s;
+  }
+  .controls:hover, .controls:focus-within { opacity: 1; }
+  button, .preset {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid var(--muted);
+    padding: 0.65rem 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  button:hover, .preset:hover {
+    background: var(--white);
+    color: var(--navy);
+    border-color: var(--white);
+  }
+  button.primary {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--white);
+  }
+  button.primary:hover {
+    background: #B85A15;
+    border-color: #B85A15;
+    color: var(--white);
+  }
+  .hint {
+    position: fixed;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    color: var(--muted);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--orange);
+  }
+  @media (max-width: 600px) {
+    .controls { gap: 0.4rem; }
+    button, .preset { font-size: 0.7rem; padding: 0.5rem 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hint">SPACEBAR: start/pause  ·  R: reset  ·  F: fullscreen</div>
+
+<div class="brand">WRoEOS NORTH TEXAS 2026</div>
+<div class="label" id="label">BREAK TIMER</div>
+<div id="time">20:00</div>
+<div class="status" id="status">Press start</div>
+
+<div class="controls">
+  <button class="preset" data-minutes="10">10 MIN</button>
+  <button class="preset" data-minutes="15">15 MIN</button>
+  <button class="preset" data-minutes="20">20 MIN</button>
+  <button class="preset" data-minutes="25">25 MIN</button>
+  <button id="start" class="primary">START</button>
+  <button id="reset">RESET</button>
+  <button id="fullscreen">FULLSCREEN</button>
+</div>
+
+<div class="footer"></div>
+
+<audio id="chime" preload="auto">
+  <source src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQBvT19" type="audio/wav">
+</audio>
+
+<script>
+  const timeEl = document.getElementById('time');
+  const statusEl = document.getElementById('status');
+  const startBtn = document.getElementById('start');
+  const resetBtn = document.getElementById('reset');
+  const fsBtn = document.getElementById('fullscreen');
+  const chime = document.getElementById('chime');
+
+  let durationSec = 20 * 60;
+  let remainingSec = durationSec;
+  let running = false;
+  let intervalId = null;
+  let lastTick = null;
+
+  function fmt(sec) {
+    sec = Math.max(0, Math.round(sec));
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return m + ':' + String(s).padStart(2, '0');
+  }
+
+  function render() {
+    timeEl.textContent = fmt(remainingSec);
+    timeEl.classList.remove('warning', 'critical', 'done');
+    if (remainingSec <= 0) {
+      timeEl.classList.add('done');
+      timeEl.textContent = "TIME'S UP";
+      statusEl.textContent = 'Break is over — let\u2019s get back to it.';
+    } else if (remainingSec <= 60) {
+      timeEl.classList.add('critical');
+    } else if (remainingSec <= 180) {
+      timeEl.classList.add('warning');
+    }
+  }
+
+  function tick() {
+    const now = performance.now();
+    const dt = (now - lastTick) / 1000;
+    lastTick = now;
+    remainingSec -= dt;
+    if (remainingSec <= 0) {
+      remainingSec = 0;
+      stop();
+      playChime();
+    }
+    render();
+  }
+
+  function start() {
+    if (running || remainingSec <= 0) return;
+    running = true;
+    lastTick = performance.now();
+    intervalId = setInterval(tick, 250);
+    startBtn.textContent = 'PAUSE';
+    statusEl.textContent = 'Timer running.';
+  }
+
+  function stop() {
+    running = false;
+    if (intervalId) { clearInterval(intervalId); intervalId = null; }
+    startBtn.textContent = 'START';
+    if (remainingSec > 0) statusEl.textContent = 'Paused.';
+  }
+
+  function reset() {
+    stop();
+    remainingSec = durationSec;
+    startBtn.textContent = 'START';
+    statusEl.textContent = 'Press start';
+    render();
+  }
+
+  function setDuration(minutes) {
+    stop();
+    durationSec = minutes * 60;
+    remainingSec = durationSec;
+    render();
+    statusEl.textContent = minutes + '-minute break loaded. Press start.';
+  }
+
+  function playChime() {
+    // Fallback: use the Web Audio API to generate a bell tone in case the
+    // inline data-URI audio didn\u2019t play.
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [523, 659, 784].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.3);
+        gain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + i * 0.3 + 0.05);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.3 + 0.8);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(ctx.currentTime + i * 0.3);
+        osc.stop(ctx.currentTime + i * 0.3 + 0.8);
+      });
+    } catch (e) { /* silent */ }
+  }
+
+  // Preset buttons
+  document.querySelectorAll('.preset').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setDuration(parseInt(btn.dataset.minutes, 10));
+    });
+  });
+
+  startBtn.addEventListener('click', () => running ? stop() : start());
+  resetBtn.addEventListener('click', reset);
+  fsBtn.addEventListener('click', () => {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  });
+
+  // Keyboard shortcuts
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      running ? stop() : start();
+    } else if (e.key === 'r' || e.key === 'R') {
+      reset();
+    } else if (e.key === 'f' || e.key === 'F') {
+      fsBtn.click();
+    }
+  });
+
+  render();
+</script>
+</body>
+</html>
