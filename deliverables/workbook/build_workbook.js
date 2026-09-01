@@ -5,6 +5,14 @@
 const fs = require('fs');
 const path = require('path');
 const docx = require('docx');
+const { execSync } = require('child_process');
+
+// Read image dimensions via ImageMagick `identify` (already installed).
+function imageSize(imgPath) {
+  const out = execSync(`identify -format "%w %h" '${imgPath}'`).toString().trim();
+  const [w, h] = out.split(' ').map(Number);
+  return { w, h };
+}
 const {
   Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, ImageRun,
   Header, Footer, AlignmentType, PageOrientation, LevelFormat, ExternalHyperlink,
@@ -186,7 +194,7 @@ function coverPage() {
     spacing: { before: 2000, after: 200 },
     children: [new TextRun({
       text: 'FIFTH ANNUAL', font: FONT_HEAD, size: 22, bold: true,
-      color: COLORS.orange, characterSpacing: 200,
+      color: COLORS.orange,
     })],
   }));
   children.push(new Paragraph({
@@ -242,19 +250,42 @@ function coverPage() {
 
 // ==== WELCOME LETTER ====
 function welcomeLetter() {
-  return [
+  const paragraphs = [
+    'Welcome to the fifth annual We Run on EOS® North Texas. Today we come together as an EOS community — entrepreneurs, leadership teams, and the certified Implementers who serve them — to sharpen our tools, share what’s working, and get better at running our businesses.',
+    'If you’re running on EOS, this day is designed to make you stronger. World-class speakers. Practical workshops. Books you can actually use on Monday morning. And a room full of North Texas leaders who are on the same journey.',
+    'If you’re just getting started, welcome. You picked a great day to see what happens when a whole community rallies around one operating system. Ask questions. Take notes. Introduce yourself to the person next to you.',
+    'A few suggestions to make the most of the day:',
+  ];
+  const bullets = [
+    'Use this workbook. Every session has space for the ideas that hit you hardest.',
+    'Talk to the sponsors. They’re here because they believe in EOS and want to help you win.',
+    'Introduce yourself to at least three people you don’t know. Business is a team sport.',
+    'Come back at 6:15 for Happy Hour. Some of the best conversations of the day happen there.',
+  ];
+  const closing = [
+    'Here’s to a great day — stronger teams, healthier companies, and clearer visions.',
+    'Let’s get to work.',
+    '',
+    '— The North Texas EOS Community',
+  ];
+
+  const items = [
     H1('Welcome', { pageBreakBefore: true }),
     ruleLine(),
-    P('[Welcome letter — coming soon]', { italics: true, color: COLORS.textMuted, size: 22 }),
-    spacer(200),
-    P('Placeholder for the opening letter from the North Texas EOS® community.', { italics: true, color: COLORS.textMuted }),
-    spacer(200),
-    P('Suggested contents:', { bold: true }),
-    P('• Thanks to attendees, sponsors, and speakers'),
-    P('• Theme of the day / what to expect'),
-    P('• How to make the most of the workbook'),
-    P('• Sign-off from the host committee'),
   ];
+  paragraphs.forEach(t => items.push(P(t, { spacing: { after: 200 } })));
+  bullets.forEach(t => items.push(new Paragraph({
+    numbering: { reference: 'welcome-bullets', level: 0 },
+    spacing: { after: 100 },
+    children: [new TextRun({ text: t, font: FONT, size: 22, color: COLORS.text })],
+  })));
+  items.push(spacer(200));
+  closing.forEach(t => items.push(P(t, {
+    spacing: { after: 100 },
+    italics: t.startsWith('—'),
+    color: t.startsWith('—') ? COLORS.textMuted : COLORS.text,
+  })));
+  return items;
 }
 
 // ==== AGENDA ====
@@ -351,7 +382,7 @@ function speakerCoverPage(s) {
   const items = [];
   items.push(new Paragraph({
     pageBreakBefore: true, spacing: { before: 1200, after: 100 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: 'SESSION', font: FONT_HEAD, size: 20, bold: true, color: COLORS.orange, characterSpacing: 200 })],
+    children: [new TextRun({ text: 'SESSION', font: FONT_HEAD, size: 20, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 200 }, alignment: AlignmentType.LEFT,
@@ -374,7 +405,7 @@ function speakerCoverPage(s) {
   }));
   items.push(new Paragraph({
     spacing: { after: 60 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: 'PRESENTED BY', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange, characterSpacing: 200 })],
+    children: [new TextRun({ text: 'PRESENTED BY', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 40 }, alignment: AlignmentType.LEFT,
@@ -390,7 +421,7 @@ function speakerCoverPage(s) {
   // Placeholder body
   items.push(new Paragraph({
     alignment: AlignmentType.LEFT, spacing: { after: 100 },
-    children: [new TextRun({ text: 'CONTENT', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange, characterSpacing: 200 })],
+    children: [new TextRun({ text: 'CONTENT', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 200 }, alignment: AlignmentType.LEFT,
@@ -401,7 +432,7 @@ function speakerCoverPage(s) {
   items.push(pageBreak());
   items.push(new Paragraph({
     spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: s.speaker.toUpperCase() + ' · CONTENT', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange, characterSpacing: 200 })],
+    children: [new TextRun({ text: s.speaker.toUpperCase() + ' · CONTENT', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 200 }, alignment: AlignmentType.LEFT,
@@ -417,7 +448,7 @@ function speakerCoverPage(s) {
   items.push(pageBreak());
   items.push(new Paragraph({
     spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: s.speaker.toUpperCase() + ' · MY NOTES', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange, characterSpacing: 200 })],
+    children: [new TextRun({ text: s.speaker.toUpperCase() + ' · MY NOTES', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 300 }, alignment: AlignmentType.LEFT,
@@ -430,13 +461,22 @@ function speakerCoverPage(s) {
 }
 
 // ==== BOOKS PAGE ====
+// Fit an image into a bounding box while preserving aspect ratio.
+function fitBox(imgPath, maxW, maxH) {
+  const { w, h } = imageSize(imgPath);
+  const ratio = w / h;
+  let outW = maxW, outH = maxW / ratio;
+  if (outH > maxH) { outH = maxH; outW = maxH * ratio; }
+  return { w: Math.round(outW), h: Math.round(outH) };
+}
+
 function booksPage() {
   const BOOKS = [
     { title: 'Data', author: 'Mark Stanley', retail: '$20.66',
       description: 'Harness Your Numbers to Go from Uncertain to Unstoppable. A practical playbook for using data to drive decisions and accountability.',
       cover: path.join(__dirname, 'assets/books/data_cover.jpg') },
     { title: 'Rollout', author: 'Beth Fahey', retail: '$29.99',
-      description: 'Get Your Entire Team Running on EOS® to Achieve Your Vision. A field-tested guide for taking EOS deeper across your whole organization.',
+      description: 'Get Your Entire Team Running on EOS\u00ae to Achieve Your Vision. A field-tested guide for taking EOS deeper across your whole organization.',
       cover: path.join(__dirname, 'assets/books/rollout_cover.jpg') },
     { title: 'Visionary', author: 'Mark C. Winters', retail: '$29.99',
       description: 'How Driven Entrepreneurs Get What They Want Without Doing It All Themselves. The Visionary/Integrator dynamic that powers great companies.',
@@ -448,36 +488,40 @@ function booksPage() {
   items.push(ruleLine());
   items.push(P('Every Full Day ticket includes three hardcover books\u00a0— your working library from today\u2019s presenters.',
     { italics: true, color: COLORS.textMuted, size: 22 }));
-  items.push(spacer(200));
+  items.push(spacer(160));
 
   BOOKS.forEach((b) => {
+    // Aspect-correct cover, small enough to fit 3 on a page:
+    // Book covers are ~2:3 (portrait). Cap at 120px wide × 180px tall.
+    const fit = fitBox(b.cover, 120, 180);
     const row = new TableRow({
       cantSplit: true,
       children: [
         cell({
-          width: 2600, borders: noBorders,
+          width: 2000, borders: noBorders,
           align: VerticalAlign.TOP,
-          margins: { top: 100, bottom: 100, left: 0, right: 200 },
+          margins: { top: 80, bottom: 80, left: 0, right: 200 },
           children: [new Paragraph({
-            spacing: { after: 100 },
-            children: [image(b.cover, 165, 245)]
+            alignment: AlignmentType.LEFT,
+            spacing: { after: 60 },
+            children: [image(b.cover, fit.w, fit.h)]
           })],
         }),
         cell({
-          width: 7480, borders: noBorders, align: VerticalAlign.TOP,
-          margins: { top: 100, bottom: 100, left: 200, right: 0 },
+          width: 8080, borders: noBorders, align: VerticalAlign.TOP,
+          margins: { top: 80, bottom: 80, left: 200, right: 0 },
           children: [
             new Paragraph({
+              spacing: { after: 60 },
+              children: [new TextRun({ text: b.title, font: FONT_HEAD, size: 30, bold: true, color: COLORS.navy })],
+            }),
+            new Paragraph({
               spacing: { after: 80 },
-              children: [new TextRun({ text: b.title, font: FONT_HEAD, size: 34, bold: true, color: COLORS.navy })],
+              children: [new TextRun({ text: 'by ' + b.author + '  \u00b7  Retail ' + b.retail, font: FONT, size: 18, italics: true, color: COLORS.textMuted })],
             }),
             new Paragraph({
-              spacing: { after: 100 },
-              children: [new TextRun({ text: 'by ' + b.author + '  ·  Retail ' + b.retail, font: FONT, size: 20, italics: true, color: COLORS.textMuted })],
-            }),
-            new Paragraph({
-              spacing: { after: 100 },
-              children: [new TextRun({ text: b.description, font: FONT, size: 22, color: COLORS.text })],
+              spacing: { after: 60 },
+              children: [new TextRun({ text: b.description, font: FONT, size: 20, color: COLORS.text })],
             }),
           ],
         }),
@@ -485,10 +529,10 @@ function booksPage() {
     });
     items.push(new Table({
       width: { size: USABLE_W, type: WidthType.DXA },
-      columnWidths: [2600, 7480],
+      columnWidths: [2000, 8080],
       rows: [row],
     }));
-    items.push(spacer(240));
+    items.push(spacer(160));
   });
 
   return items;
@@ -496,27 +540,22 @@ function booksPage() {
 
 // ==== SPONSORS PAGE ====
 function sponsorsPage() {
-  const tiers = SITE_CONFIG.sponsors.tiers;
   const sponsors = SITE_CONFIG.sponsors.sponsors.filter(s => s.verified);
 
-  // Group sponsors by tier key
-  const tierKeyMap = {
-    'Title Sponsor': 'title',
-    'Book Sponsor': 'book',
-    'Happy Hour Sponsor': 'happyHour',
-    'Lounge Sponsor': 'lounge',
-    'Swag Bag Sponsor': 'swag',
-    'Booth Sponsor': 'booth',
+  // Tier configuration. Height caps scale with donation size so bigger sponsors get bigger logos.
+  // Title $10K → tallest, Booth $1.5K → smallest.
+  // maxH is a HARD height cap. Width is derived from column width so it always fits the cell.
+  // Cell inner width = (USABLE_W/cols)/15 px minus ~2*margin/15 (≈22px). We'll compute exactly below.
+  const TIER_LAYOUT = {
+    title:     { label: 'Title Sponsors',      cols: 1, maxH: 200 },  // $10K — hero
+    book:      { label: 'Book Sponsors',       cols: 2, maxH: 150 },  // $9K
+    happyHour: { label: 'Happy Hour Sponsor',  cols: 1, maxH: 140 },  // $6.5K
+    lounge:    { label: 'Lounge Sponsor',      cols: 1, maxH: 120 },  // $5K
+    swag:      { label: 'Swag Bag Sponsors',   cols: 2, maxH: 100 },  // $3.5K
+    booth:     { label: 'Booth Sponsors',      cols: 4, maxH: 70  },  // $1.5K
   };
   const tierOrder = ['title', 'book', 'happyHour', 'lounge', 'swag', 'booth'];
-  const tierLabel = {
-    title: 'Title Sponsors',
-    book: 'Book Sponsors',
-    happyHour: 'Happy Hour Sponsor',
-    lounge: 'Lounge Sponsor',
-    swag: 'Swag Bag Sponsors',
-    booth: 'Booth Sponsors',
-  };
+
   const grouped = {};
   sponsors.forEach(s => {
     grouped[s.tier] = grouped[s.tier] || [];
@@ -528,66 +567,85 @@ function sponsorsPage() {
   items.push(ruleLine());
   items.push(P('This day is made possible by the generosity of these North Texas businesses.',
     { italics: true, color: COLORS.textMuted, size: 22 }));
-  items.push(spacer(200));
+  items.push(spacer(160));
 
   tierOrder.forEach(tk => {
     const list = grouped[tk] || [];
     if (list.length === 0) return;
-    items.push(H3(tierLabel[tk]));
-    // 2-column grid of logos
-    const cols = 2;
+    const layout = TIER_LAYOUT[tk];
+    items.push(H3(layout.label));
+
+    const cols = layout.cols;
+    const colWidth = Math.floor(USABLE_W / cols);
+    const columnWidths = Array(cols).fill(colWidth);
+    // Adjust last col to make widths sum exactly to USABLE_W
+    columnWidths[cols - 1] += USABLE_W - columnWidths.reduce((a,b) => a+b, 0);
+
     for (let i = 0; i < list.length; i += cols) {
       const rowCells = [];
       for (let c = 0; c < cols; c++) {
         const s = list[i + c];
         if (!s) {
-          rowCells.push(cell({ width: 5040, borders: noBorders, children: [new Paragraph('')] }));
+          rowCells.push(cell({ width: columnWidths[c], borders: noBorders, children: [new Paragraph('')] }));
           continue;
         }
-        // Resolve local logo
-        const logoBase = path.basename(s.logo).replace(/\.(svg|jpg|jpeg|webp)$/i, '.png').replace(/\.png$/, '.png');
+        // Resolve local logo path
+        const logoBase = path.basename(s.logo).replace(/\.(svg|jpg|jpeg|webp)$/i, '.png');
         const localPath = path.join(__dirname, 'assets/sponsors', logoBase);
+
+        // Compute cell inner width in pixels: col width in DXA → px minus horizontal margins.
+        // DXA → px conversion is 1 px = 15 DXA (assuming 96 dpi).
+        const cellMarginDxa = 160 * 2; // left+right cell margins
+        const cellInnerPx = Math.floor((columnWidths[c] - cellMarginDxa) / 15) - 10; // 10px safety
+
         const cellChildren = [];
         try {
+          // Aspect-correct within tier max height AND cell inner width
+          const fit = fitBox(localPath, cellInnerPx, layout.maxH);
           cellChildren.push(new Paragraph({
-            alignment: AlignmentType.CENTER, spacing: { after: 100 },
-            children: [image(localPath, 200, 90)]
+            alignment: AlignmentType.CENTER, spacing: { after: 80 },
+            children: [image(localPath, fit.w, fit.h)]
           }));
         } catch (e) {
           cellChildren.push(new Paragraph({
-            alignment: AlignmentType.CENTER, spacing: { after: 100 },
+            alignment: AlignmentType.CENTER, spacing: { after: 80 },
             children: [new TextRun({ text: '[logo]', font: FONT, size: 18, color: COLORS.textMuted })]
           }));
         }
+        // Sponsor name & URL sized down for smaller tiers
+        const nameSize = tk === 'title' ? 26 : tk === 'book' || tk === 'happyHour' ? 22 : tk === 'booth' ? 16 : 18;
+        const urlSize  = tk === 'title' ? 20 : tk === 'booth' ? 12 : 14;
         cellChildren.push(new Paragraph({
-          alignment: AlignmentType.CENTER, spacing: { after: 40 },
-          children: [new TextRun({ text: s.name, font: FONT_HEAD, size: 22, bold: true, color: COLORS.navy })],
+          alignment: AlignmentType.CENTER, spacing: { after: 30 },
+          children: [new TextRun({ text: s.name, font: FONT_HEAD, size: nameSize, bold: true, color: COLORS.navy })],
         }));
         cellChildren.push(new Paragraph({
-          alignment: AlignmentType.CENTER, spacing: { after: 100 },
+          alignment: AlignmentType.CENTER, spacing: { after: 80 },
           children: [new ExternalHyperlink({
             link: s.url,
             children: [new TextRun({
               text: s.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''),
-              font: FONT, size: 18, color: COLORS.orange, style: 'Hyperlink',
+              font: FONT, size: urlSize, color: COLORS.orange, style: 'Hyperlink',
             })],
           })],
         }));
+
+        const boxPadding = tk === 'title' ? 240 : tk === 'booth' ? 100 : 160;
         rowCells.push(cell({
-          width: 5040, borders: lightBorders, shading: COLORS.white,
+          width: columnWidths[c], borders: lightBorders, shading: COLORS.white,
           align: VerticalAlign.CENTER,
-          margins: { top: 200, bottom: 200, left: 200, right: 200 },
+          margins: { top: boxPadding, bottom: boxPadding, left: 160, right: 160 },
           children: cellChildren,
         }));
       }
       items.push(new Table({
         width: { size: USABLE_W, type: WidthType.DXA },
-        columnWidths: [5040, 5040],
+        columnWidths,
         rows: [new TableRow({ cantSplit: true, children: rowCells })],
       }));
-      items.push(spacer(120));
+      items.push(spacer(100));
     }
-    items.push(spacer(200));
+    items.push(spacer(180));
   });
 
   return items;
@@ -755,8 +813,24 @@ backCover().forEach(c => allChildren.push(c));
 
 const doc = new Document({
   creator: 'WRoEOS North Texas',
-  title: 'WRoEOS North Texas 2026 — Attendee Workbook',
+  title: 'WRoEOS North Texas 2026 \u2014 Attendee Workbook',
   description: 'Attendee workbook',
+  numbering: {
+    config: [
+      {
+        reference: 'welcome-bullets',
+        levels: [
+          {
+            level: 0,
+            format: LevelFormat.BULLET,
+            text: '\u2022',
+            alignment: AlignmentType.LEFT,
+            style: { paragraph: { indent: { left: 720, hanging: 360 } } },
+          },
+        ],
+      },
+    ],
+  },
   styles: {
     default: { document: { run: { font: FONT, size: 22 } } },
     paragraphStyles: [
