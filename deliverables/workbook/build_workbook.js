@@ -95,6 +95,8 @@ function H3(text, opts = {}) {
   return new Paragraph({
     heading: HeadingLevel.HEADING_3,
     spacing: { before: 160, after: 80 },
+    keepNext: !!opts.keepNext,
+    keepLines: true,
     children: [new TextRun({
       text, font: FONT_HEAD, size: 26, bold: true,
       color: opts.color || COLORS.orange,
@@ -542,17 +544,17 @@ function booksPage() {
 function sponsorsPage() {
   const sponsors = SITE_CONFIG.sponsors.sponsors.filter(s => s.verified);
 
-  // Tier configuration. Height caps scale with donation size so bigger sponsors get bigger logos.
-  // Title $10K → tallest, Booth $1.5K → smallest.
-  // maxH is a HARD height cap. Width is derived from column width so it always fits the cell.
-  // Cell inner width = (USABLE_W/cols)/15 px minus ~2*margin/15 (≈22px). We'll compute exactly below.
+  // Tier configuration. Height caps chosen so that render area (≈ height × avg logo width)
+  // is proportional to sponsor tier price. Since Book at 2-col has half the horizontal room
+  // per logo vs Happy Hour at 1-col, Book's height cap must be pushed up to compensate.
+  // Prices: Title $10K, Book $9K, HH $6.5K, Lounge $5K, Swag $3.5K, Booth $1.5K.
   const TIER_LAYOUT = {
-    title:     { label: 'Title Sponsors',      cols: 1, maxH: 200 },  // $10K — hero
-    book:      { label: 'Book Sponsors',       cols: 2, maxH: 150 },  // $9K
-    happyHour: { label: 'Happy Hour Sponsor',  cols: 1, maxH: 140 },  // $6.5K
-    lounge:    { label: 'Lounge Sponsor',      cols: 1, maxH: 120 },  // $5K
-    swag:      { label: 'Swag Bag Sponsors',   cols: 2, maxH: 100 },  // $3.5K
-    booth:     { label: 'Booth Sponsors',      cols: 4, maxH: 70  },  // $1.5K
+    title:     { label: 'Title Sponsors',      cols: 1, maxH: 180 },  // $10K
+    book:      { label: 'Book Sponsors',       cols: 2, maxH: 170 },  // $9K — 2 col but taller to match value
+    happyHour: { label: 'Happy Hour Sponsor',  cols: 1, maxH: 110 },  // $6.5K
+    lounge:    { label: 'Lounge Sponsor',      cols: 1, maxH: 90  },  // $5K
+    swag:      { label: 'Swag Bag Sponsors',   cols: 2, maxH: 90  },  // $3.5K
+    booth:     { label: 'Booth Sponsors',      cols: 4, maxH: 60  },  // $1.5K
   };
   const tierOrder = ['title', 'book', 'happyHour', 'lounge', 'swag', 'booth'];
 
@@ -573,7 +575,7 @@ function sponsorsPage() {
     const list = grouped[tk] || [];
     if (list.length === 0) return;
     const layout = TIER_LAYOUT[tk];
-    items.push(H3(layout.label));
+    items.push(H3(layout.label, { keepNext: true }));
 
     const cols = layout.cols;
     const colWidth = Math.floor(USABLE_W / cols);
