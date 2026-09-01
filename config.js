@@ -319,7 +319,7 @@ const SITE_CONFIG = {
         time: "11:00 AM \u2013 12:00 PM",
         session: "Your Sales Team Isn\u2019t the Problem. Your System Is.",
         location: "Grand Ballroom",
-        speaker: "The Sales Collective \u00B7 Title Sponsor",
+        speaker: "The System of Selling \u00B7 Title Sponsor",
         tier: "free",
         highlight: true
       },
