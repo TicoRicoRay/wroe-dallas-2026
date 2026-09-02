@@ -407,7 +407,9 @@ const SPEAKER_SESSIONS = [
   { session_title: 'Rollout, Reworked: Your Plan for Running EOS® Company-Wide', speaker: 'Beth Fahey', title: 'Expert EOS Implementer®',
     time: '2:50 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1 },
   { session_title: 'The 10 Pillars of Visionary Greatness', speaker: 'Mark C. Winters', title: 'Expert EOS Implementer®',
-    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1 },
+    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1,
+    handout: { file: 'appendix/10-Pillars-Handout.pdf', pages: 2,
+      caption: 'The 10 Pillars of Visionary Greatness — full framework grid and Visionary book overview from Mark C. Winters.' } },
 ];
 
 function speakerCoverPage(s) {
@@ -460,21 +462,33 @@ function speakerCoverPage(s) {
     children: [new TextRun({ text: 'Coming soon — the presenter\u2019s slides and key takeaways will be printed here.', font: FONT, size: 22, italics: true, color: COLORS.textMuted })],
   }));
 
-  // 1 placeholder content page
+  // 1 content page: either presenter-handout lead-in (spliced in later)
+  // or a generic placeholder.
   items.push(pageBreak());
   items.push(new Paragraph({
     spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: s.session_title.toUpperCase() + ' · CONTENT', font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
+    children: [new TextRun({ text: s.session_title.toUpperCase() + ' · HANDOUT', font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 200 }, alignment: AlignmentType.LEFT,
     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
     children: [new TextRun('')],
   }));
-  items.push(new Paragraph({
-    spacing: { after: 200 },
-    children: [new TextRun({ text: '[Content placeholder — 1 to 4 pages provided by the presenter.]', font: FONT, size: 22, italics: true, color: COLORS.textMuted })],
-  }));
+  if (s.handout) {
+    items.push(new Paragraph({
+      spacing: { after: 240 },
+      children: [new TextRun({ text: s.handout.caption, font: FONT, size: 22, color: COLORS.text })],
+    }));
+    items.push(new Paragraph({
+      spacing: { after: 120 },
+      children: [new TextRun({ text: 'The next ' + s.handout.pages + ' pages are the presenter\u2019s handout, printed at full size. Turn the workbook sideways for the framework grid.', font: FONT, size: 20, italics: true, color: COLORS.textMuted })],
+    }));
+  } else {
+    items.push(new Paragraph({
+      spacing: { after: 200 },
+      children: [new TextRun({ text: '[Content placeholder — 1 to 4 pages provided by the presenter.]', font: FONT, size: 22, italics: true, color: COLORS.textMuted })],
+    }));
+  }
 
   // Notes pages (per session's notes_pages count, default 1)
   const notesPages = s.notes_pages != null ? s.notes_pages : 1;
