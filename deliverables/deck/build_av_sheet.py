@@ -51,7 +51,7 @@ def header_footer(canv, doc):
     # Bottom rule + footer
     canv.setFillColor(MUTED)
     canv.setFont("DMSans-Regular", 8)
-    canv.drawString(0.6 * inch, 0.35 * inch, "AV Team Instructions  \u00b7  Print single-sided, one page")
+    canv.drawString(0.6 * inch, 0.35 * inch, "AV Team Instructions  \u00b7  Print single-sided, 2 pages")
     canv.drawRightString(letter[0] - 0.6 * inch, 0.35 * inch, "eosnorthtexas.com")
     canv.restoreState()
 
@@ -162,6 +162,43 @@ tbl_event.setStyle(TableStyle([
 ]))
 story.append(tbl_event)
 
+# --------- Section: Speaker deck handoffs ---------
+story.append(Paragraph("SPEAKER DECK HANDOFFS  \u2014  TWO SESSIONS OPEN AN EXTERNAL FILE", h2))
+
+story.append(Paragraph(
+    "Two sessions do <b>not</b> present from inside the master deck. When you reach their canvas slide, "
+    "the slide itself will say <b>OPEN PRESENTER DECK</b> and name the file. Follow these steps:",
+    body,
+))
+
+steps_handoff = [
+    ["1", "When the emcee finishes the intro and you land on the <b>OPEN PRESENTER DECK</b> slide, press <b>Esc</b> to exit the show."],
+    ["2", "Double-click the named file inside the <b>speaker-decks\\</b> folder (same folder as Deck.pptx):<br/>"
+          "&nbsp;&nbsp;&nbsp;&nbsp;\u2022 Walt Brown (12:00 lunch): <b>Profit-Power-Deck.pptx</b><br/>"
+          "&nbsp;&nbsp;&nbsp;&nbsp;\u2022 Mark C. Winters (4:45 closer): <b>10-Pillars-of-Visionary-Greatness.pptx</b>"],
+    ["3", "Press <b>F5</b> in the speaker file to run their deck. The presenter drives it."],
+    ["4", "When the session ends, press <b>Esc</b>, close the speaker file, switch back to <b>Deck.pptx</b>, and resume the <b>Event</b> custom show on the next slide (press F5, then use \u2018By slide\u2019 or advance from the current slide)."],
+]
+tbl_handoff = Table(
+    [[Paragraph(n, step_num), Paragraph(t, step_body)] for n, t in steps_handoff],
+    colWidths=[0.4 * inch, 6.7 * inch],
+)
+tbl_handoff.setStyle(TableStyle([
+    ("VALIGN", (0, 0), (-1, -1), "TOP"),
+    ("LEFTPADDING", (0, 0), (-1, -1), 0),
+    ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+    ("TOPPADDING", (0, 0), (-1, -1), 3),
+    ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+]))
+story.append(tbl_handoff)
+
+story.append(Paragraph(
+    "Both speaker files must be copied to the presentation laptop <b>before</b> the event, in the "
+    "<b>speaker-decks\\</b> folder sitting next to Deck.pptx. The master deck references them by "
+    "filename only.",
+    callout,
+))
+
 # --------- Section: Break countdown ---------
 story.append(Paragraph("BREAK COUNTDOWN TIMERS", h2))
 break_body = (
@@ -180,6 +217,7 @@ qref_data = [
     ["Playback app", "Microsoft PowerPoint (desktop) \u2014 required for timings"],
     ["Pre-event loop", "Slides 1\u20135, auto-advance 15s, loop until Esc"],
     ["Event show", "Slides 6\u201327, manual click-to-advance"],
+    ["Speaker decks", "speaker-decks\\ folder \u2014 Walt (slide 16), Winters (slide 26)"],
     ["Break timer URL", "eosnorthtexas.com/timer"],
     ["Backup handoff", "If timings misfire, click through slides 1\u20135 manually"],
 ]

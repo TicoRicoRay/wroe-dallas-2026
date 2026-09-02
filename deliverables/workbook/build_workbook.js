@@ -362,22 +362,26 @@ function agendaPage() {
 }
 
 // ==== SPEAKER SECTIONS ====
+// notes_pages: number of blank-lined notes pages after the content placeholder.
+// Per Shane Spillers (9/2/2026), Ann / Strety / System of Selling get 2 (so both
+// facing pages of the open workbook are notes lines); Walt lunch gets 1.
 const SPEAKER_SESSIONS = [
   { session_title: 'Get a Grip on your Business with EOS', speaker: 'Ann Sheu', title: 'Certified EOS Implementer®',
-    time: '8:00 – 9:35 AM', slug: 'ann-sheu' },
+    time: '8:00 – 9:35 AM', slug: 'ann-sheu', notes_pages: 2 },
   { session_title: 'Journey with an EOS Implementer', speaker: 'Strety', title: 'Title Sponsor',
-    time: '9:55 – 10:45 AM', slug: 'strety', is_sponsor: true },
+    time: '9:55 – 10:45 AM', slug: 'strety', is_sponsor: true, notes_pages: 2 },
   { session_title: 'Your Sales Team Isn\u2019t the Problem. Your System Is.', speaker: 'The System of Selling', title: 'Title Sponsor',
-    time: '11:00 AM – 12:00 PM', slug: 'system-of-selling', is_sponsor: true },
+    time: '11:00 AM – 12:00 PM', slug: 'system-of-selling', is_sponsor: true, notes_pages: 2 },
   { session_title: 'Lunch with Walt Brown: Healthy Matters', speaker: 'Walt Brown', title: 'EOS Worldwide Head Coach',
     time: '12:00 – 1:00 PM', slug: 'walt-brown',
-    subtitle: 'Unlocking the power of Healthy. Introduction to the latest EOS Trust Builder → 7 Critical Needs.' },
+    subtitle: 'Unlocking the power of Healthy. Introduction to the latest EOS Trust Builder → 7 Critical Needs.',
+    notes_pages: 1 },
   { session_title: 'Profit Power: Stronger — or Just Bigger?', speaker: 'Mark Stanley', title: 'Expert EOS Implementer®',
-    time: '1:00 – 2:30 PM', slug: 'mark-stanley' },
+    time: '1:00 – 2:30 PM', slug: 'mark-stanley', notes_pages: 1 },
   { session_title: 'Rollout, Reworked: Your Plan for Running EOS® Company-Wide', speaker: 'Beth Fahey', title: 'Expert EOS Implementer®',
-    time: '2:50 – 4:25 PM', slug: 'beth-fahey' },
+    time: '2:50 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1 },
   { session_title: 'The 10 Pillars of Visionary Greatness', speaker: 'Mark C. Winters', title: 'Expert EOS Implementer®',
-    time: '4:45 – 6:15 PM', slug: 'mark-c-winters' },
+    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1 },
 ];
 
 function speakerCoverPage(s) {
@@ -446,18 +450,24 @@ function speakerCoverPage(s) {
     children: [new TextRun({ text: '[Content placeholder — 1 to 4 pages provided by the presenter.]', font: FONT, size: 22, italics: true, color: COLORS.textMuted })],
   }));
 
-  // Notes page (12 note lines)
-  items.push(pageBreak());
-  items.push(new Paragraph({
-    spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: s.session_title.toUpperCase() + ' · MY NOTES', font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
-  }));
-  items.push(new Paragraph({
-    spacing: { after: 300 }, alignment: AlignmentType.LEFT,
-    border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
-    children: [new TextRun('')],
-  }));
-  items.push(noteLinesTable(20));
+  // Notes pages (per session's notes_pages count, default 1)
+  const notesPages = s.notes_pages != null ? s.notes_pages : 1;
+  for (let i = 0; i < notesPages; i++) {
+    items.push(pageBreak());
+    const heading = notesPages > 1
+      ? s.session_title.toUpperCase() + ` · MY NOTES (${i + 1}/${notesPages})`
+      : s.session_title.toUpperCase() + ' · MY NOTES';
+    items.push(new Paragraph({
+      spacing: { after: 120 }, alignment: AlignmentType.LEFT,
+      children: [new TextRun({ text: heading, font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
+    }));
+    items.push(new Paragraph({
+      spacing: { after: 300 }, alignment: AlignmentType.LEFT,
+      border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
+      children: [new TextRun('')],
+    }));
+    items.push(noteLinesTable(20));
+  }
 
   return items;
 }

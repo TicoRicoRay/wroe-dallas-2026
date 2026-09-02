@@ -1,0 +1,6 @@
+# Scratch: raw materials pulled from Gmail (speaker decks, handouts, awards media).
+# Anything committed for use in the event deck / workbook lives under deliverables/.
+inbox-materials/
+
+# Local node deps
+node_modules/

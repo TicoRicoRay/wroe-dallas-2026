@@ -74,6 +74,7 @@ const SESSIONS = [
     speaker: 'Walt Brown',
     credential: 'EOS Worldwide Head Coach',
     intro: "Grab your lunch and settle in — this isn't a break, it's a treat. Walt Brown, EOS Worldwide Head Coach and author, is going to unpack the power of Healthy and introduce the latest EOS Trust Builder — the 7 Critical Needs. Please welcome Walt Brown.",
+    externalDeck: 'Profit-Power-Deck.pptx',
   },
   {
     time: '1:00 – 2:30 PM',
@@ -95,6 +96,7 @@ const SESSIONS = [
     speaker: 'Mark C. Winters',
     credential: 'Expert EOS Implementer®',
     intro: "We save the very best for last. Mark C. Winters — Expert EOS Implementer and co-author of Rocket Fuel and Visionary — is going to walk us through the ten pillars of Visionary greatness. Please welcome Mark C. Winters.",
+    externalDeck: '10-Pillars-of-Visionary-Greatness.pptx',
   },
 ];
 
@@ -362,8 +364,8 @@ function makeSessionIntro(session, idx) {
   addFooterBar(s, { bg: NAVY, fg: 'D4DFEA' });
   s.addNotes(`EMCEE INTRO (30-45 seconds):\n\n${session.intro}`);
 
-  // Speaker content placeholder — the presenter uses this slide as a working
-  // canvas or replaces it with their own deck material.
+  // Speaker content placeholder — either a working canvas or an explicit
+  // handoff card pointing at the speaker's own deck (staged in ./speaker-decks/).
   const p = pptx.addSlide();
   p.background = { color: WHITE };
   p.addText(session.title, {
@@ -376,21 +378,54 @@ function makeSessionIntro(session, idx) {
   });
   // Thin orange rule under header
   p.addShape('rect', { x: 0.75, y: 1.45, w: 1.2, h: 0.04, fill: { color: ORANGE }, line: { color: ORANGE } });
-  // Working canvas (subtle frame, not dashed)
-  p.addShape('roundRect', {
-    x: 0.75, y: 1.75, w: 11.8, h: 5.1,
-    fill: { color: BG_TINT }, line: { color: RULE, width: 0.75 }, rectRadius: 0.08,
-  });
-  p.addText('SPEAKER CONTENT', {
-    x: 0.75, y: 4.05, w: 11.8, h: 0.3,
-    fontSize: 11, fontFace: FONT_HEAD, color: 'A9B4C4', bold: true, charSpacing: 8, align: 'center',
-  });
-  p.addText('Replace this slide with your presentation, or use it as a working canvas.', {
-    x: 0.75, y: 4.4, w: 11.8, h: 0.4,
-    fontSize: 13, fontFace: FONT_BODY, color: 'A9B4C4', italic: true, align: 'center',
-  });
-  addFooterBar(p);
-  p.addNotes(`[Speaker canvas for ${session.speaker}. Replace with the presenter's deck, or annotate live.]`);
+
+  if (session.externalDeck) {
+    // Handoff card: presenter opens their own file for the actual session content.
+    p.addShape('roundRect', {
+      x: 0.75, y: 1.75, w: 11.8, h: 5.1,
+      fill: { color: NAVY }, line: { color: NAVY }, rectRadius: 0.08,
+    });
+    p.addText('OPEN PRESENTER DECK', {
+      x: 0.75, y: 2.4, w: 11.8, h: 0.4,
+      fontSize: 12, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 10, align: 'center',
+    });
+    p.addText(session.externalDeck, {
+      x: 0.75, y: 2.95, w: 11.8, h: 0.9,
+      fontSize: 36, fontFace: FONT_HEAD, color: WHITE, bold: true, align: 'center',
+    });
+    p.addText(`located in \\speaker-decks\\  ·  presenter drives from here`, {
+      x: 0.75, y: 4.05, w: 11.8, h: 0.4,
+      fontSize: 14, fontFace: FONT_BODY, color: 'D4DFEA', italic: true, align: 'center',
+    });
+    p.addText('When session ends, press Esc and return to this master deck to continue.', {
+      x: 0.75, y: 5.6, w: 11.8, h: 0.4,
+      fontSize: 12, fontFace: FONT_BODY, color: 'A9B4C4', align: 'center',
+    });
+    addFooterBar(p, { bg: NAVY, fg: 'D4DFEA' });
+    p.addNotes(
+      `AV HANDOFF for ${session.speaker}:\n\n` +
+      `1. Press Esc to exit this master deck.\n` +
+      `2. Open speaker-decks\\${session.externalDeck} in PowerPoint.\n` +
+      `3. Press F5 to run the presenter's deck.\n` +
+      `4. When they finish, Esc and re-open Deck.pptx > Custom Show > Event to continue on the next slide.`
+    );
+  } else {
+    // Working canvas (subtle frame, not dashed)
+    p.addShape('roundRect', {
+      x: 0.75, y: 1.75, w: 11.8, h: 5.1,
+      fill: { color: BG_TINT }, line: { color: RULE, width: 0.75 }, rectRadius: 0.08,
+    });
+    p.addText('SPEAKER CONTENT', {
+      x: 0.75, y: 4.05, w: 11.8, h: 0.3,
+      fontSize: 11, fontFace: FONT_HEAD, color: 'A9B4C4', bold: true, charSpacing: 8, align: 'center',
+    });
+    p.addText('Replace this slide with your presentation, or use it as a working canvas.', {
+      x: 0.75, y: 4.4, w: 11.8, h: 0.4,
+      fontSize: 13, fontFace: FONT_BODY, color: 'A9B4C4', italic: true, align: 'center',
+    });
+    addFooterBar(p);
+    p.addNotes(`[Speaker canvas for ${session.speaker}. Replace with the presenter's deck, or annotate live.]`);
+  }
 }
 
 // ==============================================================
