@@ -9,7 +9,7 @@ pptxgenjs 4.0.1 has no API for either, so we edit the OOXML directly.
 
 2. Two Custom Shows in ppt/presentation.xml:
      - "Pre-Event Loop" (slides 1-5)
-     - "Event"          (slides 6-28)
+     - "Event"          (slides 6-N, where N is the last slide of the deck)
    Insert <p:custShowLst>...</p:custShowLst> after </p:sldIdLst>.
    Slides are referenced by the r:id values found in the sldIdLst mapping.
 """

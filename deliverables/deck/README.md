@@ -1,32 +1,43 @@
-# WRoEOS North Texas 2026 — Event Deck
+# WRoEOS North Texas 2026 — Event Deck (Paid-Day / PM Scope)
+
+## Scope
+
+This deck covers the **paid afternoon only**. The free morning (Ann Sheu,
+Strety, System of Selling) and Walt Brown’s lunch (Healthy Matters / 7 Critical
+Needs) are **not** in this deck — they run from their own materials. The
+pre-event loop is designed to play from ~12:30 PM as guests return from lunch;
+the Event show starts at Mark Stanley’s 1:00 PM session.
 
 ## Files
 
-- `Deck.pptx` — main presentation deck (28 slides). Open in PowerPoint or Google Slides.
+- `Deck.pptx` — main presentation deck (17 slides, 16:9). Open in PowerPoint (desktop) for timings.
+- `speaker-decks/` — external presenter decks referenced by the master deck:
+  - `Profit-Power-Deck.pptx` — Mark Stanley (1:00 PM)
+  - `10-Pillars-of-Visionary-Greatness.pptx` — Mark C. Winters (4:45 PM)
 - `CountdownTimer.bas` — VBA source for adding a live mm:ss countdown timer to the break slides. Optional.
 - `build_deck.js` — generator script (Node.js + pptxgenjs). Run `node build_deck.js` to rebuild.
+- `post_build_timings.py` — injects 15s auto-advance on slides 1–5 and defines the two Custom Shows.
+- `build_av_sheet.py` — generates the 2-page `AV-Team-Instructions.pdf` handout.
 
-## Deck contents (28 slides)
+## Deck contents (17 slides)
 
 | # | Slide | Notes |
 |---|---|---|
-| 1–5 | Pre-event loop | Welcome, Wi-Fi, Essentials, Hashtag, Countdown to 8:00 |
-| 6 | Emcee open — Fifth Annual welcome | 60–90s notes |
-| 7 | Session 1 intro — Ann Sheu | + speaker canvas (slide 8) |
-| 9 | Morning break — 20 min + all sponsors | |
-| 10 | Session 2 intro — Strety | + canvas (11) |
-| 12 | Transition — 15 min | |
-| 13 | Session 3 intro — System of Selling | + canvas (14) |
-| 15 | Session 4 intro — Walt Brown lunch | + canvas (16), runs continuously into Mark Stanley |
-| 17 | Session 5 intro — Mark Stanley | + canvas (18) |
-| 19 | Afternoon break — 20 min | |
-| 20 | Session 6 intro — Beth Fahey | + canvas (21) |
-| 22 | Final break — 20 min | |
-| 23 | Sponsor thank-you page 1 — Title/Book/Happy Hour/Lounge | |
-| 24 | Sponsor thank-you page 2 — Swag Bag + Booth | |
-| 25 | Session 7 intro — Mark C. Winters | + canvas (26) |
-| 27 | Happy Hour close — 6:15 PM with Ninety.io logo | |
+| 1–5 | Pre-event loop | Welcome (“Afternoon Program · Resumes at 1:00 PM”), Wi-Fi, Essentials, Hashtag, Countdown to 1:00 |
+| 6 | Emcee open — Fifth Annual welcome back from lunch | 60–90s notes |
+| 7 | Session 1 cover — Mark Stanley (1:00–2:30 PM) | |
+| 8 | Mark Stanley canvas | OPEN PRESENTER DECK → `speaker-decks/Profit-Power-Deck.pptx` |
+| 9 | Afternoon break — 20 min | |
+| 10 | Session 2 cover — Beth Fahey (2:50–4:25 PM) | |
+| 11 | Beth Fahey canvas | Presenter drives from here inside the master deck |
+| 12 | Final break — 20 min | |
+| 13 | Sponsor thank-you page 1 — Title/Book/Happy Hour/Lounge | |
+| 14 | Sponsor thank-you page 2 — Swag Bag + Booth | |
+| 15 | Session 3 cover — Mark C. Winters (4:45–6:15 PM) | |
+| 16 | Winters canvas | OPEN PRESENTER DECK → `speaker-decks/10-Pillars-of-Visionary-Greatness.pptx` |
+| 17 | Happy Hour close — 6:15 PM with Ninety.io logo | |
 
+Custom Shows: **Pre-Event Loop** = slides 1–5, **Event** = slides 6–17.
 Every non-speaker slide has emcee notes in the Notes pane.
 
 ## Adding the live countdown timer (optional)
@@ -69,5 +80,7 @@ Open it on a second display or a laptop screen visible to the emcee. Presets for
 ```bash
 cd /home/user/workspace/wroe-dallas-2026/deliverables/deck
 NODE_PATH=/home/user/node_modules node build_deck.js
+python post_build_timings.py
 python /home/user/workspace/skills/office/pptx/scripts/repair.py Deck.pptx
+python build_av_sheet.py     # rebuilds AV-Team-Instructions.pdf
 ```

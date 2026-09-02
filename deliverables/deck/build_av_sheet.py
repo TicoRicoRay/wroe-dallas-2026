@@ -111,10 +111,15 @@ step_body = ParagraphStyle(
 story = []
 
 story.append(Paragraph("AV Team \u2014 Deck Playback Guide", h1))
-story.append(Paragraph("One PowerPoint file. Two playback modes: pre-event loop and event.", h1_sub))
+story.append(Paragraph("One PowerPoint file, paid-day (PM) scope. Two playback modes: pre-event loop and event.", h1_sub))
+
+story.append(Paragraph(
+    "<b>Scope:</b> This deck covers the paid afternoon only. The free morning (Ann Sheu, Strety, System of Selling) and Walt Brown\u2019s lunch are <b>not</b> in this deck \u2014 they run separately from their own materials. The pre-event loop is designed to play from ~12:30 PM as guests return from lunch, and the Event show starts at Mark Stanley\u2019s 1:00 PM session.",
+    callout,
+))
 
 # --------- Section: Before doors open ---------
-story.append(Paragraph("BEFORE DOORS OPEN  \u2014  START THE PRE-EVENT LOOP", h2))
+story.append(Paragraph("BEFORE THE PM PROGRAM  \u2014  START THE PRE-EVENT LOOP AT ~12:30 PM", h2))
 
 steps_pre = [
     ["1", "Open <b>Deck.pptx</b> in PowerPoint (desktop). Google Slides and Keynote do <b>not</b> support the auto-advance timings \u2014 use Microsoft PowerPoint."],
@@ -166,7 +171,7 @@ story.append(tbl_event)
 story.append(Paragraph("SPEAKER DECK HANDOFFS  \u2014  TWO SESSIONS OPEN AN EXTERNAL FILE", h2))
 
 story.append(Paragraph(
-    "Two sessions do <b>not</b> present from inside the master deck. When you reach their canvas slide, "
+    "Two of the three PM sessions do <b>not</b> present from inside the master deck. When you reach their canvas slide, "
     "the slide itself will say <b>OPEN PRESENTER DECK</b> and name the file. Follow these steps:",
     body,
 ))
@@ -174,8 +179,8 @@ story.append(Paragraph(
 steps_handoff = [
     ["1", "When the emcee finishes the intro and you land on the <b>OPEN PRESENTER DECK</b> slide, press <b>Esc</b> to exit the show."],
     ["2", "Double-click the named file inside the <b>speaker-decks\\</b> folder (same folder as Deck.pptx):<br/>"
-          "&nbsp;&nbsp;&nbsp;&nbsp;\u2022 Walt Brown (12:00 lunch): <b>Profit-Power-Deck.pptx</b><br/>"
-          "&nbsp;&nbsp;&nbsp;&nbsp;\u2022 Mark C. Winters (4:45 closer): <b>10-Pillars-of-Visionary-Greatness.pptx</b>"],
+          "&nbsp;&nbsp;&nbsp;&nbsp;\u2022 Mark Stanley (1:00 PM opener): <b>Profit-Power-Deck.pptx</b> \u2014 lands on <b>slide 8</b><br/>"
+          "&nbsp;&nbsp;&nbsp;&nbsp;\u2022 Mark C. Winters (4:45 PM closer): <b>10-Pillars-of-Visionary-Greatness.pptx</b> \u2014 lands on <b>slide 16</b>"],
     ["3", "Press <b>F5</b> in the speaker file to run their deck. The presenter drives it."],
     ["4", "When the session ends, press <b>Esc</b>, close the speaker file, switch back to <b>Deck.pptx</b>, and resume the <b>Event</b> custom show on the next slide (press F5, then use \u2018By slide\u2019 or advance from the current slide)."],
 ]
@@ -213,11 +218,11 @@ story.append(Paragraph(break_body, body))
 story.append(Paragraph("QUICK REFERENCE", h2))
 
 qref_data = [
-    ["Deck file", "Deck.pptx (27 slides, 16:9)"],
+    ["Deck file", "Deck.pptx (17 slides, 16:9) \u2014 paid PM only"],
     ["Playback app", "Microsoft PowerPoint (desktop) \u2014 required for timings"],
-    ["Pre-event loop", "Slides 1\u20135, auto-advance 15s, loop until Esc"],
-    ["Event show", "Slides 6\u201327, manual click-to-advance"],
-    ["Speaker decks", "speaker-decks\\ folder \u2014 Walt (slide 16), Winters (slide 26)"],
+    ["Pre-event loop", "Slides 1\u20135, auto-advance 15s, loop until Esc (plays ~12:30\u20131:00 PM)"],
+    ["Event show", "Slides 6\u201317, manual click-to-advance (starts at 1:00 PM emcee open)"],
+    ["Speaker decks", "speaker-decks\\ folder \u2014 Mark Stanley (slide 8), Winters (slide 16)"],
     ["Break timer URL", "eosnorthtexas.com/timer"],
     ["Backup handoff", "If timings misfire, click through slides 1\u20135 manually"],
 ]

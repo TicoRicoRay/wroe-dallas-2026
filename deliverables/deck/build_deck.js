@@ -44,44 +44,18 @@ const FONT_BODY = 'Calibri';
 const SPONSOR_DIR = path.join(__dirname, '../workbook/assets/sponsors');
 const BOOKS_DIR   = path.join(__dirname, '../workbook/assets/books');
 
-// ====== SPEAKER SESSIONS (with emcee intros) ======
+// ====== SPEAKER SESSIONS (paid PM only) ======
+// Free morning + Walt's lunch are NOT in this deck. The Event show starts at
+// Mark Stanley (1:00 PM). Two of the three sessions hand off to an external
+// speaker deck under speaker-decks/.
 const SESSIONS = [
-  {
-    time: '8:00 – 9:35 AM',
-    title: 'Get a Grip on your Business with EOS',
-    speaker: 'Ann Sheu',
-    credential: 'Certified EOS Implementer®',
-    intro: "Our opening session is designed to give you the foundation of the Entire Entrepreneurial Operating System. Whether this is your first exposure to EOS or your fifth year running on it, Ann Sheu is going to help you get a grip on your business. Please welcome Certified EOS Implementer Ann Sheu.",
-  },
-  {
-    time: '9:55 – 10:45 AM',
-    title: 'Journey with an EOS Implementer',
-    speaker: 'Strety',
-    credential: 'Title Sponsor',
-    intro: "This next session comes from our title sponsor, Strety. They're going to walk us through the real-world journey of running EOS with the right tools — the ups, the downs, and the breakthroughs. Please welcome Strety.",
-  },
-  {
-    time: '11:00 AM – 12:00 PM',
-    title: "Your Sales Team Isn't the Problem. Your System Is.",
-    speaker: 'The System of Selling',
-    credential: 'Title Sponsor',
-    intro: "If you've ever wondered why your sales team is missing quota — this session is going to reframe the entire conversation. Our title sponsor, The System of Selling, is going to show you why the problem is almost never the people. Please welcome The System of Selling.",
-  },
-  {
-    time: '12:00 – 1:00 PM',
-    title: 'Lunch with Walt Brown: Healthy Matters',
-    subtitle: 'Unlocking the power of Healthy. Introduction to the latest EOS Trust Builder → 7 Critical Needs.',
-    speaker: 'Walt Brown',
-    credential: 'EOS Worldwide Head Coach',
-    intro: "Grab your lunch and settle in — this isn't a break, it's a treat. Walt Brown, EOS Worldwide Head Coach and author, is going to unpack the power of Healthy and introduce the latest EOS Trust Builder — the 7 Critical Needs. Please welcome Walt Brown.",
-    externalDeck: 'Profit-Power-Deck.pptx',
-  },
   {
     time: '1:00 – 2:30 PM',
     title: 'Profit Power: Stronger — or Just Bigger?',
     speaker: 'Mark Stanley',
     credential: 'Expert EOS Implementer®',
     intro: "In this session we're going to challenge one of the most common assumptions in business — that growth equals health. Mark Stanley, Expert EOS Implementer and author of Data, is going to help you decide whether you're really getting stronger or just getting bigger. Please welcome Mark Stanley.",
+    externalDeck: 'Profit-Power-Deck.pptx',
   },
   {
     time: '2:50 – 4:25 PM',
@@ -175,7 +149,7 @@ function makePreEventLoop() {
       x: 0.5, y: 3.1, w: 12.333, h: 0.8,
       fontSize: 44, fontFace: FONT_HEAD, color: WHITE, align: 'center',
     });
-    s.addText('Doors open at 7:30 AM  ·  Program begins at 8:00 AM', {
+    s.addText('Afternoon Program  ·  Resumes at 1:00 PM', {
       x: 0.5, y: 4.5, w: 12.333, h: 0.5,
       fontSize: 22, fontFace: FONT_BODY, color: ORANGE, align: 'center', italic: true,
     });
@@ -184,7 +158,7 @@ function makePreEventLoop() {
       fontSize: 16, fontFace: FONT_BODY, color: WHITE, align: 'center',
     });
     addFooterBar(s, { bg: NAVY, fg: WHITE, barColor: ORANGE });
-    s.addNotes('[Pre-event loop — no emcee needed. Slide auto-advances every 15 seconds.]');
+    s.addNotes('[Pre-event loop — plays 12:30–1:00 PM as guests return from Walt Brown’s lunch. No emcee needed. Slide auto-advances every 15 seconds.]');
   }
   // Slide 2: Wi-Fi
   {
@@ -276,7 +250,7 @@ function makePreEventLoop() {
       x: 0.5, y: 1.8, w: 12.333, h: 0.6,
       fontSize: 20, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 12, align: 'center',
     });
-    s.addText('8:00', {
+    s.addText('1:00', {
       x: 0.5, y: 2.5, w: 12.333, h: 2.4,
       fontSize: 220, fontFace: FONT_HEAD, color: WHITE, bold: true, align: 'center',
     });
@@ -285,7 +259,7 @@ function makePreEventLoop() {
       fontSize: 22, fontFace: FONT_BODY, color: WHITE, italic: true, align: 'center',
     });
     addFooterBar(s, { bg: NAVY, fg: WHITE });
-    s.addNotes('[Pre-event loop — no emcee needed. Displays 5 minutes before 8:00 to prompt seating.]');
+    s.addNotes('[Pre-event loop — no emcee needed. Displays 5 minutes before 1:00 PM to prompt seating.]');
   }
 }
 
@@ -309,17 +283,17 @@ function makeEmceeOpen() {
     x: 0.75, y: 3.15, w: 12, h: 0.9,
     fontSize: 46, fontFace: FONT_HEAD, color: NAVY,
   });
-  s.addText('Welcome — let\u2019s get started.', {
+  s.addText('Welcome back — let\u2019s bring it home.', {
     x: 0.75, y: 4.6, w: 12, h: 0.6,
     fontSize: 22, fontFace: FONT_BODY, color: TEXT_MUTED, italic: true,
   });
   addFooterBar(s);
   s.addNotes(
-    "EMCEE OPEN (60-90 seconds):\n\n" +
-    "Good morning, North Texas! Welcome to the fifth annual We Run on EOS North Texas. My name is [emcee name] and I'm going to be your host today.\n\n" +
-    "Real quick, a few housekeeping items. Restrooms are down the main hallway on your right. Wi-Fi is up on the screens if you need it. Please silence your phones — not turn them off, silence them — because we want you posting from every session today. The hashtag is #WRoENorthTexas2026.\n\n" +
-    "Today is going to be a full day of world-class content. Seven speakers. Three hardcover books included with your ticket. Fifteen sponsors who believe in this community. And a Happy Hour at the end that you will not want to miss.\n\n" +
-    "Let's kick this off. Please welcome to the stage our opening keynote — Certified EOS Implementer Ann Sheu."
+    "EMCEE OPEN (60-90 seconds) — Paid-Day Return from Lunch:\n\n" +
+    "Welcome back, North Texas. Hope you enjoyed lunch and the conversation with Walt Brown — the 7 Critical Needs is going to stick with you.\n\n" +
+    "Quick reminders as we get into the paid workshops. Restrooms are down the main hallway on your right. Wi-Fi info is on the pre-event slides if you missed it. Please silence your phones — not off, silence — because we want you posting from every session this afternoon. Hashtag is #WRoENorthTexas2026.\n\n" +
+    "This afternoon: three of the best Expert EOS Implementers in the country, three hardcover books in your bag, and a Happy Hour at 6:15 that you will not want to miss.\n\n" +
+    "Let\u2019s kick this off. Please welcome to the stage — Expert EOS Implementer and author of Data, Mark Stanley."
   );
 }
 
@@ -664,35 +638,23 @@ function makeHappyHourClose() {
 // ==============================================================
 // BUILD THE DECK
 // ==============================================================
+// Paid-PM assembly. Free morning + Walt's lunch are NOT in this deck.
+// Pre-event loop plays 12:30–1:00 PM as guests return from lunch.
 makePreEventLoop();
 makeEmceeOpen();
-// Session 1: Ann Sheu
+// Session 1 (paid PM): Mark Stanley
 makeSessionIntro(SESSIONS[0], 0);
-makeBreakSlide({ label: 'Morning Break', duration: '20', resumeAt: '9:55 AM',
-  notes: 'EMCEE (20 seconds): "Twenty minute break — visit our sponsors in the lobby, refill your coffee, and be back in your seats by 9:55. We come back with our title sponsor Strety."'});
-// Session 2: Strety
-makeSessionIntro(SESSIONS[1], 1);
-makeBreakSlide({ label: 'Transition', duration: '15', resumeAt: '11:00 AM',
-  notes: 'EMCEE (15 seconds): "Quick fifteen-minute stretch. Grab water. We come back with The System of Selling."'});
-// Session 3: System of Selling
-makeSessionIntro(SESSIONS[2], 2);
-// Lunch loop + Walt Brown
-// Lunch is a full session with Walt Brown (12:00–1:00). Mark Stanley starts at 1:00.
-// No break slide between them — the room stays seated.
-makeSessionIntro(SESSIONS[3], 3);
-// Session 4: Mark Stanley
-makeSessionIntro(SESSIONS[4], 4);
 makeBreakSlide({ label: 'Afternoon Break', duration: '20', resumeAt: '2:50 PM',
   notes: 'EMCEE (20 seconds): "Twenty minute break. Sponsor lounge is open — say hi. Back at 2:50 with Beth Fahey."'});
-// Session 5: Beth Fahey
-makeSessionIntro(SESSIONS[5], 5);
+// Session 2 (paid PM): Beth Fahey
+makeSessionIntro(SESSIONS[1], 1);
 makeBreakSlide({ label: 'Final Break', duration: '20', resumeAt: '4:45 PM',
   notes: 'EMCEE: "Last break of the day, twenty minutes. Stretch, refuel, then we bring it home with Mark C. Winters."'});
 // Sponsor thank-you before final session (2 slides)
 makeSponsorThankYou();
 makeSponsorThankYou2();
-// Session 6: Mark C. Winters
-makeSessionIntro(SESSIONS[6], 6);
+// Session 3 (paid PM): Mark C. Winters
+makeSessionIntro(SESSIONS[2], 2);
 // Close
 makeHappyHourClose();
 
