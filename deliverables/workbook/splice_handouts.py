@@ -28,6 +28,10 @@ HANDOUTS = [
         WORKBOOK_DIR / "appendix" / "Profit-Power-Handout.pdf",
     ),
     (
+        "PRESENTED BY BETH FAHEY",
+        WORKBOOK_DIR / "appendix" / "Rollout-Handout.pdf",
+    ),
+    (
         "PRESENTED BY MARK C. WINTERS",
         WORKBOOK_DIR / "appendix" / "10-Pillars-Handout.pdf",
     ),
