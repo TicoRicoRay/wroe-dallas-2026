@@ -403,7 +403,9 @@ function agendaPage() {
 // begins 1:00 PM with Mark Stanley).
 const SPEAKER_SESSIONS = [
   { session_title: 'Profit Power: Stronger — or Just Bigger?', speaker: 'Mark Stanley', title: 'Expert EOS Implementer®',
-    time: '1:00 – 2:30 PM', slug: 'mark-stanley', notes_pages: 1 },
+    time: '1:00 – 2:30 PM', slug: 'mark-stanley', notes_pages: 1,
+    handout: { file: 'appendix/Profit-Power-Handout.pdf', pages: 2,
+      caption: 'Profit Power — The 5-Number Income Statement™ worksheet from Mark Stanley. Fill it in during the session.' } },
   { session_title: 'Rollout, Reworked: Your Plan for Running EOS® Company-Wide', speaker: 'Beth Fahey', title: 'Expert EOS Implementer®',
     time: '2:50 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1 },
   { session_title: 'The 10 Pillars of Visionary Greatness', speaker: 'Mark C. Winters', title: 'Expert EOS Implementer®',
@@ -450,45 +452,9 @@ function speakerCoverPage(s) {
     children: [new TextRun({ text: s.title, font: FONT, size: 22, italics: true, color: COLORS.textMuted })],
   }));
 
-  items.push(new Paragraph({ spacing: { before: 800 }, children: [new TextRun('')] }));
-
-  // Placeholder body
-  items.push(new Paragraph({
-    alignment: AlignmentType.LEFT, spacing: { after: 100 },
-    children: [new TextRun({ text: 'CONTENT', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange })],
-  }));
-  items.push(new Paragraph({
-    spacing: { after: 200 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: 'Coming soon — the presenter\u2019s slides and key takeaways will be printed here.', font: FONT, size: 22, italics: true, color: COLORS.textMuted })],
-  }));
-
-  // 1 content page: either presenter-handout lead-in (spliced in later)
-  // or a generic placeholder.
-  items.push(pageBreak());
-  items.push(new Paragraph({
-    spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: s.session_title.toUpperCase() + ' · HANDOUT', font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
-  }));
-  items.push(new Paragraph({
-    spacing: { after: 200 }, alignment: AlignmentType.LEFT,
-    border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
-    children: [new TextRun('')],
-  }));
-  if (s.handout) {
-    items.push(new Paragraph({
-      spacing: { after: 240 },
-      children: [new TextRun({ text: s.handout.caption, font: FONT, size: 22, color: COLORS.text })],
-    }));
-    items.push(new Paragraph({
-      spacing: { after: 120 },
-      children: [new TextRun({ text: 'The next ' + s.handout.pages + ' pages are the presenter\u2019s handout, printed at full size. Turn the workbook sideways for the framework grid.', font: FONT, size: 20, italics: true, color: COLORS.textMuted })],
-    }));
-  } else {
-    items.push(new Paragraph({
-      spacing: { after: 200 },
-      children: [new TextRun({ text: '[Content placeholder — 1 to 4 pages provided by the presenter.]', font: FONT, size: 22, italics: true, color: COLORS.textMuted })],
-    }));
-  }
+  // SESSION cover flows straight into MY NOTES.
+  // Handouts (when present) are spliced in by splice_handouts.py between
+  // this cover page and the notes page(s), anchored on the speaker name.
 
   // Notes pages (per session's notes_pages count, default 1)
   const notesPages = s.notes_pages != null ? s.notes_pages : 1;
@@ -921,18 +887,11 @@ const doc = new Document({
         first: new Header({ children: [new Paragraph('')] }),  // hide on cover
       },
       footers: {
-        default: new Footer({
-          children: [new Paragraph({
-            alignment: AlignmentType.CENTER, spacing: { before: 100 },
-            children: [
-              new TextRun({ text: 'Page ', font: FONT, size: 16, color: COLORS.textMuted }),
-              new TextRun({ children: [PageNumber.CURRENT], font: FONT, size: 16, color: COLORS.textMuted }),
-              new TextRun({ text: ' of ', font: FONT, size: 16, color: COLORS.textMuted }),
-              new TextRun({ children: [PageNumber.TOTAL_PAGES], font: FONT, size: 16, color: COLORS.textMuted }),
-            ],
-          })],
-        }),
-        first: new Footer({ children: [new Paragraph('')] }),  // hide on cover
+        // Page numbers are applied post-build by paginate_workbook.py so
+        // they stay consistent across the Word pages AND the spliced-in
+        // presenter handout pages. Leave the docx footer empty.
+        default: new Footer({ children: [new Paragraph('')] }),
+        first: new Footer({ children: [new Paragraph('')] }),
       },
     },
   ],

@@ -2,13 +2,9 @@
 """
 Splice presenter handout PDFs into Workbook.pdf.
 
-Each session in SPEAKER_SESSIONS with a `handout` gets its handout PDF
-inserted after the session's own HANDOUT lead-in page, before the MY NOTES
-page.
-
-Currently, only Mark C. Winters' session has a handout. This script is
-generic — it walks the workbook's text pages to find the correct insertion
-point via the "· HANDOUT" heading on the lead-in page.
+Each handout is inserted directly after its speaker's SESSION cover page,
+before that session's MY NOTES page. The SESSION cover is the natural
+anchor — it uniquely identifies the session via the presenter's name.
 
 Input:  Workbook.pdf (Word export)
 Output: Workbook.pdf (rewritten in place, with appendix pages spliced in)
@@ -22,13 +18,17 @@ from pypdf import PdfReader, PdfWriter
 WORKBOOK_DIR = Path(__file__).parent
 WORKBOOK_PDF = WORKBOOK_DIR / "Workbook.pdf"
 
-# (heading_text_substring_on_leadin_page, handout_pdf_path)
-# The heading substring must uniquely identify the session's HANDOUT lead-in
-# page (page immediately following the SESSION cover). We match on the
-# session_title.upper() + " · HANDOUT" string emitted by build_workbook.js.
+# (anchor_text_on_session_cover, handout_pdf_path)
+# The anchor must uniquely identify the SESSION cover page. We use
+# "PRESENTED BY" + speaker name — both strings appear together on the
+# session cover and nowhere else in the workbook.
 HANDOUTS = [
     (
-        "THE 10 PILLARS OF VISIONARY GREATNESS · HANDOUT",
+        "PRESENTED BY MARK STANLEY",
+        WORKBOOK_DIR / "appendix" / "Profit-Power-Handout.pdf",
+    ),
+    (
+        "PRESENTED BY MARK C. WINTERS",
         WORKBOOK_DIR / "appendix" / "10-Pillars-Handout.pdf",
     ),
 ]
@@ -38,11 +38,11 @@ def find_page_index(reader: PdfReader, needle: str) -> int:
     """Return the 0-indexed page number whose extracted text contains needle."""
     for i, page in enumerate(reader.pages):
         text = page.extract_text() or ""
-        # normalize whitespace so line breaks inside the heading don't defeat us
+        # normalize whitespace so line breaks inside the anchor don't defeat us
         norm = re.sub(r"\s+", " ", text).upper()
         if needle.upper() in norm:
             return i
-    raise RuntimeError(f"Could not find lead-in page containing: {needle}")
+    raise RuntimeError(f"Could not find session cover page containing: {needle}")
 
 
 def main() -> int:
@@ -56,12 +56,12 @@ def main() -> int:
 
     # Resolve insertion points BEFORE splicing (indices are stable in the source).
     inserts = []  # list of (source_index, handout_pdf_path)
-    for heading, handout_path in HANDOUTS:
+    for anchor, handout_path in HANDOUTS:
         if not handout_path.exists():
             print(f"error: handout not found: {handout_path}", file=sys.stderr)
             return 1
-        idx = find_page_index(reader, heading)
-        print(f"  found '{heading}' at page {idx + 1}")
+        idx = find_page_index(reader, anchor)
+        print(f"  found '{anchor}' at page {idx + 1}")
         inserts.append((idx, handout_path))
 
     # Sort ascending so we can walk pages once.
