@@ -69,12 +69,21 @@ def main() -> int:
 
     writer = PdfWriter()
     insert_ptr = 0
+    rotated = 0
     for i in range(n_pages):
         writer.add_page(reader.pages[i])
         if insert_ptr < len(inserts) and inserts[insert_ptr][0] == i:
             handout_path = inserts[insert_ptr][1]
             h_reader = PdfReader(str(handout_path))
             for h_page in h_reader.pages:
+                # Rotate landscape handout pages 90° clockwise so the whole
+                # workbook prints in portrait. Attendees turn the book 90°
+                # to read them, matching the presenter's original layout.
+                w = float(h_page.mediabox.width)
+                h = float(h_page.mediabox.height)
+                if w > h:
+                    h_page.rotate(90)
+                    rotated += 1
                 writer.add_page(h_page)
             print(f"  spliced {len(h_reader.pages)} page(s) from {handout_path.name} after page {i + 1}")
             insert_ptr += 1
@@ -84,7 +93,7 @@ def main() -> int:
         writer.write(f)
 
     final_reader = PdfReader(str(out_path))
-    print(f"OK -> {out_path.name} ({len(final_reader.pages)} pages)")
+    print(f"OK -> {out_path.name} ({len(final_reader.pages)} pages, {rotated} landscape handout page(s) rotated to portrait)")
     return 0
 
 
