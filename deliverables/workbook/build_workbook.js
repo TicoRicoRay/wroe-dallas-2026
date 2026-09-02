@@ -321,32 +321,66 @@ function agendaPage() {
     const stripe = i % 2 === 0 ? COLORS.white : COLORS.bgTint;
     const speaker = (r.speaker || '').split(' · ')[0] || '';
     const highlight = r.highlight;
+    // The workbook covers the PM (paid) sessions only, starting at Mark Stanley
+    // 1:00 PM. Everything scheduled before that — including Walt's lunch talk —
+    // is shown on the agenda page for context but styled as "not covered here".
+    const START_HOUR = '1:00';
+    const isContextOnly = r.tier === 'free' || r.time.startsWith('7:') ||
+      r.time.startsWith('8:') || r.time.startsWith('9:') ||
+      r.time.startsWith('10:') || r.time.startsWith('11:') ||
+      r.time.startsWith('12:');
+    const isFree = isContextOnly;
+
+    // Context-only rows read as "listed for reference".
+    // Time → muted; session title → muted italic; presenter → muted.
+    const timeColor    = isFree ? COLORS.textMuted : COLORS.navy;
+    const sessionColor = isFree ? COLORS.textMuted : (highlight ? COLORS.text : COLORS.textMuted);
+    const sessionBold  = isFree ? false : highlight;
+    const sessionItal  = isFree;
+
+    // Compose session cell. First context-only row gets a tag explaining the scope.
+    const sessionChildren = [
+      new TextRun({
+        text: r.session, font: FONT, size: highlight ? 22 : 20,
+        bold: sessionBold, italics: sessionItal, color: sessionColor,
+      }),
+    ];
+    const sessionParas = [new Paragraph({ children: sessionChildren })];
+    if (isFree && !agendaPage._freeTagged) {
+      agendaPage._freeTagged = true;
+      sessionParas.push(new Paragraph({
+        spacing: { before: 40 },
+        children: [new TextRun({
+          text: 'MORNING SESSIONS — NOT COVERED IN THIS WORKBOOK',
+          font: FONT_HEAD, size: 14, bold: true, color: COLORS.orange,
+        })],
+      }));
+    }
+
     tableRows.push(new TableRow({
       children: [
         cell({
           width: 2200, shading: stripe, borders: noBorders,
           margins: { top: 100, bottom: 100, left: 140, right: 100 },
           children: [new Paragraph({
-            children: [new TextRun({ text: r.time, font: FONT, size: 20, bold: true, color: COLORS.navy })] })]
+            children: [new TextRun({ text: r.time, font: FONT, size: 20, bold: !isFree, color: timeColor })] })]
         }),
         cell({
           width: 5680, shading: stripe, borders: noBorders,
           margins: { top: 100, bottom: 100, left: 140, right: 100 },
-          children: [new Paragraph({
-            children: [new TextRun({
-              text: r.session, font: FONT, size: highlight ? 22 : 20,
-              bold: highlight, color: highlight ? COLORS.text : COLORS.textMuted,
-            })] })]
+          children: sessionParas,
         }),
         cell({
           width: 2200, shading: stripe, borders: noBorders,
           margins: { top: 100, bottom: 100, left: 140, right: 100 },
           children: [new Paragraph({
-            children: [new TextRun({ text: speaker, font: FONT, size: 18, color: COLORS.textMuted })] })]
+            children: [new TextRun({ text: speaker, font: FONT, size: 18, italics: isFree, color: COLORS.textMuted })] })]
         }),
       ],
     }));
   });
+  // reset the once-per-render flag so subsequent builds still tag correctly
+  agendaPage._freeTagged = false;
 
   return [
     H1('Agenda', { pageBreakBefore: true }),
@@ -362,20 +396,12 @@ function agendaPage() {
 }
 
 // ==== SPEAKER SECTIONS ====
-// notes_pages: number of blank-lined notes pages after the content placeholder.
-// Per Shane Spillers (9/2/2026), Ann / Strety / System of Selling get 2 (so both
-// facing pages of the open workbook are notes lines); Walt lunch gets 1.
+// PAID-DAY WORKBOOK ONLY.
+// The free morning (Ann Sheu, Strety, System of Selling) is listed on the
+// agenda page for context but does NOT get session pages in this workbook.
+// Walt Brown's lunch talk is not in the paid workbook either (paid content
+// begins 1:00 PM with Mark Stanley).
 const SPEAKER_SESSIONS = [
-  { session_title: 'Get a Grip on your Business with EOS', speaker: 'Ann Sheu', title: 'Certified EOS Implementer®',
-    time: '8:00 – 9:35 AM', slug: 'ann-sheu', notes_pages: 2 },
-  { session_title: 'Journey with an EOS Implementer', speaker: 'Strety', title: 'Title Sponsor',
-    time: '9:55 – 10:45 AM', slug: 'strety', is_sponsor: true, notes_pages: 2 },
-  { session_title: 'Your Sales Team Isn\u2019t the Problem. Your System Is.', speaker: 'The System of Selling', title: 'Title Sponsor',
-    time: '11:00 AM – 12:00 PM', slug: 'system-of-selling', is_sponsor: true, notes_pages: 2 },
-  { session_title: 'Lunch with Walt Brown: Healthy Matters', speaker: 'Walt Brown', title: 'EOS Worldwide Head Coach',
-    time: '12:00 – 1:00 PM', slug: 'walt-brown',
-    subtitle: 'Unlocking the power of Healthy. Introduction to the latest EOS Trust Builder → 7 Critical Needs.',
-    notes_pages: 1 },
   { session_title: 'Profit Power: Stronger — or Just Bigger?', speaker: 'Mark Stanley', title: 'Expert EOS Implementer®',
     time: '1:00 – 2:30 PM', slug: 'mark-stanley', notes_pages: 1 },
   { session_title: 'Rollout, Reworked: Your Plan for Running EOS® Company-Wide', speaker: 'Beth Fahey', title: 'Expert EOS Implementer®',
