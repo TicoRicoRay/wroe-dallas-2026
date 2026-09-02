@@ -76,13 +76,15 @@ def main() -> int:
             handout_path = inserts[insert_ptr][1]
             h_reader = PdfReader(str(handout_path))
             for h_page in h_reader.pages:
-                # Rotate landscape handout pages 90° clockwise so the whole
-                # workbook prints in portrait. Attendees turn the book 90°
-                # to read them, matching the presenter's original layout.
+                # Rotate landscape handout pages 270° (i.e. 90° counter-
+                # clockwise) so the handout's TOP aligns with the book's
+                # SPINE (left edge). Reader rotates the bound book 90°
+                # counter-clockwise to read — standard convention for
+                # landscape content in a portrait-bound book.
                 w = float(h_page.mediabox.width)
                 h = float(h_page.mediabox.height)
                 if w > h:
-                    h_page.rotate(90)
+                    h_page.rotate(270)
                     rotated += 1
                 writer.add_page(h_page)
             print(f"  spliced {len(h_reader.pages)} page(s) from {handout_path.name} after page {i + 1}")
