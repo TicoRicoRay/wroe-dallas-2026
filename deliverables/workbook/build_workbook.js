@@ -466,7 +466,7 @@ function speakerCoverPage(s) {
           cell({
             width: PHOTO_W, borders: noBorders,
             align: VerticalAlign.TOP,
-            margins: { top: 0, bottom: 0, left: 0, right: 240 },
+            margins: { top: 0, bottom: 0, left: 0, right: 480 },
             children: [new Paragraph({
               alignment: AlignmentType.LEFT, spacing: { after: 0 },
               children: [image(photoPath, 144, 144)],
@@ -475,7 +475,7 @@ function speakerCoverPage(s) {
           cell({
             width: BIO_W, borders: noBorders,
             align: VerticalAlign.TOP,
-            margins: { top: 0, bottom: 0, left: 0, right: 0 },
+            margins: { top: 0, bottom: 0, left: 240, right: 0 },
             children: [new Paragraph({
               alignment: AlignmentType.LEFT, spacing: { after: 0, line: 300 },
               children: [new TextRun({ text: s.bio, font: FONT, size: 20, color: COLORS.text })],
