@@ -346,16 +346,6 @@ function agendaPage() {
       }),
     ];
     const sessionParas = [new Paragraph({ children: sessionChildren })];
-    if (isFree && !agendaPage._freeTagged) {
-      agendaPage._freeTagged = true;
-      sessionParas.push(new Paragraph({
-        spacing: { before: 40 },
-        children: [new TextRun({
-          text: 'MORNING SESSIONS — NOT COVERED IN THIS WORKBOOK',
-          font: FONT_HEAD, size: 14, bold: true, color: COLORS.orange,
-        })],
-      }));
-    }
 
     tableRows.push(new TableRow({
       children: [
@@ -379,9 +369,6 @@ function agendaPage() {
       ],
     }));
   });
-  // reset the once-per-render flag so subsequent builds still tag correctly
-  agendaPage._freeTagged = false;
-
   return [
     H1('Agenda', { pageBreakBefore: true }),
     ruleLine(),
