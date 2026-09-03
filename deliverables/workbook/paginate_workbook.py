@@ -1,22 +1,15 @@
 #!/usr/bin/env python3
 """
-Overlay consistent page numbers on Workbook.pdf.
+Overlay page numbers on Workbook.pdf.
 
-Runs AFTER splice_handouts.py, so it sees the final page order (Word
-pages + spliced-in presenter handouts) and paints "Page N of TOTAL" on
-every page except the cover.
+Runs AFTER splice_handouts.py so it sees the final page order (Word
+pages + spliced-in presenter handouts) and paints the page number in
+the BOTTOM-RIGHT corner of every workbook page except the cover.
+Only the number is drawn — no "of N" suffix.
 
-Placement is per-page:
-- Workbook pages (Word-generated, contain 'WRoEOS North Texas 2026'
-  in the running header): TOP CENTER.
-- Handout pages (spliced from appendix/, no workbook running header):
-  BOTTOM RIGHT, so we don't collide with presenter-branded top bars,
-  logos, or copyright footers.
+Handout pages (spliced from appendix/) are left untouched.
 
-Uses reportlab to build a same-size overlay PDF, then pypdf to merge.
-
-Font: Helvetica 9pt, color #7A7974 (text muted from Nexus palette,
-matches the workbook's own muted-text color used elsewhere).
+Font: Helvetica 9pt, color #7A7974 (text muted from Nexus palette).
 """
 import io
 import sys
@@ -33,7 +26,7 @@ WORKBOOK_PDF = WORKBOOK_DIR / "Workbook.pdf"
 PAGENUM_COLOR = HexColor("#7A7974")
 PAGENUM_FONT = "Helvetica"
 PAGENUM_SIZE = 9
-PAGENUM_TOP_MARGIN_PT = 22   # ~ 0.3" down from top edge
+PAGENUM_MARGIN_PT = 36   # ~ 0.5" from the right/bottom edges
 
 # Pages to skip (1-indexed).
 # Page 1 is the cover — no page number.
@@ -41,19 +34,22 @@ SKIP_PAGES = {1}
 
 # Marker string that identifies a workbook (Word-generated) page.
 # Every workbook page except the cover has this in its running header.
-WORKBOOK_HEADER_MARKER = "WRoEOS North Texas 2026"
+# Header is now two lines: "We Run ON EOS®" / "North Texas 2026".
+# We match on the second (stable) line so a stray glyph in the first
+# doesn't defeat detection.
+WORKBOOK_HEADER_MARKER = "North Texas 2026"
 
 
 def build_overlay(page_num: int, total: int, width: float, height: float) -> bytes:
-    """Return a single-page PDF (as bytes) with 'Page N of TOTAL' at top center."""
+    """Return a single-page PDF (as bytes) with just the page number in the bottom-right corner."""
     buf = io.BytesIO()
     c = canvas.Canvas(buf, pagesize=(width, height))
     c.setFont(PAGENUM_FONT, PAGENUM_SIZE)
     c.setFillColor(PAGENUM_COLOR)
-    text = f"Page {page_num} of {total}"
+    text = str(page_num)
     text_width = c.stringWidth(text, PAGENUM_FONT, PAGENUM_SIZE)
-    x = (width - text_width) / 2
-    y = height - PAGENUM_TOP_MARGIN_PT - PAGENUM_SIZE
+    x = width - PAGENUM_MARGIN_PT - text_width
+    y = PAGENUM_MARGIN_PT
     c.drawString(x, y, text)
     c.save()
     return buf.getvalue()

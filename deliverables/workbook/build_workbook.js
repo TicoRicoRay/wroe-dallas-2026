@@ -319,7 +319,10 @@ function agendaPage() {
 
   rows.forEach((r, i) => {
     const stripe = i % 2 === 0 ? COLORS.white : COLORS.bgTint;
-    const speaker = (r.speaker || '').split(' · ')[0] || '';
+    let speaker = (r.speaker || '').split(' · ')[0] || '';
+    if (speaker === 'Walt Brown') {
+      speaker = 'EOS Worldwide Head Coach · Walt Brown';
+    }
     const highlight = r.highlight;
     // The workbook covers the PM (paid) sessions only, starting at Mark Stanley
     // 1:00 PM. Everything scheduled before that — including Walt's lunch talk —
@@ -331,18 +334,15 @@ function agendaPage() {
       r.time.startsWith('12:');
     const isFree = isContextOnly;
 
-    // Context-only rows read as "listed for reference".
-    // Time → muted; session title → muted italic; presenter → muted.
-    const timeColor    = isFree ? COLORS.textMuted : COLORS.navy;
-    const sessionColor = isFree ? COLORS.textMuted : (highlight ? COLORS.text : COLORS.textMuted);
-    const sessionBold  = isFree ? false : highlight;
-    const sessionItal  = isFree;
+    // All rows: session title bold, no italics, times not bold.
+    const isBreak = /^(Break|Coffee|Happy Hour)/i.test(r.session);
+    const timeColor    = COLORS.navy;
+    const sessionColor = isFree ? COLORS.textMuted : COLORS.text;
 
-    // Compose session cell. First context-only row gets a tag explaining the scope.
     const sessionChildren = [
       new TextRun({
         text: r.session, font: FONT, size: highlight ? 22 : 20,
-        bold: sessionBold, italics: sessionItal, color: sessionColor,
+        bold: !isBreak, italics: false, color: sessionColor,
       }),
     ];
     const sessionParas = [new Paragraph({ children: sessionChildren })];
@@ -353,7 +353,7 @@ function agendaPage() {
           width: 2200, shading: stripe, borders: noBorders,
           margins: { top: 100, bottom: 100, left: 140, right: 100 },
           children: [new Paragraph({
-            children: [new TextRun({ text: r.time, font: FONT, size: 20, bold: !isFree, color: timeColor })] })]
+            children: [new TextRun({ text: r.time, font: FONT, size: 20, bold: false, color: timeColor })] })]
         }),
         cell({
           width: 5680, shading: stripe, borders: noBorders,
@@ -364,7 +364,7 @@ function agendaPage() {
           width: 2200, shading: stripe, borders: noBorders,
           margins: { top: 100, bottom: 100, left: 140, right: 100 },
           children: [new Paragraph({
-            children: [new TextRun({ text: speaker, font: FONT, size: 18, italics: isFree, color: COLORS.textMuted })] })]
+            children: [new TextRun({ text: speaker, font: FONT, size: 18, italics: false, color: COLORS.textMuted })] })]
         }),
       ],
     }));
@@ -794,6 +794,32 @@ function backCover() {
   ];
 }
 
+// ---------- Morning session notes pages (free sessions, no handout) ----------
+// One MY NOTES page per free morning session, inserted between agenda and
+// the paid speaker sections.
+const MORNING_NOTES = [
+  { title: 'Get a Grip on your Business with EOS',            speaker: 'Ann Sheu',           time: '8:00 – 9:35 AM' },
+  { title: 'Journey with an EOS Implementer',                  speaker: 'Strety',              time: '9:55 – 10:45 AM' },
+  { title: 'Your Sales Team Isn’t the Problem. Your System Is.', speaker: 'The System of Selling', time: '11:00 AM – 12:00 PM' },
+  { title: 'Lunch with Walt Brown: Healthy Matters',           speaker: 'Walt Brown',          time: '12:00 – 1:00 PM' },
+];
+
+function morningNotesPage(m) {
+  const items = [];
+  items.push(pageBreak());
+  items.push(new Paragraph({
+    spacing: { after: 60 }, alignment: AlignmentType.LEFT,
+    children: [new TextRun({ text: m.title.toUpperCase() + ' · MY NOTES', font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
+  }));
+  items.push(new Paragraph({
+    spacing: { after: 300 }, alignment: AlignmentType.LEFT,
+    border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
+    children: [new TextRun({ text: `${m.time} · ${m.speaker}`, font: FONT, size: 18, color: COLORS.textMuted })],
+  }));
+  items.push(noteLinesTable(22));
+  return items;
+}
+
 // ---------- Assemble document ----------
 const allChildren = [
   ...coverPage(),
@@ -801,7 +827,12 @@ const allChildren = [
   ...agendaPage(),
 ];
 
-// Speaker sections
+// Morning session notes pages (4 pages)
+MORNING_NOTES.forEach(m => {
+  morningNotesPage(m).forEach(c => allChildren.push(c));
+});
+
+// Speaker sections (paid sessions)
 SPEAKER_SESSIONS.forEach(s => {
   speakerCoverPage(s).forEach(c => allChildren.push(c));
 });
@@ -865,13 +896,22 @@ const doc = new Document({
       children: allChildren,
       headers: {
         default: new Header({
-          children: [new Paragraph({
-            alignment: AlignmentType.RIGHT, spacing: { after: 100 },
-            children: [new TextRun({
-              text: 'WRoEOS North Texas 2026',
-              font: FONT, size: 16, color: COLORS.textMuted,
-            })],
-          })],
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.RIGHT, spacing: { after: 0 },
+              children: [new TextRun({
+                text: 'We Run ON EOS®',
+                font: FONT_HEAD, size: 26, bold: true, color: COLORS.text,
+              })],
+            }),
+            new Paragraph({
+              alignment: AlignmentType.RIGHT, spacing: { after: 100 },
+              children: [new TextRun({
+                text: 'North Texas 2026',
+                font: FONT, size: 16, color: COLORS.textMuted,
+              })],
+            }),
+          ],
         }),
         first: new Header({ children: [new Paragraph('')] }),  // hide on cover
       },
