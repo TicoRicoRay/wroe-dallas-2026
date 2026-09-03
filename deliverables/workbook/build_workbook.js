@@ -863,7 +863,8 @@ function eosiDirectory() {
 // ==== BACK COVER ====
 function backCover() {
   return [
-    new Paragraph({ pageBreakBefore: true, spacing: { before: 3000 }, children: [new TextRun('')] }),
+    // Note: no pageBreakBefore — this content lives in its own section which starts on a new page.
+    new Paragraph({ spacing: { before: 3000 }, children: [new TextRun('')] }),
     new Paragraph({
       alignment: AlignmentType.CENTER, spacing: { after: 400 },
       children: [new TextRun({ text: 'Thank You', font: FONT_HEAD, size: 96, bold: true, color: COLORS.navy })],
@@ -936,8 +937,9 @@ sponsorsPage().forEach(c => allChildren.push(c));
 // EOSI Directory
 eosiDirectory().forEach(c => allChildren.push(c));
 
-// Back cover
-backCover().forEach(c => allChildren.push(c));
+// Back cover lives in its own section (see sections[1]) so it can
+// suppress the running header + page number. Do NOT append to allChildren.
+const backCoverChildren = backCover();
 
 const doc = new Document({
   creator: 'WRoEOS North Texas',
@@ -974,7 +976,7 @@ const doc = new Document({
     ],
   },
   sections: [
-    // Cover: no page numbers
+    // Main section: cover + all body pages. Cover suppresses header via titlePage.
     {
       properties: {
         page: {
@@ -1011,6 +1013,24 @@ const doc = new Document({
         // presenter handout pages. Leave the docx footer empty.
         default: new Footer({ children: [new Paragraph('')] }),
         first: new Footer({ children: [new Paragraph('')] }),
+      },
+    },
+    // Back cover section: no header, no footer, no page number.
+    // The paginator skips this page automatically because it keys off
+    // WORKBOOK_HEADER_MARKER ("North Texas 2026"), which is absent here.
+    {
+      properties: {
+        page: {
+          size: { width: PAGE_WIDTH, height: PAGE_HEIGHT },
+          margin: { top: MARGIN, right: MARGIN, bottom: MARGIN, left: MARGIN },
+        },
+      },
+      children: backCoverChildren,
+      headers: {
+        default: new Header({ children: [new Paragraph('')] }),
+      },
+      footers: {
+        default: new Footer({ children: [new Paragraph('')] }),
       },
     },
   ],
