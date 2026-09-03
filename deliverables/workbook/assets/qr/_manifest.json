@@ -1,0 +1,230 @@
+{
+  "sponsors": {
+    "Strety": {
+      "path": "assets/qr/sponsor-strety.png",
+      "url": "https://strety.com/"
+    },
+    "The System of Selling": {
+      "path": "assets/qr/sponsor-the-system-of-selling.png",
+      "url": "https://www.thesystemofselling.com/"
+    },
+    "ProCFO Partners": {
+      "path": "assets/qr/sponsor-procfo-partners.png",
+      "url": "https://procfopartners.com/"
+    },
+    "Titus Talent": {
+      "path": "assets/qr/sponsor-titus-talent.png",
+      "url": "https://titus-talent.com/"
+    },
+    "Ninety.io": {
+      "path": "assets/qr/sponsor-ninety-io.png",
+      "url": "https://ninety.io/"
+    },
+    "Vsimple": {
+      "path": "assets/qr/sponsor-vsimple.png",
+      "url": "https://www.vsimple.com/"
+    },
+    "Strata Wealth Advisors": {
+      "path": "assets/qr/sponsor-strata-wealth-advisors.png",
+      "url": "https://www.stratawealth.com/"
+    },
+    "Success.co": {
+      "path": "assets/qr/sponsor-success-co.png",
+      "url": "https://www.success.co/"
+    },
+    "360 Consulting DFW": {
+      "path": "assets/qr/sponsor-360-consulting-dfw.png",
+      "url": "https://360consultingdfw.com/"
+    },
+    "All In One Accounting": {
+      "path": "assets/qr/sponsor-all-in-one-accounting.png",
+      "url": "https://allinoneaccounting.com/"
+    },
+    "Chief AI Officer": {
+      "path": "assets/qr/sponsor-chief-ai-officer.png",
+      "url": "https://chiefaiofficer.com/"
+    },
+    "Hoops HR": {
+      "path": "assets/qr/sponsor-hoops-hr.png",
+      "url": "https://hoopshr.com/"
+    },
+    "Next Level Revenue": {
+      "path": "assets/qr/sponsor-next-level-revenue.png",
+      "url": "https://readyforthenextlevel.com/"
+    },
+    "Profit Works": {
+      "path": "assets/qr/sponsor-profit-works.png",
+      "url": "https://www.profitworksllc.com/"
+    },
+    "Talent Harbor": {
+      "path": "assets/qr/sponsor-talent-harbor.png",
+      "url": "https://talentharbor.com/"
+    },
+    "Wolf's Edge Integrators": {
+      "path": "assets/qr/sponsor-wolf-s-edge-integrators.png",
+      "url": "https://wolfsedgeintegrators.com/"
+    }
+  },
+  "eosi": {
+    "Aaron Garcia": {
+      "path": "assets/qr/eosi-aaron-garcia.png",
+      "url": "https://implementer.eosworldwide.com/aaron-garcia/"
+    },
+    "Amanda Matthews": {
+      "path": "assets/qr/eosi-amanda-matthews.png",
+      "url": "https://implementer.eosworldwide.com/amanda-matthews/"
+    },
+    "Amy Johannesen": {
+      "path": "assets/qr/eosi-amy-johannesen.png",
+      "url": "https://implementer.eosworldwide.com/amy-johannesen/"
+    },
+    "Andrea Holmes": {
+      "path": "assets/qr/eosi-andrea-holmes.png",
+      "url": "mailto:andrea.holmes@eosworldwide.com"
+    },
+    "Andrew Newsom": {
+      "path": "assets/qr/eosi-andrew-newsom.png",
+      "url": "https://implementer.eosworldwide.com/andrew-newsom/"
+    },
+    "Ann Sheu": {
+      "path": "assets/qr/eosi-ann-sheu.png",
+      "url": "https://implementer.eosworldwide.com/ann-sheu/"
+    },
+    "Blake Winters": {
+      "path": "assets/qr/eosi-blake-winters.png",
+      "url": "https://implementer.eosworldwide.com/blake-winters/"
+    },
+    "Brian Prescott": {
+      "path": "assets/qr/eosi-brian-prescott.png",
+      "url": "https://implementer.eosworldwide.com/brian-prescott/"
+    },
+    "Brooke Lively": {
+      "path": "assets/qr/eosi-brooke-lively.png",
+      "url": "https://implementer.eosworldwide.com/brooke-lively/"
+    },
+    "Curt Swindoll": {
+      "path": "assets/qr/eosi-curt-swindoll.png",
+      "url": "https://implementer.eosworldwide.com/curt-swindoll/"
+    },
+    "Curtis Rippee": {
+      "path": "assets/qr/eosi-curtis-rippee.png",
+      "url": "https://implementer.eosworldwide.com/curtis-rippee/"
+    },
+    "Daniel Ignatius Himel": {
+      "path": "assets/qr/eosi-daniel-ignatius-himel.png",
+      "url": "https://implementer.eosworldwide.com/daniel-himel/"
+    },
+    "Dawn Clarke": {
+      "path": "assets/qr/eosi-dawn-clarke.png",
+      "url": "https://implementer.eosworldwide.com/dawn-clarke/"
+    },
+    "Duke Revard": {
+      "path": "assets/qr/eosi-duke-revard.png",
+      "url": "https://implementer.eosworldwide.com/duke-revard/"
+    },
+    "Erin Thiem": {
+      "path": "assets/qr/eosi-erin-thiem.png",
+      "url": "https://implementer.eosworldwide.com/erin-thiem/"
+    },
+    "Gary Leeman": {
+      "path": "assets/qr/eosi-gary-leeman.png",
+      "url": "https://implementer.eosworldwide.com/gary-leeman/"
+    },
+    "Greg Benson": {
+      "path": "assets/qr/eosi-greg-benson.png",
+      "url": "https://implementer.eosworldwide.com/greg-benson/"
+    },
+    "Harrison Jenkins": {
+      "path": "assets/qr/eosi-harrison-jenkins.png",
+      "url": "https://implementer.eosworldwide.com/harrison-jenkins/"
+    },
+    "James Hill": {
+      "path": "assets/qr/eosi-james-hill.png",
+      "url": "https://implementer.eosworldwide.com/james-hill/"
+    },
+    "Jarrod Upton": {
+      "path": "assets/qr/eosi-jarrod-upton.png",
+      "url": "https://implementer.eosworldwide.com/jarrod-upton/"
+    },
+    "Jeff Schafer": {
+      "path": "assets/qr/eosi-jeff-schafer.png",
+      "url": "https://implementer.eosworldwide.com/jeff-schafer/"
+    },
+    "Jill Young": {
+      "path": "assets/qr/eosi-jill-young.png",
+      "url": "https://implementer.eosworldwide.com/jill-young/"
+    },
+    "Jim Brewer": {
+      "path": "assets/qr/eosi-jim-brewer.png",
+      "url": "https://implementer.eosworldwide.com/jim-brewer/"
+    },
+    "John Lewis": {
+      "path": "assets/qr/eosi-john-lewis.png",
+      "url": "https://implementer.eosworldwide.com/john-lewis/"
+    },
+    "Justin Mink": {
+      "path": "assets/qr/eosi-justin-mink.png",
+      "url": "https://implementer.eosworldwide.com/justin-mink/"
+    },
+    "Kevin Taylor": {
+      "path": "assets/qr/eosi-kevin-taylor.png",
+      "url": "https://implementer.eosworldwide.com/kevin-taylor/"
+    },
+    "Leonard Lynskey": {
+      "path": "assets/qr/eosi-leonard-lynskey.png",
+      "url": "https://implementer.eosworldwide.com/leonard-lynskey/"
+    },
+    "Mark C Winters": {
+      "path": "assets/qr/eosi-mark-c-winters.png",
+      "url": "https://implementer.eosworldwide.com/mark-c-winters/"
+    },
+    "Michael Visentine": {
+      "path": "assets/qr/eosi-michael-visentine.png",
+      "url": "https://implementer.eosworldwide.com/michael-visentine/"
+    },
+    "Natalie Mitro": {
+      "path": "assets/qr/eosi-natalie-mitro.png",
+      "url": "https://implementer.eosworldwide.com/natalie-mitro/"
+    },
+    "Ray Myers": {
+      "path": "assets/qr/eosi-ray-myers.png",
+      "url": "https://implementer.eosworldwide.com/ray-myers/"
+    },
+    "Ray Salinas": {
+      "path": "assets/qr/eosi-ray-salinas.png",
+      "url": "https://implementer.eosworldwide.com/ray-salinas/"
+    },
+    "Sally Michael": {
+      "path": "assets/qr/eosi-sally-michael.png",
+      "url": "https://implementer.eosworldwide.com/sally-michael/"
+    },
+    "Sandi Mitchell": {
+      "path": "assets/qr/eosi-sandi-mitchell.png",
+      "url": "https://implementer.eosworldwide.com/sandi-mitchell/"
+    },
+    "Sean Rosensteel": {
+      "path": "assets/qr/eosi-sean-rosensteel.png",
+      "url": "https://implementer.eosworldwide.com/sean-rosensteel/"
+    },
+    "Shane Spillers": {
+      "path": "assets/qr/eosi-shane-spillers.png",
+      "url": "https://implementer.eosworldwide.com/shane-spillers/"
+    },
+    "Steven Ross": {
+      "path": "assets/qr/eosi-steven-ross.png",
+      "url": "https://implementer.eosworldwide.com/steven-ross/"
+    },
+    "Stewart Hsu": {
+      "path": "assets/qr/eosi-stewart-hsu.png",
+      "url": "https://implementer.eosworldwide.com/stewart-hsu/"
+    },
+    "Willard Martin": {
+      "path": "assets/qr/eosi-willard-martin.png",
+      "url": "https://implementer.eosworldwide.com/willard-martin/"
+    },
+    "Zachary Perry": {
+      "path": "assets/qr/eosi-zachary-perry.png",
+      "url": "https://implementer.eosworldwide.com/zack-perry/"
+    }
+  }
+}

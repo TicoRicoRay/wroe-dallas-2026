@@ -590,41 +590,56 @@ function booksPage() {
 }
 
 // ==== SPONSORS PAGE ====
+// Loads QR-code manifest for sponsor URLs (see gen_qr.py). Missing entries fall
+// back to no QR (still shows logo + name).
+const QR_MANIFEST = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'assets/qr/_manifest.json'), 'utf8')); }
+  catch (e) { return { sponsors: {}, eosi: {} }; }
+})();
+
 function sponsorsPage() {
   const sponsors = SITE_CONFIG.sponsors.sponsors.filter(s => s.verified);
 
-  // Tier configuration. Height caps chosen so that render area (≈ height × avg logo width)
-  // is proportional to sponsor tier price. Since Book at 2-col has half the horizontal room
-  // per logo vs Happy Hour at 1-col, Book's height cap must be pushed up to compensate.
+  // Compact single-page layout. All 16 sponsors on one page. Heights and
+  // paddings tightened vs. the earlier two-page version; URL text has been
+  // replaced by a QR code inside each cell.
   // Prices: Title $10K, Book $9K, HH $6.5K, Lounge $5K, Swag $3.5K, Booth $1.5K.
   const TIER_LAYOUT = {
-    title:     { label: 'Title Sponsors',      cols: 2, maxH: 130 },  // $10K — 2 title sponsors, side by side
-    book:      { label: 'Book Sponsors',       cols: 2, maxH: 120 },  // $9K
-    happyHour: { label: 'Happy Hour Sponsor',  cols: 1, maxH: 100 },  // $6.5K
-    lounge:    { label: 'Lounge Sponsor',      cols: 1, maxH: 80  },  // $5K
-    swag:      { label: 'Swag Bag Sponsors',   cols: 2, maxH: 80  },  // $3.5K
-    booth:     { label: 'Booth Sponsors',      cols: 4, maxH: 55  },  // $1.5K
+    title:      { label: 'Title Sponsors',              cols: 2, maxH: 68, qr: 58 },
+    book:       { label: 'Book Sponsors',               cols: 2, maxH: 60, qr: 54 },
+    hhLounge:   { label: 'Happy Hour & Lounge Sponsors', cols: 2, maxH: 56, qr: 50 },
+    swag:       { label: 'Swag Bag Sponsors',           cols: 2, maxH: 54, qr: 50 },
+    booth:      { label: 'Booth Sponsors',              cols: 4, maxH: 40, qr: 42 },
   };
-  const tierOrder = ['title', 'book', 'happyHour', 'lounge', 'swag', 'booth'];
+  const tierOrder = ['title', 'book', 'hhLounge', 'swag', 'booth'];
 
   const grouped = {};
   sponsors.forEach(s => {
-    grouped[s.tier] = grouped[s.tier] || [];
-    grouped[s.tier].push(s);
+    // Combine happyHour + lounge into a single row to save vertical space.
+    const key = (s.tier === 'happyHour' || s.tier === 'lounge') ? 'hhLounge' : s.tier;
+    grouped[key] = grouped[key] || [];
+    grouped[key].push(s);
   });
 
   const items = [];
   items.push(H1('Thank You to Our Sponsors', { pageBreakBefore: true }));
   items.push(ruleLine());
-  items.push(P('This day is made possible by the generosity of these North Texas businesses.',
-    { italics: true, color: COLORS.textMuted, size: 22 }));
-  items.push(spacer(160));
+  items.push(P('This day is made possible by the generosity of these North Texas businesses. Scan any QR to visit the sponsor.',
+    { italics: true, color: COLORS.textMuted, size: 20 }));
+  items.push(spacer(30));
+
+  // Compact tier label — smaller than global H3 and no big "before" spacing.
+  const sponsorTierLabel = (text) => new Paragraph({
+    spacing: { before: 40, after: 30 },
+    keepNext: true,
+    children: [new TextRun({ text, font: FONT_HEAD, size: 20, bold: true, color: COLORS.orange })],
+  });
 
   tierOrder.forEach(tk => {
     const list = grouped[tk] || [];
     if (list.length === 0) return;
     const layout = TIER_LAYOUT[tk];
-    items.push(H3(layout.label, { keepNext: true }));
+    items.push(sponsorTierLabel(layout.label));
 
     const cols = layout.cols;
     const colWidth = Math.floor(USABLE_W / cols);
@@ -632,6 +647,11 @@ function sponsorsPage() {
     // Adjust last col to make widths sum exactly to USABLE_W
     columnWidths[cols - 1] += USABLE_W - columnWidths.reduce((a,b) => a+b, 0);
 
+    // Build ALL rows for this tier as ONE multi-row table so that when the
+    // tier has multiple rows (e.g. Booth Sponsors) they stay together without
+    // an inter-row spacer, and the whole tier can flow to the next page if
+    // needed. cantSplit is still per-row so individual cards don't split.
+    const tierRows = [];
     for (let i = 0; i < list.length; i += cols) {
       const rowCells = [];
       for (let c = 0; c < cols; c++) {
@@ -644,171 +664,197 @@ function sponsorsPage() {
         const logoBase = path.basename(s.logo).replace(/\.(svg|jpg|jpeg|webp)$/i, '.png');
         const localPath = path.join(__dirname, 'assets/sponsors', logoBase);
 
-        // Compute cell inner width in pixels: col width in DXA → px minus horizontal margins.
-        // DXA → px conversion is 1 px = 15 DXA (assuming 96 dpi).
-        const cellMarginDxa = 160 * 2; // left+right cell margins
-        const cellInnerPx = Math.floor((columnWidths[c] - cellMarginDxa) / 15) - 10; // 10px safety
+        // Inner 2-column layout inside each sponsor cell: logo + name on the
+        // left, QR code on the right. Widths chosen so the QR is ~qr-px on the
+        // page and the logo column takes the remaining space.
+        const qrPx = layout.qr;
+        const qrColDxa = qrPx * 15 + 240; // qr px + inner margin
+        const logoColDxa = columnWidths[c] - qrColDxa;
+        const logoInnerPx = Math.floor((logoColDxa - 240) / 15) - 8;
 
-        const cellChildren = [];
+        // Left inner cell: logo + name
+        const leftChildren = [];
         try {
-          // Aspect-correct within tier max height AND cell inner width
-          const fit = fitBox(localPath, cellInnerPx, layout.maxH);
-          cellChildren.push(new Paragraph({
-            alignment: AlignmentType.CENTER, spacing: { after: 80 },
+          const fit = fitBox(localPath, logoInnerPx, layout.maxH);
+          leftChildren.push(new Paragraph({
+            alignment: AlignmentType.LEFT, spacing: { after: 40 },
             children: [image(localPath, fit.w, fit.h)]
           }));
         } catch (e) {
-          cellChildren.push(new Paragraph({
-            alignment: AlignmentType.CENTER, spacing: { after: 80 },
-            children: [new TextRun({ text: '[logo]', font: FONT, size: 18, color: COLORS.textMuted })]
+          leftChildren.push(new Paragraph({
+            alignment: AlignmentType.LEFT, spacing: { after: 40 },
+            children: [new TextRun({ text: '[logo]', font: FONT, size: 16, color: COLORS.textMuted })]
           }));
         }
-        // Sponsor name & URL sized down for smaller tiers
-        const nameSize = tk === 'title' ? 26 : tk === 'book' || tk === 'happyHour' ? 22 : tk === 'booth' ? 16 : 18;
-        const urlSize  = tk === 'title' ? 20 : tk === 'booth' ? 12 : 14;
-        cellChildren.push(new Paragraph({
-          alignment: AlignmentType.CENTER, spacing: { after: 30 },
+        const nameSize = tk === 'title' ? 22 : (tk === 'book' || tk === 'happyHour') ? 20 : tk === 'booth' ? 14 : 18;
+        leftChildren.push(new Paragraph({
+          alignment: AlignmentType.LEFT, spacing: { after: 0 },
           children: [new TextRun({ text: s.name, font: FONT_HEAD, size: nameSize, bold: true, color: COLORS.navy })],
         }));
-        cellChildren.push(new Paragraph({
-          alignment: AlignmentType.CENTER, spacing: { after: 80 },
-          children: [new ExternalHyperlink({
-            link: s.url,
-            children: [new TextRun({
-              text: s.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''),
-              font: FONT, size: urlSize, color: COLORS.orange, style: 'Hyperlink',
-            })],
-          })],
-        }));
 
-        const boxPadding = tk === 'title' ? 180 : tk === 'booth' ? 80 : 140;
+        // Right inner cell: QR code (or blank if missing)
+        const qrMeta = QR_MANIFEST.sponsors && QR_MANIFEST.sponsors[s.name];
+        const qrChildren = [];
+        if (qrMeta && qrMeta.path) {
+          const qrPath = path.join(__dirname, qrMeta.path);
+          qrChildren.push(new Paragraph({
+            alignment: AlignmentType.RIGHT, spacing: { after: 0 },
+            children: [image(qrPath, qrPx, qrPx)],
+          }));
+        } else {
+          qrChildren.push(new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun('')] }));
+        }
+
+        const innerTable = new Table({
+          width: { size: columnWidths[c] - 320, type: WidthType.DXA },
+          columnWidths: [logoColDxa, qrColDxa],
+          rows: [new TableRow({
+            cantSplit: true,
+            children: [
+              cell({ width: logoColDxa, borders: noBorders, align: VerticalAlign.CENTER,
+                margins: { top: 0, bottom: 0, left: 0, right: 120 }, children: leftChildren }),
+              cell({ width: qrColDxa, borders: noBorders, align: VerticalAlign.CENTER,
+                margins: { top: 0, bottom: 0, left: 120, right: 0 }, children: qrChildren }),
+            ],
+          })],
+        });
+
+        const boxPadding = tk === 'title' ? 70 : tk === 'booth' ? 40 : 60;
         rowCells.push(cell({
           width: columnWidths[c], borders: lightBorders, shading: COLORS.white,
           align: VerticalAlign.CENTER,
-          margins: { top: boxPadding, bottom: boxPadding, left: 160, right: 160 },
-          children: cellChildren,
+          margins: { top: boxPadding, bottom: boxPadding, left: 140, right: 140 },
+          children: [innerTable],
         }));
       }
-      items.push(new Table({
-        width: { size: USABLE_W, type: WidthType.DXA },
-        columnWidths,
-        rows: [new TableRow({ cantSplit: true, children: rowCells })],
-      }));
-      items.push(spacer(100));
+      tierRows.push(new TableRow({ cantSplit: true, children: rowCells }));
     }
-    items.push(spacer(180));
+    items.push(new Table({
+      width: { size: USABLE_W, type: WidthType.DXA },
+      columnWidths,
+      rows: tierRows,
+    }));
+    items.push(spacer(20));
   });
 
   return items;
 }
 
 // ==== EOSI DIRECTORY ====
+// Compact 3-page layout: 7 rows × 2 columns = 14 cards per page → up to 42
+// slots for the 40-person roster. QR code (right side of each card) links to
+// the implementer's EOS Worldwide profile; email/profile URL text removed to
+// save vertical space.
 function eosiDirectory() {
   const items = [];
-  items.push(H1('DFW EOS Implementer® Directory', { pageBreakBefore: true }));
+  items.push(H1('North Texas EOS Implementer® Directory', { pageBreakBefore: true }));
   items.push(ruleLine());
-  items.push(P('The certified EOS Implementers serving North Texas businesses.',
-    { italics: true, color: COLORS.textMuted, size: 22 }));
-  items.push(spacer(200));
+  items.push(P('The certified EOS Implementers serving North Texas businesses. Scan any QR to view the full profile on EOSWorldwide.com.',
+    { italics: true, color: COLORS.textMuted, size: 18 }));
+  items.push(spacer(80));
 
-  // 2 columns × cards
   const roster = [...ROSTER].sort((a, b) => a.last_name.localeCompare(b.last_name));
   const cols = 2;
+  const cardW = Math.floor(USABLE_W / cols);       // ~5040 dxa
+  // Card inner: photo | info | QR
+  const PHOTO_W = 1120;                              // ~75px column
+  const QR_W    = 1120;                              // ~75px column
+  const INFO_W  = cardW - PHOTO_W - QR_W - 320;      // remainder minus card margins
 
   for (let i = 0; i < roster.length; i += cols) {
     const rowCells = [];
     for (let c = 0; c < cols; c++) {
       const r = roster[i + c];
       if (!r) {
-        rowCells.push(cell({ width: 5040, borders: noBorders, children: [new Paragraph('')] }));
+        rowCells.push(cell({ width: cardW, borders: noBorders, children: [new Paragraph('')] }));
         continue;
       }
       const photoInfo = PHOTO_MANIFEST[r.name];
       const photoPath = photoInfo && photoInfo.path ? photoInfo.path : null;
 
-      // Left sub-cell: photo, Right sub-cell: text — implement as inner table
       const photoCell = cell({
-        width: 1400, borders: noBorders, align: VerticalAlign.TOP,
-        margins: { top: 0, bottom: 0, left: 0, right: 100 },
+        width: PHOTO_W, borders: noBorders, align: VerticalAlign.CENTER,
+        margins: { top: 0, bottom: 0, left: 0, right: 80 },
         children: [
           photoPath
-            ? new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 40 }, children: [image(photoPath, 90, 90)] })
+            ? new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 0 }, children: [image(photoPath, 66, 66)] })
             : new Paragraph({
                 alignment: AlignmentType.CENTER,
-                shading: { fill: COLORS.navy, type: ShadingType.CLEAR },
-                children: [new TextRun({ text: (r.first_name[0] + r.last_name[0]).toUpperCase(), font: FONT_HEAD, size: 32, bold: true, color: COLORS.white })],
+                children: [new TextRun({ text: (r.first_name[0] + r.last_name[0]).toUpperCase(), font: FONT_HEAD, size: 24, bold: true, color: COLORS.navy })],
               }),
         ],
       });
 
       const infoChildren = [
         new Paragraph({
-          spacing: { after: 40 },
-          children: [new TextRun({ text: r.name, font: FONT_HEAD, size: 22, bold: true, color: COLORS.navy })],
+          spacing: { after: 20 },
+          children: [new TextRun({ text: r.name, font: FONT_HEAD, size: 18, bold: true, color: COLORS.navy })],
         }),
         new Paragraph({
-          spacing: { after: 40 },
-          children: [new TextRun({ text: r.designation + ' EOS Implementer®', font: FONT, size: 16, italics: true, color: COLORS.orange })],
+          spacing: { after: 30 },
+          children: [new TextRun({ text: r.designation + ' EOS Implementer®', font: FONT, size: 12, italics: true, color: COLORS.orange })],
         }),
       ];
       if (r.primary_market) {
         infoChildren.push(new Paragraph({
-          spacing: { after: 20 },
+          spacing: { after: 10 },
           children: [
-            new TextRun({ text: 'Primary: ', font: FONT, size: 16, bold: true, color: COLORS.textMuted }),
-            new TextRun({ text: r.primary_market, font: FONT, size: 16, color: COLORS.text }),
+            new TextRun({ text: 'Primary: ', font: FONT, size: 12, bold: true, color: COLORS.textMuted }),
+            new TextRun({ text: r.primary_market, font: FONT, size: 12, color: COLORS.text }),
           ],
         }));
       }
       if (r.other_market) {
         infoChildren.push(new Paragraph({
-          spacing: { after: 20 },
+          spacing: { after: 0 },
           children: [
-            new TextRun({ text: 'Other: ', font: FONT, size: 16, bold: true, color: COLORS.textMuted }),
-            new TextRun({ text: r.other_market, font: FONT, size: 16, color: COLORS.text }),
+            new TextRun({ text: 'Other: ', font: FONT, size: 12, bold: true, color: COLORS.textMuted }),
+            new TextRun({ text: r.other_market, font: FONT, size: 12, color: COLORS.text }),
           ],
         }));
       }
-      if (r.email) {
-        infoChildren.push(new Paragraph({
-          spacing: { after: 20 },
-          children: [new TextRun({ text: r.email, font: FONT, size: 14, color: COLORS.textMuted })],
-        }));
-      }
-      if (r.profile_url) {
-        infoChildren.push(new Paragraph({
-          children: [new ExternalHyperlink({
-            link: r.profile_url,
-            children: [new TextRun({ text: 'EOS Worldwide Profile', font: FONT, size: 14, color: COLORS.orange, style: 'Hyperlink' })],
-          })],
-        }));
-      }
       const infoCell = cell({
-        width: 3540, borders: noBorders, align: VerticalAlign.TOP,
-        margins: { top: 0, bottom: 0, left: 100, right: 0 },
+        width: INFO_W, borders: noBorders, align: VerticalAlign.CENTER,
+        margins: { top: 0, bottom: 0, left: 80, right: 80 },
         children: infoChildren,
       });
 
-      // Inner table (photo + info) for one card
+      // QR cell
+      const qrMeta = QR_MANIFEST.eosi && QR_MANIFEST.eosi[r.name];
+      const qrChildren = [];
+      if (qrMeta && qrMeta.path) {
+        qrChildren.push(new Paragraph({
+          alignment: AlignmentType.RIGHT, spacing: { after: 0 },
+          children: [image(path.join(__dirname, qrMeta.path), 66, 66)],
+        }));
+      } else {
+        qrChildren.push(new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun('')] }));
+      }
+      const qrCell = cell({
+        width: QR_W, borders: noBorders, align: VerticalAlign.CENTER,
+        margins: { top: 0, bottom: 0, left: 80, right: 0 },
+        children: qrChildren,
+      });
+
       const innerTable = new Table({
-        width: { size: 4940, type: WidthType.DXA },
-        columnWidths: [1400, 3540],
-        rows: [new TableRow({ cantSplit: true, children: [photoCell, infoCell] })],
+        width: { size: cardW - 320, type: WidthType.DXA },
+        columnWidths: [PHOTO_W, INFO_W, QR_W],
+        rows: [new TableRow({ cantSplit: true, children: [photoCell, infoCell, qrCell] })],
       });
 
       rowCells.push(cell({
-        width: 5040, borders: lightBorders, shading: COLORS.white,
-        align: VerticalAlign.TOP,
-        margins: { top: 160, bottom: 160, left: 160, right: 160 },
+        width: cardW, borders: lightBorders, shading: COLORS.white,
+        align: VerticalAlign.CENTER,
+        margins: { top: 90, bottom: 90, left: 140, right: 140 },
         children: [innerTable],
       }));
     }
     items.push(new Table({
       width: { size: USABLE_W, type: WidthType.DXA },
-      columnWidths: [5040, 5040],
+      columnWidths: [cardW, cardW],
       rows: [new TableRow({ cantSplit: true, children: rowCells })],
     }));
-    items.push(spacer(100));
+    items.push(spacer(40));
   }
 
   return items;
