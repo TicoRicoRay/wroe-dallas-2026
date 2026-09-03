@@ -393,14 +393,20 @@ function agendaPage() {
 const SPEAKER_SESSIONS = [
   { session_title: 'Profit Power: Stronger — or Just Bigger?', speaker: 'Mark Stanley', title: 'Expert EOS Implementer®',
     time: '1:00 – 2:30 PM', slug: 'mark-stanley', notes_pages: 1,
+    photo: 'assets/speakers/mark-stanley.jpg',
+    bio: 'One of the first EOS® Implementers in the world (2009) and now an Expert EOS Implementer with 1,700+ full-day sessions across 180+ leadership teams. Co-author of The Data Book, co-founder of the UNSTOPPABLE! Data-Driven Leader community, and a three-time entrepreneur. Brings a Theory of Constraints, Lean, and Six Sigma toolkit — plus a bias for action — to every session. BBA (Iowa), MBA (Drake). Lives in Johnston, Iowa.',
     handout: { file: 'appendix/Profit-Power-Handout.pdf', pages: 2,
       caption: 'Profit Power — The 5-Number Income Statement™ worksheet from Mark Stanley. Fill it in during the session.' } },
   { session_title: 'Rollout, Reworked: Your Plan for Running EOS® Company-Wide', speaker: 'Beth Fahey', title: 'Expert EOS Implementer®',
     time: '2:50 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1,
+    photo: 'assets/speakers/beth-fahey.jpg',
+    bio: 'Expert EOS Implementer® with 500+ client sessions and an EOS Worldwide Coach who trains other Implementers. Co-author of ROLLOUT: Get Your Entire Team Running on EOS® to Achieve Your Vision, and co-creator of the Great Boss™ Workshops with René Boer — more than 40 workshops delivered to thousands of managers. Host of the Bad Boss Confessional podcast. Founder-first perspective: she built a bakery, ran it on EOS, and led the Retail Bakers of America before going full-time as an Implementer. Based in the Chicago area.',
     handout: { file: 'appendix/Rollout-Handout.pdf', pages: 3,
       caption: 'Rollout — Tips for Sharing the Context of EOS®, plus the Rollout Tracker self-assessment.' } },
   { session_title: 'The 10 Pillars of Visionary Greatness', speaker: 'Mark C. Winters', title: 'Expert EOS Implementer®',
     time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1,
+    photo: 'assets/speakers/mark-c-winters.jpg',
+    bio: 'Expert EOS Implementer® since 2012 with 1,000+ full-day sessions delivered. Author of Visionary and co-author of Rocket Fuel with EOS founder Gino Wickman — the definitive book on the Visionary/Integrator partnership. Founder and Visionary of Rocket Fuel University and host of the Rocket Fuel Podcast. Serial entrepreneur (14 companies started, bought, sold, or shut down) with one exit at a 100x cash return in under three years. MBA from The University of Chicago. Based in Dallas.',
     handout: { file: 'appendix/10-Pillars-Handout.pdf', pages: 2,
       caption: 'The 10 Pillars of Visionary Greatness — full framework grid and Visionary book overview from Mark C. Winters.' } },
 ];
@@ -439,9 +445,46 @@ function speakerCoverPage(s) {
     children: [new TextRun({ text: s.speaker, font: FONT_HEAD, size: 34, bold: true, color: COLORS.navy })],
   }));
   items.push(new Paragraph({
-    spacing: { after: 400 }, alignment: AlignmentType.LEFT,
+    spacing: { after: 300 }, alignment: AlignmentType.LEFT,
     children: [new TextRun({ text: s.title, font: FONT, size: 22, italics: true, color: COLORS.textMuted })],
   }));
+
+  // Photo + bio (side-by-side) when configured for this speaker.
+  if (s.photo && s.bio) {
+    const photoPath = path.join(__dirname, s.photo);
+    // Two-column table: 2" square photo on left, bio on right.
+    // USABLE_W is defined elsewhere; use fixed DXA widths so LibreOffice
+    // renders identically to Word. 1" = 1440 DXA.
+    const PHOTO_W = 2160;   // 1.5"
+    const BIO_W   = 6720;   // ~4.67"
+    items.push(new Table({
+      width: { size: PHOTO_W + BIO_W, type: WidthType.DXA },
+      columnWidths: [PHOTO_W, BIO_W],
+      rows: [new TableRow({
+        cantSplit: true,
+        children: [
+          cell({
+            width: PHOTO_W, borders: noBorders,
+            align: VerticalAlign.TOP,
+            margins: { top: 0, bottom: 0, left: 0, right: 240 },
+            children: [new Paragraph({
+              alignment: AlignmentType.LEFT, spacing: { after: 0 },
+              children: [image(photoPath, 144, 144)],
+            })],
+          }),
+          cell({
+            width: BIO_W, borders: noBorders,
+            align: VerticalAlign.TOP,
+            margins: { top: 0, bottom: 0, left: 0, right: 0 },
+            children: [new Paragraph({
+              alignment: AlignmentType.LEFT, spacing: { after: 0, line: 300 },
+              children: [new TextRun({ text: s.bio, font: FONT, size: 20, color: COLORS.text })],
+            })],
+          }),
+        ],
+      })],
+    }));
+  }
 
   // SESSION cover flows straight into MY NOTES.
   // Handouts (when present) are spliced in by splice_handouts.py between
