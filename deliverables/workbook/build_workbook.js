@@ -334,14 +334,16 @@ function agendaPage() {
       r.time.startsWith('12:');
     const isFree = isContextOnly;
 
-    // All rows: session title bold, no italics, times not bold.
+    // All rows: session title bold (except breaks), no italics, times not bold.
+    // Every speaker session shares the same size & color; only breaks/reference
+    // rows differ.
     const isBreak = /^(Break|Coffee|Happy Hour)/i.test(r.session);
     const timeColor    = COLORS.navy;
-    const sessionColor = isFree ? COLORS.textMuted : COLORS.text;
+    const sessionColor = isBreak ? COLORS.textMuted : COLORS.text;
 
     const sessionChildren = [
       new TextRun({
-        text: r.session, font: FONT, size: highlight ? 22 : 20,
+        text: r.session, font: FONT, size: 22,
         bold: !isBreak, italics: false, color: sessionColor,
       }),
     ];
@@ -449,12 +451,11 @@ function speakerCoverPage(s) {
   const notesPages = s.notes_pages != null ? s.notes_pages : 1;
   for (let i = 0; i < notesPages; i++) {
     items.push(pageBreak());
-    const heading = notesPages > 1
-      ? s.session_title.toUpperCase() + ` · MY NOTES (${i + 1}/${notesPages})`
-      : s.session_title.toUpperCase() + ' · MY NOTES';
+    const suffix = notesPages > 1 ? ` (${i + 1}/${notesPages})` : '';
+    const heading = 'MY NOTES · ' + s.session_title.toUpperCase() + suffix;
     items.push(new Paragraph({
       spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-      children: [new TextRun({ text: heading, font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
+      children: [new TextRun({ text: heading, font: FONT_HEAD, size: 24, bold: true, color: COLORS.orange })],
     }));
     items.push(new Paragraph({
       spacing: { after: 300 }, alignment: AlignmentType.LEFT,
@@ -809,7 +810,7 @@ function morningNotesPage(m) {
   items.push(pageBreak());
   items.push(new Paragraph({
     spacing: { after: 60 }, alignment: AlignmentType.LEFT,
-    children: [new TextRun({ text: m.title.toUpperCase() + ' · MY NOTES', font: FONT_HEAD, size: 16, bold: true, color: COLORS.orange })],
+    children: [new TextRun({ text: 'MY NOTES · ' + m.title.toUpperCase(), font: FONT_HEAD, size: 24, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
     spacing: { after: 300 }, alignment: AlignmentType.LEFT,
@@ -908,7 +909,7 @@ const doc = new Document({
               alignment: AlignmentType.RIGHT, spacing: { after: 100 },
               children: [new TextRun({
                 text: 'North Texas 2026',
-                font: FONT, size: 16, color: COLORS.textMuted,
+                font: FONT_HEAD, size: 22, bold: true, color: COLORS.textMuted,
               })],
             }),
           ],
