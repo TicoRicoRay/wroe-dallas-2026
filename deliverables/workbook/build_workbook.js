@@ -133,7 +133,7 @@ function noteLinesTable(count = 20) {
   const rows = [];
   for (let i = 0; i < count; i++) {
     rows.push(new TableRow({
-      height: { value: 460, rule: HeightRule.EXACT },
+      height: { value: 470, rule: HeightRule.EXACT }, // fills page minus header (~9" usable)
       children: [new TableCell({
         width: { size: USABLE_W, type: WidthType.DXA },
         borders: bottomOnly,
@@ -505,7 +505,7 @@ function speakerCoverPage(s) {
       border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
       children: [new TextRun('')],
     }));
-    items.push(noteLinesTable(20));
+    items.push(noteLinesTable(26)); // speaker session notes: no subheading, fits 26 @ 470 DXA
   }
 
   return items;
@@ -906,7 +906,7 @@ function morningNotesPage(m) {
     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
     children: [new TextRun({ text: `${m.time} · ${m.speaker}`, font: FONT, size: 18, color: COLORS.textMuted })],
   }));
-  items.push(noteLinesTable(22));
+  items.push(noteLinesTable(25)); // morning notes has extra subheading (time+speaker), 25 @ 470 DXA fits
   return items;
 }
 
