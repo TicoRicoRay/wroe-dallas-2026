@@ -70,12 +70,42 @@
   #time.done { color: var(--orange); animation: pulse 1s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-  .status {
-    margin-top: 3vh;
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    color: var(--muted);
-    font-style: italic;
-    min-height: 1.5em;
+  /* Sponsor carousel above the timer */
+  .sponsors {
+    width: 100vw;
+    overflow: hidden;
+    padding: 1.2vh 0;
+    margin-bottom: 3vh;
+    /* Fade the edges into the navy background so logos don't hard-cut. */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+  .sponsors-track {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    /* Two copies of the list are rendered; slide by -50% to loop seamlessly. */
+    width: max-content;
+    animation: sponsors-scroll 90s linear infinite;
+  }
+  .sponsors:hover .sponsors-track { animation-play-state: paused; }
+  .sponsors-track img {
+    height: 8vh;
+    max-height: 90px;
+    width: auto;
+    /* Logos are mixed light/dark; put them on a white pill so all read clearly on navy. */
+    background: var(--white);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+  @keyframes sponsors-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sponsors-track { animation: none; }
   }
   .controls {
     position: fixed;
@@ -149,16 +179,6 @@
     border-color: var(--orange);
     color: var(--white);
   }
-  .hint {
-    position: fixed;
-    top: 2vh;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.75rem;
-    color: var(--muted);
-    opacity: 0.6;
-    letter-spacing: 0.05em;
-  }
   .footer {
     position: fixed;
     bottom: 0;
@@ -175,12 +195,13 @@
 </head>
 <body>
 
-<div class="hint">SPACEBAR: start/pause  ·  R: reset  ·  F: fullscreen</div>
+<div class="sponsors" aria-hidden="true">
+  <div class="sponsors-track" id="sponsorsTrack"></div>
+</div>
 
 <div class="brand">WRoEOS NORTH TEXAS 2026</div>
 <div class="label" id="label">BREAK TIMER</div>
 <div id="time">20:00</div>
-<div class="status" id="status">Press start</div>
 
 <div class="controls">
   <div class="row">
@@ -214,11 +235,41 @@
 
 <script>
   const timeEl = document.getElementById('time');
-  const statusEl = document.getElementById('status');
   const startBtn = document.getElementById('start');
   const resetBtn = document.getElementById('reset');
   const fsBtn = document.getElementById('fullscreen');
   const chime = document.getElementById('chime');
+
+  // ---------- Sponsor carousel ----------
+  // Ordered roughly by tier (Title → Book → Happy Hour/Lounge → Swag → Booth)
+  // so higher tiers appear first each loop. Paths are relative to /timer/.
+  const SPONSORS = [
+    { name: 'Strety',                    logo: '../images/strety.png' },
+    { name: 'The System of Selling',     logo: '../images/tsos.png' },
+    { name: 'ProCFO Partners',           logo: '../images/procfopartners.svg' },
+    { name: 'Trainual',                  logo: '../images/trainual.png' },
+    { name: 'Titus Talent',              logo: '../images/titustalent.png' },
+    { name: 'Ninety.io',                 logo: '../images/ninety.png' },
+    { name: 'Vsimple',                   logo: '../images/vsimple.svg' },
+    { name: 'Strata Wealth Advisors',    logo: '../images/strata.jpg' },
+    { name: 'Success.co',                logo: '../images/successco.png' },
+    { name: '360 Consulting DFW',        logo: '../images/360consultingdfw.png' },
+    { name: 'All In One Accounting',     logo: '../images/allinoneaccounting.svg' },
+    { name: 'Chief AI Officer',          logo: '../images/chiefaiofficer.webp' },
+    { name: 'Hoops HR',                  logo: '../images/hoopshr.webp' },
+    { name: 'Next Level Revenue',        logo: '../images/readyforthenextlevel.svg' },
+    { name: 'Profit Works',              logo: '../images/profitworks.png' },
+    { name: 'Talent Harbor',             logo: '../images/talentharbor.png' },
+    { name: "Wolf's Edge Integrators",   logo: '../images/wolfsedgeintegrators.png' },
+  ];
+  (function populateSponsors() {
+    const track = document.getElementById('sponsorsTrack');
+    // Render the list twice back-to-back so the -50% translate loop is seamless.
+    const html = SPONSORS.map(s =>
+      `<img src="${s.logo}" alt="${s.name}" loading="lazy">`
+    ).join('');
+    track.innerHTML = html + html;
+  })();
 
   let durationSec = 20 * 60;
   let remainingSec = durationSec;
@@ -247,7 +298,6 @@
     if (remainingSec <= 0) {
       timeEl.classList.add('done');
       timeEl.textContent = "TIME'S UP";
-      statusEl.textContent = 'Break is over — let\u2019s get back to it.';
     } else if (remainingSec <= 60) {
       timeEl.classList.add('critical');
     } else if (remainingSec <= 180) {
@@ -279,14 +329,12 @@
     lastTick = performance.now();
     intervalId = setInterval(tick, 250);
     startBtn.textContent = 'PAUSE';
-    statusEl.textContent = 'Timer running.';
   }
 
   function stop() {
     running = false;
     if (intervalId) { clearInterval(intervalId); intervalId = null; }
     startBtn.textContent = 'START';
-    if (remainingSec > 0) statusEl.textContent = 'Paused.';
   }
 
   function reset() {
@@ -298,7 +346,6 @@
       remainingSec = durationSec;
     }
     startBtn.textContent = 'START';
-    statusEl.textContent = 'Press start';
     render();
   }
 
@@ -309,7 +356,6 @@
     remainingSec = durationSec;
     document.getElementById('label').textContent = 'BREAK TIMER';
     render();
-    statusEl.textContent = minutes + '-minute break loaded. Press start.';
   }
 
   // hh:mm 24-hour format
@@ -327,7 +373,6 @@
     remainingSec = durationSec;
     document.getElementById('label').textContent = 'COUNT DOWN TO ' + displayLabel;
     render();
-    statusEl.textContent = 'Counting down to ' + displayLabel + '. Press start.';
   }
 
   function playChime() {
