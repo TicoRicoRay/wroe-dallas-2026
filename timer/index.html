@@ -81,14 +81,34 @@
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
     justify-content: center;
     padding: 0 1rem;
+    width: 100%;
+    max-width: 1100px;
     opacity: 0.35;
     transition: opacity 0.2s;
   }
   .controls:hover, .controls:focus-within { opacity: 1; }
+  .row {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .row-label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+    opacity: 0.7;
+  }
   button, .preset {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
@@ -116,6 +136,15 @@
   button.primary:hover {
     background: #B85A15;
     border-color: #B85A15;
+    color: var(--white);
+  }
+  .target {
+    border-color: rgba(232, 119, 34, 0.6);
+    color: var(--muted);
+  }
+  .target:hover {
+    background: var(--orange);
+    border-color: var(--orange);
     color: var(--white);
   }
   .hint {
@@ -152,13 +181,28 @@
 <div class="status" id="status">Press start</div>
 
 <div class="controls">
-  <button class="preset" data-minutes="10">10 MIN</button>
-  <button class="preset" data-minutes="15">15 MIN</button>
-  <button class="preset" data-minutes="20">20 MIN</button>
-  <button class="preset" data-minutes="25">25 MIN</button>
-  <button id="start" class="primary">START</button>
-  <button id="reset">RESET</button>
-  <button id="fullscreen">FULLSCREEN</button>
+  <div class="row">
+    <span class="row-label">Duration</span>
+    <button class="preset" data-minutes="10">10 MIN</button>
+    <button class="preset" data-minutes="15">15 MIN</button>
+    <button class="preset" data-minutes="20">20 MIN</button>
+    <button class="preset" data-minutes="25">25 MIN</button>
+  </div>
+  <div class="row">
+    <span class="row-label">Count Down To</span>
+    <button class="target" data-target="08:00">8:00 AM</button>
+    <button class="target" data-target="09:55">9:55 AM</button>
+    <button class="target" data-target="11:00">11:00 AM</button>
+    <button class="target" data-target="13:00">1:00 PM</button>
+    <button class="target" data-target="14:50">2:50 PM</button>
+    <button class="target" data-target="16:45">4:45 PM</button>
+    <button class="target" data-target="18:15">6:15 PM</button>
+  </div>
+  <div class="row">
+    <button id="start" class="primary">START</button>
+    <button id="reset">RESET</button>
+    <button id="fullscreen">FULLSCREEN</button>
+  </div>
 </div>
 
 <div class="footer"></div>
@@ -180,11 +224,19 @@
   let running = false;
   let intervalId = null;
   let lastTick = null;
+  // When counting down to a wall-clock time, we ignore durationSec and
+  // recompute remaining from the target on every tick so the timer stays
+  // aligned with real time even after pause/resume.
+  let targetTs = null; // ms epoch of the target time, or null
 
   function fmt(sec) {
     sec = Math.max(0, Math.round(sec));
-    const m = Math.floor(sec / 60);
+    const h = Math.floor(sec / 3600);
+    const m = Math.floor((sec % 3600) / 60);
     const s = sec % 60;
+    if (h > 0) {
+      return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
     return m + ':' + String(s).padStart(2, '0');
   }
 
@@ -203,10 +255,15 @@
   }
 
   function tick() {
-    const now = performance.now();
-    const dt = (now - lastTick) / 1000;
-    lastTick = now;
-    remainingSec -= dt;
+    if (targetTs != null) {
+      // Wall-clock countdown: recompute from target so drift can't accumulate.
+      remainingSec = Math.max(0, (targetTs - Date.now()) / 1000);
+    } else {
+      const now = performance.now();
+      const dt = (now - lastTick) / 1000;
+      lastTick = now;
+      remainingSec -= dt;
+    }
     if (remainingSec <= 0) {
       remainingSec = 0;
       stop();
@@ -233,7 +290,12 @@
 
   function reset() {
     stop();
-    remainingSec = durationSec;
+    if (targetTs != null) {
+      // Re-anchor on the same target so the number reflects real remaining time.
+      remainingSec = Math.max(0, (targetTs - Date.now()) / 1000);
+    } else {
+      remainingSec = durationSec;
+    }
     startBtn.textContent = 'START';
     statusEl.textContent = 'Press start';
     render();
@@ -241,10 +303,30 @@
 
   function setDuration(minutes) {
     stop();
+    targetTs = null;
     durationSec = minutes * 60;
     remainingSec = durationSec;
+    document.getElementById('label').textContent = 'BREAK TIMER';
     render();
     statusEl.textContent = minutes + '-minute break loaded. Press start.';
+  }
+
+  // hh:mm 24-hour format
+  function setTarget(hhmm, displayLabel) {
+    stop();
+    const [h, m] = hhmm.split(':').map(Number);
+    const now = new Date();
+    const t = new Date(now);
+    t.setHours(h, m, 0, 0);
+    // If the target has already passed today, roll forward one day so the
+    // timer still counts down (rather than showing TIME'S UP immediately).
+    if (t.getTime() <= now.getTime()) t.setDate(t.getDate() + 1);
+    targetTs = t.getTime();
+    durationSec = Math.max(0, Math.round((targetTs - now.getTime()) / 1000));
+    remainingSec = durationSec;
+    document.getElementById('label').textContent = 'COUNT DOWN TO ' + displayLabel;
+    render();
+    statusEl.textContent = 'Counting down to ' + displayLabel + '. Press start.';
   }
 
   function playChime() {
@@ -267,10 +349,17 @@
     } catch (e) { /* silent */ }
   }
 
-  // Preset buttons
+  // Preset buttons (fixed duration)
   document.querySelectorAll('.preset').forEach(btn => {
     btn.addEventListener('click', () => {
       setDuration(parseInt(btn.dataset.minutes, 10));
+    });
+  });
+
+  // Target buttons (count down to wall-clock time)
+  document.querySelectorAll('.target').forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTarget(btn.dataset.target, btn.textContent.trim());
     });
   });
 
