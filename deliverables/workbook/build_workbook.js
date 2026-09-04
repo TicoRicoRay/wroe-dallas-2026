@@ -887,64 +887,68 @@ function backCover() {
 // One MY NOTES page per free morning session, inserted between agenda and
 // the paid speaker sections.
 // ---------- Networking & Reflection page ----------
-// A one-page 2×2 grid: Connections + Table-Mates (labeled contact fields)
-// on top, Thought Provoking Questions + Memorable Quotes (blank ruled lines)
-// on bottom. Sits between the agenda and the morning notes pages.
+// Full-width single-column flow. Each section spans the full page width:
+//   1. Connections     — tabular contact rows (Name | Business | Role | Phone | Email)
+//   2. Table-Mates     — tabular contact rows (Name | Role | Business | Phone | Email)
+//   3. Thought Provoking Questions — blank ruled lines
+//   4. Memorable Quotes           — blank ruled lines
+// Sits between the agenda and the morning notes pages.
 
 const RULER = { style: BorderStyle.SINGLE, size: 4, color: COLORS.ruler };
 
-// One labeled field row: bold label + underline that fills the rest of the cell width.
-// Rendered as a nested table row with a bottom border on the value cell so the
-// line runs cleanly past the label text.
-function labeledFieldRow(label, cellWidthDxa) {
-  const LABEL_W = 1100; // ~0.76"
-  const VALUE_W = cellWidthDxa - LABEL_W;
+// One blank fill-in row for a contact table — N cells, each with a bottom rule.
+function contactBlankRow(colWidths) {
   return new TableRow({
-    height: { value: 320, rule: HeightRule.EXACT },
-    children: [
-      new TableCell({
-        width: { size: LABEL_W, type: WidthType.DXA },
-        borders: noBorders,
-        margins: { top: 0, bottom: 0, left: 40, right: 40 },
-        verticalAlign: VerticalAlign.BOTTOM,
-        children: [new Paragraph({
-          spacing: { before: 0, after: 0 },
-          children: [new TextRun({ text: label, font: FONT, size: 16, bold: true, color: COLORS.textMuted })],
-        })],
-      }),
-      new TableCell({
-        width: { size: VALUE_W, type: WidthType.DXA },
-        borders: { top: noBorder, left: noBorder, right: noBorder, bottom: RULER },
-        margins: { top: 0, bottom: 0, left: 0, right: 0 },
-        children: [new Paragraph({
-          spacing: { before: 0, after: 0 },
-          children: [new TextRun({ text: ' ', font: FONT, size: 16 })],
-        })],
-      }),
-    ],
+    height: { value: 340, rule: HeightRule.EXACT },
+    children: colWidths.map(w => new TableCell({
+      width: { size: w, type: WidthType.DXA },
+      borders: { top: noBorder, left: noBorder, right: noBorder, bottom: RULER },
+      margins: { top: 0, bottom: 0, left: 60, right: 60 },
+      children: [new Paragraph({
+        spacing: { before: 0, after: 0 },
+        children: [new TextRun({ text: ' ', font: FONT, size: 20 })],
+      })],
+    })),
   });
 }
 
-// Contact-block builder: title strip + N labeled fields, all inside one cell
-// of the outer 2×2 grid.
-function contactBlock(fields, cellWidthDxa) {
+// Header row of column labels for a contact table.
+function contactHeaderRow(labels, colWidths) {
+  return new TableRow({
+    height: { value: 260, rule: HeightRule.EXACT },
+    children: labels.map((label, i) => new TableCell({
+      width: { size: colWidths[i], type: WidthType.DXA },
+      borders: noBorders,
+      margins: { top: 0, bottom: 0, left: 60, right: 60 },
+      verticalAlign: VerticalAlign.BOTTOM,
+      children: [new Paragraph({
+        spacing: { before: 0, after: 40 },
+        children: [new TextRun({ text: label.toUpperCase(), font: FONT, size: 14, bold: true, color: COLORS.textMuted })],
+      })],
+    })),
+  });
+}
+
+// A full-width contact table: header row + N blank rows.
+function contactTable(labels, colWidths, rowCount) {
+  const rows = [contactHeaderRow(labels, colWidths)];
+  for (let i = 0; i < rowCount; i++) rows.push(contactBlankRow(colWidths));
   return new Table({
-    width: { size: cellWidthDxa, type: WidthType.DXA },
-    columnWidths: [1100, cellWidthDxa - 1100],
+    width: { size: USABLE_W, type: WidthType.DXA },
+    columnWidths: colWidths,
     borders: noBorders,
-    rows: fields.map(f => labeledFieldRow(f, cellWidthDxa)),
+    rows,
   });
 }
 
-// A block of N ruled blank lines sized to the cell width (used for the two
-// bottom quadrants — Questions and Quotes).
-function blankLinesBlock(count, cellWidthDxa) {
+// Full-width block of N ruled blank lines (for Questions / Quotes).
+function fullWidthLines(count) {
   const rows = [];
   for (let i = 0; i < count; i++) {
     rows.push(new TableRow({
       height: { value: 380, rule: HeightRule.EXACT },
       children: [new TableCell({
-        width: { size: cellWidthDxa, type: WidthType.DXA },
+        width: { size: USABLE_W, type: WidthType.DXA },
         borders: { top: noBorder, left: noBorder, right: noBorder, bottom: RULER },
         margins: { top: 0, bottom: 0, left: 0, right: 0 },
         children: [new Paragraph({
@@ -955,17 +959,17 @@ function blankLinesBlock(count, cellWidthDxa) {
     }));
   }
   return new Table({
-    width: { size: cellWidthDxa, type: WidthType.DXA },
-    columnWidths: [cellWidthDxa],
+    width: { size: USABLE_W, type: WidthType.DXA },
+    columnWidths: [USABLE_W],
     borders: noBorders,
     rows,
   });
 }
 
-// Section title inside a quadrant.
-function quadTitle(text) {
+// Section title strip.
+function sectionTitle(text) {
   return new Paragraph({
-    spacing: { before: 0, after: 120 },
+    spacing: { before: 200, after: 120 },
     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
     children: [new TextRun({ text: text.toUpperCase(), font: FONT_HEAD, size: 22, bold: true, color: COLORS.orange })],
   });
@@ -980,66 +984,38 @@ function networkingPage() {
     children: [new TextRun({ text: 'NETWORKING & REFLECTION', font: FONT_HEAD, size: 24, bold: true, color: COLORS.orange })],
   }));
   items.push(new Paragraph({
-    spacing: { after: 240 }, alignment: AlignmentType.LEFT,
+    spacing: { after: 200 }, alignment: AlignmentType.LEFT,
     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
     children: [new TextRun({ text: 'Capture the people, ideas, and moments you don\u2019t want to forget.', font: FONT, size: 18, color: COLORS.textMuted })],
   }));
 
-  // 2×2 grid. Split the usable width evenly with a small gutter between columns.
-  const GUTTER = 240; // 0.17"
-  const COL_W = Math.floor((USABLE_W - GUTTER) / 2);
+  // Column widths (DXA) for the 5-field contact tables. Sum = USABLE_W (10080).
+  //  Name     Business/Role   Role/Business   Phone    Email
+  const CONTACT_COLS = [1900, 2200, 1700, 1680, 2600];
 
-  function quadCell(children, isRight) {
-    return new TableCell({
-      width: { size: isRight ? COL_W : COL_W, type: WidthType.DXA },
-      borders: noBorders,
-      margins: { top: 80, bottom: 80, left: isRight ? 120 : 0, right: isRight ? 0 : 120 },
-      children,
-    });
-  }
+  // Connections
+  items.push(sectionTitle('Connections'));
+  items.push(contactTable(
+    ['Name', 'Business', 'Role', 'Phone', 'Email'],
+    CONTACT_COLS,
+    7,
+  ));
 
-  const CONNECT_FIELDS = ['Name', 'Business', 'Role', 'Phone', 'Email'];
-  const TABLEMATE_FIELDS = ['Name', 'Role', 'Business', 'Phone', 'Email'];
-  const CONTACTS_PER_BLOCK = 3;
+  // Table-Mates — same widths, Role and Business swapped per spec.
+  items.push(sectionTitle('Table-Mates'));
+  items.push(contactTable(
+    ['Name', 'Role', 'Business', 'Phone', 'Email'],
+    CONTACT_COLS,
+    7,
+  ));
 
-  // Build a quadrant: title + contact contents.
-  function contactQuadrant(titleText, fields) {
-    const kids = [ quadTitle(titleText) ];
-    for (let i = 0; i < CONTACTS_PER_BLOCK; i++) {
-      kids.push(contactBlock(fields, COL_W - 120));
-      if (i < CONTACTS_PER_BLOCK - 1) kids.push(spacer(120));
-    }
-    return kids;
-  }
+  // Thought Provoking Questions — blank ruled lines.
+  items.push(sectionTitle('Thought Provoking Questions'));
+  items.push(fullWidthLines(4));
 
-  function textQuadrant(titleText, lineCount) {
-    return [
-      quadTitle(titleText),
-      blankLinesBlock(lineCount, COL_W - 120),
-    ];
-  }
-
-  // Row 1: Connections | Table-Mates
-  const row1 = new TableRow({
-    children: [
-      quadCell(contactQuadrant('Connections', CONNECT_FIELDS), false),
-      quadCell(contactQuadrant('Table-Mates', TABLEMATE_FIELDS), true),
-    ],
-  });
-  // Row 2: Thought Provoking Questions | Memorable Quotes
-  const row2 = new TableRow({
-    children: [
-      quadCell(textQuadrant('Thought Provoking Questions', 8), false),
-      quadCell(textQuadrant('Memorable Quotes', 8), true),
-    ],
-  });
-
-  items.push(new Table({
-    width: { size: USABLE_W, type: WidthType.DXA },
-    columnWidths: [COL_W, COL_W],
-    borders: noBorders,
-    rows: [row1, row2],
-  }));
+  // Memorable Quotes
+  items.push(sectionTitle('Memorable Quotes'));
+  items.push(fullWidthLines(4));
 
   return items;
 }
