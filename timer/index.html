@@ -83,22 +83,31 @@
   .sponsors-track {
     display: flex;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
     /* Two copies of the list are rendered; slide by -50% to loop seamlessly. */
     width: max-content;
     animation: sponsors-scroll 90s linear infinite;
   }
   .sponsors:hover .sponsors-track { animation-play-state: paused; }
-  .sponsors-track img {
-    height: 8vh;
-    max-height: 90px;
-    width: auto;
-    /* Logos are mixed light/dark; put them on a white pill so all read clearly on navy. */
+  .sponsors-track .logo {
+    /* Fixed pill size so every logo occupies the same footprint regardless of
+       intrinsic aspect ratio; the <img> inside scales to fit. */
+    width: 200px;
+    height: 90px;
     background: var(--white);
-    padding: 0.6rem 1rem;
     border-radius: 8px;
-    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
     flex: 0 0 auto;
+  }
+  .sponsors-track .logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   @keyframes sponsors-scroll {
     from { transform: translateX(0); }
@@ -241,13 +250,14 @@
   const chime = document.getElementById('chime');
 
   // ---------- Sponsor carousel ----------
-  // Ordered roughly by tier (Title → Book → Happy Hour/Lounge → Swag → Booth)
-  // so higher tiers appear first each loop. Paths are relative to /timer/.
+  // Only sponsors with verified: true in config.js are shown on the site's
+  // home page — the timer carousel mirrors that list (Trainual is currently
+  // unverified and intentionally omitted). Ordered by tier: Title → Book →
+  // Happy Hour/Lounge → Swag → Booth. Paths are relative to /timer/.
   const SPONSORS = [
     { name: 'Strety',                    logo: '../images/strety.png' },
     { name: 'The System of Selling',     logo: '../images/tsos.png' },
     { name: 'ProCFO Partners',           logo: '../images/procfopartners.svg' },
-    { name: 'Trainual',                  logo: '../images/trainual.png' },
     { name: 'Titus Talent',              logo: '../images/titustalent.png' },
     { name: 'Ninety.io',                 logo: '../images/ninety.png' },
     { name: 'Vsimple',                   logo: '../images/vsimple.svg' },
@@ -264,9 +274,11 @@
   ];
   (function populateSponsors() {
     const track = document.getElementById('sponsorsTrack');
-    // Render the list twice back-to-back so the -50% translate loop is seamless.
+    // Each logo lives in a fixed-width pill so every sponsor gets the same
+    // slot. Render the list twice back-to-back so the -50% translate loop is
+    // seamless.
     const html = SPONSORS.map(s =>
-      `<img src="${s.logo}" alt="${s.name}" loading="lazy">`
+      `<div class="logo"><img src="${s.logo}" alt="${s.name}" loading="lazy"></div>`
     ).join('');
     track.innerHTML = html + html;
   })();
