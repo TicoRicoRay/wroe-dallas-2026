@@ -382,11 +382,23 @@
       // Photo
       const photoWrap = document.createElement('div');
       photoWrap.className = 'card-photo-wrap';
+      // Per-implementer photo framing overrides. Some source headshots have
+      // extra space above/below the subject that we can't fix with object-
+      // position alone (image aspect matches the container), so we zoom in
+      // using transform and re-anchor. Keys: implementer name.
+      const PHOTO_FRAMING_OVERRIDES = {
+        'Shane Spillers': { transform: 'scale(1.25)', transformOrigin: 'center 78%' },
+      };
       if (i.photo_url) {
         const img = document.createElement('img');
         img.src = i.photo_url;
         img.alt = i.name;
         img.loading = 'lazy';
+        const framing = PHOTO_FRAMING_OVERRIDES[i.name];
+        if (framing) {
+          if (framing.transform)       img.style.transform = framing.transform;
+          if (framing.transformOrigin) img.style.transformOrigin = framing.transformOrigin;
+        }
         img.onerror = function() {
           this.remove();
           const fallback = document.createElement('div');
