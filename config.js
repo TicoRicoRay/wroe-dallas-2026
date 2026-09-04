@@ -375,7 +375,7 @@ const SITE_CONFIG = {
         time: "6:15 \u2013 8:00 PM",
         session: "Happy Hour + Networking",
         location: "Junior Ballroom",
-        speaker: "Celebrate wins. Connect. Go home fired up.",
+        speaker: "Ninety.io",
         tier: "paid",
         highlight: false
       },
