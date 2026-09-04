@@ -190,7 +190,7 @@ const USABLE_W    = PAGE_WIDTH - 2 * MARGIN;  // 10080 DXA
 // ==== COVER PAGE ====
 function coverPage() {
   const children = [];
-  // Big block of navy-styled top
+  // FIFTH ANNUAL kicker
   children.push(new Paragraph({
     alignment: AlignmentType.CENTER,
     spacing: { before: 2000, after: 200 },
@@ -199,19 +199,12 @@ function coverPage() {
       color: COLORS.orange,
     })],
   }));
+  // Texas-shaped "We run on EOS Y'all NTX" mark replaces the old
+  // "WE RUN ON / EOS® NORTH TEXAS" text (the logo already says it).
   children.push(new Paragraph({
     alignment: AlignmentType.CENTER,
-    spacing: { after: 100 },
-    children: [new TextRun({
-      text: 'WE RUN ON', font: FONT_HEAD, size: 40, bold: true, color: COLORS.textMuted,
-    })],
-  }));
-  children.push(new Paragraph({
-    alignment: AlignmentType.CENTER,
-    spacing: { after: 100 },
-    children: [new TextRun({
-      text: 'EOS® NORTH TEXAS', font: FONT_HEAD, size: 96, bold: true, color: COLORS.navy,
-    })],
+    spacing: { after: 400 },
+    children: [image(path.join(__dirname, 'assets/we-run-on-eos-ntx.jpg'), 380, 294)],
   }));
   children.push(new Paragraph({
     alignment: AlignmentType.CENTER,
@@ -864,19 +857,24 @@ function eosiDirectory() {
 function backCover() {
   return [
     // Note: no pageBreakBefore — this content lives in its own section which starts on a new page.
-    new Paragraph({ spacing: { before: 3000 }, children: [new TextRun('')] }),
+    new Paragraph({ spacing: { before: 2400 }, children: [new TextRun('')] }),
     new Paragraph({
       alignment: AlignmentType.CENTER, spacing: { after: 400 },
       children: [new TextRun({ text: 'Thank You', font: FONT_HEAD, size: 96, bold: true, color: COLORS.navy })],
     }),
     new Paragraph({
-      alignment: AlignmentType.CENTER, spacing: { after: 800 },
+      alignment: AlignmentType.CENTER, spacing: { after: 600 },
       border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: COLORS.orange } },
       children: [new TextRun('')],
     }),
     new Paragraph({
       alignment: AlignmentType.CENTER, spacing: { after: 200 },
       children: [new TextRun({ text: 'See you next year.', font: FONT, size: 32, italics: true, color: COLORS.textMuted })],
+    }),
+    // Texas-shaped mark to bookend the cover.
+    new Paragraph({
+      alignment: AlignmentType.CENTER, spacing: { before: 300, after: 300 },
+      children: [image(path.join(__dirname, 'assets/we-run-on-eos-ntx.jpg'), 260, 201)],
     }),
     new Paragraph({
       alignment: AlignmentType.CENTER, spacing: { after: 100 },
