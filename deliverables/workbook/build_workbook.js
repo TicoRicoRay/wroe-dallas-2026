@@ -734,10 +734,11 @@ function sponsorsPage() {
 }
 
 // ==== EOSI DIRECTORY ====
-// Compact 3-page layout: 7 rows × 2 columns = 14 cards per page → up to 42
-// slots for the 40-person roster. QR code (right side of each card) links to
-// the implementer's EOS Worldwide profile; email/profile URL text removed to
-// save vertical space.
+// Compact 2-page layout: 10 rows × 2 columns = 20 cards per page → exactly
+// 40 slots for the 40-person roster. QR code (right side of each card) links
+// to the implementer's EOS Worldwide profile; email/profile URL text removed
+// to save vertical space. Card dimensions tightened (smaller photo, tighter
+// margins, smaller name font) so all cards fit on 2 pages.
 function eosiDirectory() {
   const items = [];
   items.push(H1('North Texas EOS Implementer® Directory', { pageBreakBefore: true }));
@@ -770,30 +771,30 @@ function eosiDirectory() {
         margins: { top: 0, bottom: 0, left: 0, right: 80 },
         children: [
           photoPath
-            ? new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 0 }, children: [image(photoPath, 66, 66)] })
+            ? new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 0 }, children: [image(photoPath, 54, 54)] })
             : new Paragraph({
                 alignment: AlignmentType.CENTER,
-                children: [new TextRun({ text: (r.first_name[0] + r.last_name[0]).toUpperCase(), font: FONT_HEAD, size: 24, bold: true, color: COLORS.navy })],
+                children: [new TextRun({ text: (r.first_name[0] + r.last_name[0]).toUpperCase(), font: FONT_HEAD, size: 22, bold: true, color: COLORS.navy })],
               }),
         ],
       });
 
       const infoChildren = [
         new Paragraph({
-          spacing: { after: 20 },
-          children: [new TextRun({ text: r.name, font: FONT_HEAD, size: 18, bold: true, color: COLORS.navy })],
+          spacing: { after: 10 },
+          children: [new TextRun({ text: r.name, font: FONT_HEAD, size: 16, bold: true, color: COLORS.navy })],
         }),
         new Paragraph({
-          spacing: { after: 30 },
-          children: [new TextRun({ text: r.designation + ' EOS Implementer®', font: FONT, size: 12, italics: true, color: COLORS.orange })],
+          spacing: { after: 20 },
+          children: [new TextRun({ text: r.designation + ' EOS Implementer®', font: FONT, size: 11, italics: true, color: COLORS.orange })],
         }),
       ];
       if (r.primary_market) {
         infoChildren.push(new Paragraph({
-          spacing: { after: 10 },
+          spacing: { after: 0 },
           children: [
-            new TextRun({ text: 'Primary: ', font: FONT, size: 12, bold: true, color: COLORS.textMuted }),
-            new TextRun({ text: r.primary_market, font: FONT, size: 12, color: COLORS.text }),
+            new TextRun({ text: 'Primary: ', font: FONT, size: 11, bold: true, color: COLORS.textMuted }),
+            new TextRun({ text: r.primary_market, font: FONT, size: 11, color: COLORS.text }),
           ],
         }));
       }
@@ -801,8 +802,8 @@ function eosiDirectory() {
         infoChildren.push(new Paragraph({
           spacing: { after: 0 },
           children: [
-            new TextRun({ text: 'Other: ', font: FONT, size: 12, bold: true, color: COLORS.textMuted }),
-            new TextRun({ text: r.other_market, font: FONT, size: 12, color: COLORS.text }),
+            new TextRun({ text: 'Other: ', font: FONT, size: 11, bold: true, color: COLORS.textMuted }),
+            new TextRun({ text: r.other_market, font: FONT, size: 11, color: COLORS.text }),
           ],
         }));
       }
@@ -818,7 +819,7 @@ function eosiDirectory() {
       if (qrMeta && qrMeta.path) {
         qrChildren.push(new Paragraph({
           alignment: AlignmentType.RIGHT, spacing: { after: 0 },
-          children: [image(path.join(__dirname, qrMeta.path), 66, 66)],
+          children: [image(path.join(__dirname, qrMeta.path), 54, 54)],
         }));
       } else {
         qrChildren.push(new Paragraph({ alignment: AlignmentType.RIGHT, children: [new TextRun('')] }));
@@ -838,7 +839,7 @@ function eosiDirectory() {
       rowCells.push(cell({
         width: cardW, borders: lightBorders, shading: COLORS.white,
         align: VerticalAlign.CENTER,
-        margins: { top: 90, bottom: 90, left: 140, right: 140 },
+        margins: { top: 50, bottom: 50, left: 120, right: 120 },
         children: [innerTable],
       }));
     }
@@ -847,7 +848,9 @@ function eosiDirectory() {
       columnWidths: [cardW, cardW],
       rows: [new TableRow({ cantSplit: true, children: rowCells })],
     }));
-    items.push(spacer(40));
+    // No trailing spacer on the final row — avoids pushing a blank page
+    // before the back-cover section break.
+    if (i + cols < roster.length) items.push(spacer(20));
   }
 
   return items;
