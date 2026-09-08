@@ -1075,13 +1075,9 @@ function networkingPage() {
     7,
   ));
 
-  // Thought Provoking Questions — blank ruled lines.
-  items.push(sectionTitle('Thought Provoking Questions'));
-  items.push(fullWidthLines(4));
-
-  // Memorable Quotes
-  items.push(sectionTitle('Memorable Quotes'));
-  items.push(fullWidthLines(4));
+  // Gold Nuggets — blank ruled lines to bottom of page.
+  items.push(sectionTitle('Gold Nuggets'));
+  items.push(fullWidthLines(12));
 
   return items;
 }
