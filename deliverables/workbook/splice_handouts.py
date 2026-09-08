@@ -20,25 +20,26 @@ WORKBOOK_PDF = WORKBOOK_DIR / "Workbook.pdf"
 
 # (anchor_text, handout_pdf_path)
 # The anchor must uniquely identify the page AFTER which the handout is
-# spliced. For paid-track sessions we use the SESSION cover page's
-# "PRESENTED BY" + speaker name (both strings appear together and
-# nowhere else). For Walt Brown's free-morning lunch talk there is no
-# session cover, so we anchor on his MY NOTES page header instead.
+# spliced. For paid-track sessions we anchor on the '(continued)' notes
+# page so the handout lands AFTER all of the speaker's note-taking space
+# (session cover with notes + notes continuation page). For Walt Brown's
+# free-morning lunch talk there is no session cover, so we anchor on his
+# single MY NOTES page header instead.
 HANDOUTS = [
     (
         "MY NOTES · LUNCH WITH WALT BROWN",
         WORKBOOK_DIR / "appendix" / "Walt-Brown-Healthy-Matters-Handout.pdf",
     ),
     (
-        "PRESENTED BY MARK STANLEY",
+        "MY NOTES · PROFIT POWER: STRONGER — OR JUST BIGGER? (CONTINUED)",
         WORKBOOK_DIR / "appendix" / "Profit-Power-Handout.pdf",
     ),
     (
-        "PRESENTED BY BETH FAHEY",
+        "MY NOTES · ROLLOUT, REWORKED: YOUR PLAN FOR RUNNING EOS® COMPANY-WIDE (CONTINUED)",
         WORKBOOK_DIR / "appendix" / "Rollout-Handout.pdf",
     ),
     (
-        "PRESENTED BY MARK C. WINTERS",
+        "MY NOTES · THE 10 PILLARS OF VISIONARY GREATNESS (CONTINUED)",
         WORKBOOK_DIR / "appendix" / "10-Pillars-Handout.pdf",
     ),
 ]

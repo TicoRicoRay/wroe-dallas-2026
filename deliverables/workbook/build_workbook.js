@@ -639,33 +639,40 @@ function speakerCoverPage(s) {
     }));
   }
 
-  // SESSION cover flows straight into MY NOTES.
-  // Handouts (when present) are spliced in by splice_handouts.py between
-  // this cover page and the notes page(s), anchored on the speaker name.
+  // MY NOTES heading + note lines on the SESSION cover, directly under the bio.
+  // Handouts (when present) are spliced in by splice_handouts.py AFTER the
+  // continuation notes page (see below), anchored on the speaker name.
+  const notesHeading = 'MY NOTES · ' + s.session_title.toUpperCase();
+  items.push(new Paragraph({
+    spacing: { before: 320, after: 100 }, alignment: AlignmentType.LEFT,
+    children: [new TextRun({ text: notesHeading, font: FONT_HEAD, size: 20, bold: true, color: COLORS.orange })],
+  }));
+  items.push(new Paragraph({
+    spacing: { after: 200 }, alignment: AlignmentType.LEFT,
+    border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
+    children: [new TextRun('')],
+  }));
+  // 10 lines fills the remaining cover-page space under the bio without
+  // pushing content onto the next page (verified with LibreOffice render).
+  items.push(noteLinesTable(s.cover_notes_lines != null ? s.cover_notes_lines : 10));
 
-  // Notes pages (per session's notes_pages count, default 1)
-  const notesPages = s.notes_pages != null ? s.notes_pages : 1;
-  for (let i = 0; i < notesPages; i++) {
-    items.push(pageBreak());
-    const suffix = notesPages > 1 ? ` (${i + 1}/${notesPages})` : '';
-    const heading = 'MY NOTES · ' + s.session_title.toUpperCase() + suffix;
-    items.push(new Paragraph({
-      spacing: { after: 120 }, alignment: AlignmentType.LEFT,
-      children: [new TextRun({ text: heading, font: FONT_HEAD, size: 24, bold: true, color: COLORS.orange })],
-    }));
-    items.push(new Paragraph({
-      spacing: { after: 300 }, alignment: AlignmentType.LEFT,
-      border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
-      children: [new TextRun('')],
-    }));
-    // If a reflection block is defined on the session, cap notes lines
-    // and append the reflection thought box (matches morning-notes pattern).
-    const linesCount = s.reflection ? (s.notes_lines || 15) : 26;
-    items.push(noteLinesTable(linesCount));
-    if (s.reflection) {
-      items.push(spacer(200));
-      items.push(thoughtBox(s.reflection));
-    }
+  // Continuation notes page: more lines + reflection thought box (if defined).
+  // Kept as a single flow so all writing space sits BEFORE the handout.
+  items.push(pageBreak());
+  items.push(new Paragraph({
+    spacing: { after: 120 }, alignment: AlignmentType.LEFT,
+    children: [new TextRun({ text: notesHeading + ' (continued)', font: FONT_HEAD, size: 24, bold: true, color: COLORS.orange })],
+  }));
+  items.push(new Paragraph({
+    spacing: { after: 300 }, alignment: AlignmentType.LEFT,
+    border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
+    children: [new TextRun('')],
+  }));
+  const contLines = s.reflection ? (s.notes_lines || 15) : 26;
+  items.push(noteLinesTable(contLines));
+  if (s.reflection) {
+    items.push(spacer(200));
+    items.push(thoughtBox(s.reflection));
   }
 
   return items;
