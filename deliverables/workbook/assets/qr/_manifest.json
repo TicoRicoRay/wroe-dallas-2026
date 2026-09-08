@@ -63,6 +63,10 @@
     "Wolf's Edge Integrators": {
       "path": "assets/qr/sponsor-wolf-s-edge-integrators.png",
       "url": "https://wolfsedgeintegrators.com/"
+    },
+    "North Texas EOS Implementers": {
+      "path": "assets/qr/host-eosnorthtexas.png",
+      "url": "https://EOSNorthTexas.com"
     }
   },
   "eosi": {

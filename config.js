@@ -83,6 +83,14 @@ const SITE_CONFIG = {
     sponsors: [
 
       {
+        name: "North Texas EOS Implementers",
+        tier: "host",
+        url: "https://EOSNorthTexas.com",
+        logo: "images/NorthTexas.png",
+        alt: "We Run on EOS® North Texas 2026 — hosted by the North Texas EOS Implementers",
+        verified: true
+      },
+      {
         name: "Strety",
         tier: "title",
         url: "https://strety.com/",

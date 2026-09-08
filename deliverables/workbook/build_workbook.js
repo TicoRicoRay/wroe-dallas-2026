@@ -829,13 +829,14 @@ function sponsorsPage() {
   // replaced by a QR code inside each cell.
   // Prices: Title $10K, Book $9K, HH $6.5K, Lounge $5K, Swag $3.5K, Booth $1.5K.
   const TIER_LAYOUT = {
+    host:       { label: 'Hosted by',                    cols: 1, maxH: 44, qr: 44 },
     title:      { label: 'Title Sponsors',              cols: 2, maxH: 68, qr: 58 },
     book:       { label: 'Book Sponsors',               cols: 2, maxH: 60, qr: 54 },
     hhLounge:   { label: 'Happy Hour & Lounge Sponsors', cols: 2, maxH: 56, qr: 50 },
     swag:       { label: 'Swag Bag Sponsors',           cols: 2, maxH: 54, qr: 50 },
     booth:      { label: 'Booth Sponsors',              cols: 4, maxH: 40, qr: 42 },
   };
-  const tierOrder = ['title', 'book', 'hhLounge', 'swag', 'booth'];
+  const tierOrder = ['host', 'title', 'book', 'hhLounge', 'swag', 'booth'];
 
   const grouped = {};
   sponsors.forEach(s => {
@@ -848,7 +849,7 @@ function sponsorsPage() {
   const items = [];
   items.push(H1('Thank You to Our Sponsors', { pageBreakBefore: true }));
   items.push(ruleLine());
-  items.push(P('This day is made possible by the generosity of these North Texas businesses. Scan any QR to visit the sponsor.',
+  items.push(P('This day is made possible by the generosity of these sponsors. Scan any QR to visit the sponsor.',
     { italics: true, color: COLORS.textMuted, size: 20 }));
   items.push(spacer(30));
 
@@ -859,9 +860,10 @@ function sponsorsPage() {
     children: [new TextRun({ text, font: FONT_HEAD, size: 20, bold: true, color: COLORS.orange })],
   });
 
-  tierOrder.forEach(tk => {
-    const list = grouped[tk] || [];
-    if (list.length === 0) return;
+  const activeTiers = tierOrder.filter(tk => (grouped[tk] || []).length > 0);
+  activeTiers.forEach((tk, tierIdx) => {
+    const list = grouped[tk];
+    const isLast = tierIdx === activeTiers.length - 1;
     const layout = TIER_LAYOUT[tk];
     items.push(sponsorTierLabel(layout.label));
 
@@ -910,7 +912,7 @@ function sponsorsPage() {
             children: [new TextRun({ text: '[logo]', font: FONT, size: 16, color: COLORS.textMuted })]
           }));
         }
-        const nameSize = tk === 'title' ? 22 : (tk === 'book' || tk === 'happyHour') ? 20 : tk === 'booth' ? 14 : 18;
+        const nameSize = (tk === 'host' || tk === 'title') ? 22 : (tk === 'book' || tk === 'happyHour') ? 20 : tk === 'booth' ? 14 : 18;
         leftChildren.push(new Paragraph({
           alignment: AlignmentType.LEFT, spacing: { after: 0 },
           children: [new TextRun({ text: s.name, font: FONT_HEAD, size: nameSize, bold: true, color: COLORS.navy })],
@@ -943,7 +945,7 @@ function sponsorsPage() {
           })],
         });
 
-        const boxPadding = tk === 'title' ? 70 : tk === 'booth' ? 40 : 60;
+        const boxPadding = tk === 'host' ? 40 : tk === 'title' ? 70 : tk === 'booth' ? 40 : 60;
         rowCells.push(cell({
           width: columnWidths[c], borders: lightBorders, shading: COLORS.white,
           align: VerticalAlign.CENTER,
@@ -958,8 +960,11 @@ function sponsorsPage() {
       columnWidths,
       rows: tierRows,
     }));
-    items.push(spacer(20));
+    if (!isLast) items.push(spacer(20));
   });
+  // Trim any trailing paragraph flow so the sponsors section doesn't push a
+  // ghost blank page before the next H1 (which uses pageBreakBefore).
+  // (An empty spacer paragraph is fine; docx sections handle the break.)
 
   return items;
 }
