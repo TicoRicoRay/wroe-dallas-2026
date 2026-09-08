@@ -1186,7 +1186,22 @@ const MORNING_NOTES = [
       ],
     },
   },
-  { title: 'Journey with an EOS Implementer',                  speaker: 'Strety',              time: '9:55 – 10:45 AM' },
+  {
+    title: 'Journey with an EOS Implementer',
+    speaker: 'Brian Dosal', speakerTitle: 'Strety',
+    time: '9:55 – 10:45 AM',
+    notesLines: 15,
+    reflection: {
+      quote: 'Let go of the vine.',
+      attribution: 'Gino Wickman, Traction',
+      questions: [
+        'What has an Implementer, a peer, or this room already told you that you have not acted on? What is really stopping you?',
+        'Who on your leadership team is watching the journey instead of rowing? What conversation are you avoiding with them?',
+        'Twelve months from today, what will your team say is different about you, not just the company?',
+        'If you are self-implementing, where has “good enough” quietly become the standard?',
+      ],
+    },
+  },
   { title: 'Your Sales Team Isn’t the Problem. Your System Is.', speaker: 'The System of Selling', time: '11:00 AM – 12:00 PM' },
   { title: 'Lunch with Walt Brown: Healthy Matters',           speaker: 'Walt Brown',          time: '12:00 – 1:00 PM' },
 ];
