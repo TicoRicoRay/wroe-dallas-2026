@@ -321,82 +321,108 @@ function welcomeLetter() {
 }
 
 // ==== AGENDA ====
+// Per-session presenter subtitle + workbook page where their content starts.
+// Break rows leave both blank. Keyed by exact session title from config.js.
+const AGENDA_PRESENTER_INFO = {
+  'Get a Grip on your Business with EOS':                          { name: 'Ann Sheu',        subtitle: 'Certified EOS Implementer', page: '4' },
+  'Journey with an EOS Implementer':                               { name: 'Brian Dosal',     subtitle: 'Strety',                     page: '5' },
+  'Your Sales Team Isn’t the Problem. Your System Is.':            { name: 'Steve Heroux',    subtitle: 'The System of Selling',      page: '6' },
+  'Lunch with Walt Brown: Healthy Matters':                        { name: 'Walt Brown',      subtitle: 'EOS Worldwide Head Coach',   page: '7' },
+  'Profit Power: Stronger — or Just Bigger?':                      { name: 'Mark Stanley',    subtitle: 'Expert EOS Implementer',     page: '8' },
+  'Rollout, Reworked: Your Plan for Running EOS® Company-Wide':    { name: 'Beth Fahey',      subtitle: 'Expert EOS Implementer',     page: '12' },
+  'The 10 Pillars of Visionary Greatness':                         { name: 'Mark C. Winters', subtitle: 'Expert EOS Implementer',     page: '32' },
+  'Happy Hour + Networking':                                       { name: 'Ninety.io',       subtitle: '',                            page: '' },
+};
+
 function agendaPage() {
   const rows = SITE_CONFIG.agenda;
   const tableRows = [];
 
+  // Column widths (DXA). Sum = USABLE_W (10080).
+  const COL_TIME     = 1700;
+  const COL_SESSION  = 5080;
+  const COL_PRES     = 2500;
+  const COL_PAGE     =  800;
+
   // Header row
+  const headerCell = (text, w, align = AlignmentType.LEFT) => cell({
+    width: w, shading: COLORS.navy, borders: noBorders,
+    children: [new Paragraph({ alignment: align,
+      children: [new TextRun({ text, font: FONT_HEAD, size: 20, bold: true, color: COLORS.white })] })]
+  });
+
   tableRows.push(new TableRow({
     tableHeader: true,
     children: [
-      cell({
-        width: 2200, shading: COLORS.navy, borders: noBorders,
-        children: [new Paragraph({ alignment: AlignmentType.LEFT,
-          children: [new TextRun({ text: 'TIME', font: FONT_HEAD, size: 20, bold: true, color: COLORS.white })] })]
-      }),
-      cell({
-        width: 5680, shading: COLORS.navy, borders: noBorders,
-        children: [new Paragraph({ alignment: AlignmentType.LEFT,
-          children: [new TextRun({ text: 'SESSION', font: FONT_HEAD, size: 20, bold: true, color: COLORS.white })] })]
-      }),
-      cell({
-        width: 2200, shading: COLORS.navy, borders: noBorders,
-        children: [new Paragraph({ alignment: AlignmentType.LEFT,
-          children: [new TextRun({ text: 'PRESENTER', font: FONT_HEAD, size: 20, bold: true, color: COLORS.white })] })]
-      }),
+      headerCell('TIME',      COL_TIME),
+      headerCell('SESSION',   COL_SESSION),
+      headerCell('PRESENTER', COL_PRES),
+      headerCell('PAGE',      COL_PAGE,    AlignmentType.CENTER),
     ],
   }));
 
   rows.forEach((r, i) => {
     const stripe = i % 2 === 0 ? COLORS.white : COLORS.bgTint;
-    let speaker = (r.speaker || '').split(' · ')[0] || '';
-    if (speaker === 'Walt Brown') {
-      speaker = 'EOS Worldwide Head Coach · Walt Brown';
-    }
-    const highlight = r.highlight;
-    // The workbook covers the PM (paid) sessions only, starting at Mark Stanley
-    // 1:00 PM. Everything scheduled before that — including Walt's lunch talk —
-    // is shown on the agenda page for context but styled as "not covered here".
-    const START_HOUR = '1:00';
-    const isContextOnly = r.tier === 'free' || r.time.startsWith('7:') ||
-      r.time.startsWith('8:') || r.time.startsWith('9:') ||
-      r.time.startsWith('10:') || r.time.startsWith('11:') ||
-      r.time.startsWith('12:');
-    const isFree = isContextOnly;
-
-    // All rows: session title bold (except breaks), no italics, times not bold.
-    // Every speaker session shares the same size & color; only breaks/reference
-    // rows differ.
-    const isBreak = /^(Break|Coffee|Happy Hour)/i.test(r.session);
+    const isBreak = /^(Break|Coffee)/i.test(r.session);
     const timeColor    = COLORS.navy;
     const sessionColor = isBreak ? COLORS.textMuted : COLORS.text;
 
-    const sessionChildren = [
-      new TextRun({
-        text: r.session, font: FONT, size: 22,
-        bold: !isBreak, italics: false, color: sessionColor,
-      }),
-    ];
-    const sessionParas = [new Paragraph({ children: sessionChildren })];
+    // Presenter cell: two lines (name + subtitle). Break rows: two blank lines
+    // (non-breaking space) so row height stays consistent with two-line rows.
+    const info = AGENDA_PRESENTER_INFO[r.session] || { name: '', subtitle: '', page: '' };
+    const presName     = isBreak ? '\u00A0' : (info.name     || '\u00A0');
+    const presSubtitle = isBreak ? '\u00A0' : (info.subtitle || '\u00A0');
+    const pageStr      = isBreak ? '' : (info.page || '');
 
     tableRows.push(new TableRow({
       children: [
         cell({
-          width: 2200, shading: stripe, borders: noBorders,
+          width: COL_TIME, shading: stripe, borders: noBorders,
           margins: { top: 100, bottom: 100, left: 140, right: 100 },
           children: [new Paragraph({
-            children: [new TextRun({ text: r.time, font: FONT, size: 20, bold: false, color: timeColor })] })]
+            children: [new TextRun({ text: r.time, font: FONT, size: 20, bold: false, color: timeColor })] })],
         }),
         cell({
-          width: 5680, shading: stripe, borders: noBorders,
-          margins: { top: 100, bottom: 100, left: 140, right: 100 },
-          children: sessionParas,
-        }),
-        cell({
-          width: 2200, shading: stripe, borders: noBorders,
+          width: COL_SESSION, shading: stripe, borders: noBorders,
           margins: { top: 100, bottom: 100, left: 140, right: 100 },
           children: [new Paragraph({
-            children: [new TextRun({ text: speaker, font: FONT, size: 18, italics: false, color: COLORS.textMuted })] })]
+            children: [new TextRun({
+              text: r.session, font: FONT, size: 22,
+              bold: !isBreak, italics: false, color: sessionColor,
+            })],
+          })],
+        }),
+        cell({
+          width: COL_PRES, shading: stripe, borders: noBorders,
+          margins: { top: 100, bottom: 100, left: 140, right: 100 },
+          children: [
+            new Paragraph({
+              spacing: { after: 0 },
+              children: [new TextRun({
+                text: presName, font: FONT, size: 20,
+                bold: !isBreak, italics: false,
+                color: isBreak ? COLORS.textMuted : COLORS.text,
+              })],
+            }),
+            new Paragraph({
+              spacing: { after: 0 },
+              children: [new TextRun({
+                text: presSubtitle, font: FONT, size: 18,
+                italics: false, color: COLORS.textMuted,
+              })],
+            }),
+          ],
+        }),
+        cell({
+          width: COL_PAGE, shading: stripe, borders: noBorders,
+          margins: { top: 100, bottom: 100, left: 100, right: 140 },
+          children: [new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [new TextRun({
+              text: pageStr, font: FONT_HEAD, size: 22, bold: true,
+              color: COLORS.orange,
+            })],
+          })],
         }),
       ],
     }));
@@ -404,11 +430,11 @@ function agendaPage() {
   return [
     H1('Agenda', { pageBreakBefore: true }),
     ruleLine(),
-    P('Monday, September 14, 2026 · The Statler Dallas', { italics: true, color: COLORS.textMuted, size: 22 }),
+    P('Monday, September 14, 2026 · The Statler', { italics: true, color: COLORS.textMuted, size: 22 }),
     spacer(200),
     new Table({
       width: { size: USABLE_W, type: WidthType.DXA },
-      columnWidths: [2200, 5680, 2200],
+      columnWidths: [COL_TIME, COL_SESSION, COL_PRES, COL_PAGE],
       rows: tableRows,
     }),
   ];
@@ -1198,6 +1224,7 @@ const doc = new Document({
           children: [
             new Paragraph({
               alignment: AlignmentType.RIGHT, spacing: { after: 0 },
+              indent: { right: 0 },
               children: [new TextRun({
                 text: 'We Run ON EOS®',
                 font: FONT_HEAD, size: 26, bold: true, color: COLORS.text,
@@ -1205,6 +1232,7 @@ const doc = new Document({
             }),
             new Paragraph({
               alignment: AlignmentType.RIGHT, spacing: { after: 100 },
+              indent: { right: 0 },
               children: [new TextRun({
                 text: 'North Texas 2026',
                 font: FONT_HEAD, size: 22, bold: true, color: COLORS.textMuted,
