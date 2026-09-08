@@ -32,7 +32,27 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 4vh 2vw;
+    padding: 0 2vw;
+  }
+  /* The sponsor marquee is pinned to the top so it feels like a persistent
+     banner and doesn't steal vertical weight from the timer. */
+  .sponsors-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+  }
+  /* The brand + label + timer stack is what actually gets vertically centered.
+     It lives in normal flow with the body's justify-content: center placing
+     it in the middle of the viewport. The fixed sponsor marquee and fixed
+     controls bar are out of flow and don't influence the centering. */
+  .stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   .brand {
     font-family: 'Montserrat', sans-serif;
@@ -75,7 +95,7 @@
     width: 100vw;
     overflow: hidden;
     padding: 1.2vh 0;
-    margin-bottom: 3vh;
+    background: var(--navy);
     /* Fade the edges into the navy background so logos don't hard-cut. */
     -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
             mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
@@ -204,13 +224,17 @@
 </head>
 <body>
 
-<div class="sponsors" aria-hidden="true">
-  <div class="sponsors-track" id="sponsorsTrack"></div>
+<div class="sponsors-wrap">
+  <div class="sponsors" aria-hidden="true">
+    <div class="sponsors-track" id="sponsorsTrack"></div>
+  </div>
 </div>
 
-<div class="brand">WRoEOS NORTH TEXAS 2026</div>
-<div class="label" id="label">BREAK TIMER</div>
-<div id="time">20:00</div>
+<div class="stack">
+  <div class="brand">WRoEOS NORTH TEXAS 2026</div>
+  <div class="label" id="label">BREAK TIMER</div>
+  <div id="time">20:00</div>
+</div>
 
 <div class="controls">
   <div class="row">
@@ -252,9 +276,10 @@
   // ---------- Sponsor carousel ----------
   // Only sponsors with verified: true in config.js are shown on the site's
   // home page — the timer carousel mirrors that list (Trainual is currently
-  // unverified and intentionally omitted). Ordered by tier: Title → Book →
-  // Happy Hour/Lounge → Swag → Booth. Paths are relative to /timer/.
+  // unverified and intentionally omitted). Ordered by tier: Host → Title →
+  // Book → Happy Hour/Lounge → Swag → Booth. Paths are relative to /timer/.
   const SPONSORS = [
+    { name: 'North Texas EOS Implementers', logo: '../images/NorthTexas.png' },
     { name: 'Strety',                    logo: '../images/strety.png' },
     { name: 'The System of Selling',     logo: '../images/tsos.png' },
     { name: 'ProCFO Partners',           logo: '../images/procfopartners.svg' },
@@ -274,13 +299,16 @@
   ];
   (function populateSponsors() {
     const track = document.getElementById('sponsorsTrack');
-    // Each logo lives in a fixed-width pill so every sponsor gets the same
-    // slot. Render the list twice back-to-back so the -50% translate loop is
-    // seamless.
+    // Force-eager loading. Render the list twice back-to-back so the -50%
+    // translate loop is seamless. Each logo lives in a fixed-width pill so
+    // every sponsor gets the same slot regardless of intrinsic aspect ratio.
     const html = SPONSORS.map(s =>
-      `<div class="logo"><img src="${s.logo}" alt="${s.name}" loading="lazy"></div>`
+      `<div class="logo"><img src="${s.logo}" alt="${s.name}" loading="eager" fetchpriority="high" decoding="sync"></div>`
     ).join('');
     track.innerHTML = html + html;
+    // Belt-and-suspenders: also warm the browser cache via Image() so every
+    // logo is in memory before its first pixel needs to paint.
+    SPONSORS.forEach(s => { const im = new Image(); im.src = s.logo; });
   })();
 
   let durationSec = 20 * 60;
