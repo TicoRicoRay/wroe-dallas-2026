@@ -1202,7 +1202,22 @@ const MORNING_NOTES = [
       ],
     },
   },
-  { title: 'Your Sales Team Isn’t the Problem. Your System Is.', speaker: 'The System of Selling', time: '11:00 AM – 12:00 PM' },
+  {
+    title: 'Your Sales Team Isn’t the Problem. Your System Is.',
+    speaker: 'Steve Heroux', speakerTitle: 'The System of Selling',
+    time: '11:00 AM – 12:00 PM',
+    notesLines: 15,
+    reflection: {
+      quote: 'Systemize the predictable so you can humanize the exceptional.',
+      attribution: 'Isadore Sharp, Founder of Four Seasons',
+      questions: [
+        'If your top salesperson walked out today, how much of your sales process walks out with them?',
+        'Is your sales process documented, simplified, and followed by all? Or do you have as many sales processes as you have reps?',
+        'Which leading indicators sit on your sales Scorecard? Would they have warned you a quarter ago about this quarter’s number?',
+        'Where does your pipeline leak: lead generation, qualifying, proposal, close, or the handoff to operations? Name the root cause, not the symptom.',
+      ],
+    },
+  },
   { title: 'Lunch with Walt Brown: Healthy Matters',           speaker: 'Walt Brown',          time: '12:00 – 1:00 PM' },
 ];
 
