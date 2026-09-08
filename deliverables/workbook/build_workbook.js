@@ -121,6 +121,93 @@ function ruleLine() {
   });
 }
 
+// Reflection "thought box" — a full-width bordered panel with a leading
+// italic quote, numbered questions, and an action line. Use at the bottom
+// of a notes page to prompt the attendee to translate the session into a
+// concrete To Do. Reusable across every morning-notes and speaker-notes
+// page.
+function thoughtBox({ quote, attribution, questions, action = 'My To Do from this session is:', dueDateLabel = 'Due Date:' }) {
+  const children = [];
+
+  if (quote) {
+    const quoteText = '\u201C' + quote.replace(/^\s*[\u201C"]|[\u201D"]\s*$/g, '') + '\u201D';
+    children.push(new Paragraph({
+      alignment: AlignmentType.LEFT,
+      spacing: { after: 40 },
+      children: [new TextRun({
+        text: quoteText, font: FONT_HEAD, size: 22, italics: true, color: COLORS.navy,
+      })],
+    }));
+    if (attribution) {
+      children.push(new Paragraph({
+        alignment: AlignmentType.LEFT,
+        spacing: { after: 160 },
+        children: [new TextRun({
+          text: '\u2014 ' + attribution, font: FONT, size: 18, color: COLORS.textMuted,
+        })],
+      }));
+    }
+  }
+
+  (questions || []).forEach((q, i) => {
+    children.push(new Paragraph({
+      alignment: AlignmentType.LEFT,
+      spacing: { after: 60 },
+      indent: { left: 200, hanging: 200 },
+      children: [new TextRun({
+        text: `${i + 1}. ${q}`, font: FONT, size: 20, color: COLORS.text,
+      })],
+    }));
+  });
+
+  if (action) {
+    // ACTION header + write-in line for the To Do and Due Date.
+    children.push(new Paragraph({
+      spacing: { before: 100, after: 40 },
+      children: [new TextRun({
+        text: 'ACTION:', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange,
+      })],
+    }));
+    children.push(new Paragraph({
+      spacing: { after: 0 },
+      children: [
+        new TextRun({ text: action + ' ', font: FONT, size: 20, color: COLORS.text }),
+        // Use underscore chars for the write-in ruler so LibreOffice always
+        // draws them (underline on trailing whitespace runs can vanish).
+        new TextRun({
+          text: '_'.repeat(45), font: FONT, size: 20, color: COLORS.textMuted,
+        }),
+        new TextRun({ text: '  ' + dueDateLabel + ' ', font: FONT, size: 20, color: COLORS.text }),
+        new TextRun({
+          text: '_'.repeat(14), font: FONT, size: 20, color: COLORS.textMuted,
+        }),
+      ],
+    }));
+  }
+
+  // Wrap in a single-cell table so we get a proper box with a dashed border
+  // that fits attention without overwhelming the page. Orange, small dashes.
+  return new Table({
+    width: { size: USABLE_W, type: WidthType.DXA },
+    columnWidths: [USABLE_W],
+    rows: [new TableRow({
+      cantSplit: true,
+      children: [new TableCell({
+        width: { size: USABLE_W, type: WidthType.DXA },
+        shading: { type: ShadingType.CLEAR, color: 'auto', fill: 'FFFFFF' },
+        borders: {
+          top:    { style: BorderStyle.DASH_SMALL_GAP, size: 12, color: COLORS.orange },
+          right:  { style: BorderStyle.DASH_SMALL_GAP, size: 12, color: COLORS.orange },
+          bottom: { style: BorderStyle.DASH_SMALL_GAP, size: 12, color: COLORS.orange },
+          left:   { style: BorderStyle.DASH_SMALL_GAP, size: 12, color: COLORS.orange },
+        },
+        margins: { top: 240, bottom: 240, left: 300, right: 300 },
+        children,
+      })],
+    })],
+  });
+}
+
 // Pull-quote block for callouts. Wide orange left border, tinted background,
 // large italic navy quote text, smaller muted attribution.
 // Use across the workbook wherever a speaker quote should pop.
@@ -1083,7 +1170,22 @@ function networkingPage() {
 }
 
 const MORNING_NOTES = [
-  { title: 'Get a Grip on your Business with EOS',            speaker: 'Ann Sheu',           time: '8:00 – 9:35 AM' },
+  {
+    title: 'Get a Grip on your Business with EOS',
+    speaker: 'Ann Sheu', speakerTitle: 'Certified EOS Implementer',
+    time: '8:00 – 9:35 AM',
+    notesLines: 15,
+    reflection: {
+      quote: 'Do you have a grip on your business, or does your business have a grip on you?',
+      attribution: 'Gino Wickman, Traction',
+      questions: [
+        'Rate your grip on the business today, 1 to 10. What is the one thing that would move it a full point?',
+        'Of the Six Key Components (Vision, People, Data, Issues, Process, Traction), which is weakest in your company? What is that weakness costing you every month?',
+        'Where are you hitting the ceiling right now: the whole company, one department, or you personally?',
+        'What are you holding onto that you would have to let go of for the business to grow past you?',
+      ],
+    },
+  },
   { title: 'Journey with an EOS Implementer',                  speaker: 'Strety',              time: '9:55 – 10:45 AM' },
   { title: 'Your Sales Team Isn’t the Problem. Your System Is.', speaker: 'The System of Selling', time: '11:00 AM – 12:00 PM' },
   { title: 'Lunch with Walt Brown: Healthy Matters',           speaker: 'Walt Brown',          time: '12:00 – 1:00 PM' },
@@ -1096,12 +1198,25 @@ function morningNotesPage(m) {
     spacing: { after: 60 }, alignment: AlignmentType.LEFT,
     children: [new TextRun({ text: 'MY NOTES · ' + m.title.toUpperCase(), font: FONT_HEAD, size: 24, bold: true, color: COLORS.orange })],
   }));
+  const subtitleRuns = [
+    new TextRun({ text: `${m.time} · ${m.speaker}`, font: FONT, size: 18, color: COLORS.textMuted }),
+  ];
+  if (m.speakerTitle) {
+    subtitleRuns.push(new TextRun({ text: `  (${m.speakerTitle})`, font: FONT, size: 18, italics: true, color: COLORS.textMuted }));
+  }
   items.push(new Paragraph({
     spacing: { after: 300 }, alignment: AlignmentType.LEFT,
     border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
-    children: [new TextRun({ text: `${m.time} · ${m.speaker}`, font: FONT, size: 18, color: COLORS.textMuted })],
+    children: subtitleRuns,
   }));
-  items.push(noteLinesTable(25)); // morning notes has extra subheading (time+speaker), 25 @ 470 DXA fits
+  // If a reflection block is defined, cap the note-lines block to leave room
+  // for it and its own spacer. Otherwise use the full 25-line ruled area.
+  const linesCount = m.reflection ? (m.notesLines || 15) : 25;
+  items.push(noteLinesTable(linesCount));
+  if (m.reflection) {
+    items.push(spacer(200));
+    items.push(thoughtBox(m.reflection));
+  }
   return items;
 }
 
