@@ -535,11 +535,21 @@ function agendaPage() {
 // begins 1:00 PM with Mark Stanley).
 const SPEAKER_SESSIONS = [
   { session_title: 'Profit Power: Stronger — or Just Bigger?', speaker: 'Mark Stanley', title: 'Expert EOS Implementer®',
-    time: '1:00 – 2:30 PM', slug: 'mark-stanley', notes_pages: 1,
+    time: '1:00 – 2:30 PM', slug: 'mark-stanley', notes_pages: 1, notes_lines: 15,
     photo: 'assets/speakers/mark-stanley.jpg',
     bio: 'One of the first EOS® Implementers in the world (2009) and now an Expert EOS Implementer with 1,700+ full-day sessions across 180+ leadership teams. Co-author of The Data Book, co-founder of the UNSTOPPABLE! Data-Driven Leader community, and a three-time entrepreneur. Brings a Theory of Constraints, Lean, and Six Sigma toolkit — plus a bias for action — to every session. BBA (Iowa), MBA (Drake). Lives in Johnston, Iowa.',
     handout: { file: 'appendix/Profit-Power-Handout.pdf', pages: 2,
-      caption: 'Profit Power — The 5-Number Income Statement™ worksheet from Mark Stanley. Fill it in during the session.' } },
+      caption: 'Profit Power — The 5-Number Income Statement™ worksheet from Mark Stanley. Fill it in during the session.' },
+    reflection: {
+      quote: 'Everyone has a number.',
+      attribution: 'Gino Wickman, Traction',
+      questions: [
+        'Without looking, write your five numbers: Revenue, Directly Variable Costs, Gross Profit, OPEX, Net Profit. Which one did you have to guess?',
+        'Of the 7 Power Moves, which one would your team call impossible? Is it impossible, or just uncomfortable?',
+        'If you raised prices 1% tomorrow, who would actually notice? What would it add to gross profit?',
+        'What is your First Move Monday, who owns it, and which Scorecard number turns red if it stalls?',
+      ],
+    } },
   { session_title: 'Rollout, Reworked: Your Plan for Running EOS® Company-Wide', speaker: 'Beth Fahey', title: 'Expert EOS Implementer®',
     time: '2:50 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1,
     photo: 'assets/speakers/beth-fahey.jpg',
@@ -648,7 +658,14 @@ function speakerCoverPage(s) {
       border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: COLORS.orange } },
       children: [new TextRun('')],
     }));
-    items.push(noteLinesTable(26)); // speaker session notes: no subheading, fits 26 @ 470 DXA
+    // If a reflection block is defined on the session, cap notes lines
+    // and append the reflection thought box (matches morning-notes pattern).
+    const linesCount = s.reflection ? (s.notes_lines || 15) : 26;
+    items.push(noteLinesTable(linesCount));
+    if (s.reflection) {
+      items.push(spacer(200));
+      items.push(thoughtBox(s.reflection));
+    }
   }
 
   return items;
