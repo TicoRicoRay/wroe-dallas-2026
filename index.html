@@ -341,6 +341,7 @@
     .sponsor-logo img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
     /* Sizing scales with sponsorship price. Logos use flex to fill the row on desktop. */
     .sponsor-logo.title { flex: 1 1 0; min-width: 280px; max-width: 560px; height: 140px; }
+    .sponsor-logo.host  { flex: 1 1 0; min-width: 320px; max-width: 640px; height: 120px; padding: 1rem 1.5rem; }
     .sponsor-logo.book  { flex: 1 1 0; min-width: 240px; max-width: 360px; height: 110px; }
     .sponsor-logo.happy  { width: 260px; height: 90px; }
     .sponsor-logo.lounge { width: 220px; height: 80px; }
@@ -401,6 +402,7 @@
     }
     @media (max-width: 900px) {
       .sponsor-logo.title { min-width: 0; max-width: 100%; height: 110px; }
+      .sponsor-logo.host  { min-width: 0; max-width: 100%; height: 100px; }
       .sponsor-logo.book  { min-width: 0; max-width: 100%; height: 90px; }
       .sponsor-slot.title { width: 100%; max-width: 360px; height: 110px; }
       .sponsor-slot.book  { width: 100%; max-width: 320px; height: 90px; }
@@ -797,12 +799,20 @@
     });
 
     // Sponsors
-    const clsMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happy','Lounge Sponsor':'lounge','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
+    const clsMap = {'Title Sponsor':'title','Hosted by':'host','Book Sponsor':'book','Happy Hour Sponsor':'happy','Lounge Sponsor':'lounge','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
     // Map tier-name -> internal key used on sponsor records (e.g. "Title Sponsor" -> "title")
-    const tierKeyMap = {'Title Sponsor':'title','Book Sponsor':'book','Happy Hour Sponsor':'happyHour','Lounge Sponsor':'lounge','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
+    const tierKeyMap = {'Title Sponsor':'title','Hosted by':'host','Book Sponsor':'book','Happy Hour Sponsor':'happyHour','Lounge Sponsor':'lounge','Swag Bag Sponsor':'swag','Booth Sponsor':'booth'};
     const sponsorList = (C.sponsors.sponsors || []).filter(s => s && s.verified === true);
+    // Synthetic 'Hosted by' tier metadata (not a paid sponsorship) so the
+    // existing render loop can iterate it. Order matches workbook: Title first,
+    // then Hosted by, then paid tiers by price.
+    const tierMeta = (C.sponsors.tiers || []).slice();
+    if (!tierMeta.some(t => t.name === 'Hosted by')) {
+      tierMeta.push({ name: 'Hosted by', price: 0, available: 0 });
+    }
     const tierGroups = [
       { keys: ['Title Sponsor'] },
+      { keys: ['Hosted by'] },
       { keys: ['Book Sponsor'] },
       { keys: ['Happy Hour Sponsor'] },
       { keys: ['Lounge Sponsor'] },
@@ -811,7 +821,7 @@
     ];
     const tierContainer = el('sponsor-tiers');
     tierGroups.forEach(group => {
-      const tiers = C.sponsors.tiers.filter(t => group.keys.includes(t.name));
+      const tiers = tierMeta.filter(t => group.keys.includes(t.name));
       // Skip this tier entirely if it has zero verified sponsors AND zero available slots
       const tierKeys = tiers.map(t => tierKeyMap[t.name]);
       const hasVerified = sponsorList.some(s => tierKeys.includes(s.tier));
