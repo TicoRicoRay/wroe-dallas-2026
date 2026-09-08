@@ -595,7 +595,7 @@ const SPEAKER_SESSIONS = [
       ],
     } },
   { session_title: 'The 10 Pillars of Visionary Greatness', speaker: 'Mark C. Winters', title: 'Expert EOS Implementer®',
-    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1, notes_lines: 4,
+    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1, notes_lines: 14,
     photo: 'assets/speakers/mark-c-winters.jpg',
     bio: 'Expert EOS Implementer® since 2012 with 1,000+ full-day sessions delivered. Author of Visionary and co-author of Rocket Fuel with EOS founder Gino Wickman — the definitive book on the Visionary/Integrator partnership. Founder and Visionary of Rocket Fuel University and host of the Rocket Fuel Podcast. Serial entrepreneur (14 companies started, bought, sold, or shut down) with one exit at a 100x cash return in under three years. MBA from The University of Chicago. Based in Dallas.',
     handout: { file: 'appendix/10-Pillars-Handout.pdf', pages: 2,
