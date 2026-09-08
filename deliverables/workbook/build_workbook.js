@@ -745,14 +745,15 @@ function fitBox(imgPath, maxW, maxH) {
 }
 
 function booksPage() {
+  // Retail pricing intentionally omitted per redline (2026-09-08).
   const BOOKS = [
-    { title: 'Data', author: 'Mark Stanley', retail: '$20.66',
+    { title: 'Data', author: 'Mark Stanley',
       description: 'Harness Your Numbers to Go from Uncertain to Unstoppable. A practical playbook for using data to drive decisions and accountability.',
       cover: path.join(__dirname, 'assets/books/data_cover.jpg') },
-    { title: 'Rollout', author: 'Beth Fahey', retail: '$29.99',
+    { title: 'Rollout', author: 'Beth Fahey',
       description: 'Get Your Entire Team Running on EOS\u00ae to Achieve Your Vision. A field-tested guide for taking EOS deeper across your whole organization.',
       cover: path.join(__dirname, 'assets/books/rollout_cover.jpg') },
-    { title: 'Visionary', author: 'Mark C. Winters', retail: '$29.99',
+    { title: 'Visionary', author: 'Mark C. Winters',
       description: 'How Driven Entrepreneurs Get What They Want Without Doing It All Themselves. The Visionary/Integrator dynamic that powers great companies.',
       cover: path.join(__dirname, 'assets/books/visionary_cover.jpg') },
   ];
@@ -791,7 +792,7 @@ function booksPage() {
             }),
             new Paragraph({
               spacing: { after: 80 },
-              children: [new TextRun({ text: 'by ' + b.author + '  \u00b7  Retail ' + b.retail, font: FONT, size: 18, italics: true, color: COLORS.textMuted })],
+              children: [new TextRun({ text: 'by ' + b.author, font: FONT, size: 18, italics: true, color: COLORS.textMuted })],
             }),
             new Paragraph({
               spacing: { after: 60 },
