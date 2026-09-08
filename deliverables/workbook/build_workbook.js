@@ -190,20 +190,11 @@ const USABLE_W    = PAGE_WIDTH - 2 * MARGIN;  // 10080 DXA
 // ==== COVER PAGE ====
 function coverPage() {
   const children = [];
-  // FIFTH ANNUAL kicker
-  children.push(new Paragraph({
-    alignment: AlignmentType.CENTER,
-    spacing: { before: 2000, after: 200 },
-    children: [new TextRun({
-      text: 'FIFTH ANNUAL', font: FONT_HEAD, size: 22, bold: true,
-      color: COLORS.orange,
-    })],
-  }));
   // Texas-shaped "We run on EOS Y'all NTX" mark replaces the old
   // "WE RUN ON / EOS® NORTH TEXAS" text (the logo already says it).
   children.push(new Paragraph({
     alignment: AlignmentType.CENTER,
-    spacing: { after: 400 },
+    spacing: { before: 2000, after: 400 },
     children: [image(path.join(__dirname, 'assets/we-run-on-eos-ntx.jpg'), 380, 294)],
   }));
   children.push(new Paragraph({
@@ -233,7 +224,7 @@ function coverPage() {
   children.push(new Paragraph({
     alignment: AlignmentType.CENTER,
     spacing: { after: 100 },
-    children: [new TextRun({ text: 'The Statler Dallas', font: FONT, size: 26, italics: true, color: COLORS.textMuted })],
+    children: [new TextRun({ text: 'The Statler', font: FONT, size: 26, italics: true, color: COLORS.textMuted })],
   }));
   children.push(new Paragraph({
     alignment: AlignmentType.CENTER,
@@ -246,7 +237,7 @@ function coverPage() {
 // ==== WELCOME LETTER ====
 function welcomeLetter() {
   const paragraphs = [
-    'Welcome to the fifth annual We Run on EOS® North Texas. Today we come together as an EOS community — entrepreneurs, leadership teams, and the certified Implementers who serve them — to sharpen our tools, share what’s working, and get better at running our businesses.',
+    'Welcome to We Run on EOS® North Texas. Today we come together as an EOS community — entrepreneurs, leadership teams, and the certified Implementers who serve them — to sharpen our tools, share what’s working, and get better at running our businesses.',
     'If you’re running on EOS, this day is designed to make you stronger. World-class speakers. Practical workshops. Books you can actually use on Monday morning. And a room full of North Texas leaders who are on the same journey.',
     'If you’re just getting started, welcome. You picked a great day to see what happens when a whole community rallies around one operating system. Ask questions. Take notes. Introduce yourself to the person next to you.',
     'A few suggestions to make the most of the day:',
@@ -1049,6 +1040,11 @@ function morningNotesPage(m) {
 // ---------- Assemble document ----------
 const allChildren = [
   ...coverPage(),
+  // Blank spacer page after cover (page 2). Paginator skips it because it
+  // has no WORKBOOK_HEADER_MARKER text and page-number list explicitly skips
+  // page 2. Section break to a new section with no header/footer would be
+  // cleaner, but this is simpler and works.
+  new Paragraph({ pageBreakBefore: true, children: [new TextRun('')] }),
   ...welcomeLetter(),
   ...agendaPage(),
   ...networkingPage(),

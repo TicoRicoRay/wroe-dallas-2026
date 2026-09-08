@@ -30,7 +30,8 @@ PAGENUM_MARGIN_PT = 36   # ~ 0.5" from the right/bottom edges
 
 # Pages to skip (1-indexed).
 # Page 1 is the cover — no page number.
-SKIP_PAGES = {1}
+# Page 2 is an intentional blank spacer page after the cover — no page number.
+SKIP_PAGES = {1, 2}
 
 # Marker string that identifies a workbook (Word-generated) page.
 # Every workbook page except the cover has this in its running header.
