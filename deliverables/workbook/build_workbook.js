@@ -1218,7 +1218,22 @@ const MORNING_NOTES = [
       ],
     },
   },
-  { title: 'Lunch with Walt Brown: Healthy Matters',           speaker: 'Walt Brown',          time: '12:00 – 1:00 PM' },
+  {
+    title: 'Lunch with Walt Brown: Healthy Matters',
+    speaker: 'Walt Brown', speakerTitle: 'EOS Worldwide Head Coach',
+    time: '12:00 – 1:00 PM',
+    notesLines: 15,
+    reflection: {
+      quote: 'The single greatest advantage any company can achieve is organizational health.',
+      attribution: 'Patrick Lencioni, The Advantage',
+      questions: [
+        'Walt’s seven questions: Do I belong? Do I believe? Am I accountable? Am I measured? Am I heard? Am I developed? Am I balanced? Which one gets the weakest yes from your people today?',
+        'Is your leadership team healthy, or just polite? What Issue has been sitting on the list because nobody wants to enter the danger?',
+        'Are you running EOS for your people or to your people? How would they answer that?',
+        'Whose future is aligned with yours? Who on your team would you struggle to say that about?',
+      ],
+    },
+  },
 ];
 
 function morningNotesPage(m) {
