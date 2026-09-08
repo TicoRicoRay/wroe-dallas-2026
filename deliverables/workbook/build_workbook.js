@@ -1128,6 +1128,17 @@ function backCover() {
       alignment: AlignmentType.CENTER, spacing: { after: 100 },
       children: [new TextRun({ text: 'EOSNorthTexas.com', font: FONT_HEAD, size: 26, bold: true, color: COLORS.orange })],
     }),
+    // Feedback QR (Tally form: https://tally.so/r/GxPLoj). Positioned at the
+    // bottom of the back cover — spacing pushes it clear of the wordmark above
+    // without touching the bottom page margin.
+    new Paragraph({
+      alignment: AlignmentType.CENTER, spacing: { before: 1200, after: 120 },
+      children: [image(path.join(__dirname, 'assets/feedback-qr.jpg'), 110, 110)],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER, spacing: { after: 0 },
+      children: [new TextRun({ text: 'Feedback Form', font: FONT_HEAD, size: 20, bold: true, color: COLORS.navy })],
+    }),
   ];
 }
 
