@@ -416,8 +416,8 @@ const AGENDA_PRESENTER_INFO = {
   'Your Sales Team Isn’t the Problem. Your System Is.':            { name: 'Steve Heroux',    subtitle: 'The System of Selling',      page: '6' },
   'Lunch with Walt Brown: Healthy Matters':                        { name: 'Walt Brown',      subtitle: 'EOS Worldwide Head Coach',   page: '7' },
   'Profit Power: Stronger — or Just Bigger?':                      { name: 'Mark Stanley',    subtitle: 'Expert EOS Implementer',     page: '8' },
-  'Rollout, Reworked: Your Plan for Running EOS® Company-Wide':    { name: 'Beth Fahey',      subtitle: 'Expert EOS Implementer',     page: '12' },
-  'The 10 Pillars of Visionary Greatness':                         { name: 'Mark C. Winters', subtitle: 'Expert EOS Implementer',     page: '32' },
+  'Rollout, Reworked: Your Plan for Running EOS® Company-Wide':    { name: 'Beth Fahey',      subtitle: 'Expert EOS Implementer',     page: '10' },
+  'The 10 Pillars of Visionary Greatness':                         { name: 'Mark C. Winters', subtitle: 'Expert EOS Implementer',     page: '12' },
   'Happy Hour + Networking':                                       { name: 'Ninety.io',       subtitle: '',                            page: '' },
 };
 

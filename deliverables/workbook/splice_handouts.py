@@ -18,11 +18,17 @@ from pypdf import PdfReader, PdfWriter
 WORKBOOK_DIR = Path(__file__).parent
 WORKBOOK_PDF = WORKBOOK_DIR / "Workbook.pdf"
 
-# (anchor_text_on_session_cover, handout_pdf_path)
-# The anchor must uniquely identify the SESSION cover page. We use
-# "PRESENTED BY" + speaker name — both strings appear together on the
-# session cover and nowhere else in the workbook.
+# (anchor_text, handout_pdf_path)
+# The anchor must uniquely identify the page AFTER which the handout is
+# spliced. For paid-track sessions we use the SESSION cover page's
+# "PRESENTED BY" + speaker name (both strings appear together and
+# nowhere else). For Walt Brown's free-morning lunch talk there is no
+# session cover, so we anchor on his MY NOTES page header instead.
 HANDOUTS = [
+    (
+        "MY NOTES · LUNCH WITH WALT BROWN",
+        WORKBOOK_DIR / "appendix" / "Walt-Brown-Healthy-Matters-Handout.pdf",
+    ),
     (
         "PRESENTED BY MARK STANLEY",
         WORKBOOK_DIR / "appendix" / "Profit-Power-Handout.pdf",

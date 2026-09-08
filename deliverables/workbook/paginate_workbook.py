@@ -33,9 +33,12 @@ PAGENUM_MARGIN_PT = 36   # ~ 0.5" from the right/bottom edges
 # Page 2 is an intentional blank spacer page after the cover — no page number.
 SKIP_PAGES = {1, 2}
 
-# Number the workbook body starting from 1 on physical page 3.
-# Displayed number = physical page - PAGENUM_OFFSET.
-PAGENUM_OFFSET = 2
+# Number the workbook body starting from 1 on the first non-skipped
+# non-handout page. The displayed number increments by 1 for each
+# stamped workbook page (handouts are skipped and do not advance the
+# counter), so the printed page numbers stay continuous across the
+# spliced-in handout PDFs.
+PAGENUM_START = 1
 
 # Marker string that identifies a workbook (Word-generated) page.
 # Every workbook page except the cover has this in its running header.
@@ -43,6 +46,11 @@ PAGENUM_OFFSET = 2
 # We match on the second (stable) line so a stray glyph in the first
 # doesn't defeat detection.
 WORKBOOK_HEADER_MARKER = "North Texas 2026"
+
+# Handout marker — pages that carry "HANDOUT" in their header are
+# presenter handouts even if they were designed with the workbook's
+# "North Texas 2026" running header. Skip pagination on these.
+HANDOUT_MARKER = "HANDOUT"
 
 
 def build_overlay(page_num: int, total: int, width: float, height: float) -> bytes:
@@ -71,17 +79,19 @@ def main() -> int:
 
     writer = PdfWriter()
     stamped = 0
+    display_num = PAGENUM_START
     for i, page in enumerate(reader.pages, start=1):
         page_text = page.extract_text() or ""
         is_workbook = WORKBOOK_HEADER_MARKER in page_text
-        if i not in SKIP_PAGES and is_workbook:
+        is_handout = HANDOUT_MARKER in page_text
+        if i not in SKIP_PAGES and is_workbook and not is_handout:
             w = float(page.mediabox.width)
             h = float(page.mediabox.height)
-            display_num = i - PAGENUM_OFFSET
             overlay_bytes = build_overlay(display_num, total, w, h)
             overlay_reader = PdfReader(io.BytesIO(overlay_bytes))
             page.merge_page(overlay_reader.pages[0])
             stamped += 1
+            display_num += 1
         writer.add_page(page)
 
     with WORKBOOK_PDF.open("wb") as f:
