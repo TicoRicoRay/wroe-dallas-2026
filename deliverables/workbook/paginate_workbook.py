@@ -33,12 +33,11 @@ PAGENUM_MARGIN_PT = 36   # ~ 0.5" from the right/bottom edges
 # Page 2 is an intentional blank spacer page after the cover — no page number.
 SKIP_PAGES = {1, 2}
 
-# Number the workbook body starting from 1 on the first non-skipped
-# non-handout page. The displayed number increments by 1 for each
-# stamped workbook page (handouts are skipped and do not advance the
-# counter), so the printed page numbers stay continuous across the
-# spliced-in handout PDFs.
-PAGENUM_START = 1
+# Numbering scheme: cover (physical page 1) and blank spacer (page 2)
+# do not count, so Welcome = 1. Every subsequent physical page counts
+# toward the displayed number, INCLUDING spliced-in handout pages
+# (which are not stamped themselves but still advance the counter).
+# So Winters cover at physical page 38 displays as 36.
 
 # Marker string that identifies a workbook (Word-generated) page.
 # Every workbook page except the cover has this in its running header.
@@ -79,19 +78,22 @@ def main() -> int:
 
     writer = PdfWriter()
     stamped = 0
-    display_num = PAGENUM_START
+    # Displayed number = physical page index minus the two unnumbered
+    # front-matter pages (cover + blank). Handouts still advance the
+    # counter even though they aren't stamped.
+    offset = len(SKIP_PAGES)
     for i, page in enumerate(reader.pages, start=1):
         page_text = page.extract_text() or ""
         is_workbook = WORKBOOK_HEADER_MARKER in page_text
         is_handout = HANDOUT_MARKER in page_text
         if i not in SKIP_PAGES and is_workbook and not is_handout:
+            display_num = i - offset
             w = float(page.mediabox.width)
             h = float(page.mediabox.height)
             overlay_bytes = build_overlay(display_num, total, w, h)
             overlay_reader = PdfReader(io.BytesIO(overlay_bytes))
             page.merge_page(overlay_reader.pages[0])
             stamped += 1
-            display_num += 1
         writer.add_page(page)
 
     with WORKBOOK_PDF.open("wb") as f:
