@@ -33,6 +33,10 @@ PAGENUM_MARGIN_PT = 36   # ~ 0.5" from the right/bottom edges
 # Page 2 is an intentional blank spacer page after the cover — no page number.
 SKIP_PAGES = {1, 2}
 
+# Number the workbook body starting from 1 on physical page 3.
+# Displayed number = physical page - PAGENUM_OFFSET.
+PAGENUM_OFFSET = 2
+
 # Marker string that identifies a workbook (Word-generated) page.
 # Every workbook page except the cover has this in its running header.
 # Header is now two lines: "We Run ON EOS®" / "North Texas 2026".
@@ -73,7 +77,8 @@ def main() -> int:
         if i not in SKIP_PAGES and is_workbook:
             w = float(page.mediabox.width)
             h = float(page.mediabox.height)
-            overlay_bytes = build_overlay(i, total, w, h)
+            display_num = i - PAGENUM_OFFSET
+            overlay_bytes = build_overlay(display_num, total, w, h)
             overlay_reader = PdfReader(io.BytesIO(overlay_bytes))
             page.merge_page(overlay_reader.pages[0])
             stamped += 1

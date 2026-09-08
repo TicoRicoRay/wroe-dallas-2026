@@ -121,6 +121,49 @@ function ruleLine() {
   });
 }
 
+// Pull-quote block for callouts. Wide orange left border, tinted background,
+// large italic navy quote text, smaller muted attribution.
+// Use across the workbook wherever a speaker quote should pop.
+function pullQuote(quote, attribution) {
+  const quoteText = '\u201C' + quote.replace(/^\s*[\u201C"]|[\u201D"]\s*$/g, '') + '\u201D';
+  return new Table({
+    width: { size: USABLE_W, type: WidthType.DXA },
+    columnWidths: [USABLE_W],
+    rows: [
+      new TableRow({
+        cantSplit: true,
+        children: [new TableCell({
+          width: { size: USABLE_W, type: WidthType.DXA },
+          shading: { type: ShadingType.CLEAR, color: 'auto', fill: COLORS.bgTint },
+          borders: {
+            top:    { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
+            right:  { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
+            bottom: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
+            left:   { style: BorderStyle.SINGLE, size: 36, color: COLORS.orange },
+          },
+          margins: { top: 240, bottom: 240, left: 360, right: 360 },
+          children: [
+            new Paragraph({
+              alignment: AlignmentType.LEFT,
+              spacing: { after: 120 },
+              children: [new TextRun({
+                text: quoteText, font: FONT_HEAD, size: 28, italics: true, color: COLORS.navy,
+              })],
+            }),
+            new Paragraph({
+              alignment: AlignmentType.LEFT,
+              spacing: { after: 0 },
+              children: [new TextRun({
+                text: '\u2014 ' + attribution, font: FONT, size: 20, color: COLORS.textMuted,
+              })],
+            }),
+          ],
+        })],
+      }),
+    ],
+  });
+}
+
 // A block of ruled "note lines" — use a table with N rows, each row is one line.
 // Each row gets a bottom border. This renders reliably in Word and LibreOffice.
 function noteLinesTable(count = 20) {
@@ -237,7 +280,7 @@ function coverPage() {
 // ==== WELCOME LETTER ====
 function welcomeLetter() {
   const paragraphs = [
-    'Welcome to We Run on EOS® North Texas. Today we come together as an EOS community — entrepreneurs, leadership teams, and the certified Implementers who serve them — to sharpen our tools, share what’s working, and get better at running our businesses.',
+    'Welcome to We Run on EOS® North Texas. Today we come together as an EOS community — entrepreneurs, leadership teams, and the Implementers who serve them — to sharpen our tools, share what’s working, and get better at running our businesses.',
     'If you’re running on EOS, this day is designed to make you stronger. World-class speakers. Practical workshops. Books you can actually use on Monday morning. And a room full of North Texas leaders who are on the same journey.',
     'If you’re just getting started, welcome. You picked a great day to see what happens when a whole community rallies around one operating system. Ask questions. Take notes. Introduce yourself to the person next to you.',
     'A few suggestions to make the most of the day:',
@@ -246,13 +289,14 @@ function welcomeLetter() {
     'Use this workbook. Every session has space for the ideas that hit you hardest.',
     'Talk to the sponsors. They’re here because they believe in EOS and want to help you win.',
     'Introduce yourself to at least three people you don’t know. Business is a team sport.',
-    'Come back at 6:15 for Happy Hour. Some of the best conversations of the day happen there.',
+    'Stick around for the Happy Hour. Some of the best conversations of the day happen there.',
   ];
   const closing = [
     'Here’s to a great day — stronger teams, healthier companies, and clearer visions.',
+    '',
     'Let’s get to work.',
     '',
-    '— The North Texas EOS Community',
+    '— The North Texas EOS Implementer Community',
   ];
 
   const items = [
@@ -271,6 +315,8 @@ function welcomeLetter() {
     italics: t.startsWith('—'),
     color: t.startsWith('—') ? COLORS.textMuted : COLORS.text,
   })));
+  items.push(spacer(400));
+  items.push(pullQuote('Vision without traction is merely hallucination.', 'Gino Wickman, Traction'));
   return items;
 }
 
@@ -1038,13 +1084,18 @@ function morningNotesPage(m) {
 }
 
 // ---------- Assemble document ----------
-const allChildren = [
-  ...coverPage(),
-  // Blank spacer page after cover (page 2). Paginator skips it because it
-  // has no WORKBOOK_HEADER_MARKER text and page-number list explicitly skips
-  // page 2. Section break to a new section with no header/footer would be
-  // cleaner, but this is simpler and works.
-  new Paragraph({ pageBreakBefore: true, children: [new TextRun('')] }),
+// Section A: cover page only (no header, no footer).
+const coverChildren = coverPage();
+
+// Section B: intentional blank page after cover (no header, no footer, no
+// page number). Single empty paragraph.
+const blankSpacerChildren = [new Paragraph({ children: [new TextRun('')] })];
+
+// Section C: welcome + all body pages. This section carries the running
+// header. The welcome page's H1 has pageBreakBefore, which triggers the new
+// section's first page. The paginator stamps page numbers starting from 1
+// on the first page of this section (physical page 3).
+const bodyChildren = [
   ...welcomeLetter(),
   ...agendaPage(),
   ...networkingPage(),
@@ -1052,22 +1103,22 @@ const allChildren = [
 
 // Morning session notes pages (4 pages)
 MORNING_NOTES.forEach(m => {
-  morningNotesPage(m).forEach(c => allChildren.push(c));
+  bodyChildren.push(...morningNotesPage(m));
 });
 
 // Speaker sections (paid sessions)
 SPEAKER_SESSIONS.forEach(s => {
-  speakerCoverPage(s).forEach(c => allChildren.push(c));
+  bodyChildren.push(...speakerCoverPage(s));
 });
 
 // Books
-booksPage().forEach(c => allChildren.push(c));
+bodyChildren.push(...booksPage());
 
 // Sponsors
-sponsorsPage().forEach(c => allChildren.push(c));
+bodyChildren.push(...sponsorsPage());
 
 // EOSI Directory
-eosiDirectory().forEach(c => allChildren.push(c));
+bodyChildren.push(...eosiDirectory());
 
 // Back cover lives in its own section (see sections[1]) so it can
 // suppress the running header + page number. Do NOT append to allChildren.
@@ -1108,16 +1159,40 @@ const doc = new Document({
     ],
   },
   sections: [
-    // Main section: cover + all body pages. Cover suppresses header via titlePage.
+    // Section A: cover page only. No header, no footer.
     {
       properties: {
         page: {
           size: { width: PAGE_WIDTH, height: PAGE_HEIGHT },
           margin: { top: MARGIN, right: MARGIN, bottom: MARGIN, left: MARGIN },
         },
-        titlePage: true,
       },
-      children: allChildren,
+      children: coverChildren,
+      headers: { default: new Header({ children: [new Paragraph('')] }) },
+      footers: { default: new Footer({ children: [new Paragraph('')] }) },
+    },
+    // Section B: truly blank spacer page. No header, no footer.
+    {
+      properties: {
+        page: {
+          size: { width: PAGE_WIDTH, height: PAGE_HEIGHT },
+          margin: { top: MARGIN, right: MARGIN, bottom: MARGIN, left: MARGIN },
+        },
+      },
+      children: blankSpacerChildren,
+      headers: { default: new Header({ children: [new Paragraph('')] }) },
+      footers: { default: new Footer({ children: [new Paragraph('')] }) },
+    },
+    // Section C: welcome + all body pages. Carries the running header.
+    // Page numbers are overlaid post-build by paginate_workbook.py.
+    {
+      properties: {
+        page: {
+          size: { width: PAGE_WIDTH, height: PAGE_HEIGHT },
+          margin: { top: MARGIN, right: MARGIN, bottom: MARGIN, left: MARGIN },
+        },
+      },
+      children: bodyChildren,
       headers: {
         default: new Header({
           children: [
@@ -1137,19 +1212,12 @@ const doc = new Document({
             }),
           ],
         }),
-        first: new Header({ children: [new Paragraph('')] }),  // hide on cover
       },
       footers: {
-        // Page numbers are applied post-build by paginate_workbook.py so
-        // they stay consistent across the Word pages AND the spliced-in
-        // presenter handout pages. Leave the docx footer empty.
         default: new Footer({ children: [new Paragraph('')] }),
-        first: new Footer({ children: [new Paragraph('')] }),
       },
     },
-    // Back cover section: no header, no footer, no page number.
-    // The paginator skips this page automatically because it keys off
-    // WORKBOOK_HEADER_MARKER ("North Texas 2026"), which is absent here.
+    // Section D: back cover. No header, no footer, no page number.
     {
       properties: {
         page: {
