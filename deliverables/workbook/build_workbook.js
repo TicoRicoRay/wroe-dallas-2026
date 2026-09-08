@@ -836,7 +836,7 @@ function sponsorsPage() {
     swag:       { label: 'Swag Bag Sponsors',           cols: 2, maxH: 54, qr: 50 },
     booth:      { label: 'Booth Sponsors',              cols: 4, maxH: 40, qr: 42 },
   };
-  const tierOrder = ['host', 'title', 'book', 'hhLounge', 'swag', 'booth'];
+  const tierOrder = ['title', 'host', 'book', 'hhLounge', 'swag', 'booth'];
 
   const grouped = {};
   sponsors.forEach(s => {
@@ -981,7 +981,7 @@ function eosiDirectory() {
   items.push(ruleLine());
   items.push(P('The certified EOS Implementers serving North Texas businesses. Scan any QR to view the full profile on EOSWorldwide.com.',
     { italics: true, color: COLORS.textMuted, size: 18 }));
-  items.push(spacer(80));
+  items.push(spacer(20));
 
   const roster = [...ROSTER].sort((a, b) => a.last_name.localeCompare(b.last_name));
   const cols = 2;
@@ -1075,7 +1075,7 @@ function eosiDirectory() {
       rowCells.push(cell({
         width: cardW, borders: lightBorders, shading: COLORS.white,
         align: VerticalAlign.CENTER,
-        margins: { top: 50, bottom: 50, left: 120, right: 120 },
+        margins: { top: 20, bottom: 20, left: 120, right: 120 },
         children: [innerTable],
       }));
     }
@@ -1086,7 +1086,7 @@ function eosiDirectory() {
     }));
     // No trailing spacer on the final row — avoids pushing a blank page
     // before the back-cover section break.
-    if (i + cols < roster.length) items.push(spacer(20));
+    if (i + cols < roster.length) items.push(spacer(6));
   }
 
   return items;
@@ -1108,7 +1108,7 @@ function backCover() {
     }),
     new Paragraph({
       alignment: AlignmentType.CENTER, spacing: { after: 200 },
-      children: [new TextRun({ text: 'See you next year.', font: FONT, size: 32, italics: true, color: COLORS.textMuted })],
+      children: [new TextRun({ text: 'See y’all next year.', font: FONT, size: 32, italics: true, color: COLORS.textMuted })],
     }),
     // Texas-shaped mark to bookend the cover.
     new Paragraph({
