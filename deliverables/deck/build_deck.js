@@ -46,11 +46,11 @@ const BOOKS_DIR   = path.join(__dirname, '../workbook/assets/books');
 
 // ====== SPEAKER SESSIONS (paid PM only) ======
 // Free morning + Walt's lunch are NOT in this deck. The Event show starts at
-// Mark Stanley (1:00 PM). Two of the three sessions hand off to an external
+// Mark Stanley (1:10 PM). Two of the three sessions hand off to an external
 // speaker deck under speaker-decks/.
 const SESSIONS = [
   {
-    time: '1:00 – 2:30 PM',
+    time: '1:10 – 2:40 PM',
     title: 'Profit Power: Stronger — or Just Bigger?',
     speaker: 'Mark Stanley',
     credential: 'Expert EOS Implementer®',
@@ -58,7 +58,7 @@ const SESSIONS = [
     externalDeck: 'Profit-Power-Deck.pptx',
   },
   {
-    time: '2:50 – 4:25 PM',
+    time: '2:55 – 4:25 PM',
     title: 'Rollout, Reworked: Running EOS Company-Wide',
     speaker: 'Beth Fahey',
     credential: 'Expert EOS Implementer®',
@@ -149,7 +149,7 @@ function makePreEventLoop() {
       x: 0.5, y: 3.1, w: 12.333, h: 0.8,
       fontSize: 44, fontFace: FONT_HEAD, color: WHITE, align: 'center',
     });
-    s.addText('Afternoon Program  ·  Resumes at 1:00 PM', {
+    s.addText('Afternoon Program  ·  Resumes at 1:10 PM', {
       x: 0.5, y: 4.5, w: 12.333, h: 0.5,
       fontSize: 22, fontFace: FONT_BODY, color: ORANGE, align: 'center', italic: true,
     });
@@ -158,7 +158,7 @@ function makePreEventLoop() {
       fontSize: 16, fontFace: FONT_BODY, color: WHITE, align: 'center',
     });
     addFooterBar(s, { bg: NAVY, fg: WHITE, barColor: ORANGE });
-    s.addNotes('[Pre-event loop — plays 12:30–1:00 PM as guests return from Walt Brown’s lunch. No emcee needed. Slide auto-advances every 15 seconds.]');
+    s.addNotes('[Pre-event loop — plays 12:45–1:10 PM as guests return from Walt Brown’s lunch and take a 10-minute break. No emcee needed. Slide auto-advances every 15 seconds.]');
   }
   // Slide 2: Wi-Fi
   {
@@ -250,7 +250,7 @@ function makePreEventLoop() {
       x: 0.5, y: 1.8, w: 12.333, h: 0.6,
       fontSize: 20, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 12, align: 'center',
     });
-    s.addText('1:00', {
+    s.addText('1:10', {
       x: 0.5, y: 2.5, w: 12.333, h: 2.4,
       fontSize: 220, fontFace: FONT_HEAD, color: WHITE, bold: true, align: 'center',
     });
@@ -259,7 +259,7 @@ function makePreEventLoop() {
       fontSize: 22, fontFace: FONT_BODY, color: WHITE, italic: true, align: 'center',
     });
     addFooterBar(s, { bg: NAVY, fg: WHITE });
-    s.addNotes('[Pre-event loop — no emcee needed. Displays 5 minutes before 1:00 PM to prompt seating.]');
+    s.addNotes('[Pre-event loop — no emcee needed. Displays 5 minutes before 1:10 PM to prompt seating.]');
   }
 }
 
@@ -639,13 +639,13 @@ function makeHappyHourClose() {
 // BUILD THE DECK
 // ==============================================================
 // Paid-PM assembly. Free morning + Walt's lunch are NOT in this deck.
-// Pre-event loop plays 12:30–1:00 PM as guests return from lunch.
+// Pre-event loop plays 12:45–1:10 PM as guests return from lunch + break.
 makePreEventLoop();
 makeEmceeOpen();
 // Session 1 (paid PM): Mark Stanley
 makeSessionIntro(SESSIONS[0], 0);
-makeBreakSlide({ label: 'Afternoon Break', duration: '20', resumeAt: '2:50 PM',
-  notes: 'EMCEE (20 seconds): "Twenty minute break. Sponsor lounge is open — say hi. Back at 2:50 with Beth Fahey."'});
+makeBreakSlide({ label: 'Afternoon Break', duration: '15', resumeAt: '2:55 PM',
+  notes: 'EMCEE (20 seconds): "Fifteen minute break. Sponsor lounge is open — say hi. Back at 2:55 with Beth Fahey."'});
 // Session 2 (paid PM): Beth Fahey
 makeSessionIntro(SESSIONS[1], 1);
 makeBreakSlide({ label: 'Final Break', duration: '20', resumeAt: '4:45 PM',

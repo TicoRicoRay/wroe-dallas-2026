@@ -299,7 +299,7 @@ const SITE_CONFIG = {
         highlight: true
       },
       {
-        time: "9:35 \u2013 9:55 AM",
+        time: "9:35 \u2013 9:50 AM",
         session: "Break",
         location: "Foyer & Junior Ballroom",
         speaker: "",
@@ -308,7 +308,7 @@ const SITE_CONFIG = {
       },
 
       {
-        time: "9:55 \u2013 10:45 AM",
+        time: "9:50 \u2013 10:40 AM",
         session: "Journey with an EOS Implementer",
         location: "Grand Ballroom",
         speaker: "Strety \u00B7 Title Sponsor",
@@ -316,7 +316,7 @@ const SITE_CONFIG = {
         highlight: true
       },
       {
-        time: "10:45 \u2013 11:00 AM",
+        time: "10:40 \u2013 10:55 AM",
         session: "Break",
         location: "Foyer & Junior Ballroom",
         speaker: "",
@@ -324,7 +324,7 @@ const SITE_CONFIG = {
         highlight: false
       },
       {
-        time: "11:00 AM \u2013 12:00 PM",
+        time: "10:55 \u2013 11:55 AM",
         session: "Your Sales Team Isn\u2019t the Problem. Your System Is.",
         location: "Grand Ballroom",
         speaker: "The System of Selling \u00B7 Title Sponsor",
@@ -332,23 +332,15 @@ const SITE_CONFIG = {
         highlight: true
       },
       {
-        time: "12:00 PM \u2013 1:00 PM",
-        session: "Lunch with Walt Brown: Healthy Matters",
+        time: "11:55 AM \u2013 1:00 PM",
+        session: "Lunch and Learn: Healthy Matters",
         location: "Grand Ballroom",
-        speaker: "Walt Brown \u00B7 Unlocking the power of Healthy. Introduction to the latest EOS Trust Builder \u2192 7 Critical Needs.",
+        speaker: "Walt Brown \u00B7 Unlocking the power of Healthy with the 7 Critical Needs.",
         tier: "paid",
         highlight: true
       },
       {
-        time: "1:00 \u2013 2:30 PM",
-        session: "Profit Power: Stronger \u2014 or Just Bigger?",
-        location: "Grand Ballroom",
-        speaker: "Mark Stanley \u00B7 Expert EOS Implementer\u00AE",
-        tier: "paid",
-        highlight: true
-      },
-      {
-        time: "2:30 \u2013 2:50 PM",
+        time: "1:00 \u2013 1:10 PM",
         session: "Break",
         location: "Foyer & Junior Ballroom",
         speaker: "",
@@ -356,7 +348,23 @@ const SITE_CONFIG = {
         highlight: false
       },
       {
-        time: "2:50 \u2013 4:25 PM",
+        time: "1:10 \u2013 2:40 PM",
+        session: "Profit Power: Stronger \u2014 or Just Bigger?",
+        location: "Grand Ballroom",
+        speaker: "Mark Stanley \u00B7 Expert EOS Implementer\u00AE",
+        tier: "paid",
+        highlight: true
+      },
+      {
+        time: "2:40 \u2013 2:55 PM",
+        session: "Break",
+        location: "Foyer & Junior Ballroom",
+        speaker: "",
+        tier: "paid",
+        highlight: false
+      },
+      {
+        time: "2:55 \u2013 4:25 PM",
         session: "Rollout, Reworked: Your Plan for Running EOS\u00AE Company-Wide",
         location: "Grand Ballroom",
         speaker: "Beth Fahey \u00B7 Expert EOS Implementer\u00AE",

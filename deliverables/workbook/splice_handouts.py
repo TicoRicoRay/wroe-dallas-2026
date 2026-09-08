@@ -27,7 +27,7 @@ WORKBOOK_PDF = WORKBOOK_DIR / "Workbook.pdf"
 # single MY NOTES page header instead.
 HANDOUTS = [
     (
-        "MY NOTES · LUNCH WITH WALT BROWN",
+        "MY NOTES · LUNCH AND LEARN: HEALTHY MATTERS",
         WORKBOOK_DIR / "appendix" / "Walt-Brown-Healthy-Matters-Handout.pdf",
     ),
     (

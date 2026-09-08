@@ -442,7 +442,7 @@ const AGENDA_PRESENTER_INFO = {
   'Get a Grip on your Business with EOS':                          { name: 'Ann Sheu',        subtitle: 'Certified EOS Implementer', page: '4' },
   'Journey with an EOS Implementer':                               { name: 'Brian Dosal',     subtitle: 'Strety',                     page: '5' },
   'Your Sales Team Isn’t the Problem. Your System Is.':            { name: 'Steve Heroux',    subtitle: 'The System of Selling',      page: '6' },
-  'Lunch with Walt Brown: Healthy Matters':                        { name: 'Walt Brown',      subtitle: 'EOS Worldwide Head Coach',   page: '7' },
+  'Lunch and Learn: Healthy Matters':                              { name: 'Walt Brown',      subtitle: 'EOS Worldwide Head Coach',   page: '7' },
   'Profit Power: Stronger — or Just Bigger?':                      { name: 'Mark Stanley',    subtitle: 'Expert EOS Implementer',     page: '12' },
   'Rollout, Reworked: Your Plan for Running EOS® Company-Wide':    { name: 'Beth Fahey',      subtitle: 'Expert EOS Implementer',     page: '16' },
   'The 10 Pillars of Visionary Greatness':                         { name: 'Mark C. Winters', subtitle: 'Expert EOS Implementer',     page: '36' },
@@ -563,7 +563,7 @@ function agendaPage() {
 // begins 1:00 PM with Mark Stanley).
 const SPEAKER_SESSIONS = [
   { session_title: 'Profit Power: Stronger — or Just Bigger?', speaker: 'Mark Stanley', title: 'Expert EOS Implementer®',
-    time: '1:00 – 2:30 PM', slug: 'mark-stanley', notes_pages: 1, notes_lines: 15,
+    time: '1:10 – 2:40 PM', slug: 'mark-stanley', notes_pages: 1, notes_lines: 15,
     photo: 'assets/speakers/mark-stanley.jpg',
     bio: 'One of the first EOS® Implementers in the world (2009) and now an Expert EOS Implementer with 1,700+ full-day sessions across 180+ leadership teams. Co-author of The Data Book, co-founder of the UNSTOPPABLE! Data-Driven Leader community, and a three-time entrepreneur. Brings a Theory of Constraints, Lean, and Six Sigma toolkit — plus a bias for action — to every session. BBA (Iowa), MBA (Drake). Lives in Johnston, Iowa.',
     handout: { file: 'appendix/Profit-Power-Handout.pdf', pages: 2,
@@ -579,7 +579,7 @@ const SPEAKER_SESSIONS = [
       ],
     } },
   { session_title: 'Rollout, Reworked: Your Plan for Running EOS® Company-Wide', speaker: 'Beth Fahey', title: 'Expert EOS Implementer®',
-    time: '2:50 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1, notes_lines: 15,
+    time: '2:55 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1, notes_lines: 15,
     photo: 'assets/speakers/beth-fahey.jpg',
     bio: 'Expert EOS Implementer® with 500+ client sessions and an EOS Worldwide Coach who trains other Implementers. Co-author of ROLLOUT: Get Your Entire Team Running on EOS® to Achieve Your Vision, and co-creator of the Great Boss™ Workshops with René Boer — more than 40 workshops delivered to thousands of managers. Host of the Bad Boss Confessional podcast. Founder-first perspective: she built a bakery, ran it on EOS, and led the Retail Bakers of America before going full-time as an Implementer. Based in the Chicago area.',
     handout: { file: 'appendix/Rollout-Handout.pdf', pages: 18,
@@ -1275,7 +1275,7 @@ const MORNING_NOTES = [
   {
     title: 'Journey with an EOS Implementer',
     speaker: 'Brian Dosal', speakerTitle: 'Strety',
-    time: '9:55 – 10:45 AM',
+    time: '9:50 – 10:40 AM',
     notesLines: 15,
     reflection: {
       quote: 'Let go of the vine.',
@@ -1291,7 +1291,7 @@ const MORNING_NOTES = [
   {
     title: 'Your Sales Team Isn’t the Problem. Your System Is.',
     speaker: 'Steve Heroux', speakerTitle: 'The System of Selling',
-    time: '11:00 AM – 12:00 PM',
+    time: '10:55 – 11:55 AM',
     notesLines: 15,
     reflection: {
       quote: 'Systemize the predictable so you can humanize the exceptional.',
@@ -1305,9 +1305,9 @@ const MORNING_NOTES = [
     },
   },
   {
-    title: 'Lunch with Walt Brown: Healthy Matters',
+    title: 'Lunch and Learn: Healthy Matters',
     speaker: 'Walt Brown', speakerTitle: 'EOS Worldwide Head Coach',
-    time: '12:00 – 1:00 PM',
+    time: '11:55 AM – 1:00 PM',
     notesLines: 15,
     reflection: {
       quote: 'The single greatest advantage any company can achieve is organizational health.',

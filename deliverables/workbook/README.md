@@ -16,7 +16,7 @@ Print-ready workbook for WRoEOS North Texas 2026 attendees.
 
 ## Structure
 
-Paid-PM scope (starts at Mark Stanley 1:00 PM). Final PDF is 22 pages after handout splicing.
+Paid-PM scope (starts at Mark Stanley 1:10 PM). Final PDF is 46 pages after handout splicing.
 
 1. Cover
 2. Welcome letter (placeholder)
