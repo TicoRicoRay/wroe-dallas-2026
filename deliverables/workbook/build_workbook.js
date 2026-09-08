@@ -126,8 +126,18 @@ function ruleLine() {
 // of a notes page to prompt the attendee to translate the session into a
 // concrete To Do. Reusable across every morning-notes and speaker-notes
 // page.
-function thoughtBox({ quote, attribution, questions, action = 'My To Do from this session is:', dueDateLabel = 'Due Date:' }) {
+function thoughtBox({ quote, attribution, questions, action = 'My To Do from this session is:', dueDateLabel = 'Due Date:', compact = false }) {
   const children = [];
+  // Compact mode: shrink fonts and gaps so a long question list (e.g.
+  // Winters' 10 Pillars) still fits inside a single-page bordered box.
+  const qSize = compact ? 16 : 20;
+  const qAfter = compact ? 30 : 60;
+  const attrSize = compact ? 16 : 18;
+  const attrAfter = compact ? 80 : 160;
+  const quoteSize = compact ? 20 : 22;
+  const actionSize = compact ? 16 : 20;
+  const actionHeaderSize = compact ? 16 : 18;
+  const actionBefore = compact ? 60 : 100;
 
   if (quote) {
     const quoteText = '\u201C' + quote.replace(/^\s*[\u201C"]|[\u201D"]\s*$/g, '') + '\u201D';
@@ -135,27 +145,45 @@ function thoughtBox({ quote, attribution, questions, action = 'My To Do from thi
       alignment: AlignmentType.LEFT,
       spacing: { after: 40 },
       children: [new TextRun({
-        text: quoteText, font: FONT_HEAD, size: 22, italics: true, color: COLORS.navy,
+        text: quoteText, font: FONT_HEAD, size: quoteSize, italics: true, color: COLORS.navy,
       })],
     }));
     if (attribution) {
       children.push(new Paragraph({
         alignment: AlignmentType.LEFT,
-        spacing: { after: 160 },
+        spacing: { after: attrAfter },
         children: [new TextRun({
-          text: '\u2014 ' + attribution, font: FONT, size: 18, color: COLORS.textMuted,
+          text: '\u2014 ' + attribution, font: FONT, size: attrSize, color: COLORS.textMuted,
         })],
       }));
     }
   }
 
-  (questions || []).forEach((q, i) => {
+  // Use a separate counter for numbered items so { sub: '...' } entries
+  // don't consume a number.
+  let qNum = 0;
+  (questions || []).forEach((q) => {
+    if (typeof q === 'object' && q && q.sub) {
+      children.push(new Paragraph({
+        alignment: AlignmentType.LEFT,
+        spacing: { after: qAfter },
+        indent: { left: 460, hanging: 0 },
+        children: [new TextRun({
+          text: q.sub, font: FONT, size: qSize, italics: true, color: COLORS.textMuted,
+        })],
+      }));
+      return;
+    }
+    qNum += 1;
+    // Compact mode needs a slightly wider hang because two-digit numbers
+    // ('10.', '11.') don't fit the 200-dxa hang used elsewhere.
+    const qIndent = compact ? { left: 260, hanging: 260 } : { left: 200, hanging: 200 };
     children.push(new Paragraph({
       alignment: AlignmentType.LEFT,
-      spacing: { after: 60 },
-      indent: { left: 200, hanging: 200 },
+      spacing: { after: qAfter },
+      indent: qIndent,
       children: [new TextRun({
-        text: `${i + 1}. ${q}`, font: FONT, size: 20, color: COLORS.text,
+        text: `${qNum}. ${q}`, font: FONT, size: qSize, color: COLORS.text,
       })],
     }));
   });
@@ -163,23 +191,23 @@ function thoughtBox({ quote, attribution, questions, action = 'My To Do from thi
   if (action) {
     // ACTION header + write-in line for the To Do and Due Date.
     children.push(new Paragraph({
-      spacing: { before: 100, after: 40 },
+      spacing: { before: actionBefore, after: 40 },
       children: [new TextRun({
-        text: 'ACTION:', font: FONT_HEAD, size: 18, bold: true, color: COLORS.orange,
+        text: 'ACTION:', font: FONT_HEAD, size: actionHeaderSize, bold: true, color: COLORS.orange,
       })],
     }));
     children.push(new Paragraph({
       spacing: { after: 0 },
       children: [
-        new TextRun({ text: action + ' ', font: FONT, size: 20, color: COLORS.text }),
+        new TextRun({ text: action + ' ', font: FONT, size: actionSize, color: COLORS.text }),
         // Use underscore chars for the write-in ruler so LibreOffice always
         // draws them (underline on trailing whitespace runs can vanish).
         new TextRun({
-          text: '_'.repeat(45), font: FONT, size: 20, color: COLORS.textMuted,
+          text: '_'.repeat(45), font: FONT, size: actionSize, color: COLORS.textMuted,
         }),
-        new TextRun({ text: '  ' + dueDateLabel + ' ', font: FONT, size: 20, color: COLORS.text }),
+        new TextRun({ text: '  ' + dueDateLabel + ' ', font: FONT, size: actionSize, color: COLORS.text }),
         new TextRun({
-          text: '_'.repeat(14), font: FONT, size: 20, color: COLORS.textMuted,
+          text: '_'.repeat(14), font: FONT, size: actionSize, color: COLORS.textMuted,
         }),
       ],
     }));
@@ -567,11 +595,29 @@ const SPEAKER_SESSIONS = [
       ],
     } },
   { session_title: 'The 10 Pillars of Visionary Greatness', speaker: 'Mark C. Winters', title: 'Expert EOS Implementer®',
-    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1,
+    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1, notes_lines: 4,
     photo: 'assets/speakers/mark-c-winters.jpg',
     bio: 'Expert EOS Implementer® since 2012 with 1,000+ full-day sessions delivered. Author of Visionary and co-author of Rocket Fuel with EOS founder Gino Wickman — the definitive book on the Visionary/Integrator partnership. Founder and Visionary of Rocket Fuel University and host of the Rocket Fuel Podcast. Serial entrepreneur (14 companies started, bought, sold, or shut down) with one exit at a 100x cash return in under three years. MBA from The University of Chicago. Based in Dallas.',
     handout: { file: 'appendix/10-Pillars-Handout.pdf', pages: 2,
-      caption: 'The 10 Pillars of Visionary Greatness — full framework grid and Visionary book overview from Mark C. Winters.' } },
+      caption: 'The 10 Pillars of Visionary Greatness — full framework grid and Visionary book overview from Mark C. Winters.' },
+    reflection: {
+      compact: true,
+      quote: 'Structure fuels freedom.',
+      attribution: 'Mark C. Winters, Visionary',
+      questions: [
+        'Know Thyself ★ Where does your Intrinsic Genius (Competence × Joy × Drive) actually live, and what share of last week did you spend there?',
+        'Maintain Warrior Shape ★ Which lever is red on your personal Scorecard right now: Body, Mind, or Spirit? What is the one habit that turns it green?',
+        'Surround Yourself ★ Which of your Seven Special Posts is empty or weak: Integrator, Leadership Team, Assistant, Coaches and Advisors, Peer Group, Family, Friends?',
+        'Commit to Your Operating System ★ Have you chosen one operating system and committed to mastery, or are you still waffling? What does the waffling cost your team?',
+        'Support Your Integrator ★ Which of the Five Rules did you break most recently: Stay on the same page, No end runs, The Integrator is the tie-breaker, Owner vs. Employee, Maintain mutual respect? What did it cost your Integrator?',
+        { sub: 'Integrators ★ Which rule did your Visionary break, and did you call it?' },
+        'Think About What You Think About ★ Where are you tampering when you should be guiding?',
+        'Watch Out for Pitfalls ★ Where are you the bottleneck? What decision is sitting with you right now that your team is waiting on?',
+        'Help Others Stretch ★ Is your next big idea on the Ledge of Conceivability or in the Pit of Inconceivability? Who on your team is allowed to tell you which?',
+        'Go Slow to Go Fast ★ How many ideas have you put on your team\u2019s on-ramp in the last 90 days? How many made it all the way through?',
+        'Do No Harm ★ When did you last make a special exception for a favorite or a family member? What did it signal to everyone else?',
+      ],
+    } },
 ];
 
 function speakerCoverPage(s) {
