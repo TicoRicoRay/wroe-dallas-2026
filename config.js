@@ -332,7 +332,7 @@ const SITE_CONFIG = {
         highlight: true
       },
       {
-        time: "11:55 AM \u2013 1:00 PM",
+        time: "11:55 \u2013 1:00 PM",
         session: "Lunch and Learn: Healthy Matters",
         location: "Grand Ballroom",
         speaker: "Walt Brown \u00B7 Unlocking the power of Healthy with the 7 Critical Needs.",

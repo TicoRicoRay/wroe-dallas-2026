@@ -1148,7 +1148,7 @@ function backCover() {
 // ---------- Networking & Reflection page ----------
 // Full-width single-column flow. Each section spans the full page width:
 //   1. Connections     — tabular contact rows (Name | Business | Role | Phone | Email)
-//   2. Table-Mates     — tabular contact rows (Name | Role | Business | Phone | Email)
+//   2. Table-Mates     — tabular contact rows (Name | Business | Role | Phone | Email)
 //   3. Thought Provoking Questions — blank ruled lines
 //   4. Memorable Quotes           — blank ruled lines
 // Sits between the agenda and the morning notes pages.
@@ -1260,10 +1260,10 @@ function networkingPage() {
     7,
   ));
 
-  // Table-Mates — same widths, Role and Business swapped per spec.
+  // Table-Mates — match Connections column order (Name, Business, Role, Phone, Email).
   items.push(sectionTitle('Table-Mates'));
   items.push(contactTable(
-    ['Name', 'Role', 'Business', 'Phone', 'Email'],
+    ['Name', 'Business', 'Role', 'Phone', 'Email'],
     CONTACT_COLS,
     7,
   ));
