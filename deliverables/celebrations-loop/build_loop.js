@@ -58,7 +58,10 @@ const ADVANCE_SEC = 8;
 
 // ====== ASSETS ======
 const ASSETS = path.join(__dirname, 'assets');
-const WORDMARK = path.join(ASSETS, 'wordmark.jpg');
+// White-silhouette wordmark on transparent background so it reads on navy.
+// Generated with: convert wordmark.jpg -fuzz 5% -transparent white -trim +repage wordmark.png
+// then: convert wordmark.png -fuzz 25% -fill white -opaque "#0B1F3A" wordmark_white.png
+const WORDMARK = path.join(ASSETS, 'wordmark_white.png');
 const WORDMARK_ASPECT = imageAspect(WORDMARK);
 
 // ====== CUSTOMER DATA ======
@@ -66,7 +69,9 @@ const WORDMARK_ASPECT = imageAspect(WORDMARK);
 // (small, all-caps, no ® needed there per EY brand guidelines for kickers)
 // and use a rich-run superscript ® in the section-divider title only.
 const CUSTOMERS = [
-  // --- Spillers clients ---
+  // Attribution note: implementer names below come from Shane's master DOCX
+  // ("EOSI:" field) or, where the win came in via a separate email, the sender
+  // of that email. NTO forward came from Erin Thiem (relaying Matt Griffiths).
   {
     name: 'Maverick Power',
     headline: 'Signs $1.75 billion acquisition agreement with nVent',
@@ -74,6 +79,7 @@ const CUSTOMERS = [
     readAs: 'Tom Currier, President and CEO',
     photo: null,
     badge: 'HEADLINE WIN',
+    implementer: 'Shane Spillers',
   },
   {
     name: 'KPost Roofing & Waterproofing',
@@ -81,7 +87,8 @@ const CUSTOMERS = [
     detail: 'Commercial/Mixed Use category winner for the National Medal of Honor Museum in Arlington. Honored at the International Roofing Expo in Las Vegas, January 2026.',
     readAs: 'Steve Little, Keith Post, and Jayne Williams, Founders',
     photo: null,
-    badge: 'SPILLERS CLIENT',
+    badge: 'COMMUNITY WIN',
+    implementer: 'Shane Spillers',
   },
   {
     name: 'Neighborhood Management, Inc.',
@@ -89,7 +96,8 @@ const CUSTOMERS = [
     detail: 'President Beverly Coghlan, PCAM — one of 44 finalists from 41 companies, announced April 21, 2026.',
     readAs: 'Beverly Coghlan, President',
     photo: 'neighborhood_beverly.jpg',
-    badge: 'SPILLERS CLIENT',
+    badge: 'COMMUNITY WIN',
+    implementer: 'Shane Spillers',
   },
   {
     name: 'B2 Design Co',
@@ -97,7 +105,8 @@ const CUSTOMERS = [
     detail: 'Founder and CEO B. Allison Brooks, AIA (October 2025). Recently completed interiors for HALL Park Hotel and The Ludlow. Offices in Dallas, Chicago, Miami, and Chapel Hill.',
     readAs: 'B. Allison Brooks, Founder and CEO',
     photo: null,
-    badge: 'SPILLERS CLIENT',
+    badge: 'COMMUNITY WIN',
+    implementer: 'Shane Spillers',
   },
   {
     name: 'Artstillery',
@@ -105,7 +114,8 @@ const CUSTOMERS = [
     detail: 'Celebrating 10 years (June 27, 2026). The grant supports "Dichotomy of Compassion," the current immersive multimedia production. Now Dallas and Chicago.',
     readAs: 'Ilknur Nilufer Ozgur, Founder, Executive and Artistic Director',
     photo: null,
-    badge: 'SPILLERS CLIENT',
+    badge: 'COMMUNITY WIN',
+    implementer: 'Shane Spillers',
   },
 
   // --- EY EOY 2026 NTX EOS Community ---
@@ -113,49 +123,55 @@ const CUSTOMERS = [
     name: 'Moonshot',
     headline: 'Southwest Winner — advancing to National Awards',
     detail: 'Founder and CEO Ethan Ellenberg. Denton-based. Advances to the EY National Awards in November 2026.',
-    readAs: 'Ethan Ellenberg, Founder and CEO   ·   Implementer: Ryan Wall',
+    readAs: 'Ethan Ellenberg, Founder and CEO',
     photo: 'moonshot_ethan.jpg',
     badge: 'EY EOY 2026 · SOUTHWEST WINNER',
+    implementer: 'Ryan Wall',
   },
   {
     name: 'Lime Media Group',
     headline: 'Southwest Winner + 2026 Top Workplaces Culture Excellence',
     detail: 'Founder and CEO Heath Hill. Rockwall-based. Top Workplaces Culture Excellence winner (July 2026).',
-    readAs: 'Heath Hill, Founder and CEO   ·   Implementer: Leonard',
+    readAs: 'Heath Hill, Founder and CEO',
     photo: 'lime_heath.jpg',
     badge: 'EY EOY 2026 · SOUTHWEST WINNER',
+    implementer: 'Leonard',
   },
   {
     name: 'Brain Storm Shelter Restaurants',
     headline: 'Southwest Finalist',
     detail: 'Jason Boso — founder of Truck Yard, Twisted Root Burger Co., and more. Also a finalist in the Oklahoma City ULI Impact Awards.',
-    readAs: 'Jason Boso, Founder   ·   Implementer: Amanda',
+    readAs: 'Jason Boso, Founder',
     photo: 'brainstorm_jason.jpg',
     badge: 'EY EOY 2026 · SOUTHWEST FINALIST',
+    implementer: 'Amanda Matthews',
   },
   {
     name: 'TruLabs',
     headline: 'Southwest Finalists',
     detail: 'Co-founders Brandon Pogue (CEO) and Jennifer Pogue (CMO). McKinney-based.',
-    readAs: 'Brandon and Jennifer Pogue   ·   Implementer: Amy',
+    readAs: 'Brandon and Jennifer Pogue',
     photo: 'trulabs_pogues.jpg',
     badge: 'EY EOY 2026 · SOUTHWEST FINALIST',
+    implementer: 'Amy Johannesen',
   },
   {
     name: 'Excel Medical Staffing',
     headline: 'Southwest Finalist',
     detail: 'Founder and CEO Gabriel Griess, U.S. Air Force Academy graduate. Grapevine-based.',
-    readAs: 'Gabriel Griess, Founder and CEO   ·   Implementer: Justin Mink',
+    readAs: 'Gabriel Griess, Founder and CEO',
     photo: 'excel_gabe.jpg',
     badge: 'EY EOY 2026 · SOUTHWEST FINALIST',
+    implementer: 'Justin Mink',
   },
   {
     name: 'HorsePower Brands',
     headline: 'Heartland Finalist',
     detail: 'CEO Tony Hulbert. Nine home-service franchise brands, five of them on Entrepreneur magazine\u2019s 2026 Franchise 500. Omaha-based.',
-    readAs: 'Tony Hulbert, CEO   ·   Implementer: Justin Mink',
+    readAs: 'Tony Hulbert, CEO',
     photo: null,
     badge: 'EY EOY 2026 · HEARTLAND FINALIST',
+    implementer: 'Justin Mink',
   },
 
   // --- More community celebrations ---
@@ -166,6 +182,7 @@ const CUSTOMERS = [
     readAs: 'Matt Griffiths, Director of Marketing and Technology',
     photo: 'ntoa_lasik_team.jpg',
     badge: 'COMMUNITY WIN',
+    implementer: 'Erin Thiem',
   },
   {
     name: 'Austin Street Center',
@@ -174,6 +191,7 @@ const CUSTOMERS = [
     readAs: 'Daniel Roby, CEO',
     photo: 'austin_street.jpg',
     badge: 'COMMUNITY WIN',
+    implementer: 'Kevin Taylor',
   },
   {
     name: 'BAT Security',
@@ -182,6 +200,7 @@ const CUSTOMERS = [
     readAs: 'Kyle Beller, President',
     photo: null,
     badge: 'COMMUNITY WIN',
+    implementer: 'Kevin Taylor',
   },
   {
     name: 'Blue Mint Thai',
@@ -190,14 +209,16 @@ const CUSTOMERS = [
     readAs: 'Mike Wilson, CEO   ·   Alisa Dodenhoff',
     photo: 'blue_mint_hero.jpg',
     badge: 'COMMUNITY WIN',
+    implementer: 'Kevin Taylor',
   },
   {
     name: 'Rose Marketing Solutions',
     headline: 'EO Dallas Forum Moderator of the Year',
     detail: 'Ruth Ann Rose named Forum Moderator of the Year by EO Dallas. Featured speaker at the Hinge Brokers Shift Early Childhood Conference. On track for the highest revenue year in company history.',
-    readAs: 'Ruth Ann Rose, Founder   ·   Implementer: Amanda Matthews',
+    readAs: 'Ruth Ann Rose, Founder',
     photo: null,
     badge: 'COMMUNITY WIN',
+    implementer: 'Amanda Matthews',
   },
 ];
 
@@ -217,9 +238,9 @@ function addChrome(slide) {
   slide.addShape('rect', {
     x: 0, y: SH - 0.08, w: SW, h: 0.08, fill: { color: ORANGE }, line: { color: ORANGE },
   });
-  // Wordmark placed at its native aspect (~1.294:1). Keep it tucked bottom-right
-  // above the orange rule.
-  const wmH = 0.75;
+  // Wordmark placed at its native aspect (~1.06:1 for the trimmed transparent PNG).
+  // White silhouette + orange NTX badge, so no white sticker on navy.
+  const wmH = 0.85;
   const wmW = wmH * WORDMARK_ASPECT;
   slide.addImage({ path: WORDMARK, x: SW - 0.4 - wmW, y: SH - 0.16 - wmH, w: wmW, h: wmH });
 }
@@ -299,13 +320,9 @@ function addCustomerSlide(c) {
   }
 
   if (hasPhoto) {
-    // Left half: photo panel (5.7" wide × 6.3" tall — near-portrait so more headshots crop cleanly)
+    // Left half: photo panel — photo sits directly on the navy background (no frame).
+    // Bounds define the max area; image is fit at native aspect and centered.
     const PX = 0.5, PY = 0.5, PW = 5.7, PH = 6.3;
-    s.addShape('rect', {
-      x: PX, y: PY, w: PW, h: PH,
-      fill: { color: CREAM }, line: { color: RULE, width: 0.5 },
-    });
-    // Fit the photo inside the frame at its native aspect (letterbox on cream).
     const imgAsp = imageAspect(photoPath);
     const fit = fitBox(imgAsp, PX, PY, PW, PH);
     s.addImage({ path: photoPath, x: fit.x, y: fit.y, w: fit.w, h: fit.h });
@@ -338,9 +355,15 @@ function addCustomerSlide(c) {
       valign: 'top',
     });
     s.addText(c.readAs, {
-      x: TX, y: 6.4, w: TW, h: 0.4,
+      x: TX, y: 6.15, w: TW, h: 0.35,
       fontFace: FONT_BODY, fontSize: 12, italic: true, color: RULE, align: 'left',
     });
+    if (c.implementer) {
+      s.addText(`Implementer:  ${c.implementer}`, {
+        x: TX, y: 6.5, w: TW, h: 0.3,
+        fontFace: FONT_BODY, fontSize: 11, color: ORANGE, align: 'left',
+      });
+    }
   } else {
     // Typography-only slide (centered)
     s.addText(c.badge, {
@@ -368,30 +391,21 @@ function addCustomerSlide(c) {
       valign: 'top',
     });
     s.addText(c.readAs, {
-      x: 1.0, y: 6.55, w: SW - 2.0, h: 0.4,
+      x: 1.0, y: 6.3, w: SW - 2.0, h: 0.35,
       fontFace: FONT_BODY, fontSize: 14, italic: true, color: RULE, align: 'center',
     });
+    if (c.implementer) {
+      s.addText(`Implementer:  ${c.implementer}`, {
+        x: 1.0, y: 6.65, w: SW - 2.0, h: 0.3,
+        fontFace: FONT_BODY, fontSize: 12, color: ORANGE, align: 'center',
+      });
+    }
   }
 }
 
-// Section: Spillers Clients
-addSectionDivider('SECTION',
-  [{ text: 'Spillers Clients', options: {} }],
-  'North Texas businesses winning at their craft');
-for (let i = 0; i < 5; i++) addCustomerSlide(CUSTOMERS[i]);
-
-// Section: EY EOY 2026 — plain text with unicode ® (avoid rich-run superscript
-// which pptxgenjs emits as invalid XML)
-addSectionDivider('SECTION',
-  [{ text: 'EY Entrepreneur Of The Year\u00ae 2026', options: {} }],
-  'North Texas EOS community winners and finalists');
-for (let i = 5; i < 11; i++) addCustomerSlide(CUSTOMERS[i]);
-
-// Section: More Community Celebrations
-addSectionDivider('SECTION',
-  [{ text: 'More Community Celebrations', options: {} }],
-  'Wins from across the North Texas EOS community');
-for (let i = 11; i < CUSTOMERS.length; i++) addCustomerSlide(CUSTOMERS[i]);
+// Straight loop — no section dividers. Order is intentional (Maverick as
+// headline win, EY EOY block together, Rose Marketing as final).
+for (const c of CUSTOMERS) addCustomerSlide(c);
 
 // ---- CLOSING SLIDE ----
 {
@@ -423,6 +437,6 @@ for (let i = 11; i < CUSTOMERS.length; i++) addCustomerSlide(CUSTOMERS[i]);
 const OUT = path.join(__dirname, 'Celebrations-Loop.pptx');
 pptx.writeFile({ fileName: OUT }).then((filename) => {
   console.log(`Wrote ${filename}`);
-  console.log(`Slides: ${1 + 3 + CUSTOMERS.length + 1} (title + 3 dividers + ${CUSTOMERS.length} customers + closing)`);
+  console.log(`Slides: ${1 + CUSTOMERS.length + 1} (title + ${CUSTOMERS.length} customers + closing)`);
   console.log(`Auto-advance will be added by post-process step (${ADVANCE_SEC}s).`);
 });

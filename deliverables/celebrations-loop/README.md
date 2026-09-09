@@ -3,9 +3,10 @@
 Looping deck for the big screen during breaks at WRoEOS North Texas 2026.
 
 - **File:** `Celebrations-Loop.pptx`
-- **Format:** 16:9 widescreen, 21 slides, 8 seconds per slide (~2:48 loop)
+- **Format:** 16:9 widescreen, 18 slides, 8 seconds per slide (~2:24 loop)
 - **Kiosk mode:** already set — the file will auto-advance and loop on its own.
 - **Design:** matches the main event deck (navy `#0B1F3A` + orange `#E87722`, Calibri).
+- Each customer slide shows the Implementer name in small orange text near the bottom right of the text panel.
 
 ## Running the loop in PowerPoint
 
@@ -21,29 +22,28 @@ If the timings or loop do not stick (e.g., opened in Keynote or Google Slides), 
 
 ## Slide order
 
-| # | Slide |
-|---|---|
-| 1 | Title — Customer Celebrations |
-| 2 | Section — Spillers Clients |
-| 3 | Maverick Power (headline win) |
-| 4 | KPost Roofing & Waterproofing |
-| 5 | Neighborhood Management, Inc. |
-| 6 | B2 Design Co |
-| 7 | Artstillery |
-| 8 | Section — EY Entrepreneur Of The Year® 2026 |
-| 9 | Moonshot (Southwest Winner) |
-| 10 | Lime Media Group (Southwest Winner) |
-| 11 | Brain Storm Shelter Restaurants (Finalist) |
-| 12 | TruLabs (Finalist) |
-| 13 | Excel Medical Staffing (Finalist) |
-| 14 | HorsePower Brands (Heartland Finalist) |
-| 15 | Section — More Community Celebrations |
-| 16 | North Texas Ophthalmology |
-| 17 | Austin Street Center |
-| 18 | BAT Security |
-| 19 | Blue Mint Thai |
-| 20 | Rose Marketing Solutions |
-| 21 | Closing — Congratulations |
+| # | Slide | Implementer |
+|---|---|---|
+| 1 | Title — Customer Celebrations | — |
+| 2 | Maverick Power (headline win) | Shane Spillers |
+| 3 | KPost Roofing & Waterproofing | Shane Spillers |
+| 4 | Neighborhood Management, Inc. | Shane Spillers |
+| 5 | B2 Design Co | Shane Spillers |
+| 6 | Artstillery | Shane Spillers |
+| 7 | Moonshot (EY Southwest Winner) | Ryan Wall |
+| 8 | Lime Media Group (EY Southwest Winner) | Leonard |
+| 9 | Brain Storm Shelter Restaurants (EY Finalist) | Amanda Matthews |
+| 10 | TruLabs (EY Finalist) | Amy Johannesen |
+| 11 | Excel Medical Staffing (EY Finalist) | Justin Mink |
+| 12 | HorsePower Brands (EY Heartland Finalist) | Justin Mink |
+| 13 | North Texas Ophthalmology | Erin Thiem |
+| 14 | Austin Street Center | Kevin Taylor |
+| 15 | BAT Security | Kevin Taylor |
+| 16 | Blue Mint Thai | Kevin Taylor |
+| 17 | Rose Marketing Solutions | Amanda Matthews |
+| 18 | Closing — Congratulations | — |
+
+Implementer attribution comes from Shane's master DOCX (“EOSI:” field). For wins that came in via a separate email, the sender is credited as Implementer. North Texas Ophthalmology was forwarded by Erin Thiem; adjust if Matt Griffiths' actual EOSI is someone else.
 
 ## Content sources
 
