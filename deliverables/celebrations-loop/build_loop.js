@@ -18,6 +18,31 @@ require('module').Module._initPaths();
 const PptxGenJS = require('pptxgenjs');
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
+
+// Read image intrinsic size (pixels) using ImageMagick `identify` — available in sandbox.
+function imageAspect(p) {
+  const out = execSync(`identify -format "%w %h" ${JSON.stringify(p)}`, { encoding: 'utf8' }).trim();
+  const [w, h] = out.split(/\s+/).map(Number);
+  return w / h;
+}
+
+// Fit an image of given aspect into a box (bw x bh), preserving aspect.
+// Returns {x, y, w, h} centered inside the box.
+function fitBox(imgAspect, bx, by, bw, bh) {
+  const boxAspect = bw / bh;
+  let w, h;
+  if (imgAspect >= boxAspect) {
+    // image is wider than box — width-limited
+    w = bw;
+    h = bw / imgAspect;
+  } else {
+    // image is taller than box — height-limited
+    h = bh;
+    w = bh * imgAspect;
+  }
+  return { x: bx + (bw - w) / 2, y: by + (bh - h) / 2, w, h };
+}
 
 // ====== DESIGN TOKENS (match main deck) ======
 const NAVY       = '0B1F3A';
@@ -34,6 +59,7 @@ const ADVANCE_SEC = 8;
 // ====== ASSETS ======
 const ASSETS = path.join(__dirname, 'assets');
 const WORDMARK = path.join(ASSETS, 'wordmark.jpg');
+const WORDMARK_ASPECT = imageAspect(WORDMARK);
 
 // ====== CUSTOMER DATA ======
 // EY branding note: we use "EY Entrepreneur Of The Year" in the badge kicker
@@ -191,7 +217,11 @@ function addChrome(slide) {
   slide.addShape('rect', {
     x: 0, y: SH - 0.08, w: SW, h: 0.08, fill: { color: ORANGE }, line: { color: ORANGE },
   });
-  slide.addImage({ path: WORDMARK, x: SW - 2.4, y: SH - 0.72, w: 2.15, h: 0.55 });
+  // Wordmark placed at its native aspect (~1.294:1). Keep it tucked bottom-right
+  // above the orange rule.
+  const wmH = 0.75;
+  const wmW = wmH * WORDMARK_ASPECT;
+  slide.addImage({ path: WORDMARK, x: SW - 0.4 - wmW, y: SH - 0.16 - wmH, w: wmW, h: wmH });
 }
 
 // Auto-size a name based on character count and target width.
@@ -275,11 +305,10 @@ function addCustomerSlide(c) {
       x: PX, y: PY, w: PW, h: PH,
       fill: { color: CREAM }, line: { color: RULE, width: 0.5 },
     });
-    s.addImage({
-      path: photoPath,
-      x: PX, y: PY, w: PW, h: PH,
-      sizing: { type: 'cover', w: PW, h: PH },
-    });
+    // Fit the photo inside the frame at its native aspect (letterbox on cream).
+    const imgAsp = imageAspect(photoPath);
+    const fit = fitBox(imgAsp, PX, PY, PW, PH);
+    s.addImage({ path: photoPath, x: fit.x, y: fit.y, w: fit.w, h: fit.h });
 
     // Right half: text panel
     const TX = 6.5, TW = SW - TX - 0.5;
@@ -351,13 +380,10 @@ addSectionDivider('SECTION',
   'North Texas businesses winning at their craft');
 for (let i = 0; i < 5; i++) addCustomerSlide(CUSTOMERS[i]);
 
-// Section: EY EOY 2026 — use rich runs so ® renders at superscript size
+// Section: EY EOY 2026 — plain text with unicode ® (avoid rich-run superscript
+// which pptxgenjs emits as invalid XML)
 addSectionDivider('SECTION',
-  [
-    { text: 'EY Entrepreneur Of The Year', options: {} },
-    { text: '\u00ae', options: { superscript: true, fontSize: 24 } },
-    { text: ' 2026', options: {} },
-  ],
+  [{ text: 'EY Entrepreneur Of The Year\u00ae 2026', options: {} }],
   'North Texas EOS community winners and finalists');
 for (let i = 5; i < 11; i++) addCustomerSlide(CUSTOMERS[i]);
 
