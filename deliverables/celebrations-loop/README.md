@@ -22,25 +22,27 @@ If the timings or loop do not stick (e.g., opened in Keynote or Google Slides), 
 
 ## Slide order
 
+Customer slides are sorted alphabetically by company name.
+
 | # | Slide | Implementer |
 |---|---|---|
 | 1 | Title — Customer Celebrations | — |
-| 2 | Maverick Power (headline win) | Shane Spillers |
-| 3 | KPost Roofing & Waterproofing | Shane Spillers |
-| 4 | Neighborhood Management, Inc. | Shane Spillers |
-| 5 | B2 Design Co | Shane Spillers |
-| 6 | Artstillery | Shane Spillers |
-| 7 | Moonshot (EY Southwest Winner) | Ryan Wall |
-| 8 | Lime Media Group (EY Southwest Winner) | Leonard |
-| 9 | Brain Storm Shelter Restaurants (EY Finalist) | Amanda Matthews |
-| 10 | TruLabs (EY Finalist) | Amy Johannesen |
-| 11 | Excel Medical Staffing (EY Finalist) | Justin Mink |
-| 12 | HorsePower Brands (EY Heartland Finalist) | Justin Mink |
-| 13 | North Texas Ophthalmology | Erin Thiem |
-| 14 | Austin Street Center | Kevin Taylor |
-| 15 | BAT Security | Kevin Taylor |
-| 16 | Blue Mint Thai | Kevin Taylor |
-| 17 | Rose Marketing Solutions | Amanda Matthews |
+| 2 | Artstillery | Shane Spillers |
+| 3 | Austin Street Center | Kevin Taylor |
+| 4 | B2 Design Co | Shane Spillers |
+| 5 | BAT Security | Kevin Taylor |
+| 6 | Blue Mint Thai | Kevin Taylor |
+| 7 | Brain Storm Shelter Restaurants (EY Finalist) | Amanda Matthews |
+| 8 | Excel Medical Staffing (EY Finalist) | Justin Mink |
+| 9 | HorsePower Brands (EY Heartland Finalist) | Justin Mink |
+| 10 | KPost Roofing & Waterproofing | Shane Spillers |
+| 11 | Lime Media Group (EY Southwest Winner) | Leonard Lynskey |
+| 12 | Maverick Power (headline win) | Shane Spillers |
+| 13 | Moonshot (EY Southwest Winner) | Ryan Wall |
+| 14 | Neighborhood Management, Inc. | Shane Spillers |
+| 15 | North Texas Ophthalmology | Erin Thiem |
+| 16 | Rose Marketing Solutions | Amanda Matthews |
+| 17 | TruLabs (EY Finalist) | Amy Johannesen |
 | 18 | Closing — Congratulations | — |
 
 Implementer attribution comes from Shane's master DOCX (“EOSI:” field). For wins that came in via a separate email, the sender is credited as Implementer. North Texas Ophthalmology was forwarded by Erin Thiem; adjust if Matt Griffiths' actual EOSI is someone else.

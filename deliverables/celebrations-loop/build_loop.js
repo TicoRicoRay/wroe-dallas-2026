@@ -135,7 +135,7 @@ const CUSTOMERS = [
     readAs: 'Heath Hill, Founder and CEO',
     photo: 'lime_heath.jpg',
     badge: 'EY EOY 2026 · SOUTHWEST WINNER',
-    implementer: 'Leonard',
+    implementer: 'Leonard Lynskey',
   },
   {
     name: 'Brain Storm Shelter Restaurants',
@@ -403,9 +403,11 @@ function addCustomerSlide(c) {
   }
 }
 
-// Straight loop — no section dividers. Order is intentional (Maverick as
-// headline win, EY EOY block together, Rose Marketing as final).
-for (const c of CUSTOMERS) addCustomerSlide(c);
+// Straight loop — no section dividers. Customer slides sorted alphabetically
+// by company name (ignoring leading articles / punctuation).
+const sortKey = (name) => name.replace(/^(the|a|an)\s+/i, '').toLowerCase();
+const SORTED = [...CUSTOMERS].sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name)));
+for (const c of SORTED) addCustomerSlide(c);
 
 // ---- CLOSING SLIDE ----
 {
