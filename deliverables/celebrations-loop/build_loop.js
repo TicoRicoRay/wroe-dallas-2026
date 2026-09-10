@@ -214,11 +214,29 @@ const CUSTOMERS = [
   {
     name: 'Rose Marketing Solutions',
     headline: 'EO Dallas Forum Moderator of the Year',
-    detail: 'Ruth Ann Rose named Forum Moderator of the Year by EO Dallas. Featured speaker at the Hinge Brokers Shift Early Childhood Conference. On track for the highest revenue year in company history.',
+    detail: 'Ruth Ann Rose named Forum Moderator of the Year by EO Dallas. Featured speaker at the Hinge Brokers Shift Early Childhood Conference.',
     readAs: 'Ruth Ann Rose, Founder',
-    photo: null,
+    photo: 'rose_confetti.jpg',
     badge: 'COMMUNITY WIN',
     implementer: 'Amanda Matthews',
+  },
+  {
+    name: 'Beacon Hill Preparatory Institute',
+    headline: '20 years serving North Texas students and families',
+    detail: 'Nonprofit celebrating its 20th Anniversary on July 6, 2026. Since 2006, Beacon Hill has delivered in-school, after-school, and summer literacy and math tutoring across North Texas.',
+    readAs: 'Beacon Hill Preparatory Institute',
+    photo: 'beacon_hill_students.jpg',
+    badge: 'COMMUNITY WIN',
+    implementer: 'Sandi Mitchell',
+  },
+  {
+    name: 'The Crowther Group',
+    headline: 'Best Place to Work for Working Parents, three years running',
+    detail: 'Ranked No. 56 on the Dallas Business Journal Largest General Contractors list (June 2026). Third consecutive year partnering with UTA\u2019s Senior Capstone program and expanding K-12 pipelines with Dallas ISD, Garland ISD, DeSoto ISD, and P-TECH. April Crowther Foundation extended its philanthropic reach to The Bahamas.',
+    readAs: 'Thomas and Trish Crowther',
+    photo: 'crowther_team.jpg',
+    badge: 'COMMUNITY WIN',
+    implementer: 'Sandi Mitchell',
   },
 ];
 
