@@ -277,6 +277,15 @@ const CUSTOMERS = [
     implementer: 'Amy Johannesen',
   },
   {
+    name: "Covington's Nursery",
+    headline: 'Rowlett Chamber of Commerce Small Business of the Year',
+    detail: 'Rowlett-based garden center and landscape design company. Recognized by the Rowlett Chamber of Commerce as Small Business of the Year.',
+    readAs: "Covington's Nursery team",
+    photo: 'covingtons_team.jpg',
+    badge: 'COMMUNITY WIN',
+    implementer: 'Amy Johannesen',
+  },
+  {
     name: 'Local Profile',
     headline: '25th Annual Women in Business Summit sold out two months early',
     detail: 'Plano-based media company. The September 18 flagship summit sold out in two weeks, two months before the event. Presented by Baylor Scott and White Health.',
