@@ -563,7 +563,10 @@ function agendaPage() {
 // begins 1:00 PM with Mark Stanley).
 const SPEAKER_SESSIONS = [
   { session_title: 'Profit Power: Stronger — or Just Bigger?', speaker: 'Mark Stanley', title: 'Expert EOS Implementer®',
-    time: '1:10 – 2:40 PM', slug: 'mark-stanley', notes_pages: 1, notes_lines: 15,
+    time: '1:10 – 2:40 PM', slug: 'mark-stanley', notes_pages: 1,
+    // Cover page: single-line title + 6-line bio — 12 lines fits without overflow.
+    // Continued page: 4-question compact reflection — 16 lines fits without overflow.
+    cover_notes_lines: 12, notes_lines: 16,
     photo: 'assets/speakers/mark-stanley.jpg',
     bio: 'One of the first EOS® Implementers in the world (2009) and now an Expert EOS Implementer with 1,700+ full-day sessions across 180+ leadership teams. Co-author of The Data Book, co-founder of the UNSTOPPABLE! Data-Driven Leader community, and a three-time entrepreneur. Brings a Theory of Constraints, Lean, and Six Sigma toolkit — plus a bias for action — to every session. BBA (Iowa), MBA (Drake). Lives in Johnston, Iowa.',
     handout: { file: 'appendix/Profit-Power-Handout.pdf', pages: 2,
@@ -579,7 +582,10 @@ const SPEAKER_SESSIONS = [
       ],
     } },
   { session_title: 'Rollout, Reworked: Your Plan for Running EOS® Company-Wide', speaker: 'Beth Fahey', title: 'Expert EOS Implementer®',
-    time: '2:55 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1, notes_lines: 15,
+    time: '2:55 – 4:25 PM', slug: 'beth-fahey', notes_pages: 1,
+    // Cover page: 2-line title + 7-line bio consumes more vertical space — 11 lines fits.
+    // Continued page: 4-question compact reflection — 16 lines fits without overflow.
+    cover_notes_lines: 11, notes_lines: 16,
     photo: 'assets/speakers/beth-fahey.jpg',
     bio: 'Expert EOS Implementer® with 500+ client sessions and an EOS Worldwide Coach who trains other Implementers. Co-author of ROLLOUT: Get Your Entire Team Running on EOS® to Achieve Your Vision, and co-creator of the Great Boss™ Workshops with René Boer — more than 40 workshops delivered to thousands of managers. Host of the Bad Boss Confessional podcast. Founder-first perspective: she built a bakery, ran it on EOS, and led the Retail Bakers of America before going full-time as an Implementer. Based in the Chicago area.',
     handout: { file: 'appendix/Rollout-Handout.pdf', pages: 18,
@@ -595,7 +601,10 @@ const SPEAKER_SESSIONS = [
       ],
     } },
   { session_title: 'The 10 Pillars of Visionary Greatness', speaker: 'Mark C. Winters', title: 'Expert EOS Implementer®',
-    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1, notes_lines: 14,
+    time: '4:45 – 6:15 PM', slug: 'mark-c-winters', notes_pages: 1,
+    // Cover page: single-line title + 6-line bio — 12 lines fits without overflow.
+    // Continued page: full 10-pillar reflection box is tall — 14 lines is the ceiling.
+    cover_notes_lines: 12, notes_lines: 14,
     photo: 'assets/speakers/mark-c-winters.jpg',
     bio: 'Expert EOS Implementer® since 2012 with 1,000+ full-day sessions delivered. Author of Visionary and co-author of Rocket Fuel with EOS founder Gino Wickman — the definitive book on the Visionary/Integrator partnership. Founder and Visionary of Rocket Fuel University and host of the Rocket Fuel Podcast. Serial entrepreneur (14 companies started, bought, sold, or shut down) with one exit at a 100x cash return in under three years. MBA from The University of Chicago. Based in Dallas.',
     handout: { file: 'appendix/10-Pillars-Handout.pdf', pages: 2,
@@ -1119,6 +1128,17 @@ function backCover() {
       alignment: AlignmentType.CENTER, spacing: { after: 100 },
       children: [new TextRun({ text: 'EOSNorthTexas.com', font: FONT_HEAD, size: 26, bold: true, color: COLORS.orange })],
     }),
+    // Feedback QR (Tally form: https://tally.so/r/GxPLoj). Positioned at the
+    // bottom of the back cover — spacing pushes it clear of the wordmark above
+    // without touching the bottom page margin.
+    new Paragraph({
+      alignment: AlignmentType.CENTER, spacing: { before: 1200, after: 120 },
+      children: [image(path.join(__dirname, 'assets/feedback-qr.jpg'), 110, 110)],
+    }),
+    new Paragraph({
+      alignment: AlignmentType.CENTER, spacing: { after: 0 },
+      children: [new TextRun({ text: 'Feedback Form', font: FONT_HEAD, size: 20, bold: true, color: COLORS.navy })],
+    }),
   ];
 }
 
@@ -1128,7 +1148,7 @@ function backCover() {
 // ---------- Networking & Reflection page ----------
 // Full-width single-column flow. Each section spans the full page width:
 //   1. Connections     — tabular contact rows (Name | Business | Role | Phone | Email)
-//   2. Table-Mates     — tabular contact rows (Name | Role | Business | Phone | Email)
+//   2. Table-Mates     — tabular contact rows (Name | Business | Role | Phone | Email)
 //   3. Thought Provoking Questions — blank ruled lines
 //   4. Memorable Quotes           — blank ruled lines
 // Sits between the agenda and the morning notes pages.
@@ -1240,10 +1260,10 @@ function networkingPage() {
     7,
   ));
 
-  // Table-Mates — same widths, Role and Business swapped per spec.
+  // Table-Mates — match Connections column order (Name, Business, Role, Phone, Email).
   items.push(sectionTitle('Table-Mates'));
   items.push(contactTable(
-    ['Name', 'Role', 'Business', 'Phone', 'Email'],
+    ['Name', 'Business', 'Role', 'Phone', 'Email'],
     CONTACT_COLS,
     7,
   ));
