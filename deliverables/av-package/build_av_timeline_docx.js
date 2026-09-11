@@ -271,9 +271,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '8:00 – 9:35 AM',
   [cp([sb('Get a Grip on your Business with EOS')]), cp([run('Ann Sheu · Certified EOS Implementer', { size: 18, color: MUTED })])],
-  [cp('Ann Sheu\'s deck (she brings USB)')],
+  [cp('Ann\'s deck (in speaker-decks/)')],
   [cp([sb('Walk-on: '), sl('Unstoppable', SPOT.unstoppable, { italics: true }), s(' — The Score. '), sb('Start at 0:30.')])],
-  [cp('Fade playlist. Play Ann\'s walk-on song. Load her deck when she takes the stage.')],
+  [cp('Fade playlist. Play Ann\'s walk-on song. Load Ann_Sheu_Get_A_Grip.pptx when she takes the stage.')],
   { stripe: true },
 ));
 

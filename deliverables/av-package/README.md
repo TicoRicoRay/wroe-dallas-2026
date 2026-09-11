@@ -37,5 +37,5 @@ Everything the AV team needs for show day is in this folder.
 
 ## Sunday sound check
 
-- Confirm Ann Sheu brings her deck on a USB drive.
+- Ann Sheu's deck is in `deliverables/speaker-decks/Ann_Sheu_Get_A_Grip.pptx` (also in the Drive Speaker Decks folder). No USB needed.
 - Confirm Mark C. Winters' walk-on song (still "TBD" as of Sep 11).
