@@ -208,6 +208,64 @@
     border-color: var(--orange);
     color: var(--white);
   }
+  .custom-wrap {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1.5px solid var(--muted);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .custom-wrap:focus-within {
+    border-color: var(--orange);
+  }
+  #customMin {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    background: transparent;
+    color: var(--white);
+    border: none;
+    padding: 0.65rem 0.5rem 0.65rem 0.9rem;
+    width: 4.5rem;
+    text-align: right;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+  #customMin::-webkit-outer-spin-button,
+  #customMin::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .custom-wrap .unit {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    padding: 0 0.8rem 0 0.2rem;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+  #customGo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    background: transparent;
+    color: var(--white);
+    border: none;
+    border-left: 1.5px solid var(--muted);
+    padding: 0 0.9rem;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  #customGo:hover {
+    background: var(--orange);
+    color: var(--white);
+  }
   .footer {
     position: fixed;
     bottom: 0;
@@ -243,6 +301,11 @@
     <button class="preset" data-minutes="15">15 MIN</button>
     <button class="preset" data-minutes="20">20 MIN</button>
     <button class="preset" data-minutes="25">25 MIN</button>
+    <span class="custom-wrap">
+      <input id="customMin" type="number" min="1" max="600" step="1" inputmode="numeric" placeholder="--" aria-label="Custom minutes">
+      <span class="unit">min</span>
+      <button id="customGo" type="button">Go</button>
+    </span>
   </div>
   <div class="row">
     <span class="row-label">Count Down To</span>
@@ -449,6 +512,25 @@
     });
   });
 
+  // Custom minutes input
+  const customMinInput = document.getElementById('customMin');
+  const customGoBtn = document.getElementById('customGo');
+  function applyCustomMinutes() {
+    const val = parseInt(customMinInput.value, 10);
+    if (!Number.isFinite(val) || val < 1 || val > 600) return;
+    setDuration(val);
+    start();
+    customMinInput.blur();
+  }
+  customGoBtn.addEventListener('click', applyCustomMinutes);
+  customMinInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
+      applyCustomMinutes();
+    }
+  });
+
   startBtn.addEventListener('click', () => running ? stop() : start());
   resetBtn.addEventListener('click', reset);
   fsBtn.addEventListener('click', () => {
@@ -458,6 +540,9 @@
 
   // Keyboard shortcuts
   window.addEventListener('keydown', (e) => {
+    // Don't hijack keys while typing in the custom-minutes input
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
     if (e.code === 'Space') {
       e.preventDefault();
       running ? stop() : start();

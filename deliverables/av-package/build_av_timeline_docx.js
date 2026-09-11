@@ -559,9 +559,11 @@ elements.push(new Paragraph({
 }));
 const contacts = [
   ['Ray Myers', 'deck / files / AV lead', '469-939-9746', '4699399746', 'ray.myers@eosworldwide.com'],
+  ['Erin Thiem', 'Day-of Show Operations (event lead, run of show)', '979-575-4585', '9795754585', 'erin.thiem@eosworldwide.com'],
+  ['Shane Spillers', 'Venue Liaison (knows the Statler)', '214-519-9599', '2145199599', 'shane.spillers@eosworldwide.com'],
   ['Fermin Martinez', 'Encore / Statler AV contact', '214-690-5211', '2146905211', 'fermin.martinez@encoreglobal.com'],
-  ['Max Reich', 'emcee', null, null, 'max.reich@eosworldwide.com'],
-  ['Meagan Harris', 'stage-side coordinator (eyes on stage all day, supports emcee Max)', null, null, 'meagan@spillersworks.com'],
+  ['Max Reich', 'MC (emcee)', null, null, 'max.reich@eosworldwide.com'],
+  ['Meagan Harris', 'stage-side coordinator (eyes on stage all day, supports MC Max)', null, null, 'meagan@spillersworks.com'],
 ];
 contacts.forEach(([name, role, phoneDisp, phoneRaw, email]) => {
   const kids = [sb(`•  ${name}`), s(` (${role}) · `)];
