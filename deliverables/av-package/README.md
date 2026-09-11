@@ -10,7 +10,7 @@ Everything the AV team needs for show day is in this folder.
 
 | File | What it is | How to use it |
 | --- | --- | --- |
-| **AV-Timeline.pdf** | Minute-by-minute run of show with music cues, deck cues, and speaker walk-on assignments | Print two copies. Follow top to bottom on show day. |
+| **AV-Timeline.docx** | Minute-by-minute run of show with music cues, deck cues, and speaker walk-on assignments. Every playlist, song, timer URL, phone number, and email is a clickable link. | Open in Word. Follow top to bottom on show day. Edit last-minute changes directly (e.g., Winters walk-on song when it arrives). |
 | **Timer.url** | Windows shortcut to the break timer page (https://EOSNorthTexas.com/timer) | Double-click to open in the default browser. The page shows the countdown AND the scrolling sponsor logo marquee. Use for every break. |
 | **Celebrations-Loop.pptx** | 18-slide auto-looping customer wins deck (advances 8s per slide) | Optional. Use during breaks on the main projector as a second visual, or leave the timer page up. |
 
@@ -22,8 +22,10 @@ Everything the AV team needs for show day is in this folder.
 ## Show-day quick start
 
 1. Open `Timer.url` on the main output. Leave it up during registration.
-2. Start the Spotify **Countdown Timer Playlist** (link in AV-Timeline.pdf page 3).
-3. Follow the timeline in `AV-Timeline.pdf`.
+2. Open `AV-Timeline.docx` in Word. Ctrl-click the Spotify links to open playlists in the browser.
+3. Follow the timeline top to bottom.
+
+**Note on Spotify links:** Song links use `?t=SECONDS` to jump to the walk-on start time. This works in the Spotify **web player** (open.spotify.com in a browser) but the desktop app ignores it and starts at 0:00. If you use the desktop app, seek manually — start times are listed in the Notes column.
 
 ## Sunday sound check
 
