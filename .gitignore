@@ -4,3 +4,5 @@ inbox-materials/
 
 # Local node deps
 node_modules/
+gws.err
+drive_listing.jsonl
