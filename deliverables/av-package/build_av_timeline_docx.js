@@ -619,11 +619,9 @@ const doc = new Document({
         default: new Footer({
           children: [
             new Paragraph({
-              alignment: AlignmentType.LEFT,
+              alignment: AlignmentType.CENTER,
               children: [
-                run('Timer page: ', { size: 16, color: MUTED }),
-                link(TIMER_URL, TIMER_URL, { size: 16 }),
-                run('  ·  Break Timer + Sponsor Marquee                                                                                                              Page ', { size: 16, color: MUTED }),
+                run('Page ', { size: 16, color: MUTED }),
                 new TextRun({ children: [PageNumber.CURRENT], size: 16, color: MUTED, font: FONT }),
                 run(' of ', { size: 16, color: MUTED }),
                 new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: MUTED, font: FONT }),
