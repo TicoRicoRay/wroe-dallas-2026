@@ -16,7 +16,6 @@ Everything the AV team needs for show day is in this folder.
 
 ## Related files elsewhere in the repo
 
-- `deliverables/deck/Deck.pptx` — main event deck (17 slides, Custom Shows: "Pre-Event Loop" and "Event")
 - `deliverables/speaker-decks/` — each presenter's own deck (open at their handoff)
 
 ## Show-day quick start

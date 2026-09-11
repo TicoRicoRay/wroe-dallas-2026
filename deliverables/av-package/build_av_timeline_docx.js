@@ -210,19 +210,13 @@ const qrRows = [
     sl('Alternates', SPOT.alt), s(' · '),
     sl('Lunch Break', SPOT.lunch), s('. Full playlist and walk-on tables on page 2.'),
   ]],
-  ['MAIN DECK', [
-    sb('deliverables/deck/Deck.pptx'),
-    s(' · 17 slides · Two Custom Shows: '),
-    sb('Pre-Event Loop'), s(' (slides 1-5, auto-advances) and '),
-    sb('Event'), s(' (slides 6-17).'),
-  ]],
   ['SPEAKER DECKS', [
-    sb('deliverables/speaker-decks/'),
-    s(' · open each speaker\'s file in PowerPoint at the handoff. Return to Deck.pptx afterward via Slide Show » Custom Show » Event.'),
+    sb('Speaker Decks/'),
+    s(' subfolder · open each speaker\'s file in PowerPoint at the handoff. After each speaker, return to the timer page or Celebrations Loop.'),
   ]],
   ['CELEBRATIONS LOOP', [
-    sb('deliverables/celebrations-loop/Celebrations-Loop.pptx'),
-    s(' · 18-slide auto-looping customer wins deck. Optional backup for breaks if you want a second visual instead of the timer page.'),
+    sb('Celebrations-Loop.pptx'),
+    s(' · 18-slide auto-looping customer wins deck. Optional visual for breaks or between speakers if you want something other than the timer page.'),
   ]],
 ];
 
@@ -271,7 +265,7 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '8:00 – 9:35 AM',
   [cp([sb('Get a Grip on your Business with EOS')]), cp([run('Ann Sheu · Certified EOS Implementer', { size: 18, color: MUTED })])],
-  [cp('Ann\'s deck (in speaker-decks/)')],
+  [cp('Ann\'s deck (in Speaker Decks/)')],
   [cp([sb('Walk-on: '), sl('Unstoppable', SPOT.unstoppable, { italics: true }), s(' — The Score. '), sb('Start at 0:30.')])],
   [cp('Fade playlist. Play Ann\'s walk-on song. Load Ann_Sheu_Get_A_Grip.pptx when she takes the stage.')],
   { stripe: true },
@@ -288,7 +282,7 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '9:50 – 10:40 AM',
   [cp([sb('Journey with an EOS Implementer')]), cp([run('Brian Dosal · Strety', { size: 18, color: MUTED })])],
-  [cp('Brian\'s deck (in speaker-decks/)')],
+  [cp('Brian\'s deck (in Speaker Decks/)')],
   [cp([sb('Walk-on: '), sl('Ants Marching', SPOT.antsMarching, { italics: true }), s(' — Dave Matthews Band (chorus)')])],
   [cp('Fade playlist. Play walk-on. Load Brian Dosal (Strety) — Journey with an EOS Implementer.pptx.')],
   { stripe: true },
@@ -305,7 +299,7 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '10:55 – 11:55 AM',
   [cp([sb('Your Sales Team Isn\'t the Problem. Your System Is.')]), cp([run('Steve Heroux', { size: 18, color: MUTED })])],
-  [cp('Steve\'s deck (in speaker-decks/)')],
+  [cp('Steve\'s deck (in Speaker Decks/)')],
   [cp([sb('Walk-on: '), sl('Down with the Sickness', SPOT.sickness, { italics: true }), s(' — Disturbed (chorus)')])],
   [cp('Fade playlist. Play walk-on. Load Steve Heroux — Sales System (fixed).pptx.')],
   { stripe: true },
@@ -325,7 +319,7 @@ rows.push(sectionRow('LUNCH & LEARN'));
 rows.push(timelineRow(
   '12:00 – 1:00 PM',
   [cp([sb('Lunch and Learn: Healthy Matters')]), cp([run('Walt Brown · 7 Critical Needs', { size: 18, color: MUTED })])],
-  [cp('Walt\'s deck (in speaker-decks/)')],
+  [cp('Walt\'s deck (in Speaker Decks/)')],
   [cp([sb('Walk-on: '), sl("Don't Ask Me No Questions", SPOT.noQuestions, { italics: true }), s(' — Lynyrd Skynyrd (chorus)')])],
   [cp('Load Walt Brown — 7 Critical Needs (fixed).pptx. Play walk-on when Walt takes the stage after guests are seated.')],
   { stripe: true },
@@ -334,9 +328,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '1:00 – 1:10 PM',
   [cp('Break / Bridge (10 min)')],
-  [cp('Pre-event loop (Deck.pptx slides 1-5 auto-advance) OR '), cp([sl('timer countdown to 1:10 PM', TIMER_TO('13:10'))])],
+  [cp([sl('Timer countdown to 1:10 PM', TIMER_TO('13:10')), s(' (or Celebrations Loop)')])],
   [cp([sb('Post-Lunch: '), sl('Do I Ever Cross Your Mind', SPOT.doIEver, { italics: true }), s(' — Dolly Parton, then '), sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp('Play post-lunch song. Load Deck.pptx — start Custom Show "Pre-Event Loop" (auto-advances 15s per slide).')],
+  [cp([s('Play post-lunch song. One-click: '), sl('countdown to 1:10 PM', TIMER_TO('13:10')), s('.')])],
 ));
 
 // ===== PAID AFTERNOON =====
@@ -345,9 +339,9 @@ rows.push(sectionRow('PAID AFTERNOON PROGRAM'));
 rows.push(timelineRow(
   '1:10 – 2:40 PM',
   [cp([sb('Profit Power: Stronger — or Just Bigger?')]), cp([run('Mark Stanley', { size: 18, color: MUTED })])],
-  [cp('Deck.pptx slide 6-8, then Mark\'s deck')],
+  [cp('Mark\'s deck (in Speaker Decks/)')],
   [cp([sb('Walk-on: '), sl('Beautiful Day', SPOT.beautifulDay, { italics: true }), s(' — U2 (chorus)')])],
-  [cp([s('Advance Deck.pptx to Custom Show '), sb('"Event"'), s(' (starts at slide 6). At slide 8, '), sb('Esc'), s(', then open '), sb('Mark Stanley — Profit Power.pptx'), s(' and press F5. Play walk-on before he takes stage.')])],
+  [cp([s('Fade playlist. Play walk-on. Load '), sb('Mark Stanley — Profit Power.pptx'), s(' and press F5 when Mark takes the stage.')])],
   { stripe: true },
 ));
 
@@ -362,9 +356,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '2:55 – 4:25 PM',
   [cp([sb('Rollout, Reworked: Running EOS Company-Wide')]), cp([run('Beth Fahey', { size: 18, color: MUTED })])],
-  [cp('Deck.pptx slide 10-11 (Beth may drive from master or her own deck)')],
+  [cp('Beth\'s deck (in Speaker Decks/)')],
   [cp([sb('Walk-on: '), sl('Rollout (My Business) — Instrumental', SPOT.rollout, { italics: true }), s(' — Ludacris')])],
-  [cp('Advance Deck.pptx to slide 10-11. Beth presents from here or hands off to her deck. Play walk-on before she takes stage.')],
+  [cp([s('Fade playlist. Play walk-on. Load '), sb('Beth_Fahey-RolloutPresentation_Dallas_2026_Updated.pptx'), s(' and press F5 when Beth takes the stage.')])],
   { stripe: true },
 ));
 
@@ -373,15 +367,15 @@ rows.push(timelineRow(
   [cp('Final Break (20 min)')],
   [cp('Timer page (countdown to 4:45) OR Celebrations Loop')],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('One-click: '), sl('countdown to 4:45 PM', TIMER_TO('16:45')), s('. '), sb('Sponsor thank-you'), s(' at Deck.pptx slides 13-14 will play on emcee return.')])],
+  [cp([s('One-click: '), sl('countdown to 4:45 PM', TIMER_TO('16:45')), s('. MC Max handles sponsor thank-yous verbally on return.')])],
 ));
 
 rows.push(timelineRow(
   '4:45 – 6:15 PM',
   [cp([sb('The 10 Pillars of Visionary Greatness')]), cp([run('Mark C. Winters', { size: 18, color: MUTED })])],
-  [cp('Deck.pptx slide 13-16, then Winters\' deck')],
+  [cp('Winters\' deck (in Speaker Decks/)')],
   [cp([sb('Walk-on: '), run('TBD — awaiting Mark C. Winters', { size: 18, bold: true, color: RED })])],
-  [cp([s('Advance Deck.pptx to slides 13-14 (sponsor thank-you), then slide 15 (session cover), then slide 16. '), sb('Esc'), s(', then open '), sb('Mark C. Winters — 10 Pillars.pptx'), s(' and press F5. Play walk-on before he takes stage.')])],
+  [cp([s('Fade playlist. Play walk-on. Load '), sb('Mark_Winters_10_Pillars.pptx'), s(' and press F5 when Mark takes the stage.')])],
   { stripe: true },
 ));
 
@@ -391,9 +385,9 @@ rows.push(sectionRow('HAPPY HOUR'));
 rows.push(timelineRow(
   '6:15 – 8:00 PM',
   [cp([sb('Happy Hour + Networking')]), cp([run('Sponsored by Ninety.io', { size: 18, color: MUTED })])],
-  [cp('Deck.pptx slide 17 (Happy Hour close)')],
+  [cp('Celebrations Loop OR timer page (any static screen)')],
   [cp('Any upbeat playlist (host\'s choice)')],
-  [cp('Advance Deck.pptx to slide 17. Leave on-screen through Happy Hour. Music continues.')],
+  [cp('Leave Celebrations-Loop.pptx running on the main screen through Happy Hour. Music continues.')],
 ));
 
 const mainTable = new Table({
@@ -538,10 +532,10 @@ elements.push(new Paragraph({
   spacing: { before: 0, after: 40 },
 }));
 [
-  ['1.', [sb('Press Esc'), s(' to exit the current master deck.')]],
-  ['2.', [s('Open the speaker\'s file from '), sb('deliverables/speaker-decks/'), s(' in PowerPoint.')]],
-  ['3.', [sb('Press F5'), s(' to run the presenter\'s deck.')]],
-  ['4.', [s('When they finish, press '), sb('Esc'), s(' and re-open '), sb('Deck.pptx'), s(', then Slide Show » Custom Show » '), sb('Event'), s(' to continue on the next master slide.')]],
+  ['1.', [s('Fade the countdown playlist and play the speaker\'s walk-on song.')]],
+  ['2.', [s('Open the speaker\'s file from '), sb('Speaker Decks/'), s(' in PowerPoint and press '), sb('F5'), s(' to run the deck.')]],
+  ['3.', [s('When they finish, press '), sb('Esc'), s('. Return to the timer page (or Celebrations Loop) on the main screen.')]],
+  ['4.', [s('MC Max handles all segment transitions and sponsor thank-yous verbally between decks.')]],
 ].forEach(([n, kids]) => {
   elements.push(new Paragraph({
     children: [sb(`   ${n}  `), ...kids],
