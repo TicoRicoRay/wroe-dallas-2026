@@ -27,6 +27,14 @@ Everything the AV team needs for show day is in this folder.
 
 **Note on Spotify links:** Song links use `?t=SECONDS` to jump to the walk-on start time. This works in the Spotify **web player** (open.spotify.com in a browser) but the desktop app ignores it and starts at 0:00. If you use the desktop app, seek manually — start times are listed in the Notes column.
 
+**One-click break countdowns:** The timer page accepts a `?to=HH:MM` query string (24-hour local time). Every break row in the timeline has a direct link that opens the timer and auto-starts counting down to the next scheduled resume time — no need to manually pick a duration. Examples:
+
+- `https://eosnorthtexas.com/timer/?to=9:50` — count down to 9:50 AM
+- `https://eosnorthtexas.com/timer/?to=13:10` — count down to 1:10 PM (24-hour)
+- `https://eosnorthtexas.com/timer/?to=1:10pm` — same thing, 12-hour with suffix
+- `https://eosnorthtexas.com/timer/?min=15` — 15-minute countdown
+- Add `&auto=0` to open configured but paused.
+
 ## Sunday sound check
 
 - Confirm Ann Sheu brings her deck on a USB drive.

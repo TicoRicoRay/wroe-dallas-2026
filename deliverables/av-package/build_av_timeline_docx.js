@@ -56,6 +56,9 @@ const SPOT = {
 };
 
 const TIMER_URL = 'https://EOSNorthTexas.com/timer';
+// Direct-link URLs: one click opens the page and auto-starts the countdown
+// to the next scheduled resume time. Query string is parsed by /timer/index.html.
+const TIMER_TO = (hhmm) => `${TIMER_URL}/?to=${hhmm}`;
 
 // --- Text helpers ---
 const FONT = 'Calibri';
@@ -262,7 +265,7 @@ rows.push(timelineRow(
   [cp('Coffee, Snacks & Registration')],
   [cp('Timer page (countdown to 8:00)')],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('Open '), sl(TIMER_URL, TIMER_URL), s(' on main screen. Set to 30:00 countdown. Start playlist.')])],
+  [cp([s('Open '), sl('countdown to 8:00 AM', TIMER_TO('8:00')), s(' on main screen. Start playlist.')])],
 ));
 
 rows.push(timelineRow(
@@ -277,9 +280,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '9:35 – 9:50 AM',
   [cp('Break (15 min)')],
-  [cp('Timer page (15:00)')],
+  [cp('Timer page (countdown to 9:50)')],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp('Set timer to 15:00. Resume playlist.')],
+  [cp([s('One-click: '), sl('countdown to 9:50 AM', TIMER_TO('9:50')), s('. Resume playlist.')])],
 ));
 
 rows.push(timelineRow(
@@ -294,9 +297,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '10:40 – 10:55 AM',
   [cp('Break (15 min)')],
-  [cp('Timer page (15:00)')],
+  [cp('Timer page (countdown to 10:55)')],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp('Set timer to 15:00. Resume playlist.')],
+  [cp([s('One-click: '), sl('countdown to 10:55 AM', TIMER_TO('10:55')), s('. Resume playlist.')])],
 ));
 
 rows.push(timelineRow(
@@ -331,7 +334,7 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '1:00 – 1:10 PM',
   [cp('Break / Bridge (10 min)')],
-  [cp('Pre-event loop (Deck.pptx slides 1-5 auto-advance)')],
+  [cp('Pre-event loop (Deck.pptx slides 1-5 auto-advance) OR '), cp([sl('timer countdown to 1:10 PM', TIMER_TO('13:10'))])],
   [cp([sb('Post-Lunch: '), sl('Do I Ever Cross Your Mind', SPOT.doIEver, { italics: true }), s(' — Dolly Parton, then '), sl('Countdown Timer Playlist', SPOT.countdown)])],
   [cp('Play post-lunch song. Load Deck.pptx — start Custom Show "Pre-Event Loop" (auto-advances 15s per slide).')],
 ));
@@ -351,9 +354,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '2:40 – 2:55 PM',
   [cp('Afternoon Break (15 min)')],
-  [cp('Timer page (15:00) OR Celebrations Loop')],
+  [cp('Timer page (countdown to 2:55) OR Celebrations Loop')],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('Set timer to 15:00. '), sb('Option:'), s(' switch to Celebrations-Loop.pptx on main projector during this break for extra content.')])],
+  [cp([s('One-click: '), sl('countdown to 2:55 PM', TIMER_TO('14:55')), s('. '), sb('Option:'), s(' switch to Celebrations-Loop.pptx on main projector during this break for extra content.')])],
 ));
 
 rows.push(timelineRow(
@@ -368,9 +371,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '4:25 – 4:45 PM',
   [cp('Final Break (20 min)')],
-  [cp('Timer page (20:00) OR Celebrations Loop')],
+  [cp('Timer page (countdown to 4:45) OR Celebrations Loop')],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('Set timer to 20:00. '), sb('Sponsor thank-you'), s(' at Deck.pptx slides 13-14 will play on emcee return.')])],
+  [cp([s('One-click: '), sl('countdown to 4:45 PM', TIMER_TO('16:45')), s('. '), sb('Sponsor thank-you'), s(' at Deck.pptx slides 13-14 will play on emcee return.')])],
 ));
 
 rows.push(timelineRow(
@@ -557,8 +560,8 @@ elements.push(new Paragraph({
 const contacts = [
   ['Ray Myers', 'deck / files / AV lead', '469-939-9746', '4699399746', 'ray.myers@eosworldwide.com'],
   ['Fermin Martinez', 'Encore / Statler AV contact', '214-690-5211', '2146905211', 'fermin.martinez@encoreglobal.com'],
-  ['Shane Spillers', 'emcee / event lead', '214-519-9599', '2145199599', 'shane.spillers@eosworldwide.com'],
-  ['Meagan Harris', 'music coordinator', null, null, 'meagan@spillersworks.com'],
+  ['Max Reich', 'emcee', null, null, 'max.reich@eosworldwide.com'],
+  ['Meagan Harris', 'stage-side coordinator (eyes on stage all day, supports emcee Max)', null, null, 'meagan@spillersworks.com'],
 ];
 contacts.forEach(([name, role, phoneDisp, phoneRaw, email]) => {
   const kids = [sb(`•  ${name}`), s(` (${role}) · `)];

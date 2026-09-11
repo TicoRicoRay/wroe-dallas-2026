@@ -468,6 +468,64 @@
     }
   });
 
+  // ---------- Query-string auto-start ----------
+  // AV can bookmark or link a single URL that opens the page pre-configured
+  // and (optionally) already counting down. Examples:
+  //   /timer/?to=9:50        -> count down to 9:50 AM local, auto-start
+  //   /timer/?to=13:10       -> count down to 1:10 PM (24-hour also works)
+  //   /timer/?to=1:10pm      -> 12-hour with am/pm suffix
+  //   /timer/?min=15         -> 15-minute break countdown, auto-start
+  //   /timer/?to=9:50&auto=0 -> configure only, do not auto-start
+  // Query params take precedence over the default 20:00 display on load.
+  function formatDisplayTime(h24, m) {
+    const period = h24 >= 12 ? 'PM' : 'AM';
+    let h12 = h24 % 12;
+    if (h12 === 0) h12 = 12;
+    return h12 + ':' + String(m).padStart(2, '0') + ' ' + period;
+  }
+  function parseTimeParam(raw) {
+    // Accepts "9:50", "09:50", "13:10", "1:10pm", "1:10 PM", "9am", etc.
+    const s = String(raw).trim().toLowerCase().replace(/\s+/g, '');
+    const m = s.match(/^(\d{1,2})(?::(\d{2}))?(am|pm)?$/);
+    if (!m) return null;
+    let h = parseInt(m[1], 10);
+    const mm = m[2] ? parseInt(m[2], 10) : 0;
+    const suffix = m[3];
+    if (h < 0 || h > 23 || mm < 0 || mm > 59) return null;
+    if (suffix === 'am') {
+      if (h < 1 || h > 12) return null;
+      if (h === 12) h = 0;
+    } else if (suffix === 'pm') {
+      if (h < 1 || h > 12) return null;
+      if (h !== 12) h += 12;
+    }
+    return { h: h, m: mm };
+  }
+  (function applyQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    const toRaw = params.get('to');
+    const minRaw = params.get('min') || params.get('minutes');
+    const autoRaw = params.get('auto');
+    const autoStart = autoRaw === null ? true : !(autoRaw === '0' || autoRaw === 'false' || autoRaw === 'no');
+    if (toRaw) {
+      const parsed = parseTimeParam(toRaw);
+      if (parsed) {
+        const hhmm = String(parsed.h).padStart(2, '0') + ':' + String(parsed.m).padStart(2, '0');
+        setTarget(hhmm, formatDisplayTime(parsed.h, parsed.m));
+        if (autoStart) start();
+        return;
+      }
+    }
+    if (minRaw) {
+      const minutes = parseInt(minRaw, 10);
+      if (Number.isFinite(minutes) && minutes > 0 && minutes <= 600) {
+        setDuration(minutes);
+        if (autoStart) start();
+        return;
+      }
+    }
+  })();
+
   render();
 </script>
 </body>
