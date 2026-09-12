@@ -216,7 +216,11 @@ const qrRows = [
   ]],
   ['CELEBRATIONS LOOP', [
     sb('Celebrations-Loop.pptx'),
-    s(' · 18-slide auto-looping customer wins deck. Optional visual for breaks or between speakers if you want something other than the timer page.'),
+    s(' · 18-slide auto-looping customer wins deck. Runs in kiosk mode (F5) and loops continuously until Esc.'),
+  ]],
+  ['BREAK PATTERN', [
+    sb('Alternating breaks per Shane: '),
+    s('sponsors loop (timer page) before Ann · celebrations loop before Brian · sponsors before Steve · celebrations for the 30-min lunch before Walt · sponsors before Mark S. · celebrations before Beth · sponsors before Mark W. See each break row below.'),
   ]],
 ];
 
@@ -257,9 +261,9 @@ rows.push(sectionRow('FREE MORNING PROGRAM'));
 rows.push(timelineRow(
   '7:30 – 8:00 AM',
   [cp('Coffee, Snacks & Registration')],
-  [cp('Timer page (countdown to 8:00)')],
+  [cp([sb('Sponsors loop: '), s('timer page (countdown to 8:00 with scrolling sponsor logos)')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('Open '), sl('countdown to 8:00 AM', TIMER_TO('8:00')), s(' on main screen. Start playlist.')])],
+  [cp([sb('Pre-Ann: '), s('Open '), sl('countdown to 8:00 AM', TIMER_TO('8:00')), s(' on main screen. Sponsors scroll across the top. Start playlist.')])],
 ));
 
 rows.push(timelineRow(
@@ -274,9 +278,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '9:35 – 9:50 AM',
   [cp('Break (15 min)')],
-  [cp('Timer page (countdown to 9:50)')],
+  [cp([sb('Celebrations loop: '), s('run Celebrations-Loop.pptx (F5, kiosk mode)')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('One-click: '), sl('countdown to 9:50 AM', TIMER_TO('9:50')), s('. Resume playlist.')])],
+  [cp([sb('Pre-Brian: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Resume playlist. Deck auto-loops until you press '), sb('Esc'), s('.')])],
 ));
 
 rows.push(timelineRow(
@@ -291,9 +295,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '10:40 – 10:55 AM',
   [cp('Break (15 min)')],
-  [cp('Timer page (countdown to 10:55)')],
+  [cp([sb('Sponsors loop: '), s('timer page (countdown to 10:55 with scrolling sponsor logos)')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('One-click: '), sl('countdown to 10:55 AM', TIMER_TO('10:55')), s('. Resume playlist.')])],
+  [cp([sb('Pre-Steve: '), s('Press '), sb('Esc'), s(' to exit Celebrations loop. One-click: '), sl('countdown to 10:55 AM', TIMER_TO('10:55')), s('. Resume playlist.')])],
 ));
 
 rows.push(timelineRow(
@@ -308,9 +312,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '11:55 – 12:00 PM',
   [cp('Emcee bridge to Lunch')],
-  [cp('Lunch title card')],
+  [cp([sb('Celebrations loop: '), s('run Celebrations-Loop.pptx (F5, kiosk mode) — loops through the bridge until Walt takes the stage at 12:00')])],
   [cp([sb('Pre-Lunch: '), sl('Find Your People', SPOT.findYourPeople, { italics: true }), s(' — Drew Holcomb & The Neighbors')])],
-  [cp('Play pre-lunch song as guests transition to lunch tables.')],
+  [cp([sb('Post-Steve: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Play pre-lunch song as guests transition. Deck auto-loops until Walt takes the stage (per Shane\'s plan the loop should be ready to fill ~30 min if Walt\'s start slips while guests are seated).')])],
 ));
 
 // ===== LUNCH =====
@@ -321,16 +325,16 @@ rows.push(timelineRow(
   [cp([sb('Lunch and Learn: Healthy Matters')]), cp([run('Walt Brown · 7 Critical Needs', { size: 18, color: MUTED })])],
   [cp('Walt\'s deck (in Speaker Decks/)')],
   [cp([sb('Walk-on: '), sl("Don't Ask Me No Questions", SPOT.noQuestions, { italics: true }), s(' — Lynyrd Skynyrd (chorus)')])],
-  [cp('Load Walt Brown — 7 Critical Needs (fixed).pptx. Play walk-on when Walt takes the stage after guests are seated.')],
+  [cp([s('Press '), sb('Esc'), s(' to exit Celebrations loop. Load '), sb('Walt Brown — 7 Critical Needs (fixed).pptx'), s('. Play walk-on when Walt takes the stage after guests are seated.')])],
   { stripe: true },
 ));
 
 rows.push(timelineRow(
   '1:00 – 1:10 PM',
   [cp('Break / Bridge (10 min)')],
-  [cp([sl('Timer countdown to 1:10 PM', TIMER_TO('13:10')), s(' (or Celebrations Loop)')])],
+  [cp([sb('Sponsors loop: '), s('timer page (countdown to 1:10 with scrolling sponsor logos)')])],
   [cp([sb('Post-Lunch: '), sl('Do I Ever Cross Your Mind', SPOT.doIEver, { italics: true }), s(' — Dolly Parton, then '), sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('Play post-lunch song. One-click: '), sl('countdown to 1:10 PM', TIMER_TO('13:10')), s('.')])],
+  [cp([sb('Pre-Mark S.: '), s('Press '), sb('Esc'), s(' to exit lunch Celebrations loop. Play post-lunch song. One-click: '), sl('countdown to 1:10 PM', TIMER_TO('13:10')), s('. Resume playlist.')])],
 ));
 
 // ===== PAID AFTERNOON =====
@@ -348,9 +352,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '2:40 – 2:55 PM',
   [cp('Afternoon Break (15 min)')],
-  [cp('Timer page (countdown to 2:55) OR Celebrations Loop')],
+  [cp([sb('Celebrations loop: '), s('run Celebrations-Loop.pptx (F5, kiosk mode)')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('One-click: '), sl('countdown to 2:55 PM', TIMER_TO('14:55')), s('. '), sb('Option:'), s(' switch to Celebrations-Loop.pptx on main projector during this break for extra content.')])],
+  [cp([sb('Pre-Beth: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Resume playlist. Deck auto-loops until you press '), sb('Esc'), s('.')])],
 ));
 
 rows.push(timelineRow(
@@ -365,9 +369,9 @@ rows.push(timelineRow(
 rows.push(timelineRow(
   '4:25 – 4:45 PM',
   [cp('Final Break (20 min)')],
-  [cp('Timer page (countdown to 4:45) OR Celebrations Loop')],
+  [cp([sb('Sponsors loop: '), s('timer page (countdown to 4:45 with scrolling sponsor logos)')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([s('One-click: '), sl('countdown to 4:45 PM', TIMER_TO('16:45')), s('. MC Max handles sponsor thank-yous verbally on return.')])],
+  [cp([sb('Pre-Mark W.: '), s('Press '), sb('Esc'), s(' to exit Celebrations loop. One-click: '), sl('countdown to 4:45 PM', TIMER_TO('16:45')), s('. Resume playlist. MC Max handles sponsor thank-yous verbally on return.')])],
 ));
 
 rows.push(timelineRow(
