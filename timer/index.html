@@ -266,6 +266,48 @@
     background: var(--orange);
     color: var(--white);
   }
+  /* Custom time input (Count Down To) mirrors custom-wrap styling */
+  #customTime {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    background: transparent;
+    color: var(--white);
+    border: none;
+    padding: 0.65rem 0.5rem 0.65rem 0.9rem;
+    width: 5.5rem;
+    text-align: right;
+    outline: none;
+  }
+  #customTime::placeholder { color: var(--muted); opacity: 0.6; }
+  #customTime.invalid { color: #ff6b6b; }
+  #customTimeGo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    background: transparent;
+    color: var(--white);
+    border: none;
+    border-left: 1.5px solid var(--muted);
+    padding: 0 0.9rem;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  #customTimeGo:hover {
+    background: var(--orange);
+    color: var(--white);
+  }
+  /* Auto-hide controls while running */
+  .controls {
+    transition: opacity 0.6s ease;
+  }
+  body.controls-hidden .controls {
+    opacity: 0;
+    pointer-events: none;
+  }
+  body.controls-hidden { cursor: none; }
   .footer {
     position: fixed;
     bottom: 0;
@@ -315,6 +357,10 @@
     <button class="target" data-target="13:10">1:10 PM</button>
     <button class="target" data-target="14:55">2:55 PM</button>
     <button class="target" data-target="16:45">4:45 PM</button>
+    <span class="custom-wrap">
+      <input id="customTime" type="text" inputmode="numeric" placeholder="h:mm" aria-label="Custom count-down target time" maxlength="8" autocomplete="off">
+      <button id="customTimeGo" type="button">Go</button>
+    </span>
   </div>
   <div class="row">
     <button id="start" class="primary">START</button>
@@ -427,18 +473,28 @@
     render();
   }
 
+  var hideTimeoutId = null;
   function start() {
     if (running || remainingSec <= 0) return;
     running = true;
     lastTick = performance.now();
     intervalId = setInterval(tick, 250);
     startBtn.textContent = 'PAUSE';
+    // Fade controls out after 2s so the user sees the state change first.
+    if (hideTimeoutId) { clearTimeout(hideTimeoutId); }
+    hideTimeoutId = setTimeout(() => {
+      const ae = document.activeElement;
+      const inInput = ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.isContentEditable);
+      if (running && !inInput) document.body.classList.add('controls-hidden');
+    }, 2000);
   }
 
   function stop() {
     running = false;
     if (intervalId) { clearInterval(intervalId); intervalId = null; }
     startBtn.textContent = 'START';
+    document.body.classList.remove('controls-hidden');
+    if (hideTimeoutId) { clearTimeout(hideTimeoutId); hideTimeoutId = null; }
   }
 
   function reset() {
@@ -533,6 +589,94 @@
       applyCustomMinutes();
     }
   });
+
+  // Custom count-down-to time input.
+  // Accepts: '9', '9:5', '9:50', '09:50', '9:50am', '9:50 PM', '21:15', '2115'.
+  // Returns { h, m, displayLabel } in 24h, or null if invalid.
+  function parseCustomTime(raw) {
+    if (raw == null) return null;
+    let s = String(raw).trim().toLowerCase().replace(/\s+/g, '');
+    if (!s) return null;
+    let ampm = null;
+    if (s.endsWith('am') || s.endsWith('a')) { ampm = 'am'; s = s.replace(/a m?$/, '').replace(/a$/, ''); }
+    else if (s.endsWith('pm') || s.endsWith('p')) { ampm = 'pm'; s = s.replace(/p m?$/, '').replace(/p$/, ''); }
+    s = s.replace(/[.\s]/g, ':');
+    let h, m;
+    if (s.includes(':')) {
+      const parts = s.split(':');
+      if (parts.length !== 2) return null;
+      h = parseInt(parts[0], 10);
+      m = parseInt(parts[1], 10);
+    } else if (/^\d{3,4}$/.test(s)) {
+      // Bare digits: '915' -> 9:15, '2115' -> 21:15
+      h = parseInt(s.slice(0, s.length - 2), 10);
+      m = parseInt(s.slice(-2), 10);
+    } else if (/^\d{1,2}$/.test(s)) {
+      h = parseInt(s, 10);
+      m = 0;
+    } else {
+      return null;
+    }
+    if (!Number.isFinite(h) || !Number.isFinite(m)) return null;
+    if (m < 0 || m > 59) return null;
+    if (ampm) {
+      if (h < 1 || h > 12) return null;
+      if (ampm === 'pm' && h !== 12) h += 12;
+      if (ampm === 'am' && h === 12) h = 0;
+    } else {
+      if (h < 0 || h > 23) return null;
+    }
+    // Format label as 12h with AM/PM.
+    const period = h < 12 ? 'AM' : 'PM';
+    const h12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
+    const label = h12 + ':' + String(m).padStart(2, '0') + ' ' + period;
+    return { h, m, displayLabel: label };
+  }
+  const customTimeInput = document.getElementById('customTime');
+  const customTimeGoBtn = document.getElementById('customTimeGo');
+  function applyCustomTime() {
+    const parsed = parseCustomTime(customTimeInput.value);
+    if (!parsed) {
+      customTimeInput.classList.add('invalid');
+      return;
+    }
+    customTimeInput.classList.remove('invalid');
+    const hhmm = String(parsed.h).padStart(2, '0') + ':' + String(parsed.m).padStart(2, '0');
+    setTarget(hhmm, parsed.displayLabel);
+    start();
+    customTimeInput.blur();
+  }
+  customTimeGoBtn.addEventListener('click', applyCustomTime);
+  customTimeInput.addEventListener('input', () => customTimeInput.classList.remove('invalid'));
+  customTimeInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
+      applyCustomTime();
+    }
+  });
+
+  // ---------- Auto-hide controls while running ----------
+  // While the timer is running, controls fade out. Any mouse movement
+  // reveals them; if the mouse then stays still for 2 seconds, they fade back out.
+  function showControls() {
+    document.body.classList.remove('controls-hidden');
+    if (hideTimeoutId) { clearTimeout(hideTimeoutId); hideTimeoutId = null; }
+    if (running) {
+      hideTimeoutId = setTimeout(() => {
+        // Only hide if still running and focus isn't in an input
+        const ae = document.activeElement;
+        const inInput = ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.isContentEditable);
+        if (running && !inInput) document.body.classList.add('controls-hidden');
+      }, 2000);
+    }
+  }
+  function hideControlsNow() {
+    if (hideTimeoutId) { clearTimeout(hideTimeoutId); hideTimeoutId = null; }
+    document.body.classList.add('controls-hidden');
+  }
+  document.addEventListener('mousemove', () => { if (running) showControls(); });
+  document.addEventListener('touchstart', () => { if (running) showControls(); }, { passive: true });
 
   startBtn.addEventListener('click', () => running ? stop() : start());
   resetBtn.addEventListener('click', reset);
