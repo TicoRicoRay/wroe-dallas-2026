@@ -107,6 +107,12 @@
     /* Two copies of the list are rendered; slide by -50% to loop seamlessly. */
     width: max-content;
     animation: sponsors-scroll 90s linear infinite;
+    /* GPU hints — force a compositor layer so the animation runs off the main
+       thread on older Chrome + Intel integrated graphics (Dell laptops etc.),
+       where CSS transforms otherwise fall back to CPU painting and freeze. */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
   .sponsors:hover .sponsors-track { animation-play-state: paused; }
   .sponsors-track .logo {
