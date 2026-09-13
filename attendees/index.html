@@ -261,6 +261,9 @@
       .qr-card { justify-self: center; }
       .qr-card img { width: 200px; height: 200px; }
       .action-qr .qr-card img { width: 160px; height: 160px; }
+      .agenda-row { grid-template-columns: 1fr; gap: 0.25rem; padding: 0.75rem 0.9rem; }
+      .agenda-time { font-size: 0.8rem; }
+      .floorplan-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     }
   </style>
 </head>
@@ -303,6 +306,38 @@
             <img src="wifi_qr.png" alt="QR code to join Hilton Honors Meeting Wi-Fi">
             <div class="caption">Scan to join</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDA -->
+    <section aria-labelledby="agenda-title">
+      <h2 id="agenda-title">Agenda</h2>
+      <div class="card">
+        <div class="agenda-list" id="agenda-list">
+          <!-- Populated by JS from config.js -->
+        </div>
+        <p class="agenda-note">All sessions in the Grand Ballroom (2nd Floor). Breaks in the Foyer and Junior Ballroom.</p>
+      </div>
+    </section>
+
+    <!-- FLOOR PLAN -->
+    <section aria-labelledby="floorplan-title">
+      <h2 id="floorplan-title">Floor Plan</h2>
+      <div class="card">
+        <div class="floorplan-grid">
+          <figure class="floorplan-fig">
+            <a href="floorplan-ballrooms.jpg" target="_blank" rel="noopener">
+              <img src="floorplan-ballrooms.jpg" alt="Grand Ballroom and Junior Ballroom floor plan, showing stage and higher-tier sponsor placements">
+            </a>
+            <figcaption>Grand &amp; Junior Ballrooms · tap to enlarge</figcaption>
+          </figure>
+          <figure class="floorplan-fig">
+            <a href="floorplan-booth-area.jpg" target="_blank" rel="noopener">
+              <img src="floorplan-booth-area.jpg" alt="Booth area floor plan showing registration, elevators, restrooms, Clarity Break Lounge, and booth sponsor locations">
+            </a>
+            <figcaption>Booth Area &amp; Registration · tap to enlarge</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -368,6 +403,27 @@
 
   <script>
     // Render sponsors from shared config.js — same source as the main site.
+    // Render agenda from shared config.js
+    (function renderAgenda() {
+      var root = document.getElementById('agenda-list');
+      if (!root || typeof SITE_CONFIG === 'undefined' || !SITE_CONFIG.agenda) return;
+      var html = '';
+      SITE_CONFIG.agenda.forEach(function (row) {
+        var classes = ['agenda-row'];
+        if (row.highlight) classes.push('highlight');
+        if (row.tier === 'paid') classes.push('paid');
+        html += '<div class="' + classes.join(' ') + '">';
+        html += '<div class="agenda-time">' + row.time + '</div>';
+        html += '<div class="agenda-body">';
+        html += '<div class="agenda-session">' + row.session + '</div>';
+        if (row.speaker) {
+          html += '<div class="agenda-speaker">' + row.speaker + '</div>';
+        }
+        html += '</div></div>';
+      });
+      root.innerHTML = html;
+    })();
+
     (function renderSponsors() {
       var root = document.getElementById('sponsors-card');
       if (!root || typeof SITE_CONFIG === 'undefined' || !SITE_CONFIG.sponsors) return;
