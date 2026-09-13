@@ -212,7 +212,10 @@
       justify-content: center;
     }
     .sponsor-grid .sponsor-cell { flex: 0 1 240px; }
-    .sponsor-grid.cols-4 .sponsor-cell { flex: 0 1 160px; }
+    /* Booth tier (currently 9 sponsors): constrain width so it wraps 3+3+3
+       instead of an awkward 5+4 or 4+4+1 orphan row. */
+    .sponsor-grid.cols-4 { max-width: 780px; margin-left: auto; margin-right: auto; }
+    .sponsor-grid.cols-4 .sponsor-cell { flex: 0 1 220px; }
     .sponsor-cell {
       background: var(--white);
       padding: 1rem;
