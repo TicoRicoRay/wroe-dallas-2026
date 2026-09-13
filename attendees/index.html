@@ -240,6 +240,81 @@
     .sponsor-cell.big { height: 140px; max-width: 320px; padding: 1.5rem; }
     .sponsor-cell img { max-height: 100%; max-width: 100%; object-fit: contain; }
 
+    /* AGENDA */
+    .agenda-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .agenda-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1.25rem;
+      align-items: baseline;
+      padding: 0.9rem 1.1rem;
+      border-radius: calc(var(--radius) - 4px);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .agenda-row.highlight {
+      background: rgba(242,101,34,0.08);
+      border-color: rgba(242,101,34,0.32);
+    }
+    .agenda-row.paid { border-left: 3px solid var(--orange); }
+    .agenda-time {
+      font-family: var(--font-display, inherit);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--orange, #F26522);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .agenda-body { min-width: 0; }
+    .agenda-session {
+      font-family: var(--font-display, inherit);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .agenda-speaker {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.62);
+      margin-top: 0.2rem;
+    }
+    .agenda-note {
+      margin: 1.25rem 0 0;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* FLOOR PLAN */
+    .floorplan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .floorplan-fig { margin: 0; }
+    .floorplan-fig a { display: block; border-bottom: none; }
+    .floorplan-fig img {
+      width: 100%;
+      height: auto;
+      border-radius: calc(var(--radius) - 4px);
+      background: #fff;
+      display: block;
+      transition: transform 0.15s;
+    }
+    .floorplan-fig a:hover img { transform: scale(1.01); }
+    .floorplan-fig figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
     /* Footer */
     footer {
       text-align: center;
