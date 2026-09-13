@@ -221,19 +221,19 @@ const SITE_CONFIG = {
         verified: true
       },
       {
-        name: "Wolf's Edge Integrators",
-        tier: "booth",
-        url: "https://wolfsedgeintegrators.com/",
-        logo: "images/wolfsedgeintegrators.png",
-        alt: "Wolf's Edge Integrators",
-        verified: true
-      },
-      {
         name: "vcfo",
         tier: "booth",
         url: "https://vcfo.com/",
         logo: "images/vcfo.svg",
         alt: "vcfo — Fractional CFO, Controller & HR Services",
+        verified: true
+      },
+      {
+        name: "Wolf's Edge Integrators",
+        tier: "booth",
+        url: "https://wolfsedgeintegrators.com/",
+        logo: "images/wolfsedgeintegrators.png",
+        alt: "Wolf's Edge Integrators",
         verified: true
       }
     ]

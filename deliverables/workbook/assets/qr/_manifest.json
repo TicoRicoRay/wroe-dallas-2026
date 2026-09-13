@@ -64,13 +64,13 @@
       "path": "assets/qr/sponsor-talent-harbor.png",
       "url": "https://talentharbor.com/"
     },
-    "Wolf's Edge Integrators": {
-      "path": "assets/qr/sponsor-wolf-s-edge-integrators.png",
-      "url": "https://wolfsedgeintegrators.com/"
-    },
     "vcfo": {
       "path": "assets/qr/sponsor-vcfo.png",
       "url": "https://vcfo.com/"
+    },
+    "Wolf's Edge Integrators": {
+      "path": "assets/qr/sponsor-wolf-s-edge-integrators.png",
+      "url": "https://wolfsedgeintegrators.com/"
     }
   },
   "eosi": {
