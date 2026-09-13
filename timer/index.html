@@ -499,17 +499,19 @@
     } catch (e) { /* silent */ }
   }
 
-  // Preset buttons (fixed duration)
+  // Preset buttons (fixed duration) — auto-start
   document.querySelectorAll('.preset').forEach(btn => {
     btn.addEventListener('click', () => {
       setDuration(parseInt(btn.dataset.minutes, 10));
+      start();
     });
   });
 
-  // Target buttons (count down to wall-clock time)
+  // Target buttons (count down to wall-clock time) — auto-start
   document.querySelectorAll('.target').forEach(btn => {
     btn.addEventListener('click', () => {
       setTarget(btn.dataset.target, btn.textContent.trim());
+      start();
     });
   });
 
