@@ -179,7 +179,7 @@ function makePreEventLoop() {
     s.addText('NETWORK', {
       x: 3.7, y: 3.3, w: 6, h: 0.3, fontSize: 12, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 8,
     });
-    s.addText('WRoEOS-Guest', {
+    s.addText('Hilton Honors Meeting', {
       x: 3.7, y: 3.65, w: 6, h: 0.55, fontSize: 32, fontFace: FONT_HEAD, color: WHITE, bold: true,
     });
     // Password card
@@ -189,11 +189,11 @@ function makePreEventLoop() {
     s.addText('PASSWORD', {
       x: 3.7, y: 4.6, w: 6, h: 0.3, fontSize: 12, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 8,
     });
-    s.addText('RunOnEOS2026', {
+    s.addText('Traction', {
       x: 3.7, y: 4.95, w: 6, h: 0.55, fontSize: 32, fontFace: FONT_HEAD, color: WHITE, bold: true,
     });
     addFooterBar(s, { bg: NAVY, fg: WHITE });
-    s.addNotes('[Pre-event loop — no emcee needed. Placeholder Wi-Fi credentials — replace with actual venue values before event day.]');
+    s.addNotes('[Pre-event loop — no emcee needed. Confirmed venue Wi-Fi credentials.]');
   }
   // Slide 3: Restrooms & Coffee
   {
