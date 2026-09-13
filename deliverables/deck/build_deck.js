@@ -541,9 +541,11 @@ function makeSponsorThankYou2() {
     x: 0.5, y: 4.05, w: 12.333, h: 0.22,
     fontSize: 10, fontFace: FONT_HEAD, color: TEXT_MUTED, bold: true, charSpacing: 6, align: 'center',
   });
-  drawLogoRow(s, booth.slice(0, 4), { y: 4.4,  maxH: 0.85, cols: 4, stripInnerW: 12, xLeft: 0.667 });
-  if (booth.length > 4) {
-    drawLogoRow(s, booth.slice(4, 8), { y: 5.55, maxH: 0.85, cols: 4, stripInnerW: 12, xLeft: 0.667 });
+  // 5-column layout accommodates up to 10 booth sponsors across 2 rows
+  const boothCols = Math.max(4, Math.min(5, Math.ceil(booth.length / 2)));
+  drawLogoRow(s, booth.slice(0, boothCols), { y: 4.4,  maxH: 0.85, cols: boothCols, stripInnerW: 12, xLeft: 0.667 });
+  if (booth.length > boothCols) {
+    drawLogoRow(s, booth.slice(boothCols, boothCols * 2), { y: 5.55, maxH: 0.85, cols: boothCols, stripInnerW: 12, xLeft: 0.667 });
   }
 
   addFooterBar(s);

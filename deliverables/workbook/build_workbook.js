@@ -843,7 +843,7 @@ function sponsorsPage() {
     book:       { label: 'Book Sponsors',               cols: 2, maxH: 60, qr: 54 },
     hhLounge:   { label: 'Happy Hour & Lounge Sponsors', cols: 2, maxH: 56, qr: 50 },
     swag:       { label: 'Swag Bag Sponsors',           cols: 2, maxH: 54, qr: 50 },
-    booth:      { label: 'Booth Sponsors',              cols: 4, maxH: 40, qr: 42 },
+    booth:      { label: 'Booth Sponsors',              cols: 5, maxH: 40, qr: 42 },
   };
   const tierOrder = ['title', 'host', 'book', 'hhLounge', 'swag', 'booth'];
 

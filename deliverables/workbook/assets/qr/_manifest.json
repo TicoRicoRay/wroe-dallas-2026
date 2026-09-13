@@ -1,5 +1,9 @@
 {
   "sponsors": {
+    "North Texas EOS Implementers": {
+      "path": "assets/qr/sponsor-north-texas-eos-implementers.png",
+      "url": "https://EOSNorthTexas.com"
+    },
     "Strety": {
       "path": "assets/qr/sponsor-strety.png",
       "url": "https://strety.com/"
@@ -64,9 +68,9 @@
       "path": "assets/qr/sponsor-wolf-s-edge-integrators.png",
       "url": "https://wolfsedgeintegrators.com/"
     },
-    "North Texas EOS Implementers": {
-      "path": "assets/qr/host-eosnorthtexas.png",
-      "url": "https://EOSNorthTexas.com"
+    "vcfo": {
+      "path": "assets/qr/sponsor-vcfo.png",
+      "url": "https://vcfo.com/"
     }
   },
   "eosi": {
