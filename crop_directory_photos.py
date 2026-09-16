@@ -30,28 +30,38 @@ def detect_face(pil_img):
     return (x + w // 2, y + h // 2, w, h)
 
 def smart_crop_square(pil_img):
+    """Frame the face with headroom. Face center sits at ~40% from top,
+    square side = face_h * 4.2. This ensures the top of the head has
+    breathing room and shoulders show below."""
     W, H = pil_img.size
     face = detect_face(pil_img)
     if face is None:
         s = min(W, H)
         left = (W - s) // 2
-        top = int((H - s) * 0.15)
+        top = int((H - s) * 0.10)
         return pil_img.crop((left, top, left + s, top + s)), 'fallback'
     fx, fy, fw, fh = face
-    target = int(fh * 3.5)
+    # Larger multiplier: extra headroom + more shoulder
+    target = int(fh * 4.2)
     target = min(target, W, H)
     left = fx - target // 2
-    top = fy - int(target * 0.30)
+    # Face center at 40% from top (was 30% — too tight at the top)
+    top = fy - int(target * 0.40)
     left = max(0, min(left, W - target))
     top = max(0, min(top, H - target))
     return pil_img.crop((left, top, left + target, top + target)), 'face'
+
+# Files we do NOT re-crop (hand-curated in prior work)
+HANDS_OFF = {'shane-spillers', 'andrea-holmes'}
 
 def process(rec):
     name = rec['name']
     photo_url = rec.get('photo_url', '') or ''
     fn_base = slug(name)
     out_path = os.path.join(OUT, fn_base + '.jpg')
-    # Skip Shane Spillers — already has a locally curated photo
+    if fn_base in HANDS_OFF:
+        return (name, 'skip_curated', f'photos/{fn_base}.jpg')
+    # Legacy: also skip anything the roster already points to a local photo
     if photo_url.startswith('photos/'):
         return (name, 'skip_local', photo_url)
     if not photo_url:
