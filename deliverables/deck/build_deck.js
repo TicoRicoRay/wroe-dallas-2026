@@ -172,28 +172,39 @@ function makePreEventLoop() {
       x: 0.5, y: 1.9, w: 12.333, h: 0.7,
       fontSize: 32, fontFace: FONT_HEAD, color: WHITE, bold: true, align: 'center',
     });
-    // Network card
+    // Network card (left)
     s.addShape('roundRect', {
-      x: 3.5, y: 3.2, w: 6.333, h: 1.1, fill: { color: NAVY_LIGHT }, line: { color: ORANGE, width: 1 }, rectRadius: 0.1,
+      x: 1.4, y: 3.2, w: 6.6, h: 1.1, fill: { color: NAVY_LIGHT }, line: { color: ORANGE, width: 1 }, rectRadius: 0.1,
     });
     s.addText('NETWORK', {
-      x: 3.7, y: 3.3, w: 6, h: 0.3, fontSize: 12, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 8,
+      x: 1.6, y: 3.3, w: 6.2, h: 0.3, fontSize: 12, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 8,
     });
-    s.addText('WRoEOS-Guest', {
-      x: 3.7, y: 3.65, w: 6, h: 0.55, fontSize: 32, fontFace: FONT_HEAD, color: WHITE, bold: true,
+    s.addText('Hilton Honors Meeting', {
+      x: 1.6, y: 3.65, w: 6.2, h: 0.55, fontSize: 28, fontFace: FONT_HEAD, color: WHITE, bold: true,
     });
-    // Password card
+    // Password card (left)
     s.addShape('roundRect', {
-      x: 3.5, y: 4.5, w: 6.333, h: 1.1, fill: { color: NAVY_LIGHT }, line: { color: ORANGE, width: 1 }, rectRadius: 0.1,
+      x: 1.4, y: 4.5, w: 6.6, h: 1.1, fill: { color: NAVY_LIGHT }, line: { color: ORANGE, width: 1 }, rectRadius: 0.1,
     });
     s.addText('PASSWORD', {
-      x: 3.7, y: 4.6, w: 6, h: 0.3, fontSize: 12, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 8,
+      x: 1.6, y: 4.6, w: 6.2, h: 0.3, fontSize: 12, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 8,
     });
-    s.addText('RunOnEOS2026', {
-      x: 3.7, y: 4.95, w: 6, h: 0.55, fontSize: 32, fontFace: FONT_HEAD, color: WHITE, bold: true,
+    s.addText('Traction', {
+      x: 1.6, y: 4.95, w: 6.2, h: 0.55, fontSize: 28, fontFace: FONT_HEAD, color: WHITE, bold: true,
+    });
+    // Wi-Fi QR (right) — QR image centered in white card, caption below
+    s.addShape('roundRect', {
+      x: 8.65, y: 3.2, w: 2.7, h: 2.7, fill: { color: 'FFFFFF' }, line: { color: ORANGE, width: 1 }, rectRadius: 0.1,
+    });
+    s.addImage({
+      path: 'wifi_qr.png',
+      x: 8.85, y: 3.4, w: 2.3, h: 2.3,
+    });
+    s.addText('SCAN TO JOIN', {
+      x: 8.65, y: 6.0, w: 2.7, h: 0.3, fontSize: 11, fontFace: FONT_HEAD, color: ORANGE, bold: true, charSpacing: 6, align: 'center',
     });
     addFooterBar(s, { bg: NAVY, fg: WHITE });
-    s.addNotes('[Pre-event loop — no emcee needed. Placeholder Wi-Fi credentials — replace with actual venue values before event day.]');
+    s.addNotes('[Pre-event loop — no emcee needed. Confirmed venue Wi-Fi credentials. QR encodes WIFI:T:WPA;S:Hilton Honors Meeting;P:Traction;; — works on iOS and Android camera apps.]');
   }
   // Slide 3: Restrooms & Coffee
   {

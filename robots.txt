@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /2027/
+
+Sitemap: https://eosnorthtexas.com/sitemap.xml

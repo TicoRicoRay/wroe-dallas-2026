@@ -122,12 +122,21 @@ const RIGHT_MARGIN = 720;
 const USABLE = 14400;
 
 // Column widths for main timeline table (sum = 14400)
-const COL_TIME = 1500;
-const COL_SEGMENT = 3200;
-const COL_SCREEN = 2700;
-const COL_MUSIC = 3400;
-const COL_ACTION = 3600;
-const COLS = [COL_TIME, COL_SEGMENT, COL_SCREEN, COL_MUSIC, COL_ACTION];
+// Two screen feeds: MAIN (primary output) and SIDES (left + right house monitors,
+// which always mirror each other). Every row fills both so gaps are visible.
+const COL_TIME = 1300;
+const COL_SEGMENT = 2800;
+const COL_MAIN = 2600;
+const COL_SIDES = 2500;
+const COL_MUSIC = 2600;
+const COL_ACTION = 2600;
+const COLS = [COL_TIME, COL_SEGMENT, COL_MAIN, COL_SIDES, COL_MUSIC, COL_ACTION];
+
+// Placeholder for screen content still being finalized at the walkthrough.
+// Rendered red + bold so gaps jump out on a printed page.
+function tbd() {
+  return cp([run('TBD (walkthrough)', { size: 18, bold: true, color: RED })]);
+}
 
 // -----------------------------------------------------------------------------
 // Header cell for main table
@@ -144,7 +153,7 @@ function sectionRow(label) {
     children: [
       cell(
         p([run(label, { bold: true, color: WHITE, size: 20 })]),
-        { fill: ORANGE, columnSpan: 5, padding: { top: 80, bottom: 80, left: 120, right: 120 } }
+        { fill: ORANGE, columnSpan: 6, padding: { top: 80, bottom: 80, left: 120, right: 120 } }
       ),
     ],
   });
@@ -152,15 +161,20 @@ function sectionRow(label) {
 
 // -----------------------------------------------------------------------------
 // Timeline row builder
-// Each row: [time, segmentChildren, screenChildren, musicChildren, actionChildren]
+// Each row: [time, segmentChildren, mainChildren, sidesChildren,
+//            musicChildren, actionChildren]
+// Any screen slot may be `null` — renders TBD placeholder so gaps are visible.
 // -----------------------------------------------------------------------------
-function timelineRow(time, segment, screen, music, action, opts = {}) {
+function timelineRow(time, segment, main, sides, music, action, opts = {}) {
   const fill = opts.stripe ? BAND : undefined;
+  const screenCell = (paras, width) =>
+    cell((paras && paras.length ? paras : [tbd()]).map(par => par), { width, fill });
   return new TableRow({
     children: [
       cell(p([bold(time, { color: NAVY, size: 20 })]), { width: COL_TIME, fill }),
       cell(segment.map(par => par), { width: COL_SEGMENT, fill }),
-      cell(screen.map(par => par), { width: COL_SCREEN, fill }),
+      screenCell(main,  COL_MAIN),
+      screenCell(sides, COL_SIDES),
       cell(music.map(par => par), { width: COL_MUSIC, fill }),
       cell(action.map(par => par), { width: COL_ACTION, fill }),
     ],
@@ -247,7 +261,8 @@ const headerRow = new TableRow({
   children: [
     headerCell('Time', COL_TIME),
     headerCell('Segment', COL_SEGMENT),
-    headerCell('On Main Screen', COL_SCREEN),
+    headerCell('Main Screen', COL_MAIN),
+    headerCell('Side Screens (L + R)', COL_SIDES),
     headerCell('Music / Audio', COL_MUSIC),
     headerCell('AV Action', COL_ACTION),
   ],
@@ -262,60 +277,60 @@ rows.push(timelineRow(
   '7:30 – 8:00 AM',
   [cp('Coffee, Snacks & Registration')],
   [cp([sb('Sponsors loop: '), s('timer page (countdown to 8:00 with scrolling sponsor logos)')])],
+  [cp([sb('Countdown'), s(' to 8:00 AM')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([sb('Pre-Ann: '), s('Open '), sl('countdown to 8:00 AM', TIMER_TO('8:00')), s(' on main screen. Sponsors scroll across the top. Start playlist.')])],
-));
+  [cp([sb('Pre-Ann: '), s('Open '), sl('countdown to 8:00 AM', TIMER_TO('8:00')), s(' on main screen. Sponsors scroll across the top. Start playlist.')])]));
 
 rows.push(timelineRow(
   '8:00 – 9:35 AM',
   [cp([sb('Get a Grip on your Business with EOS')]), cp([run('Ann Sheu · Certified EOS Implementer', { size: 18, color: MUTED })])],
   [cp('Ann\'s deck (in Speaker Decks/)')],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp([sb('Walk-on: '), sl('Unstoppable', SPOT.unstoppable, { italics: true }), s(' — The Score. '), sb('Start at 0:30.')])],
   [cp('Fade playlist. Play Ann\'s walk-on song. Load Ann_Sheu_Get_A_Grip.pptx when she takes the stage.')],
-  { stripe: true },
-));
+  { stripe: true }));
 
 rows.push(timelineRow(
   '9:35 – 9:50 AM',
   [cp('Break (15 min)')],
   [cp([sb('Celebrations loop: '), s('run Celebrations-Loop.pptx (F5, kiosk mode)')])],
+  [cp([sb('Countdown'), s(' to 9:50 AM')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([sb('Pre-Brian: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Resume playlist. Deck auto-loops until you press '), sb('Esc'), s('.')])],
-));
+  [cp([sb('Pre-Brian: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Resume playlist. Deck auto-loops until you press '), sb('Esc'), s('.')])]));
 
 rows.push(timelineRow(
   '9:50 – 10:40 AM',
   [cp([sb('Journey with an EOS Implementer')]), cp([run('Brian Dosal · Strety', { size: 18, color: MUTED })])],
   [cp('Brian\'s deck (in Speaker Decks/)')],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp([sb('Walk-on: '), sl('Ants Marching', SPOT.antsMarching, { italics: true }), s(' — Dave Matthews Band (chorus)')])],
   [cp('Fade playlist. Play walk-on. Load Brian Dosal (Strety) — Journey with an EOS Implementer.pptx.')],
-  { stripe: true },
-));
+  { stripe: true }));
 
 rows.push(timelineRow(
   '10:40 – 10:55 AM',
   [cp('Break (15 min)')],
   [cp([sb('Sponsors loop: '), s('timer page (countdown to 10:55 with scrolling sponsor logos)')])],
+  [cp([sb('Countdown'), s(' to 10:55 AM')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([sb('Pre-Steve: '), s('Press '), sb('Esc'), s(' to exit Celebrations loop. One-click: '), sl('countdown to 10:55 AM', TIMER_TO('10:55')), s('. Resume playlist.')])],
-));
+  [cp([sb('Pre-Steve: '), s('Press '), sb('Esc'), s(' to exit Celebrations loop. One-click: '), sl('countdown to 10:55 AM', TIMER_TO('10:55')), s('. Resume playlist.')])]));
 
 rows.push(timelineRow(
   '10:55 – 11:55 AM',
   [cp([sb('Your Sales Team Isn\'t the Problem. Your System Is.')]), cp([run('Steve Heroux', { size: 18, color: MUTED })])],
   [cp('Steve\'s deck (in Speaker Decks/)')],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp([sb('Walk-on: '), sl('Down with the Sickness', SPOT.sickness, { italics: true }), s(' — Disturbed (chorus)')])],
   [cp('Fade playlist. Play walk-on. Load Steve Heroux — Sales System (fixed).pptx.')],
-  { stripe: true },
-));
+  { stripe: true }));
 
 rows.push(timelineRow(
   '11:55 – 12:00 PM',
   [cp('Emcee bridge to Lunch')],
   [cp([sb('Celebrations loop: '), s('run Celebrations-Loop.pptx (F5, kiosk mode) — loops through the bridge until Walt takes the stage at 12:00')])],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp([sb('Pre-Lunch: '), sl('Find Your People', SPOT.findYourPeople, { italics: true }), s(' — Drew Holcomb & The Neighbors')])],
-  [cp([sb('Post-Steve: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Play pre-lunch song as guests transition. Deck auto-loops until Walt takes the stage (per Shane\'s plan the loop should be ready to fill ~30 min if Walt\'s start slips while guests are seated).')])],
-));
+  [cp([sb('Post-Steve: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Play pre-lunch song as guests transition. Deck auto-loops until Walt takes the stage (per Shane\'s plan the loop should be ready to fill ~30 min if Walt\'s start slips while guests are seated).')])]));
 
 // ===== LUNCH =====
 rows.push(sectionRow('LUNCH & LEARN'));
@@ -324,18 +339,18 @@ rows.push(timelineRow(
   '12:00 – 1:00 PM',
   [cp([sb('Lunch and Learn: Healthy Matters')]), cp([run('Walt Brown · 7 Critical Needs', { size: 18, color: MUTED })])],
   [cp('Walt\'s deck (in Speaker Decks/)')],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp([sb('Walk-on: '), sl("Don't Ask Me No Questions", SPOT.noQuestions, { italics: true }), s(' — Lynyrd Skynyrd (chorus)')])],
   [cp([s('Press '), sb('Esc'), s(' to exit Celebrations loop. Load '), sb('Walt Brown — 7 Critical Needs (fixed).pptx'), s('. Play walk-on when Walt takes the stage after guests are seated.')])],
-  { stripe: true },
-));
+  { stripe: true }));
 
 rows.push(timelineRow(
   '1:00 – 1:10 PM',
   [cp('Break / Bridge (10 min)')],
   [cp([sb('Sponsors loop: '), s('timer page (countdown to 1:10 with scrolling sponsor logos)')])],
+  [cp([sb('Countdown'), s(' to 1:10 PM')])],
   [cp([sb('Post-Lunch: '), sl('Do I Ever Cross Your Mind', SPOT.doIEver, { italics: true }), s(' — Dolly Parton, then '), sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([sb('Pre-Mark S.: '), s('Press '), sb('Esc'), s(' to exit lunch Celebrations loop. Play post-lunch song. One-click: '), sl('countdown to 1:10 PM', TIMER_TO('13:10')), s('. Resume playlist.')])],
-));
+  [cp([sb('Pre-Mark S.: '), s('Press '), sb('Esc'), s(' to exit lunch Celebrations loop. Play post-lunch song. One-click: '), sl('countdown to 1:10 PM', TIMER_TO('13:10')), s('. Resume playlist.')])]));
 
 // ===== PAID AFTERNOON =====
 rows.push(sectionRow('PAID AFTERNOON PROGRAM'));
@@ -344,44 +359,44 @@ rows.push(timelineRow(
   '1:10 – 2:40 PM',
   [cp([sb('Profit Power: Stronger — or Just Bigger?')]), cp([run('Mark Stanley', { size: 18, color: MUTED })])],
   [cp('Mark\'s deck (in Speaker Decks/)')],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp([sb('Walk-on: '), sl('Beautiful Day', SPOT.beautifulDay, { italics: true }), s(' — U2 (chorus)')])],
   [cp([s('Fade playlist. Play walk-on. Load '), sb('Mark Stanley — Profit Power.pptx'), s(' and press F5 when Mark takes the stage.')])],
-  { stripe: true },
-));
+  { stripe: true }));
 
 rows.push(timelineRow(
   '2:40 – 2:55 PM',
   [cp('Afternoon Break (15 min)')],
   [cp([sb('Celebrations loop: '), s('run Celebrations-Loop.pptx (F5, kiosk mode)')])],
+  [cp([sb('Countdown'), s(' to 2:55 PM')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([sb('Pre-Beth: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Resume playlist. Deck auto-loops until you press '), sb('Esc'), s('.')])],
-));
+  [cp([sb('Pre-Beth: '), s('Launch '), sb('Celebrations-Loop.pptx'), s(' on main screen and press '), sb('F5'), s('. Resume playlist. Deck auto-loops until you press '), sb('Esc'), s('.')])]));
 
 rows.push(timelineRow(
   '2:55 – 4:25 PM',
   [cp([sb('Rollout, Reworked: Running EOS Company-Wide')]), cp([run('Beth Fahey', { size: 18, color: MUTED })])],
   [cp('Beth\'s deck (in Speaker Decks/)')],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp([sb('Walk-on: '), sl('Rollout (My Business) — Instrumental', SPOT.rollout, { italics: true }), s(' — Ludacris')])],
   [cp([s('Fade playlist. Play walk-on. Load '), sb('Beth_Fahey-RolloutPresentation_Dallas_2026_Updated.pptx'), s(' and press F5 when Beth takes the stage.')])],
-  { stripe: true },
-));
+  { stripe: true }));
 
 rows.push(timelineRow(
   '4:25 – 4:45 PM',
   [cp('Final Break (20 min)')],
   [cp([sb('Sponsors loop: '), s('timer page (countdown to 4:45 with scrolling sponsor logos)')])],
+  [cp([sb('Countdown'), s(' to 4:45 PM')])],
   [cp([sl('Countdown Timer Playlist', SPOT.countdown)])],
-  [cp([sb('Pre-Mark W.: '), s('Press '), sb('Esc'), s(' to exit Celebrations loop. One-click: '), sl('countdown to 4:45 PM', TIMER_TO('16:45')), s('. Resume playlist. MC Max handles sponsor thank-yous verbally on return.')])],
-));
+  [cp([sb('Pre-Mark W.: '), s('Press '), sb('Esc'), s(' to exit Celebrations loop. One-click: '), sl('countdown to 4:45 PM', TIMER_TO('16:45')), s('. Resume playlist. MC Max handles sponsor thank-yous verbally on return.')])]));
 
 rows.push(timelineRow(
   '4:45 – 6:15 PM',
   [cp([sb('The 10 Pillars of Visionary Greatness')]), cp([run('Mark C. Winters', { size: 18, color: MUTED })])],
   [cp('Winters\' deck (in Speaker Decks/)')],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp([sb('Walk-on: '), run('TBD — awaiting Mark C. Winters', { size: 18, bold: true, color: RED })])],
   [cp([s('Fade playlist. Play walk-on. Load '), sb('Mark_Winters_10_Pillars.pptx'), s(' and press F5 when Mark takes the stage.')])],
-  { stripe: true },
-));
+  { stripe: true }));
 
 // ===== HAPPY HOUR =====
 rows.push(sectionRow('HAPPY HOUR'));
@@ -390,9 +405,9 @@ rows.push(timelineRow(
   '6:15 – 8:00 PM',
   [cp([sb('Happy Hour + Networking')]), cp([run('Sponsored by Ninety.io', { size: 18, color: MUTED })])],
   [cp('Celebrations Loop OR timer page (any static screen)')],
+  [cp([sb('Live camera feed'), s(' from the stage')])],
   [cp('Any upbeat playlist (host\'s choice)')],
-  [cp('Leave Celebrations-Loop.pptx running on the main screen through Happy Hour. Music continues.')],
-));
+  [cp('Leave Celebrations-Loop.pptx running on the main screen through Happy Hour. Music continues.')]));
 
 const mainTable = new Table({
   width: { size: USABLE, type: WidthType.DXA },
