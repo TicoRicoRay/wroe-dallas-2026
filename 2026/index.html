@@ -112,6 +112,9 @@
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
+    .resources:has(> :only-child) {
+      grid-template-columns: minmax(0, 420px);
+    }
     .resource-card {
       display: block;
       background: var(--navy);
@@ -187,10 +190,6 @@
       <a class="resource-card" href="attendees/">
         <div class="resource-title">Attendee Information</div>
         <p class="resource-desc">Agenda, floor plan, feedback survey, sponsor thank-you wall.</p>
-      </a>
-      <a class="resource-card" href="timer/">
-        <div class="resource-title">Break Timer</div>
-        <p class="resource-desc">The countdown timer used between sessions during the event.</p>
       </a>
     </div>
 
