@@ -429,11 +429,23 @@
 <body>
 
   <!-- ARCHIVED BANNER -->
-  <div style="background:#F26522;color:#fff;text-align:center;padding:0.85rem 1rem;font-family:'Montserrat',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:0.02em;line-height:1.4;">
+  <style>
+    .archived-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: #F26522; color: #fff; text-align: center;
+      padding: 0.65rem 1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem; font-weight: 600; line-height: 1.35;
+    }
+    .archived-banner a { color: #fff; text-decoration: underline; }
+    body { padding-top: 44px; }
+    nav { top: 44px !important; }
+  </style>
+  <div class="archived-banner">
     Archived event page &mdash; The 2026 event has concluded.
-    <a href="/2026/" style="color:#fff;text-decoration:underline;">See the recap</a>
+    <a href="/2026/">See the recap</a>
     or
-    <a href="/2026/attendees/" style="color:#fff;text-decoration:underline;">attendee resources</a>.
+    <a href="/2026/attendees/">attendee resources</a>.
   </div>
 
   <!-- NAV -->
@@ -705,7 +717,7 @@
       booksEl.innerHTML = fb.books.map(b => `
         <a class="bonus-book" href="${b.bookUrl}" target="_blank" rel="noopener">
           <div class="bonus-book-cover">
-            ${b.coverImage ? `<img src="../${b.coverImage}" alt="${b.title} book cover" loading="lazy">` : `<div class="bonus-book-title">${b.title}</div>`}
+            ${b.coverImage ? `<img src="${/^https?:/.test(b.coverImage) ? b.coverImage : '../' + b.coverImage}" alt="${b.title} book cover" loading="lazy">` : `<div class="bonus-book-title">${b.title}</div>`}
           </div>
           <div class="bonus-book-body">
             <h3>${b.title}</h3>
@@ -796,7 +808,7 @@
       card.innerHTML = `
         <div class="speaker-photo">
           <div class="speaker-photo-inner">
-            <img src="../${s.photo}" alt="${s.name}">
+            <img src="${/^https?:/.test(s.photo) ? s.photo : '../' + s.photo}" alt="${s.name}">
           </div>
         </div>
         <div class="speaker-info">
@@ -850,7 +862,7 @@
           const card = document.createElement(s.url ? 'a' : 'div');
           card.className = 'sponsor-logo ' + cls;
           if (s.url) { card.href = s.url; card.target = '_blank'; card.rel = 'noopener'; }
-          card.innerHTML = `<img src="../${s.logo}" alt="${s.alt || s.name}" loading="lazy">`;
+          card.innerHTML = `<img src="${/^https?:/.test(s.logo) ? s.logo : '../' + s.logo}" alt="${s.alt || s.name}" loading="lazy">`;
           row.appendChild(card);
         });
         // 2) Then render remaining "Your Logo Here" placeholders
