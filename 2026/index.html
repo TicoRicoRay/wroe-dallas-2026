@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We Run on EOS® North Texas 2026 | Event Recap</title>
+  <meta name="description" content="Recap and resources from the 2026 We Run on EOS® North Texas event, held September 14, 2026 at The Statler Dallas.">
+  <link rel="canonical" href="https://eosnorthtexas.com/2026/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:      #1B2A4A;
+      --navy-dk:   #111d33;
+      --navy-lt:   #263d6a;
+      --orange:    #F26522;
+      --orange-lt: #ff8040;
+      --white:     #FFFFFF;
+      --radius:    14px;
+      --font-display: 'Montserrat', system-ui, sans-serif;
+      --font-body: 'Roboto', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--navy-dk);
+      color: var(--white);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--orange); text-decoration: none; border-bottom: 1px solid rgba(242,101,34,0.35); }
+    a:hover { border-bottom-color: var(--orange); }
+    .top-bar { height: 6px; background: var(--orange); }
+    main { max-width: 820px; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; }
+    .brand {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 1rem;
+      letter-spacing: -0.01em;
+    }
+    h1 .accent { color: var(--orange); }
+    .subtitle {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.75);
+      margin: 0 0 2.5rem;
+    }
+    .lede {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.85);
+      margin: 0 0 2.5rem;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 3rem 0 1rem;
+      letter-spacing: -0.01em;
+    }
+    .card {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin-bottom: 1rem;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 2rem 0 3rem;
+    }
+    .stat {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.5rem;
+    }
+    .resources {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .resource-card {
+      display: block;
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .resource-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--orange);
+    }
+    .resource-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0 0 0.35rem;
+    }
+    .resource-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      margin: 0;
+    }
+    .back-link {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      border-bottom: none;
+      margin-bottom: 2rem;
+    }
+    .back-link:hover { color: var(--orange); border-bottom: none; }
+    footer {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    @media (max-width: 640px) {
+      main { padding: 2rem 1.25rem 3rem; }
+      h1 { font-size: 2rem; }
+      .card { padding: 1.25rem 1.4rem; }
+      .stats { grid-template-columns: 1fr; }
+      .resources { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar"></div>
+  <main>
+    <a href="/" class="back-link">&larr; North Texas EOS Implementers</a>
+    <div class="brand">We Run on EOS® · North Texas</div>
+    <h1><span class="accent">2026</span> Event Recap</h1>
+    <p class="subtitle">September 14, 2026 · The Statler Dallas · Grand Ballroom</p>
+
+    <p class="lede">
+      The fifth annual We Run on EOS® North Texas event brought business
+      leaders together for a full day of EOS mastery, community, and
+      celebration. Below are the resources that were live for attendees.
+    </p>
+
+    <h2>Attendee resources</h2>
+    <div class="resources">
+      <a class="resource-card" href="attendees/">
+        <div class="resource-title">Attendee Information</div>
+        <p class="resource-desc">Agenda, floor plan, feedback survey, sponsor thank-you wall.</p>
+      </a>
+      <a class="resource-card" href="timer/">
+        <div class="resource-title">Break Timer</div>
+        <p class="resource-desc">The countdown timer used between sessions during the event.</p>
+      </a>
+    </div>
+
+    <h2>Thanks to everyone who joined us</h2>
+    <div class="card">
+      <p style="margin:0;">
+        To our speakers, sponsors, attendees, and the team at The Statler
+        Dallas: thank you for making 2026 our best year yet. Watch this space
+        for details on the 2027 event.
+      </p>
+    </div>
+  </main>
+  <footer>
+    We Run on EOS® North Texas · <a href="/" style="color:inherit;border-bottom:1px solid rgba(255,255,255,0.15);">eosnorthtexas.com</a>
+  </footer>
+</body>
+</html>
