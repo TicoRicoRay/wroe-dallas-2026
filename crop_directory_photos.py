@@ -70,7 +70,17 @@ def process(rec):
         req = urllib.request.Request(photo_url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=25) as r:
             data = r.read()
-        img = Image.open(io.BytesIO(data)).convert('RGB')
+        img = Image.open(io.BytesIO(data))
+        # If the source has transparency, composite onto white BEFORE converting
+        # to RGB — otherwise the transparent area becomes palette-index-0
+        # (often green) which looks like a broken chroma key.
+        if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
+            img = img.convert('RGBA')
+            bg = Image.new('RGB', img.size, (255, 255, 255))
+            bg.paste(img, mask=img.split()[3])
+            img = bg
+        else:
+            img = img.convert('RGB')
         src_size = img.size
         cropped, method = smart_crop_square(img)
         cropped = cropped.resize((400, 400), Image.LANCZOS)
